@@ -1,0 +1,18 @@
+<div class="app-layout-container">
+  <block-ui></block-ui>
+
+  <div class="app-content" fxLayout="row">
+    <div class="navigation-content">
+      <router-outlet name="navigation"></router-outlet>
+    </div>
+    <div fxFlex fxLayout="column" class="fixed-content">
+      <div class="header-content">
+        <router-outlet name="header"></router-outlet>
+      </div>
+      <div fxFlex class="main-content" [ngClass]="pageClass">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+
+</div>

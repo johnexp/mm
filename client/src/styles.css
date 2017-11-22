@@ -1,0 +1,158 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-size: 14px;
+  font-family: 'Roboto';
+  background: #585b5e;
+}
+
+a {
+  text-decoration: none;
+}
+
+app-root,
+md-sidenav-layout,
+.app-content,
+.app-layout-container {
+  height: 100%;
+  display: block;
+}
+
+.main-content {
+  padding: 0 30px 5px 20px;
+  overflow: auto;
+  border-radius: 5px 5px 0 0;
+  background-color: #FFF;
+  overflow-y: overlay;
+  border-top: 10px solid #FFF;
+  border-right: 5px solid #FFF;
+}
+
+.main-content::-webkit-scrollbar {
+  width: .8em;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background-color: #0000005e;
+  outline: 1px solid slategrey;
+  border-radius: 5px;
+}
+
+.fixed-content {
+  height: 100%;
+  overflow: hidden;
+}
+
+.navigation-content {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./assets/img/mountains.jpg');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: auto 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mat-form-field {
+  padding: 2px;
+}
+
+
+/* .custom-table .mat-header-row {
+  align-items: flex-end;
+  border-bottom: none;
+}
+.custom-table .mat-header-row, .custom-table .mat-row {
+  padding: 0;
+}
+.custom-table .mat-header-cell {
+  font-size: 1.3em;
+  color: #6b2e76;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1.5px solid #6b2e76;
+  margin-right: 5px;
+}
+.custom-table .mat-cell, .custom-table .mat-header-cell {
+  padding: 0 24px;
+} */
+
+.custom-table .mat-cell.mat-column-selection {
+  width: 70px;
+  flex: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 40px;
+  padding: 0 10px;
+}
+
+.custom-table .mat-cell.mat-column-selection .mat-checkbox {
+  height: 40px;
+}
+
+.custom-table .mat-header-cell.mat-column-selection {
+  width: 70px;
+  padding: 0 10px;
+  flex: none;
+  text-align: center;
+}
+
+.custom-table .mat-cell.mat-column-actions {
+  display: flex;
+  justify-content: center;
+  flex: none;
+  width: 100px;
+  padding: 0 10px;
+}
+
+.custom-table .mat-header-cell.mat-column-actions {
+  width: 100px;
+  padding: 0 10px;
+  flex: none;
+}
+
+.custom-table .mat-sort-header-button:hover::after {
+  content: '\E164';
+  font-family: 'Material Icons';
+  opacity: .5;
+  font-size: 1.5em;
+  padding-left: 5px;
+}
+
+.custom-table .mat-sort-header-sorted .mat-sort-header-button:hover::after {
+  content: none;
+}
+
+body .mat-button,
+body .mat-raised-button,
+body .mat-icon-button,
+body .mat-fab,
+body .mat-mini-fab {
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+body .layout-margin>* {
+  margin: 5px;
+}
+
+.page-title {
+  font-weight: 100;
+}
+
+.custom-snack-bar button::before {
+  content: '\E5CD';
+  font-family: 'Material Icons';
+  color: #FFF;
+  font-size: 1.5em;
+  line-height: 10px;
+  vertical-align: middle;
+}

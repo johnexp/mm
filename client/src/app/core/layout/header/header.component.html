@@ -1,0 +1,29 @@
+<div class="header-container" fxLayout="column">
+  <div class="header-actions">
+    <span>SASC - bem vindo de volta!</span>
+    <div class="header-icons">
+      <button mat-icon-button>
+        <mat-icon>notifications_none</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>help_outline</mat-icon>
+      </button>
+      <button mat-icon-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu>
+  </div>
+  <nav>
+    <ul class="header-menu">
+      <li>
+        <a href="#">
+          Menu Topo
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -1,0 +1,49 @@
+import { MatPaginatorIntlPtbr } from './core/util/data-table/mat-paginator-intl-ptbr';
+import { VersaoModule } from './modules/versao/versao.module';
+import { CoreModule } from './core/core.module';
+import { AppRoutes } from './app.routes';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+import { ResourceModule } from 'ngx-resource';
+import { BlockUIModule } from 'ng-block-ui';
+import { MatButtonModule, MatCardModule, MatCheckboxModule, MatChipsModule, MAT_DATE_LOCALE, MatPaginatorIntl } from '@angular/material';
+
+import { AppComponent } from './app.component';
+import 'hammerjs';
+
+const MAT_MODULES = [
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule
+];
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    CommonModule,
+    MAT_MODULES,
+    FlexLayoutModule,
+    ResourceModule.forRoot(),
+    BlockUIModule,
+    AppRoutes,
+    CoreModule,
+    VersaoModule
+  ],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    { provide: MatPaginatorIntl, useClass: MatPaginatorIntlPtbr }
+  ],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class AppModule { }

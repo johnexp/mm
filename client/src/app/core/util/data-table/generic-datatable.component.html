@@ -1,0 +1,89 @@
+<div [hidden]="!hasFilter">
+  <div *ngIf="!lazy" fxLayoutAlign="end center">
+    <mat-form-field floatPlaceholder="never">
+      <input matInput #filter placeholder="{{filterPlaceholder}}">
+    </mat-form-field>
+    <!-- TODO: fazer filtro de itens selecionados -->
+  </div>
+
+  <form *ngIf="lazy" #form="ngForm" (ngSubmit)="doFilter()" novalidate>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
+      <ng-container *ngFor="let field of columns">
+        <ng-container *ngIf="field.type" [ngSwitch]="field.type">
+          <!-- <mat-form-field fxFlex *ngSwitchCase="'select'">
+          </mat-form-field> -->
+        </ng-container>
+        <mat-form-field fxFlex *ngIf="!field.type">
+          <input matInput name="{{field.value}}" [(ngModel)]="model[field.value]" placeholder="{{field.viewValue}}">
+        </mat-form-field>
+      </ng-container>
+      <ng-template [ngTemplateOutlet]="templateRef" [ngTemplateOutletContext]="{model: model}">
+      </ng-template>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center center" class="layout-margin">
+      <button mat-raised-button color="primary" type="submit">
+        <mat-icon>filter_list</mat-icon>
+        Filtrar
+      </button>
+      <button mat-button color="accent" type="button" (click)="goCreate()">
+        <mat-icon>insert_drive_file</mat-icon>
+        Novo
+      </button>
+      <button mat-button color="secondary" type="button" (click)="clearFilter()">
+        <mat-icon>clear</mat-icon>
+        Limpar
+      </button>
+    </div>
+  </form>
+
+
+</div>
+
+<mat-table #table class="dense custom-table" [dataSource]="dataSource" matSort matSortActive="id" matSortDisableClear matSortDirection="asc">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Selection column -->
+  <ng-container matColumnDef="selection">
+    <mat-header-cell *matHeaderCellDef> Selecionar </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <mat-checkbox (change)="changeSelection(row._id)" [checked]="selectionData.indexOf(row._id) > -1"></mat-checkbox>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Actions column -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef class="text-center"> Ações </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-icon-button color="primary" *ngIf="actions.u" (click)="goEdit(row._id)" matTooltip="Editar">
+        <mat-icon aria-label="Editar">edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" *ngIf="actions.d" (click)="confirmDelete(row._id)" matTooltip="Excluir">
+        <mat-icon aria-label="Excluir">delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Columns -->
+  <ng-container *ngFor="let column of columns" matColumnDef="{{column.value}}">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> {{column.viewValue}} </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <ng-container *ngIf="column.pipe" [ngSwitch]="column.pipe">
+        <span *ngSwitchCase="'date'">{{row[column.value] | date: 'dd/MM/yyyy'}}</span>
+        <span *ngSwitchCase="'datetime'">{{row[column.value] | date: 'dd/MM/yyyy HH:mm:ss'}}</span>
+      </ng-container>
+      <ng-container *ngIf="!column.pipe">
+        {{row[column.value]}}
+      </ng-container>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator #paginator [length]="resultsLength" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>
+<!-- <mat-paginator #paginator *ngIf="!lazy" [length]="database.data.length" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator> -->

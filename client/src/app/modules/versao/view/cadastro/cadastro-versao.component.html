@@ -1,0 +1,49 @@
+<h1 class="page-title">
+  <mat-icon>new_releases</mat-icon>
+  Versão -
+  <span class="subtitle">Cadastrar uma Versão</span>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
+    <mat-form-field fxFlex>
+      <input matInput class="form-control" name="ticket" #ticket="ngModel" [(ngModel)]="versao.ticket" placeholder="Ticket" required>
+      <mat-error [hidden]="!ticket.hasError('required') || (ticket.pristine && !ticket.touched && !form.submited)">
+        o campo "Ticket" é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <input matInput name="versao" #numeroVersao="ngModel" [(ngModel)]="versao.numeroVersao" placeholder="Versão" required>
+      <mat-error [hidden]="!numeroVersao.hasError('required') || (numeroVersao.pristine && !numeroVersao.touched && !form.submited)">
+        o campo "Versão" é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <input matInput name="data" #data="ngModel" (focus)="dataToggle.open()" (click)="dataToggle.open()" [matDatepicker]="dataToggle" [(ngModel)]="versao.data" placeholder="Data" required>
+      <mat-datepicker-toggle matSuffix [disabled]="false" [for]="dataToggle"></mat-datepicker-toggle>
+      <mat-datepicker #dataToggle></mat-datepicker>
+      <mat-error [hidden]="!data.hasError('required') || (data.pristine && !data.touched && !form.submited)">
+        o campo "Data" é obrigatório
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
+    <mat-form-field fxFlex="50">
+      <textarea matInput name="descricao" #descricao="ngModel" [(ngModel)]="versao.descricao" placeholder="Descrição" required></textarea>
+      <mat-error [hidden]="!descricao.hasError('required') || (descricao.pristine && !descricao.touched && !form.submited)">
+        o campo "Descrição" é obrigatório
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button mat-button mat-raised-button type="submit" color="primary" class="dviver-button">
+      <mat-icon>save</mat-icon>
+      salvar
+    </button>
+    <button mat-button type="button" class="dviver-button gray-button" (click)="voltar()">
+      <mat-icon>close</mat-icon>
+      cancelar
+    </button>
+  </div>
+</form>

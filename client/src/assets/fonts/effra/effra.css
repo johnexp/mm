@@ -1,0 +1,61 @@
+@font-face {
+    font-family: 'effrabold';
+    src: url('effra_std_bd-webfont.woff2') format('woff2'),
+         url('effra_std_bd-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'effra_lightregular';
+    src: url('effra_std_lt-webfont.woff2') format('woff2'),
+         url('effra_std_lt-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'effra_mediumregular';
+    src: url('effra_std_md-webfont.woff2') format('woff2'),
+         url('effra_std_md-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'effraregular';
+    src: url('effra_std_rg-webfont.woff2') format('woff2'),
+         url('effra_std_rg-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'effrabold_italic';
+    src: url('effra_std_bdit-webfont.woff2') format('woff2'),
+         url('effra_std_bdit-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'effra_lightitalic';
+    src: url('effra_std_ltit-webfont.woff2') format('woff2'),
+         url('effra_std_ltit-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'effra_mediumitalic';
+    src: url('effra_std_mdit-webfont.woff2') format('woff2'),
+         url('effra_std_mdit-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
