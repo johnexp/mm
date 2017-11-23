@@ -1,3 +1,4 @@
+import { HomologacaoModule } from './modules/homologacao/homologacao.module';
 import { MembroModule } from './modules/membro/membro.module';
 import { MatPaginatorIntlPtbr } from './core/util/data-table/mat-paginator-intl-ptbr';
 import { VersaoModule } from './modules/versao/versao.module';
@@ -39,7 +40,8 @@ const MAT_MODULES = [
     AppRoutes,
     CoreModule,
     VersaoModule,
-    MembroModule
+    MembroModule,
+    HomologacaoModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

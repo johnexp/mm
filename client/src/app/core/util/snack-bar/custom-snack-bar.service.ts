@@ -12,7 +12,7 @@ export class CustomSnackBarService implements AfterViewInit {
 
   actionButtonLabel: string = ' ';
   action: boolean = false;
-  setAutoHide: boolean = false;
+  setAutoHide: boolean = true;
   autoHide: number = 3000;
   addExtraClass: boolean = false;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';

@@ -1,0 +1,8 @@
+<h1 class="page-title">
+  <mat-icon>done</mat-icon>
+  Homologacao
+</h1>
+
+<app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'homologacaos'" [lazy]="false" [hasFilter]="true"
+  [actions]="{'u': true, 'd': true}" (deleteRecord)="excluirHomologacao($event[0], $event[1])">
+</app-generic-datatable>

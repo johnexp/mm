@@ -1,0 +1,29 @@
+<h1 class="page-title">
+  <mat-icon>done</mat-icon>
+  Homologacao -
+    <span class="subtitle">Cadastrar
+      Homologacao
+    </span>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
+    <mat-form-field fxFlex>
+      <input matInput class="form-control" name="nome" #nome="ngModel" [(ngModel)]="homologacao.nome" placeholder="Nome" required>
+      <mat-error [hidden]="!nome.hasError('required') || (nome.pristine && !nome.touched && !form.submited)">
+        O campo "Nome" é obrigatório
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center">
+    <button mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button mat-button type="button" (click)="cancelar()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+  </div>
+</form>
