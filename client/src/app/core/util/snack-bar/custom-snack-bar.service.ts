@@ -4,7 +4,6 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition
 } from '@angular/material';
-import { CustomSnackBarComponent } from './custom-snack-bar.component';
 import { Direction } from '@angular/cdk/bidi';
 import { Injectable, AfterViewInit } from '@angular/core';
 
@@ -13,7 +12,7 @@ export class CustomSnackBarService implements AfterViewInit {
 
   actionButtonLabel: string = ' ';
   action: boolean = false;
-  setAutoHide: boolean = true;
+  setAutoHide: boolean = false;
   autoHide: number = 3000;
   addExtraClass: boolean = false;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -26,13 +25,13 @@ export class CustomSnackBarService implements AfterViewInit {
     this.snackBar.dismiss();
   }
 
-  open(message: string, action?: string, customConfig?: any) {
+  open(message: string, severity?: string, action?: string, customConfig?: any) {
     const config = new MatSnackBarConfig();
     customConfig = customConfig || {};
     config.verticalPosition = customConfig.verticalPosition || this.verticalPosition;
     config.horizontalPosition = customConfig.horizontalPosition || this.horizontalPosition;
     config.duration = customConfig.autoHide || this.setAutoHide ? this.autoHide : 0;
-    config.panelClass = customConfig.panelClass || 'custom-snack-bar';
+    config.panelClass = customConfig.panelClass || ('custom-snack-bar' + (severity ? '-' + severity : ''));
     config.direction = this.direction;
     this.snackBar.open(message, action || this.actionButtonLabel, config);
   }

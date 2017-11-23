@@ -1,0 +1,8 @@
+<h1 class="page-title">
+  <mat-icon>face</mat-icon>
+  Membro
+</h1>
+
+<app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'membros'" [lazy]="false" [hasFilter]="true"
+  [actions]="{'u': true, 'd': true}" (deleteRecord)="excluirMembro($event[0], $event[1])">
+</app-generic-datatable>

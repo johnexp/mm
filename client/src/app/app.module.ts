@@ -1,3 +1,4 @@
+import { MembroModule } from './modules/membro/membro.module';
 import { MatPaginatorIntlPtbr } from './core/util/data-table/mat-paginator-intl-ptbr';
 import { VersaoModule } from './modules/versao/versao.module';
 import { CoreModule } from './core/core.module';
@@ -37,7 +38,8 @@ const MAT_MODULES = [
     BlockUIModule,
     AppRoutes,
     CoreModule,
-    VersaoModule
+    VersaoModule,
+    MembroModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

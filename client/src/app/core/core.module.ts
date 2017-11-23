@@ -1,5 +1,4 @@
 import { CustomSnackBarService } from './util/snack-bar/custom-snack-bar.service';
-import { CustomSnackBarComponent } from './util/snack-bar/custom-snack-bar.component';
 import { FormsModule } from '@angular/forms';
 import { ConfirmationDialogComponent } from './util/dialog/confirmation-dialog.component';
 import { GenericDatatableComponent } from './util/data-table/generic-datatable.component';

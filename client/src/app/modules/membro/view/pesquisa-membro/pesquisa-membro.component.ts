@@ -1,46 +1,44 @@
 import { CustomSnackBarService } from './../../../../core/util/snack-bar/custom-snack-bar.service';
 import { Pagination } from './../../../../core/domain/pagination';
 import { GenericDatabase } from './../../../../core/util/data-table/generic-database';
-import { VersaoService } from './../../service/versao.service';
-import { Versao } from './../../domain/versao';
+import { MembroService } from './../../service/membro.service';
+import { Membro } from './../../domain/membro';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
-  selector: 'app-pesquisa-versao',
-  templateUrl: './pesquisa-versao.component.html',
-  providers: [VersaoService]
+  selector: 'app-pesquisa-membro',
+  templateUrl: 'pesquisa-membro.component.html',
+  styleUrls: ['./pesquisa-membro.component.css'],
+  providers: [MembroService]
 })
-export class PesquisaVersaoComponent implements OnInit {
+export class PesquisaMembroComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
   displayedColumns = [
-    { value: 'ticket', viewValue: 'Ticket' },
-    { value: 'numeroVersao', viewValue: 'Versão' },
-    { value: 'descricao', viewValue: 'Descrição' },
-    { value: 'data', viewValue: 'Data', pipe: 'date', type: 'date' }
+    { value: 'nome', viewValue: 'Nome' },
+    { value: 'cargo', viewValue: 'Cargo' },
   ];
   database = new GenericDatabase;
   pagination: Pagination;
 
-
   constructor(private location: Location,
-    private versaoService: VersaoService,
-    private customSnackBar: CustomSnackBarService) {
+    private customSnackBar: CustomSnackBarService,
+    private membroService: MembroService) {
   }
 
   ngOnInit() {
-    this.buscarVersoes();
+    this.buscarMembros();
   }
 
-  buscarVersoes() {
+  buscarMembros() {
     this.blockUI.start('Buscando registros...')
-    this.versaoService.getAll({}).$observable.subscribe(
-      response => {
+    this.membroService.getAll({}).$observable.subscribe(
+      membros => {
         this.blockUI.stop();
         this.database = new GenericDatabase;
-        this.database.data = response;
+        this.database.data = membros;
       },
       error => {
         this.blockUI.stop();
@@ -49,14 +47,14 @@ export class PesquisaVersaoComponent implements OnInit {
     );
   }
 
-  excluirVersao(id, paginator) {
+  excluirMembro(id, paginator) {
     this.blockUI.start('Removendo registro...');
-    this.versaoService.delete({ id: id }).$observable.subscribe(
+    this.membroService.delete({ id: id }).$observable.subscribe(
       response => {
         if (!response) {
           this.customSnackBar.open('Não foi possível remover o registro!', 'danger');
         } else {
-          this.buscarVersoes();
+          this.buscarMembros();
           paginator.pageIndex = 0;
           paginator.page.emit();
         }
@@ -67,10 +65,6 @@ export class PesquisaVersaoComponent implements OnInit {
         this.customSnackBar.open('Não foi possível remover o registro!', 'danger');
       }
     );
-  }
-
-  voltar() {
-    this.location.back();
   }
 
 }

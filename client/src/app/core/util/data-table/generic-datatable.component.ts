@@ -1,5 +1,6 @@
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ConfirmationDialogComponent } from './../dialog/confirmation-dialog.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { GenericDataSource } from './generic-datasource';
 import { DataSource } from '@angular/cdk/collections';
 import { GenericService } from './../../service/generic.service';
@@ -26,45 +27,50 @@ export class GenericDatatableComponent implements OnInit {
   @Input() columns: any[];
   @Input() selectable: Boolean;
   @Input() selectionData: any[];
-  @Input() filterPlaceholder: String = 'filtrar';
+  @Input() filterPlaceholder: String = 'Filtrar';
   @Input() hasFilter: Boolean = true;
-  @Input() database: GenericDatabase;
   @Input() actions: any[] = [];
   @Input() lazy: Boolean = false;
+  @Input() resource: string;
   @Output() deleteRecord: EventEmitter<any> = new EventEmitter<any>();
-  // @Input() pagination: Pagination;
   @ViewChild('filter') filter: ElementRef;
   // TODO: fazer filtro de itens selecionados
   // @ViewChild('filterSelected') filterSelected: ElementRef;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
   @ContentChild(TemplateRef) templateRef: TemplateRef<any>;
 
   displayedColumns: any[] = [];
-  dataSource: any;
-
+  dataSource: MatTableDataSource<any> = new MatTableDataSource;
   resultsLength: Number = 0;
   isLoadingResults: Boolean = false;
   isRateLimitReached: Boolean = false;
   hasUpdate: Boolean = false;
   hasDelete: Boolean = false;
   model: any = {};
+  _dataChange = new BehaviorSubject(new GenericDatabase());
+
+  get database(): GenericDatabase {
+    if (this._dataChange.value.data.length !== this.dataSource.data.length) {
+      this.dataSource = new MatTableDataSource(this._dataChange.value.data);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    }
+    return this._dataChange.value;
+  }
+
+  @Input('database')
+  set database(database: GenericDatabase) {
+    this._dataChange.next(database);
+  }
 
   constructor(private genericService: GenericService,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog) { }
 
   ngOnInit() {
     this.createColumns();
-    if (this.lazy) {
-      this.dataSource = new MatTableDataSource();
-    } else {
-      this.dataSource = new GenericDataSource(this.database, this.paginator);
-    }
-    if (this.hasFilter) {
-      this.createFilterObservable();
-    }
   }
 
   ngAfterViewInit() {
@@ -80,7 +86,7 @@ export class GenericDatatableComponent implements OnInit {
           this.isLoadingResults = true;
           this.clearEmptyFilterValues();
           return this.genericService.filterGeneric(this.model, {
-            resource: 'versoes',
+            resource: this.resource,
             sort: this.sort.active,
             order: this.sort.direction,
             page: this.paginator.pageIndex + 1,
@@ -107,6 +113,12 @@ export class GenericDatatableComponent implements OnInit {
     }
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
   clearEmptyFilterValues() {
     const objKeys = Object.keys(this.model);
     for (let index = 0; index < objKeys.length; index++) {
@@ -115,27 +127,6 @@ export class GenericDatatableComponent implements OnInit {
         delete this.model[key];
       }
     }
-  }
-
-  /**
-   * Create filter keyup event observable
-   */
-  createFilterObservable() {
-    // Observable.fromEvent(this.filter.nativeElement, 'keyup')
-    //   .debounceTime(150)
-    //   .distinctUntilChanged()
-    //   .subscribe(() => {
-    //     if (!this.dataSource) { return; }
-    //     this.dataSource.filter = this.filter.nativeElement.value;
-    //   });
-    // TODO: fazer filtro de itens selecionados
-    // Observable.fromEvent(this.filterSelected.nativeElement, 'keyup')
-    //   .debounceTime(150)
-    //   .distinctUntilChanged()
-    //   .subscribe(() => {
-    //     if (!this.dataSource) { return; }
-    //     this.dataSource.filter = this.filterSelected.nativeElement.value;
-    //   });
   }
 
   /**
@@ -173,17 +164,24 @@ export class GenericDatatableComponent implements OnInit {
   }
 
   clearFilter() {
-    this.model = {};
-    this.doFilter();
-    this.sort.sort({ id: 'id', start: 'asc', disableClear: false });
+    if (this.lazy) {
+      this.model = {};
+      this.doFilter();
+      this.sort.sort({ id: 'id', start: 'asc', disableClear: false });
+    } else {
+      this.filter.nativeElement.value = '';
+      this.applyFilter('');
+    }
   }
 
   goEdit(id) {
-    this.router.navigate([this.router.config[0].path + '/editar/', id]);
+    const path = this.activatedRoute.root.firstChild.snapshot.url[0].path;
+    this.router.navigate([path + '/editar/', id]);
   }
 
   goCreate() {
-    this.router.navigate([this.router.config[0].path + '/cadastrar']);
+    const path = this.activatedRoute.root.firstChild.snapshot.url[0].path;
+    this.router.navigate([path + '/cadastrar']);
   }
 
   confirmDelete(id) {

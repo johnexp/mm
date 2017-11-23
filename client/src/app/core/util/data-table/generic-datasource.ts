@@ -1,7 +1,7 @@
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { GenericDatabase } from './generic-database';
-import { MatPaginator } from '@angular/material';
+import { MatPaginator, MatSort } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
@@ -22,7 +22,7 @@ export class GenericDataSource extends DataSource<any> {
   get filter(): string { return this._filterChange.value; }
   set filter(filter: string) { this._filterChange.next(filter); }
 
-  constructor(private _exampleDatabase: GenericDatabase, private _paginator: MatPaginator) {
+  constructor(private _exampleDatabase: GenericDatabase, private _paginator: MatPaginator, private _sort: MatSort) {
     super();
   }
 
@@ -32,6 +32,7 @@ export class GenericDataSource extends DataSource<any> {
       this._exampleDatabase.dataChange,
       this._filterChange,
       this._paginator.page,
+      this._sort.sort
     ];
 
     return Observable.merge(...displayDataChanges).map(() => {
@@ -40,7 +41,7 @@ export class GenericDataSource extends DataSource<any> {
       data = data.filter((item: any) => {
         let values = '';
         Object.keys(item).forEach(key => {
-          values += key !== 'id' ? item[key] : '';
+          values += key !== '_id' ? item[key] : '';
         });
         const searchStr = values.toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
@@ -48,6 +49,7 @@ export class GenericDataSource extends DataSource<any> {
 
       // Grab the page's slice of data.
       const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
+      this._paginator.length = data.length;
       return data.splice(startIndex, this._paginator.pageSize);
     });
   }

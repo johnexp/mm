@@ -3,8 +3,8 @@
   Versões
 </h1>
 
-<app-generic-datatable [columns]="displayedColumns" [database]="database" [pagination]="pagination" [lazy]="true" [hasFilter]="true"
-  [actions]="{'u': true, 'd': true}" (deleteRecord)="excluirVersao($event)">
+<app-generic-datatable [columns]="displayedColumns" [database]="database" [pagination]="pagination" [lazy]="false" [hasFilter]="true"
+  [actions]="{'u': true, 'd': true}" (deleteRecord)="excluirVersao($event[0], $event[1])">
   <ng-template let-model="model">
     <!-- <div fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap> -->
       <mat-form-field fxFlex>

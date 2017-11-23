@@ -1,8 +1,19 @@
 <div [hidden]="!hasFilter">
-  <div *ngIf="!lazy" fxLayoutAlign="end center">
-    <mat-form-field floatPlaceholder="never">
-      <input matInput #filter placeholder="{{filterPlaceholder}}">
+  <div *ngIf="!lazy" fxLayoutAlign="center center" fxLayoutWrap>
+    <mat-form-field floatPlaceholder="never" fxFlex="50" fxFlex.xs="100">
+      <input matInput #filter (keyup)="applyFilter($event.target.value)" placeholder="{{filterPlaceholder}}">
     </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="center center" class="layout-margin">
+      <button mat-icon-button color="secondary" type="button" (click)="clearFilter()" matTooltip="Limpar">
+        <mat-icon aria-label="Limpar filtro">clear</mat-icon>
+      </button>
+    </div>
+    <div fxFlex="100" fxLayoutAlign="center center">
+      <button mat-button color="accent" type="button" (click)="goCreate()">
+        <mat-icon>insert_drive_file</mat-icon>
+        Novo
+      </button>
+    </div>
     <!-- TODO: fazer filtro de itens selecionados -->
   </div>
 
@@ -83,7 +94,5 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
-<mat-paginator #paginator [length]="resultsLength" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
+<mat-paginator #paginator [length]="database.data.length || resultsLength" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
 </mat-paginator>
-<!-- <mat-paginator #paginator [length]="database.data.length" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
-</mat-paginator> -->
