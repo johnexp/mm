@@ -5,7 +5,7 @@ var VersaoService = require('../services/versao.service');
 _this = this;
 
 
-// Async Controller function to get the To do List
+// Async Controller function to get the Versoes List
 exports.getVersoes = async function (req, res, next) {
 
   // Check the existence of the query parameters, If the exists doesn't exists assign a default value
@@ -32,7 +32,21 @@ exports.getVersoes = async function (req, res, next) {
   }
 }
 
-// Async Controller function to get the To do List
+// Async Controller function to get the Versoes List
+exports.getAllVersoes = async function (req, res, next) {
+  console.log('aqui');
+  try {
+    var versoes = await VersaoService.getAllVersoes();
+
+    // Return the versoes list with the appropriate HTTP Status Code and Message.
+    return res.status(200).json(versoes);
+  } catch (e) {
+    //Return an Error Response Message with Code and the Error Message.
+    return res.status(400).json({ status: 400, message: e.message });
+  }
+}
+
+// Async Controller function to get the Versoes List
 exports.getVersao = async function (req, res, next) {
   try {
     var versoes = await VersaoService.getVersao(req.params.id)

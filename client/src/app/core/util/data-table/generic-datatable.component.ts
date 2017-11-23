@@ -44,7 +44,7 @@ export class GenericDatatableComponent implements OnInit {
   displayedColumns: any[] = [];
   dataSource: any;
 
-  resultsLength: number = 0;
+  resultsLength: Number = 0;
   isLoadingResults: Boolean = false;
   isRateLimitReached: Boolean = false;
   hasUpdate: Boolean = false;
@@ -58,7 +58,7 @@ export class GenericDatatableComponent implements OnInit {
   ngOnInit() {
     this.createColumns();
     if (this.lazy) {
-      this.dataSource = new MatTableDataSource()
+      this.dataSource = new MatTableDataSource();
     } else {
       this.dataSource = new GenericDataSource(this.database, this.paginator);
     }
@@ -68,9 +68,9 @@ export class GenericDatatableComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.database = new GenericDatabase;
-
     if (this.lazy) {
+      this.database = new GenericDatabase;
+
       // If the user changes the sort order, reset back to the first page.
       this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
@@ -109,8 +109,8 @@ export class GenericDatatableComponent implements OnInit {
 
   clearEmptyFilterValues() {
     const objKeys = Object.keys(this.model);
-    for (var index = 0; index < objKeys.length; index++) {
-      var key = objKeys[index];
+    for (let index = 0; index < objKeys.length; index++) {
+      const key = objKeys[index];
       if (this.model[key] === '') {
         delete this.model[key];
       }

@@ -17,11 +17,13 @@ import { Versao } from '../domain/versao';
 })
 export class VersaoService extends Resource {
 
-  @ResourceAction()
-  getAll: ResourceMethod<{}, Pagination>;
+  @ResourceAction({
+    isArray: true
+  })
+  getAll: ResourceMethod<{}, Versao[]>;
 
   @ResourceAction({
-    path: '/{!id}'
+    path: '/id/{!id}'
   })
   get: ResourceMethod<{ id: string }, Versao>;
 

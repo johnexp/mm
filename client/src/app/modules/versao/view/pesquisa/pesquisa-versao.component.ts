@@ -24,12 +24,25 @@ export class PesquisaVersaoComponent implements OnInit {
   database = new GenericDatabase;
   pagination: Pagination;
 
+
   constructor(private location: Location,
     private versaoService: VersaoService,
     private customSnackBar: CustomSnackBarService) {
   }
 
   ngOnInit() {
+    this.buscarVersoes();
+  }
+
+  buscarVersoes() {
+    this.versaoService.getAll({}).$observable.subscribe(
+      response => {
+        this.database.data = response.docs;
+      },
+      error => {
+        this.customSnackBar.open('Não foi possível buscar os registros!');
+      }
+    );
   }
 
   excluirVersao(event) {
@@ -48,7 +61,7 @@ export class PesquisaVersaoComponent implements OnInit {
         this.blockUI.stop();
         this.customSnackBar.open('Não foi possível remover o registro!');
       }
-    )
+    );
   }
 
   voltar() {

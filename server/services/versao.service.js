@@ -1,10 +1,10 @@
-// Gettign the Newly created Mongoose Model we just created 
+// Gettign the Newly created Mongoose Model we just created
 var Versao = require('../models/versao.model');
 
 // Saving the context of this module inside the _the variable
 _this = this;
 
-// Async function to get the To do List
+// Async function to get the Versoes List
 exports.getVersoes = async function (query, page, limit, sort) {
   // Options setup for the mongoose paginate
   var options = {
@@ -13,25 +13,39 @@ exports.getVersoes = async function (query, page, limit, sort) {
     limit
   };
 
-  // Try Catch the awaited promise to handle the error 
+  // Try Catch the awaited promise to handle the error
   try {
     var versoes = await Versao.paginate(query, options);
     // Return the versao list that was retured by the mongoose promise
     return versoes;
   } catch (e) {
-    // return a Error message describing the reason 
+    // return a Error message describing the reason
     throw Error('Error while Paginating Versoes');
+  }
+}
+
+// Async function to get the Versoes List
+exports.getAllVersoes = async function () {
+  // Try Catch the awaited promise to handle the error
+  try {
+    console.log('aqui tb');
+    var versoes = await Versao.find();
+    // Return the versao list that was retured by the mongoose promise
+    return versoes;
+  } catch (e) {
+    // return a Error message describing the reason
+    throw Error('Error while getting all Versoes');
   }
 }
 
 exports.getVersao = async function (id) {
 
-  // Try Catch the awaited promise to handle the error 
+  // Try Catch the awaited promise to handle the error
   try {
     var versao = await Versao.findById(id)
     return versao;
   } catch (e) {
-    // return a Error message describing the reason 
+    // return a Error message describing the reason
     throw Error('Error while getting a Versão');
   }
 }
@@ -46,11 +60,11 @@ exports.createVersao = async function (versao) {
   });
 
   try {
-    // Saving the Versao 
+    // Saving the Versao
     var savedVersao = await newVersao.save();
     return savedVersao;
   } catch (e) {
-    // return a Error message describing the reason     
+    // return a Error message describing the reason
     throw Error("Error while Creating Versao");
   }
 }
