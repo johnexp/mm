@@ -3,9 +3,9 @@
   Versões
 </h1>
 
-<app-generic-datatable [columns]="displayedColumns" [database]="database" [pagination]="pagination" [lazy]="false" [hasFilter]="true"
+<app-generic-datatable [columns]="columns" [database]="database" [resource]="'versoes'" [hasPaginator]="true" [lazy]="false" [hasFilter]="true"
   [actions]="{'u': true, 'd': true}" (deleteRecord)="excluirVersao($event[0], $event[1])">
-  <ng-template let-model="model">
+  <ng-template let-model="model" #templateRefColumns>
     <!-- <div fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap> -->
       <mat-form-field fxFlex>
         <input matInput name="data" (focus)="data.open()" (click)="data.open()" [matDatepicker]="data" [(ngModel)]="model.data" placeholder="Data">

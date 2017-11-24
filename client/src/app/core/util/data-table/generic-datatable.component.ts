@@ -29,16 +29,20 @@ export class GenericDatatableComponent implements OnInit {
   @Input() selectionData: any[];
   @Input() filterPlaceholder: String = 'Filtrar';
   @Input() hasFilter: Boolean = true;
+  @Input() hasPaginator: Boolean = true;
   @Input() actions: any[] = [];
   @Input() lazy: Boolean = false;
   @Input() resource: string;
+  @Input() customEdit: Boolean = false;
   @Output() deleteRecord: EventEmitter<any> = new EventEmitter<any>();
+  @Output() editRecord: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('filter') filter: ElementRef;
   // TODO: fazer filtro de itens selecionados
   // @ViewChild('filterSelected') filterSelected: ElementRef;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ContentChild(TemplateRef) templateRef: TemplateRef<any>;
+  @ContentChild(TemplateRef) templateRefFilters: TemplateRef<any>;
+  @ContentChild(TemplateRef) templateRefColumns: TemplateRef<any>;
 
   displayedColumns: any[] = [];
   dataSource: MatTableDataSource<any> = new MatTableDataSource;
@@ -51,10 +55,14 @@ export class GenericDatatableComponent implements OnInit {
   _dataChange = new BehaviorSubject(new GenericDatabase());
 
   get database(): GenericDatabase {
-    if (this._dataChange.value.data.length !== this.dataSource.data.length) {
-      this.dataSource = new MatTableDataSource(this._dataChange.value.data);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
+    if (!this.lazy) {
+      if (this._dataChange.value.data.length !== this.dataSource.data.length) {
+        this.dataSource = new MatTableDataSource(this._dataChange.value.data);
+        this.dataSource.sort = this.sort;
+        if (this.hasPaginator) {
+          this.dataSource.paginator = this.paginator;
+        }
+      }
     }
     return this._dataChange.value;
   }
@@ -139,9 +147,7 @@ export class GenericDatatableComponent implements OnInit {
     if (this.actions) {
       this.displayedColumns.push('actions');
     }
-    this.columns.forEach(column => {
-      this.displayedColumns.push(column.value);
-    });
+    this.displayedColumns.push(...this.columns.map(x => x.columnDef));
   }
 
   /**
@@ -174,9 +180,13 @@ export class GenericDatatableComponent implements OnInit {
     }
   }
 
-  goEdit(id) {
-    const path = this.activatedRoute.root.firstChild.snapshot.url[0].path;
-    this.router.navigate([path + '/editar/', id]);
+  goEdit(row) {
+    if (this.customEdit) {
+      this.editRecord.emit(row);
+    } else {
+      const path = this.activatedRoute.root.firstChild.snapshot.url[0].path;
+      this.router.navigate([path + '/editar/', row._id]);
+    }
   }
 
   goCreate() {

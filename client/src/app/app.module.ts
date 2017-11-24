@@ -1,3 +1,5 @@
+import { BannerModule } from './modules/banner/banner.module';
+import { ApresentacaoSiteModule } from './modules/apresentacao-site/apresentacao-site.module';
 import { HomologacaoModule } from './modules/homologacao/homologacao.module';
 import { MembroModule } from './modules/membro/membro.module';
 import { MatPaginatorIntlPtbr } from './core/util/data-table/mat-paginator-intl-ptbr';
@@ -5,7 +7,7 @@ import { VersaoModule } from './modules/versao/versao.module';
 import { CoreModule } from './core/core.module';
 import { AppRoutes } from './app.routes';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -41,7 +43,9 @@ const MAT_MODULES = [
     CoreModule,
     VersaoModule,
     MembroModule,
-    HomologacaoModule
+    HomologacaoModule,
+    ApresentacaoSiteModule,
+    BannerModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

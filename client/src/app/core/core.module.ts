@@ -1,3 +1,4 @@
+import { ImagePreviewComponent } from './util/image-preview/image-preview.component';
 import { CustomSnackBarService } from './util/snack-bar/custom-snack-bar.service';
 import { FormsModule } from '@angular/forms';
 import { ConfirmationDialogComponent } from './util/dialog/confirmation-dialog.component';
@@ -50,7 +51,8 @@ const MAT_MODULES = [
     HeaderComponent,
     NavigationComponent,
     GenericDatatableComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ImagePreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +67,7 @@ const MAT_MODULES = [
     HeaderComponent,
     NavigationComponent,
     GenericDatatableComponent,
+    ImagePreviewComponent
   ],
   providers: [CustomSnackBarService],
   entryComponents: [

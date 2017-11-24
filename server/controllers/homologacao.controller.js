@@ -10,7 +10,9 @@ exports.getHomologacaos = async function (req, res, next) {
   var sort = JSON.parse('{ "' + sortBy + '": ' + order + ' }');
 
   var query = {};
-  req.body.nome ? query.nome = { $regex: new RegExp('^.*' + req.body.nome.trim() + '.*', 'i') } : null;
+  req.body.descricao ? query.descricao = { $regex: new RegExp('^.*' + req.body.descricao.trim() + '.*', 'i') } : null;
+  req.body.responsavel ? query.responsavel = { $regex: new RegExp('^.*' + req.body.responsavel.trim() + '.*', 'i') } : null;
+  req.body.empresa ? query.empresa = { $regex: new RegExp('^.*' + req.body.empresa.trim() + '.*', 'i') } : null;
 
   try {
     var homologacaos = await HomologacaoService.getHomologacaos(query, page, limit, sort);
@@ -40,7 +42,9 @@ exports.getHomologacao = async function (req, res, next) {
 
 exports.createHomologacao = async function (req, res, next) {
   var homologacao = {
-    nome: req.body.nome
+    descricao: req.body.descricao,
+    responsavel: req.body.responsavel,
+    empresa: req.body.empresa
   };
 
   try {
@@ -59,7 +63,9 @@ exports.updateHomologacao = async function (req, res, next) {
   var id = req.body._id;
   var homologacao = {
     id,
-    nome: req.body.nome ? req.body.nome : null
+    descricao: req.body.descricao ? req.body.descricao : null,
+    responsavel: req.body.responsavel ? req.body.responsavel : null,
+    empresa: req.body.empresa ? req.body.empresa : null
   };
 
   try {

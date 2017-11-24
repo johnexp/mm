@@ -42,12 +42,6 @@ export class MembroService extends Resource {
   })
   delete: ResourceMethod<{ id: string }, Boolean>;
 
-  @ResourceAction({
-    method: RequestMethod.Post,
-    path: '/upload-foto'
-  })
-  salvarFoto: ResourceMethod<Membro, Membro>;
-
   constructor(http: Http) {
     super(http);
   }

@@ -1,0 +1,55 @@
+<h1 class="page-title">
+  <mat-icon>photo_size_select_actual</mat-icon>
+  Banner -
+  <span class="subtitle">Cadastrar Banner
+  </span>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
+    <app-image-preview fxFlex="20" fxFlex.sm="30" fxFlex.xs="100" [model]="banner" [image]="imagem"></app-image-preview>
+    <div fxFlex fxFlex.sm="100" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput class="form-control" name="titulo" #titulo="ngModel" [(ngModel)]="banner.titulo" placeholder="Título" required>
+        <mat-error [hidden]="!titulo.hasError('required') || (titulo.pristine && !titulo.touched && !form.submited)">
+          O campo "Título" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput class="form-control" name="texto" #texto="ngModel" [(ngModel)]="banner.texto" placeholder="Texto" required>
+        <mat-error [hidden]="!texto.hasError('required') || (texto.pristine && !texto.touched && !form.submited)">
+          O campo "Texto" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <div class="buttons-container layout-margin" fxLayoutAlign="center center" fxFlex="100">
+        <button mat-button type="button" color="primary" (click)="abrirDialogBotao()">
+          <mat-icon>add_circle_outline</mat-icon>
+          Adicionar Botão
+        </button>
+      </div>
+      <app-generic-datatable fxFlex="100" [columns]="displayedBotoesColumns" [database]="databaseBotoes" [lazy]="false" [hasFilter]="false"
+        [hasPaginator]="false" [actions]="{'u': true, 'd': true}" [customEdit]="true" (editRecord)="abrirDialogBotao($event)"
+        (deleteRecord)="removerBotao($event[0])">
+        <ng-template #templateRefColumns>
+          <ng-container matColumnDef="cor">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Cor </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              {{row['cor']}}
+            </mat-cell>
+          </ng-container>
+        </ng-template>
+      </app-generic-datatable>
+    </div>
+  </div>
+
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center">
+    <button mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button mat-button type="button" (click)="cancelar()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+  </div>
+</form>

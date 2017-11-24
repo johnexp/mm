@@ -1,6 +1,8 @@
 export class Homologacao {
   _id: number;
-  nome: string;
+  descricao: string;
+  responsavel: string;
+  empresa: string;
 
   constructor() {
 

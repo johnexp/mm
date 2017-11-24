@@ -25,10 +25,10 @@
           </mat-form-field> -->
         </ng-container>
         <mat-form-field fxFlex *ngIf="!field.type">
-          <input matInput name="{{field.value}}" [(ngModel)]="model[field.value]" placeholder="{{field.viewValue}}">
+          <input matInput name="{{ field.columnDef }}" [(ngModel)]="model[field.columnDef]" placeholder="{{ field.header }}">
         </mat-form-field>
       </ng-container>
-      <ng-template [ngTemplateOutlet]="templateRef" [ngTemplateOutletContext]="{model: model}">
+      <ng-template [ngTemplateOutlet]="templateRefFilters" [ngTemplateOutletContext]="{ model: model }">
       </ng-template>
     </div>
 
@@ -68,31 +68,29 @@
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef class="text-center"> Ações </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <button mat-icon-button color="primary" *ngIf="actions.u" (click)="goEdit(row._id)" matTooltip="Editar">
+      <button mat-icon-button type="button" color="primary" *ngIf="actions.u" (click)="goEdit(row)" matTooltip="Editar">
         <mat-icon aria-label="Editar">edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" *ngIf="actions.d" (click)="confirmDelete(row._id)" matTooltip="Excluir">
+      <button mat-icon-button type="button" color="warn" *ngIf="actions.d" (click)="confirmDelete(row._id)" matTooltip="Excluir">
         <mat-icon aria-label="Excluir">delete</mat-icon>
       </button>
     </mat-cell>
   </ng-container>
 
   <!-- Columns -->
-  <ng-container *ngFor="let column of columns" matColumnDef="{{column.value}}">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> {{column.viewValue}} </mat-header-cell>
+  <ng-container *ngFor="let column of columns" matColumnDef="{{ column.columnDef }}">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>{{ column.header }}</mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <ng-container *ngIf="column.pipe" [ngSwitch]="column.pipe">
-        <span *ngSwitchCase="'date'">{{row[column.value] | date: 'dd/MM/yyyy'}}</span>
-        <span *ngSwitchCase="'datetime'">{{row[column.value] | date: 'dd/MM/yyyy HH:mm:ss'}}</span>
-      </ng-container>
-      <ng-container *ngIf="!column.pipe">
-        {{row[column.value]}}
-      </ng-container>
+      {{ column.cell(row) }}
     </mat-cell>
   </ng-container>
+
+  <ng-template [ngTemplateOutlet]="templateRefColumns" [ngTemplateOutletContext]="{model: model}">
+  </ng-template>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
-<mat-paginator #paginator [length]="database.data.length || resultsLength" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
+<mat-paginator [hidden]="!hasPaginator" #paginator [length]="database.data.length || resultsLength" [pageIndex]="0" [pageSize]="5"
+  [pageSizeOptions]="[5, 10, 25, 100]">
 </mat-paginator>

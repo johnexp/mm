@@ -17,7 +17,9 @@ export class PesquisaHomologacaoComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
   displayedColumns = [
-    { value: 'nome', viewValue: 'Nome' }
+    { columnDef: 'descricao', header: 'Descrição', cell: (row: Homologacao) => `${row.descricao}` },
+    { columnDef: 'responsavel', header: 'Responsável', cell: (row: Homologacao) => `${row.responsavel}` },
+    { columnDef: 'empresa', header: 'Empresa', cell: (row: Homologacao) => `${row.empresa}` }
   ];
   database = new GenericDatabase;
   pagination: Pagination;

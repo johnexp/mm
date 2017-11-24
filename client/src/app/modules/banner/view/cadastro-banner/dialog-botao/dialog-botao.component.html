@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Adicionar Botão</h1>
+<div mat-dialog-content>
+  <form #form="ngForm" novalidate>
+    <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput class="form-control" name="texto" #texto="ngModel" [(ngModel)]="data.botao.texto" placeholder="Texto" required>
+        <mat-error [hidden]="!texto.hasError('required') || (texto.pristine && !texto.touched && !form.submited)">
+          O campo "Texto" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput class="form-control" name="url" #url="ngModel" [(ngModel)]="data.botao.url" placeholder="URL" required>
+        <mat-error [hidden]="!url.hasError('required') || (url.pristine && !url.touched && !form.submited)">
+          O campo "URL" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select placeholder="Cor" #cor="ngModel" name="cor" [(ngModel)]="data.botao.cor" required>
+          <mat-option *ngFor="let cor of cores" [value]="cor.value">
+            {{ cor.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error [hidden]="!cor.hasError('required') || (cor.pristine && !cor.touched && !form.submited)">
+          O campo "Cor" é obrigatório
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-actions fxLayoutAlign="end center">
+  <button mat-button [mat-dialog-close]="data.botao" color="primary">
+    <mat-icon>add_circle_outline</mat-icon>
+    Adicionar
+  </button>
+  <button mat-button (click)="onCancelClick()">
+    <mat-icon>cancel</mat-icon>
+    Cancelar
+  </button>
+</div>

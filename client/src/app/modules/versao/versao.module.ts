@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { CoreModule } from './../../core/core.module';
 import { PesquisaVersaoComponent } from './view/pesquisa/pesquisa-versao.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -39,7 +40,7 @@ const MAT_MODULES = [
     )
   ],
   exports: [],
-  providers: [],
+  providers: [DatePipe],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class VersaoModule {

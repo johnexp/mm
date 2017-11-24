@@ -17,8 +17,8 @@ export class PesquisaMembroComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
   displayedColumns = [
-    { value: 'nome', viewValue: 'Nome' },
-    { value: 'cargo', viewValue: 'Cargo' },
+    { columnDef: 'nome', header: 'Nome', cell: (row: Membro) => `${row.nome}` },
+    { columnDef: 'cargo', header: 'Cargo', cell: (row: Membro) => `${row.cargo}` },
   ];
   database = new GenericDatabase;
   pagination: Pagination;

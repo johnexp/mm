@@ -1,0 +1,8 @@
+<h1 class="page-title">
+  <mat-icon>photo_size_select_actual</mat-icon>
+  Banner
+</h1>
+
+<app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'banneres'" [lazy]="false" [hasFilter]="true"
+  [actions]="{'u': true, 'd': true}" (deleteRecord)="excluirBanner($event[0], $event[1])">
+</app-generic-datatable>

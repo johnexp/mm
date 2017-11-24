@@ -38,7 +38,9 @@ exports.getHomologacao = async function (id) {
 exports.createHomologacao = async function (homologacao) {
   // Creating a new Mongoose Object by using the new keyword
   var newHomologacao = new Homologacao({
-    nome: homologacao.nome
+    descricao: homologacao.descricao,
+    responsavel: homologacao.responsavel,
+    empresa: homologacao.empresa
   });
 
   try {
@@ -62,7 +64,9 @@ exports.updateHomologacao = async function (homologacao) {
     return false;
   }
 
-  oldHomologacao.nome = homologacao.nome;
+  oldHomologacao.descricao = homologacao.descricao;
+  oldHomologacao.responsavel = homologacao.responsavel;
+  oldHomologacao.empresa = homologacao.empresa;
 
   try {
     var savedHomologacao = await oldHomologacao.save();

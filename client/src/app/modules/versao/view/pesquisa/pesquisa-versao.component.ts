@@ -4,7 +4,7 @@ import { GenericDatabase } from './../../../../core/util/data-table/generic-data
 import { VersaoService } from './../../service/versao.service';
 import { Versao } from './../../domain/versao';
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import { Location, DatePipe } from '@angular/common';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
@@ -15,11 +15,11 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 export class PesquisaVersaoComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
-  displayedColumns = [
-    { value: 'ticket', viewValue: 'Ticket' },
-    { value: 'numeroVersao', viewValue: 'Versão' },
-    { value: 'descricao', viewValue: 'Descrição' },
-    { value: 'data', viewValue: 'Data', pipe: 'date', type: 'date' }
+  columns = [
+    { columnDef: 'ticket', header: 'Ticket', cell: (row: Versao) => `${row.ticket}` },
+    { columnDef: 'numeroVersao', header: 'Versão', cell: (row: Versao) => `${row.numeroVersao}` },
+    { columnDef: 'descricao', header: 'Descrição', cell: (row: Versao) => `${row.descricao}` },
+    { columnDef: 'data', header: 'Data', cell: (row: Versao) => `${this.datePipe.transform(row.data, 'dd/MM/yyyy')}` }
   ];
   database = new GenericDatabase;
   pagination: Pagination;
@@ -27,7 +27,8 @@ export class PesquisaVersaoComponent implements OnInit {
 
   constructor(private location: Location,
     private versaoService: VersaoService,
-    private customSnackBar: CustomSnackBarService) {
+    private customSnackBar: CustomSnackBarService,
+    private datePipe: DatePipe) {
   }
 
   ngOnInit() {
