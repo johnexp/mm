@@ -1,3 +1,8 @@
+import { AuthGuard } from './guard/auth.guard';
+import { customHttpProvider } from './helpers/custom.http';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 import { ImagePreviewComponent } from './util/image-preview/image-preview.component';
 import { CustomSnackBarService } from './util/snack-bar/custom-snack-bar.service';
 import { FormsModule } from '@angular/forms';
@@ -27,6 +32,8 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AuthenticationService } from './service/authentication.service';
+import { UserService } from './service/user.service';
 
 const MAT_MODULES = [
   MatTableModule,
@@ -52,7 +59,10 @@ const MAT_MODULES = [
     NavigationComponent,
     GenericDatatableComponent,
     ConfirmationDialogComponent,
-    ImagePreviewComponent
+    ImagePreviewComponent,
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +79,13 @@ const MAT_MODULES = [
     GenericDatatableComponent,
     ImagePreviewComponent
   ],
-  providers: [CustomSnackBarService],
+  providers: [
+    customHttpProvider,
+    CustomSnackBarService,
+    AuthGuard,
+    AuthenticationService,
+    UserService
+  ],
   entryComponents: [
     ConfirmationDialogComponent
   ],

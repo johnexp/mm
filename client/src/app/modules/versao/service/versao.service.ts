@@ -1,54 +1,15 @@
-import { Pagination } from './../../../core/domain/pagination';
-import { Permissao } from './../../../core/domain/permissao';
-import { AppSettings } from './../../../app.settings';
-import { Resource, ResourceParams, ResourceAction } from 'ngx-resource';
-import { Injectable, Injector } from '@angular/core';
-import { Http, RequestMethod, URLSearchParams } from '@angular/http';
-import { ResourceMethod, ResourceMethodStrict, ResourceResult } from 'ngx-resource/src/Interfaces';
+import { GenericService } from './../../../core/service/generic.service';
+import { Observable } from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
 import { Versao } from '../domain/versao';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
-@ResourceParams({
-  url: AppSettings.API_ENDPOINT + '/versoes',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
-})
-export class VersaoService extends Resource {
+export class VersaoService extends GenericService {
 
-  @ResourceAction({
-    isArray: true
-  })
-  getAll: ResourceMethod<{}, Versao[]>;
+  private path = 'versoes';
 
-  @ResourceAction({
-    path: '/id/{!id}'
-  })
-  get: ResourceMethod<{ id: string }, Versao>;
-
-  @ResourceAction({
-    method: RequestMethod.Post
-  })
-  create: ResourceMethod<Versao, Versao>;
-
-  @ResourceAction({
-    method: RequestMethod.Put
-  })
-  update: ResourceMethod<Versao, Versao>;
-
-  @ResourceAction({
-    method: RequestMethod.Delete,
-    path: '/{!id}'
-  })
-  delete: ResourceMethod<{ id: string }, Boolean>;
-
-
-  constructor(http: Http, injector: Injector) {
-    super(http);
-  }
-
-  createOrUpdate(versao: Versao): ResourceResult<Versao> {
+  createOrUpdate(versao: Versao): Observable<Versao> {
     if (versao._id) {
       return this.update(versao);
     } else {
@@ -56,4 +17,29 @@ export class VersaoService extends Resource {
     }
   }
 
+  getAll(): Observable<Versao[]> {
+    return this.http.get<Versao[]>(this.getResourceUrl(this.path), this.httpOptions);
+  }
+
+  get(id: string): Observable<Versao> {
+    const url = `${this.getResourceUrl(this.path)}/id/${id}`;
+    return this.http.get<Versao>(url, this.httpOptions)
+      .pipe(catchError(this.handleError<Versao>(new Versao)));
+  }
+
+  create(versao: Versao): Observable<Versao> {
+    return this.http.post<Versao>(this.getResourceUrl(this.path), versao, this.httpOptions)
+      .pipe(catchError(this.handleError<Versao>()));
+  }
+
+  update(versao: Versao): Observable<Versao> {
+    return this.http.put<Versao>(this.getResourceUrl(this.path), versao, this.httpOptions)
+      .pipe(catchError(this.handleError<Versao>()));
+  }
+
+  delete(id: string): Observable<any> {
+    const url = `${this.getResourceUrl(this.path)}/${id}`;
+    return this.http.delete(url, this.httpOptions)
+      .pipe(catchError(this.handleError<Versao>()));
+  }
 }

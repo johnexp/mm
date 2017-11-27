@@ -36,8 +36,8 @@ export class PesquisaVersaoComponent implements OnInit {
   }
 
   buscarVersoes() {
-    this.blockUI.start('Buscando registros...')
-    this.versaoService.getAll({}).$observable.subscribe(
+    this.blockUI.start('Buscando registros...');
+    this.versaoService.getAll().subscribe(
       response => {
         this.blockUI.stop();
         this.database = new GenericDatabase;
@@ -52,15 +52,11 @@ export class PesquisaVersaoComponent implements OnInit {
 
   excluirVersao(id, paginator) {
     this.blockUI.start('Removendo registro...');
-    this.versaoService.delete({ id: id }).$observable.subscribe(
+    this.versaoService.delete(id).subscribe(
       response => {
-        if (!response) {
-          this.customSnackBar.open('Não foi possível remover o registro!', 'danger');
-        } else {
-          this.buscarVersoes();
-          paginator.pageIndex = 0;
-          paginator.page.emit();
-        }
+        this.buscarVersoes();
+        paginator.pageIndex = 0;
+        paginator.page.emit();
         this.blockUI.stop();
       },
       error => {

@@ -7,7 +7,7 @@ import { GenericService } from './../../service/generic.service';
 import { Pagination } from './../../domain/pagination';
 import { GenericDatabase } from './generic-database';
 import { MatSnackBar, MatPaginator, MatTableDataSource, MatSort, MatDialog, MatSortable } from '@angular/material';
-import { Component, Input, OnInit, ElementRef, ViewChild, Output, EventEmitter, ContentChild, TemplateRef } from '@angular/core'
+import { Component, Input, OnInit, ElementRef, ViewChild, Output, EventEmitter, ContentChild, TemplateRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { Observable } from 'rxjs/Observable';
@@ -16,13 +16,14 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
+import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-generic-datatable',
   templateUrl: './generic-datatable.component.html',
   providers: [GenericService]
 })
-export class GenericDatatableComponent implements OnInit {
+export class GenericDatatableComponent implements OnInit, AfterViewInit {
 
   @Input() columns: any[];
   @Input() selectable: Boolean;
@@ -93,13 +94,12 @@ export class GenericDatatableComponent implements OnInit {
         .switchMap(() => {
           this.isLoadingResults = true;
           this.clearEmptyFilterValues();
-          return this.genericService.filterGeneric(this.model, {
-            resource: this.resource,
-            sort: this.sort.active,
-            order: this.sort.direction,
-            page: this.paginator.pageIndex + 1,
-            limit: this.paginator.pageSize
-          }).$observable;
+          return this.genericService.filterGeneric(this.model,
+            this.resource,
+            this.sort.active,
+            this.sort.direction,
+            this.paginator.pageIndex + 1,
+            this.paginator.pageSize);
         })
         .map(data => {
           // Flip flag to show that loading has finished.

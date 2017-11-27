@@ -1,3 +1,4 @@
+import { customHttpProvider } from './../../core/helpers/custom.http';
 import { DatePipe } from '@angular/common';
 import { CoreModule } from './../../core/core.module';
 import { PesquisaVersaoComponent } from './view/pesquisa/pesquisa-versao.component';
@@ -13,9 +14,9 @@ import { FormsModule } from '@angular/forms';
 
 const MAT_MODULES = [
   MatNativeDateModule,
-  MatButtonModule, 
-  MatFormFieldModule, 
-  MatIconModule, 
+  MatButtonModule,
+  MatFormFieldModule,
+  MatIconModule,
   MatInputModule,
   MatMenuModule,
   MatDatepickerModule,
@@ -40,7 +41,7 @@ const MAT_MODULES = [
     )
   ],
   exports: [],
-  providers: [DatePipe],
+  providers: [DatePipe, customHttpProvider],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class VersaoModule {

@@ -1,37 +1,50 @@
+import { CustomSnackBarService } from './../util/snack-bar/custom-snack-bar.service';
 import { Pagination } from './../domain/pagination';
 import { AppSettings } from './../../app.settings';
-import { Resource, ResourceParams, ResourceAction } from 'ngx-resource';
-import { Injectable, Injector } from '@angular/core';
-import { Http, RequestMethod, URLSearchParams } from '@angular/http';
-import { ResourceMethod, ResourceMethodStrict } from 'ngx-resource/src/Interfaces';
-import { TipoPermissao } from '../domain/tipo-permissao';
+import { Injectable } from '@angular/core';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { catchError } from 'rxjs/operators';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable()
-@ResourceParams({
-  url: AppSettings.API_ENDPOINT + '/user',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
+export class GenericService {
+
+  resourceUrl = AppSettings.API_ENDPOINT;
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json; charset=UTF-8',
+      'authorization': 'Bearer ' + this.authenticationService.getAuthorization()
+    })
+  };
+
+  constructor(public http: HttpClient,
+    private authenticationService: AuthenticationService,
+    private snackBar: CustomSnackBarService) { }
+
+  getResourceUrl(path: string) {
+    return this.resourceUrl + '/' + path;
   }
-})
-export class GenericService extends Resource {
 
-  @ResourceAction({
-    method: RequestMethod.Get,
-    path: '/permissions',
-    isArray: true
-  })
-  getAllTipoPermissao: ResourceMethod<{}, TipoPermissao[]>;
+  filterGeneric(body: any, resource: string, sort?: string, order?: string, page?: number, limit?: number): Observable<Pagination> {
+    const url = `${this.resourceUrl}/${resource}/filter/?sort=${sort}&order=${order}&page=${page}&limit=${limit}`;
+    return this.http.post<Pagination>(url, body, this.httpOptions).pipe(catchError(this.handleError<Pagination>()));
+  }
 
-  @ResourceAction({
-    method: RequestMethod.Post,
-    url: AppSettings.API_ENDPOINT + '/{resource}/filter',
-    path: '/?sort={sort}&order={order}&page={page}&limit={limit}'
-  })
-  filterGeneric: ResourceMethodStrict<any, { resource: string, sort: string, order: string, page: number, limit: number }, Pagination>;
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param result - optional value to return as the observable result
+   */
+  handleError<T>(result?: T) {
+    return (error: any): Observable<T> => {
 
-  constructor(http: Http, injector: Injector) {
-    super(http);
+      this.snackBar.open('Ocorreu um erro ao tentar realizar a operação', 'danger');
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 
 }

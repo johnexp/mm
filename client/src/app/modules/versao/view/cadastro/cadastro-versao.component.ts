@@ -34,7 +34,7 @@ export class CadastroVersaoComponent implements OnInit {
 
   obterVersao(id) {
     this.blockUI.start('Carregando...');
-    this.versaoService.get({ id: id }).$observable.subscribe(
+    this.versaoService.get(id).subscribe(
       response => {
         this.versao = response;
         this.blockUI.stop();
@@ -52,7 +52,7 @@ export class CadastroVersaoComponent implements OnInit {
       return;
     }
     this.blockUI.start('Salvando...');
-    this.versaoService.createOrUpdate(this.versao).$observable.subscribe(
+    this.versaoService.createOrUpdate(this.versao).subscribe(
       response => {
         this.customSnackBar.open('Registro salvo com sucesso!', 'success');
         this.router.navigate(['/versoes']);

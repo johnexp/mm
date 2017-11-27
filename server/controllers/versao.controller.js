@@ -34,7 +34,6 @@ exports.getVersoes = async function (req, res, next) {
 
 // Async Controller function to get the Versoes List
 exports.getAllVersoes = async function (req, res, next) {
-  console.log('aqui');
   try {
     var versoes = await VersaoService.getAllVersoes();
 

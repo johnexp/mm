@@ -14,6 +14,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { ResourceModule } from 'ngx-resource';
 import { BlockUIModule } from 'ng-block-ui';
+import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule, MatCardModule, MatCheckboxModule, MatChipsModule, MAT_DATE_LOCALE, MatPaginatorIntl } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -35,6 +36,7 @@ const MAT_MODULES = [
     FormsModule,
     BrowserAnimationsModule,
     CommonModule,
+    HttpClientModule,
     MAT_MODULES,
     FlexLayoutModule,
     ResourceModule.forRoot(),
@@ -49,7 +51,8 @@ const MAT_MODULES = [
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
-    { provide: MatPaginatorIntl, useClass: MatPaginatorIntlPtbr }
+    { provide: MatPaginatorIntl, useClass: MatPaginatorIntlPtbr },
+    HttpClientModule
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
