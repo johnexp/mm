@@ -35,7 +35,7 @@ export class CadastroHomologacaoComponent implements OnInit {
 
   obterHomologacao(id) {
     this.blockUI.start('Carregando...');
-    this.homologacaoService.get({ id: id }).$observable.subscribe(
+    this.homologacaoService.get(id).subscribe(
       response => {
         this.homologacao = response;
         this.blockUI.stop();
@@ -53,7 +53,7 @@ export class CadastroHomologacaoComponent implements OnInit {
       return;
     }
     this.blockUI.start('Salvando...');
-    this.homologacaoService.createOrUpdate(this.homologacao).$observable.subscribe(
+    this.homologacaoService.createOrUpdate(this.homologacao).subscribe(
       homologacao => {
         this.blockUI.stop();
         if (!this.homologacao._id) {

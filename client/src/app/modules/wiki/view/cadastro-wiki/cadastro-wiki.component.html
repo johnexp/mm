@@ -1,0 +1,44 @@
+<h1 class="page-title">
+  <mat-icon>language</mat-icon>
+  Wiki -
+  <span class="subtitle">Cadastrar Wiki
+  </span>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
+    <mat-form-field fxFlex>
+      <input matInput class="form-control" name="titulo" #titulo="ngModel" [(ngModel)]="wiki.titulo" placeholder="Título" required>
+      <mat-error [hidden]="!titulo.hasError('required') || (titulo.pristine && !titulo.touched && !form.submited)">
+        O campo "Título" é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <input matInput name="data" #data="ngModel" (focus)="dataToggle.open()" (click)="dataToggle.open()" [matDatepicker]="dataToggle"
+        [(ngModel)]="wiki.dataPublicacao" placeholder="Data da Publicação" required>
+      <mat-datepicker-toggle matSuffix [disabled]="false" [for]="dataToggle"></mat-datepicker-toggle>
+      <mat-datepicker #dataToggle></mat-datepicker>
+      <mat-error [hidden]="!data.hasError('required') || (data.pristine && !data.touched && !form.submitted)">
+        O campo "Data da Publicação" é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex="100">
+      <textarea matInput name="descricao" #descricao="ngModel" [(ngModel)]="wiki.descricao" placeholder="Descrição" required></textarea>
+      <mat-error [hidden]="!descricao.hasError('required') || (descricao.pristine && !descricao.touched && !form.submitted)">
+        O campo "Descrição" é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <div fxFlex="100" id="conteudo-wiki" [froalaEditor]="froalaOptions" [(froalaModel)]="wiki.conteudo"></div>
+  </div>
+
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center">
+    <button mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button mat-button type="button" (click)="cancelar()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+  </div>
+</form>

@@ -36,7 +36,7 @@ export class CadastroMembroComponent implements OnInit {
 
   obterMembro(id) {
     this.blockUI.start('Carregando...');
-    this.membroService.get({ id: id }).$observable.subscribe(
+    this.membroService.get(id).subscribe(
       response => {
         this.membro = response;
         this.imagem = this.membro.foto;
@@ -55,7 +55,7 @@ export class CadastroMembroComponent implements OnInit {
       return;
     }
     this.blockUI.start('Salvando...');
-    this.membroService.createOrUpdate(this.membro).$observable.subscribe(
+    this.membroService.createOrUpdate(this.membro).subscribe(
       membro => {
         this.blockUI.stop();
         if (!this.membro._id) {

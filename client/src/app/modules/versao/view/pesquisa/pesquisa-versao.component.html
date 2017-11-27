@@ -3,7 +3,7 @@
   Versões
 </h1>
 
-<app-generic-datatable [columns]="columns" [database]="database" [resource]="'versoes'" [hasPaginator]="true" [lazy]="true" [hasFilter]="true"
+<app-generic-datatable [columns]="columns" [database]="database" [resource]="'versoes'" [hasPaginator]="true" [lazy]="false" [hasFilter]="true"
   [actions]="{'u': true, 'd': true}" (deleteRecord)="excluirVersao($event[0], $event[1])">
   <ng-template let-model="model" #templateRefColumns>
     <!-- <div fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap> -->

@@ -1,3 +1,8 @@
+import { ArquivoModule } from './modules/arquivo/arquivo.module';
+import { WikiModule } from './modules/wiki/wiki.module';
+import { ItemProgressoModule } from './modules/item-progresso/item-progresso.module';
+import { HttpModule } from '@angular/http';
+import { customHttpProvider, CustomHttp } from './core/helpers/custom.http';
 import { BannerModule } from './modules/banner/banner.module';
 import { ApresentacaoSiteModule } from './modules/apresentacao-site/apresentacao-site.module';
 import { HomologacaoModule } from './modules/homologacao/homologacao.module';
@@ -12,9 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
-import { ResourceModule } from 'ngx-resource';
 import { BlockUIModule } from 'ng-block-ui';
-import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule, MatCardModule, MatCheckboxModule, MatChipsModule, MAT_DATE_LOCALE, MatPaginatorIntl } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -36,23 +39,25 @@ const MAT_MODULES = [
     FormsModule,
     BrowserAnimationsModule,
     CommonModule,
-    HttpClientModule,
     MAT_MODULES,
     FlexLayoutModule,
-    ResourceModule.forRoot(),
     BlockUIModule,
+    HttpModule,
     AppRoutes,
     CoreModule,
     VersaoModule,
     MembroModule,
     HomologacaoModule,
     ApresentacaoSiteModule,
-    BannerModule
+    BannerModule,
+    ItemProgressoModule,
+    WikiModule,
+    ArquivoModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     { provide: MatPaginatorIntl, useClass: MatPaginatorIntlPtbr },
-    HttpClientModule
+    customHttpProvider
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

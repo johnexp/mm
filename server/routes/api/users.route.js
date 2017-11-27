@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 // Getting the Versao Controller that we just created
-var UserController = require('../controllers/user.controller');
+var UserController = require('../../controllers/user.controller');
 
 // routes
 router.post('/authenticate', UserController.authenticate);

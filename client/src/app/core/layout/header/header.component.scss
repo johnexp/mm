@@ -27,7 +27,7 @@
   margin-right: 20px;
 }
 
-.header-actions span, .header-actions md-icon {
+.header-actions span, .header-actions mat-icon {
   color: #FFF;
 }
 
@@ -44,8 +44,4 @@
 .header-menu li .tab-link-disabled {
   color: #CE99C9;
   cursor: not-allowed;
-}
-
-.header-container {
-  background: linear-gradient(#52575b, #585b5e);
 }

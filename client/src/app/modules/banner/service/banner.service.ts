@@ -1,56 +1,45 @@
-import { Pagination } from './../../../core/domain/pagination';
-import { AppSettings } from './../../../app.settings';
-import { Http, RequestMethod, URLSearchParams } from '@angular/http';
+import { GenericService } from './../../../core/service/generic.service';
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
-import { Resource, ResourceParams, ResourceAction } from 'ngx-resource';
-import { ResourceMethod, ResourceMethodStrict, ResourceResult } from 'ngx-resource/src/Interfaces';
 import { Banner } from './../domain/banner';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
-@ResourceParams({
-  url: AppSettings.API_ENDPOINT + '/banneres',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
-})
-export class BannerService extends Resource {
+export class BannerService extends GenericService {
 
-  @ResourceAction({
-    isArray: true
-  })
-  getAll: ResourceMethod<{}, Banner[]>;
+  private path = '/banneres';
 
-  @ResourceAction({
-    path: '/id/{!id}'
-  })
-  get: ResourceMethod<{ id: string }, Banner>;
-
-  @ResourceAction({
-    method: RequestMethod.Post
-  })
-  create: ResourceMethod<Banner, Banner>;
-
-  @ResourceAction({
-    method: RequestMethod.Put
-  })
-  update: ResourceMethod<Banner, Banner>;
-
-  @ResourceAction({
-    method: RequestMethod.Delete,
-    path: '/{!id}'
-  })
-  delete: ResourceMethod<{ id: string }, Boolean>;
-
-  constructor(http: Http) {
-    super(http);
-  }
-
-  createOrUpdate(banner: Banner, callback?: (res: Banner) => any): ResourceResult<Banner> {
+  createOrUpdate(banner: Banner): Observable<Banner> {
     if (banner._id) {
-      return this.update(banner, callback);
+      return this.update(banner);
     } else {
-      return this.create(banner, callback);
+      return this.create(banner);
     }
+  }
+
+  getAll(): Observable<Banner[]> {
+    return this.http.get<Banner[]>(this.path);
+  }
+
+  get(id: string): Observable<Banner> {
+    const url = `${this.path}/id/${id}`;
+    return this.http.get<Banner>(url)
+      .pipe(catchError(this.handleError<Banner>(new Banner)));
+  }
+
+  create(banner: Banner): Observable<Banner> {
+    return this.http.post<Banner>(this.path, banner)
+      .pipe(catchError(this.handleError<Banner>()));
+  }
+
+  update(banner: Banner): Observable<Banner> {
+    return this.http.put<Banner>(this.path, banner)
+      .pipe(catchError(this.handleError<Banner>()));
+  }
+
+  delete(id: string): Observable<any> {
+    const url = `${this.path}/${id}`;
+    return this.http.delete(url)
+      .pipe(catchError(this.handleError<Banner>()));
   }
 }

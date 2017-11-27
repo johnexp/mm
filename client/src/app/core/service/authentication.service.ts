@@ -1,25 +1,22 @@
+import { CustomHttp } from './../helpers/custom.http';
+import { Router } from '@angular/router';
 import { AppSettings } from './../../app.settings';
 import { User } from './../domain/user';
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operator/map';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 
 @Injectable()
 export class AuthenticationService {
 
-  private resourceUrl = AppSettings.SERVER_URL + '/users';
+  private path = '/users/authenticate';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: CustomHttp,
+  private router: Router) { }
 
   login(username: string, password: string): Observable<User> {
-    const url = this.resourceUrl + '/authenticate';
-    return this.http.post<User>(url, { username: username, password: password }, httpOptions)
+    return this.http.post<User>(this.path, { username: username, password: password })
       .map(user => {
         if (user && user.token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -32,9 +29,13 @@ export class AuthenticationService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+    this.router.navigate(['/login']);
   }
 
   getAuthorization() {
-    return JSON.parse(localStorage.getItem('currentUser')).token;
+    if (localStorage.getItem('currentUser')) {
+      return JSON.parse(localStorage.getItem('currentUser')).token;
+    }
+    return null;
   }
 }

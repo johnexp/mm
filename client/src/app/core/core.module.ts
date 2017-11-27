@@ -1,5 +1,8 @@
+import { CustomFileUploadComponent } from './util/custom-file-upload/custom-file-upload.component';
+import { CoreRoutes } from './core.route';
+import { HttpClientModule } from '@angular/common/http';
+import { CustomHttp } from './helpers/custom.http';
 import { AuthGuard } from './guard/auth.guard';
-import { customHttpProvider } from './helpers/custom.http';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -60,6 +63,7 @@ const MAT_MODULES = [
     GenericDatatableComponent,
     ConfirmationDialogComponent,
     ImagePreviewComponent,
+    CustomFileUploadComponent,
     HomeComponent,
     LoginComponent,
     RegisterComponent
@@ -70,21 +74,24 @@ const MAT_MODULES = [
     FormsModule,
     MAT_MODULES,
     FlexLayoutModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule,
+    CoreRoutes
   ],
   exports: [
     FooterComponent,
     HeaderComponent,
     NavigationComponent,
     GenericDatatableComponent,
-    ImagePreviewComponent
+    ImagePreviewComponent,
+    CustomFileUploadComponent
   ],
   providers: [
-    customHttpProvider,
     CustomSnackBarService,
     AuthGuard,
     AuthenticationService,
-    UserService
+    UserService,
+    CustomHttp
   ],
   entryComponents: [
     ConfirmationDialogComponent

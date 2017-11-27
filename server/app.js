@@ -10,8 +10,6 @@ var expressJwt = require('express-jwt');
 var config = require('./config.json');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
-
 var api = require('./routes/api.route');
 
 var app = express();
@@ -46,11 +44,9 @@ app.use(expressJwt({
     }
     return null;
   }
-}).unless({ path: ['/users/authenticate', '/users/register'] }));
+}).unless({ path: ['/api/users/authenticate', '/api/users/register'] }));
 
 app.use('/', index);
-app.use('/users', users);
-
 app.use('/api', api);
 
 // catch 404 and forward to error handler

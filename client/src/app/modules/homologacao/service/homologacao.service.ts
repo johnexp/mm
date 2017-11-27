@@ -1,56 +1,45 @@
-import { Pagination } from './../../../core/domain/pagination';
-import { AppSettings } from './../../../app.settings';
-import { Http, RequestMethod, URLSearchParams } from '@angular/http';
+import { GenericService } from './../../../core/service/generic.service';
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
-import { Resource, ResourceParams, ResourceAction } from 'ngx-resource';
-import { ResourceMethod, ResourceMethodStrict, ResourceResult } from 'ngx-resource/src/Interfaces';
 import { Homologacao } from './../domain/homologacao';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
-@ResourceParams({
-  url: AppSettings.API_ENDPOINT + '/homologacaos',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
-})
-export class HomologacaoService extends Resource {
+export class HomologacaoService extends GenericService {
 
-  @ResourceAction({
-    isArray: true
-  })
-  getAll: ResourceMethod<{}, Homologacao[]>;
+  private path = '/homologacaos';
 
-  @ResourceAction({
-    path: '/id/{!id}'
-  })
-  get: ResourceMethod<{ id: string }, Homologacao>;
-
-  @ResourceAction({
-    method: RequestMethod.Post
-  })
-  create: ResourceMethod<Homologacao, Homologacao>;
-
-  @ResourceAction({
-    method: RequestMethod.Put
-  })
-  update: ResourceMethod<Homologacao, Homologacao>;
-
-  @ResourceAction({
-    method: RequestMethod.Delete,
-    path: '/{!id}'
-  })
-  delete: ResourceMethod<{ id: string }, Boolean>;
-
-  constructor(http: Http) {
-    super(http);
-  }
-
-  createOrUpdate(homologacao: Homologacao, callback?: (res: Homologacao) => any): ResourceResult<Homologacao> {
+  createOrUpdate(homologacao: Homologacao): Observable<Homologacao> {
     if (homologacao._id) {
-      return this.update(homologacao, callback);
+      return this.update(homologacao);
     } else {
-      return this.create(homologacao, callback);
+      return this.create(homologacao);
     }
+  }
+
+  getAll(): Observable<Homologacao[]> {
+    return this.http.get<Homologacao[]>(this.path);
+  }
+
+  get(id: string): Observable<Homologacao> {
+    const url = `${this.path}/id/${id}`;
+    return this.http.get<Homologacao>(url)
+      .pipe(catchError(this.handleError<Homologacao>(new Homologacao)));
+  }
+
+  create(homologacao: Homologacao): Observable<Homologacao> {
+    return this.http.post<Homologacao>(this.path, homologacao)
+      .pipe(catchError(this.handleError<Homologacao>()));
+  }
+
+  update(homologacao: Homologacao): Observable<Homologacao> {
+    return this.http.put<Homologacao>(this.path, homologacao)
+      .pipe(catchError(this.handleError<Homologacao>()));
+  }
+
+  delete(id: string): Observable<any> {
+    const url = `${this.path}/${id}`;
+    return this.http.delete(url)
+      .pipe(catchError(this.handleError<Homologacao>()));
   }
 }

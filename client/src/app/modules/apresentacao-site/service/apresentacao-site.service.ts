@@ -1,54 +1,34 @@
-import { Pagination } from './../../../core/domain/pagination';
-import { AppSettings } from './../../../app.settings';
-import { Http, RequestMethod, URLSearchParams } from '@angular/http';
+import { GenericService } from './../../../core/service/generic.service';
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
-import { Resource, ResourceParams, ResourceAction } from 'ngx-resource';
-import { ResourceMethod, ResourceMethodStrict, ResourceResult } from 'ngx-resource/src/Interfaces';
 import { ApresentacaoSite } from './../domain/apresentacao-site';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
-@ResourceParams({
-  url: AppSettings.API_ENDPOINT + '/apresentacao-site',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
-})
-export class ApresentacaoSiteService extends Resource {
+export class ApresentacaoSiteService extends GenericService {
 
-  @ResourceAction({
-    isArray: true
-  })
-  getAll: ResourceMethod<{}, ApresentacaoSite[]>;
+  private path = '/apresentacao-site';
 
-  @ResourceAction()
-  get: ResourceMethod<{}, ApresentacaoSite>;
-
-  @ResourceAction({
-    method: RequestMethod.Post
-  })
-  create: ResourceMethod<ApresentacaoSite, ApresentacaoSite>;
-
-  @ResourceAction({
-    method: RequestMethod.Put
-  })
-  update: ResourceMethod<ApresentacaoSite, ApresentacaoSite>;
-
-  @ResourceAction({
-    method: RequestMethod.Delete,
-    path: '/{!id}'
-  })
-  delete: ResourceMethod<{ id: string }, Boolean>;
-
-  constructor(http: Http) {
-    super(http);
-  }
-
-  createOrUpdate(apresentacaoSite: ApresentacaoSite, callback?: (res: ApresentacaoSite) => any): ResourceResult<ApresentacaoSite> {
+  createOrUpdate(apresentacaoSite: ApresentacaoSite): Observable<ApresentacaoSite> {
     if (apresentacaoSite._id) {
-      return this.update(apresentacaoSite, callback);
+      return this.update(apresentacaoSite);
     } else {
-      return this.create(apresentacaoSite, callback);
+      return this.create(apresentacaoSite);
     }
+  }
+
+  get(): Observable<ApresentacaoSite> {
+    return this.http.get<ApresentacaoSite>(this.path)
+      .pipe(catchError(this.handleError<ApresentacaoSite>(new ApresentacaoSite)));
+  }
+
+  create(apresentacaoSite: ApresentacaoSite): Observable<ApresentacaoSite> {
+    return this.http.post<ApresentacaoSite>(this.path, apresentacaoSite)
+      .pipe(catchError(this.handleError<ApresentacaoSite>()));
+  }
+
+  update(apresentacaoSite: ApresentacaoSite): Observable<ApresentacaoSite> {
+    return this.http.put<ApresentacaoSite>(this.path, apresentacaoSite)
+      .pipe(catchError(this.handleError<ApresentacaoSite>()));
   }
 }

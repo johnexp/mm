@@ -10,21 +10,21 @@
     <mat-form-field fxFlex="100">
       <textarea matInput name="descricao" #descricao="ngModel" [(ngModel)]="homologacao.descricao" placeholder="Descrição"
         required></textarea>
-      <mat-error [hidden]="!descricao.hasError('required') || (descricao.pristine && !descricao.touched && !form.submited)">
+      <mat-error [hidden]="!descricao.hasError('required') || (descricao.pristine && !descricao.touched && !form.submitted)">
         O campo "Descrição" é obrigatório
       </mat-error>
     </mat-form-field>
     <mat-form-field fxFlex>
       <input matInput class="form-control" name="responsavel" #responsavel="ngModel" [(ngModel)]="homologacao.responsavel" placeholder="Responsável"
         required>
-      <mat-error [hidden]="!responsavel.hasError('required') || (responsavel.pristine && !responsavel.touched && !form.submited)">
+      <mat-error [hidden]="!responsavel.hasError('required') || (responsavel.pristine && !responsavel.touched && !form.submitted)">
         O campo "Responsável" é obrigatório
       </mat-error>
     </mat-form-field>
     <mat-form-field fxFlex>
       <input matInput class="form-control" name="empresa" #empresa="ngModel" [(ngModel)]="homologacao.empresa" placeholder="Empresa"
         required>
-      <mat-error [hidden]="!empresa.hasError('required') || (empresa.pristine && !empresa.touched && !form.submited)">
+      <mat-error [hidden]="!empresa.hasError('required') || (empresa.pristine && !empresa.touched && !form.submitted)">
         O campo "Empresa" é obrigatório
       </mat-error>
     </mat-form-field>

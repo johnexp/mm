@@ -1,0 +1,43 @@
+<h1 class="page-title">
+  <mat-icon>format_list_bulleted</mat-icon>
+  Item de Progresso -
+  <span class="subtitle">Cadastrar Item de Progresso
+  </span>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
+    <mat-form-field fxFlex>
+      <input matInput class="form-control" name="titulo" #titulo="ngModel" [(ngModel)]="itemProgresso.titulo" placeholder="Título"
+        required>
+      <mat-error [hidden]="!titulo.hasError('required') || (titulo.pristine && !titulo.touched && !form.submited)">
+        O campo "Título" é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <input matInput class="form-control" name="subtitulo" #subtitulo="ngModel" [(ngModel)]="itemProgresso.subtitulo" placeholder="Subtítulo"
+        required>
+      <mat-error [hidden]="!subtitulo.hasError('required') || (subtitulo.pristine && !subtitulo.touched && !form.submited)">
+        O campo "Subtítulo" é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-card fxFlex="100" class="slider-wrapper">
+      <mat-card-content>
+        <label>Progresso</label>
+        <mat-slider name="progresso" #progresso="ngModel" [max]="100" [min]="0" [thumb-label]="true" [(ngModel)]="itemProgresso.progresso">
+        </mat-slider>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center">
+    <button mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button mat-button type="button" (click)="cancelar()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+  </div>
+</form>

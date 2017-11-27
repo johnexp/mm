@@ -1,0 +1,8 @@
+<h1 class="page-title">
+  <mat-icon>attach_file</mat-icon>
+  Arquivo
+</h1>
+
+<app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'arquivos'" [lazy]="false" [hasFilter]="true"
+  [actions]="{'u': true, 'd': true}" (deleteRecord)="excluirArquivo($event[0], $event[1])">
+</app-generic-datatable>

@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../core/guard/auth.guard';
 import { Routes } from '@angular/router';
 import { NavigationComponent } from './../../core/layout/navigation/navigation.component';
 import { HeaderComponent } from './../../core/layout/header/header.component';
@@ -6,7 +7,7 @@ import { PesquisaHomologacaoComponent } from './view/pesquisa-homologacao/pesqui
 
 export const HomologacaoRoute: Routes = [
   {
-    path: 'homologacao', children: [
+    path: 'homologacao', canActivate: [AuthGuard], children: [
       { path: '', redirectTo: 'listar', pathMatch: 'full' },
       { path: 'listar', component: PesquisaHomologacaoComponent },
       { path: 'cadastrar', component: CadastroHomologacaoComponent },

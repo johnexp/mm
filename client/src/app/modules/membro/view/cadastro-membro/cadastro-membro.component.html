@@ -7,24 +7,24 @@
 
 <form #form="ngForm" (ngSubmit)="salvar()" novalidate>
   <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
-    <app-image-preview fxFlex="20" fxFlex.sm="30" fxFlex.xs="100" [model]="membro" [image]="imagem"></app-image-preview>
+    <app-image-preview fxFlex="20" fxFlex.sm="30" fxFlex.xs="100" [isBase64File]="true" [model]="membro" [modelFileProperty]="'foto'" [image]="imagem"></app-image-preview>
     <div fxFlex fxLayoutWrap>
       <mat-form-field fxFlex>
         <input matInput class="form-control" name="nome" #nome="ngModel" [(ngModel)]="membro.nome" placeholder="Nome" required>
-        <mat-error [hidden]="!nome.hasError('required') || (nome.pristine && !nome.touched && !form.submited)">
+        <mat-error [hidden]="!nome.hasError('required') || (nome.pristine && !nome.touched && !form.submitted)">
           O campo "Nome" é obrigatório
         </mat-error>
       </mat-form-field>
       <mat-form-field fxFlex>
         <input matInput class="form-control" name="cargo" #cargo="ngModel" [(ngModel)]="membro.cargo" placeholder="Cargo" required>
-        <mat-error [hidden]="!cargo.hasError('required') || (cargo.pristine && !cargo.touched && !form.submited)">
+        <mat-error [hidden]="!cargo.hasError('required') || (cargo.pristine && !cargo.touched && !form.submitted)">
           O campo "Cargo" é obrigatório
         </mat-error>
       </mat-form-field>
       <mat-form-field fxFlex="100">
         <textarea matInput name="apresentacao" #apresentacao="ngModel" [(ngModel)]="membro.apresentacao" placeholder="Apresentação"
           required></textarea>
-        <mat-error [hidden]="!apresentacao.hasError('required') || (apresentacao.pristine && !apresentacao.touched && !form.submited)">
+        <mat-error [hidden]="!apresentacao.hasError('required') || (apresentacao.pristine && !apresentacao.touched && !form.submitted)">
           O campo "Apresentação" é obrigatório
         </mat-error>
       </mat-form-field>

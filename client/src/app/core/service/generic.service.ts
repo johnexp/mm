@@ -1,8 +1,8 @@
+import { CustomHttp } from './../helpers/custom.http';
 import { CustomSnackBarService } from './../util/snack-bar/custom-snack-bar.service';
 import { Pagination } from './../domain/pagination';
 import { AppSettings } from './../../app.settings';
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
@@ -12,24 +12,14 @@ import { AuthenticationService } from './authentication.service';
 export class GenericService {
 
   resourceUrl = AppSettings.API_ENDPOINT;
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json; charset=UTF-8',
-      'authorization': 'Bearer ' + this.authenticationService.getAuthorization()
-    })
-  };
 
-  constructor(public http: HttpClient,
+  constructor(public http: CustomHttp,
     private authenticationService: AuthenticationService,
     private snackBar: CustomSnackBarService) { }
 
-  getResourceUrl(path: string) {
-    return this.resourceUrl + '/' + path;
-  }
-
   filterGeneric(body: any, resource: string, sort?: string, order?: string, page?: number, limit?: number): Observable<Pagination> {
-    const url = `${this.resourceUrl}/${resource}/filter/?sort=${sort}&order=${order}&page=${page}&limit=${limit}`;
-    return this.http.post<Pagination>(url, body, this.httpOptions).pipe(catchError(this.handleError<Pagination>()));
+    const url = `/${resource}/filter/?sort=${sort}&order=${order}&page=${page}&limit=${limit}`;
+    return this.http.post<Pagination>(url, body).pipe(catchError(this.handleError<Pagination>()));
   }
 
   /**

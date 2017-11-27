@@ -17,14 +17,14 @@
 }
 
 .sidenav-menu li {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 .sidenav-menu li a {
   color: #FFF;
   display: block;
   padding: 5px 0 0 20px;
-  background: url('../../../../assets/img/menu-bg.jpg') no-repeat;
+  background: url('../../../../assets/img/menu-bg.png') no-repeat;
   background-size: 0% 100%;
   -webkit-transition: all .2s cubic-bezier(.77,.01,.25,1);
   -moz-transition: all .2s cubic-bezier(.77,.01,.25,1);
@@ -33,10 +33,10 @@
 }
 
 .sidenav-menu li.active a {
-  background: -webkit-linear-gradient(left, #f4b11a 5px, #f2ecf2 5px);
-  background: -moz-linear-gradient(left, #f4b11a 5px, #f2ecf2 5px);
-  background: -o-linear-gradient(left, #f4b11a 5px, #f2ecf2 5px);
-  background: linear-gradient(to right, #f4b11a 5px, #f2ecf2 5px);
+  background: -webkit-linear-gradient(left, #28558c 5px, #f2ecf2 5px);
+  background: -moz-linear-gradient(left, #28558c 5px, #f2ecf2 5px);
+  background: -o-linear-gradient(left, #28558c 5px, #f2ecf2 5px);
+  background: linear-gradient(to right, #28558c 5px, #f2ecf2 5px);
   color: #28558c;
 }
 
@@ -52,7 +52,7 @@
 
 .sidenav-menu li a span {
 	vertical-align: super;
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-weight: 100;
 }
 

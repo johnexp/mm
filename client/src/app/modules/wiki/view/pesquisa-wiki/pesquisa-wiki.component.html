@@ -1,0 +1,13 @@
+<h1 class="page-title">
+  <mat-icon>language</mat-icon>
+  Wiki
+</h1>
+
+<app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'wikis'" [lazy]="true" [hasFilter]="true"
+  [actions]="{'u': true, 'd': true}" (deleteRecord)="excluirWiki($event[0], $event[1])">
+  <ng-template let-model="model">
+    <div fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
+      <!-- <mat-form-field fxFlex></mat-form-field> -->
+    </div>
+  </ng-template>
+</app-generic-datatable>

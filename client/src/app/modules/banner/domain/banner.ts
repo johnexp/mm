@@ -1,4 +1,5 @@
 import { Botao } from './botao';
+
 export class Banner {
   _id: number;
   titulo: string;

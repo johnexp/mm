@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class VersaoService extends GenericService {
 
-  private path = 'versoes';
+  private path = '/versoes';
 
   createOrUpdate(versao: Versao): Observable<Versao> {
     if (versao._id) {
@@ -18,28 +18,28 @@ export class VersaoService extends GenericService {
   }
 
   getAll(): Observable<Versao[]> {
-    return this.http.get<Versao[]>(this.getResourceUrl(this.path), this.httpOptions);
+    return this.http.get<Versao[]>(this.path);
   }
 
   get(id: string): Observable<Versao> {
-    const url = `${this.getResourceUrl(this.path)}/id/${id}`;
-    return this.http.get<Versao>(url, this.httpOptions)
+    const url = `${this.path}/id/${id}`;
+    return this.http.get<Versao>(url)
       .pipe(catchError(this.handleError<Versao>(new Versao)));
   }
 
   create(versao: Versao): Observable<Versao> {
-    return this.http.post<Versao>(this.getResourceUrl(this.path), versao, this.httpOptions)
+    return this.http.post<Versao>(this.path, versao)
       .pipe(catchError(this.handleError<Versao>()));
   }
 
   update(versao: Versao): Observable<Versao> {
-    return this.http.put<Versao>(this.getResourceUrl(this.path), versao, this.httpOptions)
+    return this.http.put<Versao>(this.path, versao)
       .pipe(catchError(this.handleError<Versao>()));
   }
 
   delete(id: string): Observable<any> {
-    const url = `${this.getResourceUrl(this.path)}/${id}`;
-    return this.http.delete(url, this.httpOptions)
+    const url = `${this.path}/${id}`;
+    return this.http.delete(url)
       .pipe(catchError(this.handleError<Versao>()));
   }
 }

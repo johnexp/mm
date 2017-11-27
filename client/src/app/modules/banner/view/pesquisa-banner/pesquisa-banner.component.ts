@@ -34,7 +34,7 @@ export class PesquisaBannerComponent implements OnInit {
 
   buscarBanneres() {
     this.blockUI.start('Buscando registros...')
-    this.bannerService.getAll({}).$observable.subscribe(
+    this.bannerService.getAll().subscribe(
       banneres => {
         this.blockUI.stop();
         this.database = new GenericDatabase;
@@ -49,15 +49,11 @@ export class PesquisaBannerComponent implements OnInit {
 
   excluirBanner(id, paginator) {
     this.blockUI.start('Removendo registro...');
-    this.bannerService.delete({ id: id }).$observable.subscribe(
+    this.bannerService.delete(id).subscribe(
       response => {
-        if (!response) {
-          this.customSnackBar.open('Não foi possível remover o registro!', 'danger');
-        } else {
-          this.buscarBanneres();
-          paginator.pageIndex = 0;
-          paginator.page.emit();
-        }
+        this.buscarBanneres();
+        paginator.pageIndex = 0;
+        paginator.page.emit();
         this.blockUI.stop();
       },
       error => {

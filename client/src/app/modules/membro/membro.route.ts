@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../core/guard/auth.guard';
 import { Routes } from '@angular/router';
 import { NavigationComponent } from './../../core/layout/navigation/navigation.component';
 import { HeaderComponent } from './../../core/layout/header/header.component';
@@ -6,7 +7,7 @@ import { PesquisaMembroComponent } from './view/pesquisa-membro/pesquisa-membro.
 
 export const MembroRoute: Routes = [
   {
-    path: 'membro', children: [
+    path: 'membro', canActivate: [AuthGuard], children: [
       { path: '', redirectTo: 'listar', pathMatch: 'full' },
       { path: 'listar', component: PesquisaMembroComponent },
       { path: 'cadastrar', component: CadastroMembroComponent },

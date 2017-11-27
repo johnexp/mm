@@ -30,7 +30,7 @@ export class CadastroApresentacaoSiteComponent implements OnInit {
 
   obterApresentacaoSite() {
     this.blockUI.start('Carregando...');
-    this.apresentacaoSiteService.get().$observable.subscribe(
+    this.apresentacaoSiteService.get().subscribe(
       response => {
         this.apresentacaoSite = response;
         this.blockUI.stop();
@@ -48,7 +48,7 @@ export class CadastroApresentacaoSiteComponent implements OnInit {
       return;
     }
     this.blockUI.start('Salvando...');
-    this.apresentacaoSiteService.createOrUpdate(this.apresentacaoSite).$observable.subscribe(
+    this.apresentacaoSiteService.createOrUpdate(this.apresentacaoSite).subscribe(
       apresentacaoSite => {
         this.blockUI.stop();
         if (!this.apresentacaoSite._id) {

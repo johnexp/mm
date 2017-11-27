@@ -8,20 +8,20 @@
     <mat-form-field fxFlex>
       <input matInput class="form-control" name="titulo" #titulo="ngModel" [(ngModel)]="apresentacaoSite.titulo" placeholder="Título"
         required>
-      <mat-error [hidden]="!titulo.hasError('required') || (titulo.pristine && !titulo.touched && !form.submited)">
+      <mat-error [hidden]="!titulo.hasError('required') || (titulo.pristine && !titulo.touched && !form.submitted)">
         O campo "Título" é obrigatório
       </mat-error>
     </mat-form-field>
     <mat-form-field fxFlex>
       <input matInput class="form-control" name="subtitulo" #subtitulo="ngModel" [(ngModel)]="apresentacaoSite.subtitulo" placeholder="Subtítulo"
         required>
-      <mat-error [hidden]="!subtitulo.hasError('required') || (subtitulo.pristine && !subtitulo.touched && !form.submited)">
+      <mat-error [hidden]="!subtitulo.hasError('required') || (subtitulo.pristine && !subtitulo.touched && !form.submitted)">
         O campo "Subtítulo" é obrigatório
       </mat-error>
     </mat-form-field>
     <mat-form-field fxFlex="100">
       <textarea matInput name="texto" #texto="ngModel" [(ngModel)]="apresentacaoSite.texto" placeholder="Texto" required></textarea>
-      <mat-error [hidden]="!texto.hasError('required') || (texto.pristine && !texto.touched && !form.submited)">
+      <mat-error [hidden]="!texto.hasError('required') || (texto.pristine && !texto.touched && !form.submitted)">
         O campo "Texto" é obrigatório
       </mat-error>
     </mat-form-field>

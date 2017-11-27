@@ -1,0 +1,16 @@
+<div class="custom-file-upload" fxLayoutWrap>
+  <div class="file-preview" #filePreview fxFlex="100" fxLayoutAlign="center center"></div>
+  <div fxFlex="100" fxLayoutWrap>
+    <label for="file" class="upload-label" fxFlex="100">
+      <a mat-button type="button" color="accent" class="block">
+        <mat-icon>attach_file</mat-icon>
+        Inserir Arquivo
+      </a>
+    </label>
+    <input type="file" [hidden]="true" id="file" (change)="onFileChange($event)" #fileInput>
+    <button mat-button fxFlex="100" type="button" (click)="clearFile()" [hidden]="filePreview.innerHTML == ''">
+      <mat-icon>clear</mat-icon>
+      Limpar
+    </button>
+  </div>
+</div>

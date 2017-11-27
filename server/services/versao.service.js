@@ -28,7 +28,6 @@ exports.getVersoes = async function (query, page, limit, sort) {
 exports.getAllVersoes = async function () {
   // Try Catch the awaited promise to handle the error
   try {
-    console.log('aqui tb');
     var versoes = await Versao.find();
     // Return the versao list that was retured by the mongoose promise
     return versoes;

@@ -35,7 +35,7 @@ export class PesquisaHomologacaoComponent implements OnInit {
 
   buscarHomologacaos() {
     this.blockUI.start('Buscando registros...')
-    this.homologacaoService.getAll({}).$observable.subscribe(
+    this.homologacaoService.getAll().subscribe(
       homologacaos => {
         this.blockUI.stop();
         this.database = new GenericDatabase;
@@ -50,15 +50,11 @@ export class PesquisaHomologacaoComponent implements OnInit {
 
   excluirHomologacao(id, paginator) {
     this.blockUI.start('Removendo registro...');
-    this.homologacaoService.delete({ id: id }).$observable.subscribe(
+    this.homologacaoService.delete(id).subscribe(
       response => {
-        if (!response) {
-          this.customSnackBar.open('Não foi possível remover o registro!', 'danger');
-        } else {
-          this.buscarHomologacaos();
-          paginator.pageIndex = 0;
-          paginator.page.emit();
-        }
+        this.buscarHomologacaos();
+        paginator.pageIndex = 0;
+        paginator.page.emit();
         this.blockUI.stop();
       },
       error => {

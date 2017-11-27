@@ -11,6 +11,8 @@ import { Component, Output, EventEmitter, Input, ViewChild, ElementRef } from '@
 export class ImagePreviewComponent {
 
   @Input() model: any;
+  @Input() modelFileProperty: string = 'imagem';
+  @Input() isBase64File: Boolean = false;
   @ViewChild('fileInput') fileInput: ElementRef;
   @ViewChild('imagePreview') imagePreview: ElementRef;
   imageChange: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -39,26 +41,31 @@ export class ImagePreviewComponent {
       }
       reader.readAsDataURL(file);
       reader.onload = () => {
-        this.model.imagem = {
+        this.model[this.modelFileProperty] = {
           filename: file.name,
           filetype: file.type,
           value: reader.result.split(',')[1]
         };
+        this.isBase64File = true;
         this.showImage();
       };
     }
   }
 
   clearFile() {
-    this.model.imagem = null;
+    this.model[this.modelFileProperty] = null;
     this.model.arquivo = null;
     this.imagePreview.nativeElement.innerHTML = '';
   }
 
   showImage() {
-    if (this.model.imagem) {
+    if (this.model[this.modelFileProperty]) {
       let image = new Image;
-      image.src = 'data:' + this.model.imagem.filetype + ';base64,' + this.model.imagem.value;
+      if (this.isBase64File) {
+        image.src = 'data:' + this.model[this.modelFileProperty].filetype + ';base64,' + this.model[this.modelFileProperty].value;
+      } else {
+        image.src = AppSettings.SERVER_URL + '/upload/' + this.model[this.modelFileProperty].value;
+      }
       this.imagePreview.nativeElement.innerHTML = '';
       this.imagePreview.nativeElement.appendChild(image);
     } else if (this.model.arquivo) {

@@ -34,7 +34,7 @@ export class PesquisaMembroComponent implements OnInit {
 
   buscarMembros() {
     this.blockUI.start('Buscando registros...')
-    this.membroService.getAll({}).$observable.subscribe(
+    this.membroService.getAll().subscribe(
       membros => {
         this.blockUI.stop();
         this.database = new GenericDatabase;
@@ -49,15 +49,11 @@ export class PesquisaMembroComponent implements OnInit {
 
   excluirMembro(id, paginator) {
     this.blockUI.start('Removendo registro...');
-    this.membroService.delete({ id: id }).$observable.subscribe(
+    this.membroService.delete(id).subscribe(
       response => {
-        if (!response) {
-          this.customSnackBar.open('Não foi possível remover o registro!', 'danger');
-        } else {
-          this.buscarMembros();
-          paginator.pageIndex = 0;
-          paginator.page.emit();
-        }
+        this.buscarMembros();
+        paginator.pageIndex = 0;
+        paginator.page.emit();
         this.blockUI.stop();
       },
       error => {

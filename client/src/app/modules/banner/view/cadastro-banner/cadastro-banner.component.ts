@@ -49,7 +49,7 @@ export class CadastroBannerComponent implements OnInit {
 
   obterBanner(id) {
     this.blockUI.start('Carregando...');
-    this.bannerService.get({ id: id }).$observable.subscribe(
+    this.bannerService.get(id).subscribe(
       response => {
         this.banner = response;
         this.banner.botoes = this.banner.botoes || [];
@@ -71,7 +71,7 @@ export class CadastroBannerComponent implements OnInit {
       return;
     }
     this.blockUI.start('Salvando...');
-    this.bannerService.createOrUpdate(this.banner).$observable.subscribe(
+    this.bannerService.createOrUpdate(this.banner).subscribe(
       banner => {
         this.blockUI.stop();
         if (!this.banner._id) {
