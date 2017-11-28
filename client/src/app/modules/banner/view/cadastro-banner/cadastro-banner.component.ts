@@ -99,7 +99,7 @@ export class CadastroBannerComponent implements OnInit {
       // clona o botão para não editar o objeto no grid
       botao = JSON.parse(JSON.stringify(botao));
     }
-    let dialogRef = this.dialog.open(DialogBotaoComponent, {
+    const dialogRef = this.dialog.open(DialogBotaoComponent, {
       width: '400px',
       data: { botao: botao }
     });
@@ -115,7 +115,7 @@ export class CadastroBannerComponent implements OnInit {
       botao._id = '___' + Math.random().toString(36).substring(7);
       this.banner.botoes.push(botao);
     } else {
-      let indexBotaoAlterado = this.banner.botoes.findIndex(botaoExistente => botao._id == botaoExistente._id);
+      const indexBotaoAlterado = this.banner.botoes.findIndex(botaoExistente => botao._id === botaoExistente._id);
       this.banner.botoes.splice(indexBotaoAlterado, 1);
       this.databaseBotoes = new GenericDatabase;
       this.databaseBotoes.data = this.banner.botoes;

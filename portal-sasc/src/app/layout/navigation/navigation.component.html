@@ -1,0 +1,57 @@
+<div class="sidenav-container" fxLayout="column" fxFlexAlign="space-bewteen center">
+  <nav fxFlex>
+    <ul class="sidenav-menu">
+      <li [ngClass]="{ 'active': path == 'versoes' }">
+        <a [routerLink]="['/versoes']">
+          <mat-icon>new_releases</mat-icon>
+          <span>Versões</span>
+        </a>
+      </li>
+      <li [ngClass]="{ 'active': path == 'membro' }">
+        <a [routerLink]="['/membro']">
+          <mat-icon>face</mat-icon>
+          <span>Membros</span>
+        </a>
+      </li>
+      <li [ngClass]="{ 'active': path == 'homologacao' }">
+        <a [routerLink]="['/homologacao']">
+          <mat-icon>backup</mat-icon>
+          <span>Homologações</span>
+        </a>
+      </li>
+      <li [ngClass]="{ 'active': path == 'apresentacao-site' }">
+        <a [routerLink]="['/apresentacao-site']">
+          <mat-icon>format_color_text</mat-icon>
+          <span>Apresentação do Site</span>
+        </a>
+      </li>
+      <li [ngClass]="{ 'active': path == 'banner' }">
+        <a [routerLink]="['/banner']">
+          <mat-icon>photo_size_select_actual</mat-icon>
+          <span>Banneres</span>
+        </a>
+      </li>
+      <li [ngClass]="{ 'active': path == 'item-progresso' }">
+        <a [routerLink]="['/item-progresso']">
+          <mat-icon>format_list_bulleted</mat-icon>
+          <span>Item de Progresso</span>
+        </a>
+      </li>
+      <li [ngClass]="{ 'active': path == 'wiki' }">
+        <a [routerLink]="['/wiki']">
+          <mat-icon>language</mat-icon>
+          <span>Wiki</span>
+        </a>
+      </li>
+      <li [ngClass]="{ 'active': path == 'arquivo' }">
+        <a [routerLink]="['/arquivo']">
+          <mat-icon>attach_file</mat-icon>
+          <span>Arquivo</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <span class="sidenav-footer">
+    feito com <mat-icon>favorite_border</mat-icon> pela Fencom - 2017
+  </span>
+</div>

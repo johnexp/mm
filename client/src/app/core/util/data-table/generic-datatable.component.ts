@@ -42,8 +42,9 @@ export class GenericDatatableComponent implements OnInit, AfterViewInit {
   // @ViewChild('filterSelected') filterSelected: ElementRef;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ContentChild(TemplateRef) templateRefFilters: TemplateRef<any>;
-  @ContentChild(TemplateRef) templateRefColumns: TemplateRef<any>;
+  @ContentChild('filtersRef', { read: TemplateRef }) filtersRef: TemplateRef<any>;
+  @ContentChild('columnsRef', { read: TemplateRef }) columnsRef: TemplateRef<any>;
+  @ContentChild('buttonsRef', { read: TemplateRef }) buttonsRef: TemplateRef<any>;
 
   displayedColumns: any[] = [];
   dataSource: MatTableDataSource<any> = new MatTableDataSource;

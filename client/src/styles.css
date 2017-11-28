@@ -9,7 +9,7 @@ body {
   margin: 0;
   font-size: 14px;
   font-family: 'Roboto';
-  background: linear-gradient(rgba(181, 12, 131, 0.5), rgba(175, 0, 0, 0.5)), #585b5e;
+  background: linear-gradient(-45deg, rgba(233, 57, 17, 0.43), rgba(150, 50, 43, 0.67));
 }
 
 a {
@@ -37,7 +37,7 @@ md-sidenav-layout,
 .main-content.public {
   border-radius: 0;
   border: none;
-  background: linear-gradient(rgba(181, 12, 131, 0.5), rgba(175, 0, 0, 0.5));
+  background: transparent;
 }
 
 .main-content::-webkit-scrollbar {
@@ -107,15 +107,13 @@ md-sidenav-layout,
 .custom-table .mat-cell.mat-column-actions {
   display: flex;
   justify-content: center;
-  flex: none;
-  width: 100px;
+  flex: .5 1;
   padding: 0 10px;
 }
 
 .custom-table .mat-header-cell.mat-column-actions {
-  width: 100px;
+  flex: .5 1;
   padding: 0 10px;
-  flex: none;
 }
 
 .custom-table .mat-sort-header-container:hover .mat-sort-header-button::after {

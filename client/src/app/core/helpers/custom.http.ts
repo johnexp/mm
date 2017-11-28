@@ -41,7 +41,7 @@ export class CustomHttp extends HttpClient {
     }
     const options = {
       headers: new HttpHeaders(headerOptions)
-    }
+    };
 
     return options;
   }

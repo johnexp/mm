@@ -54,22 +54,28 @@ export class CadastroArquivoComponent implements OnInit {
       this.customSnackBar.open('O formulário não foi preenchido corretamente', 'warn');
       return;
     }
+    const formData = new FormData();
+    if (this.arquivo.arquivo) {
+      formData.append('file', this.arquivo.arquivo.file);
+    }
+    formData.append('arquivo', JSON.stringify(this.arquivo));
+    if (this.arquivo._id) {
+      formData.append('_id', this.arquivo._id.toString());
+    }
     this.blockUI.start('Salvando...');
-    this.arquivoService.createOrUpdate(this.arquivo).subscribe(
-      arquivo => {
-        this.blockUI.stop();
-        if (!this.arquivo._id) {
+    this.arquivoService.createOrUpdate(formData, arquivo => {
+      this.blockUI.stop();
+      if (!arquivo) {
+        this.customSnackBar.open('Ocorreu um erro ao salvar o registro.', 'danger');
+      } else {
+        if (!JSON.parse(arquivo)._id) {
           this.customSnackBar.open('Registro salvo com sucesso!', 'success');
         } else {
           this.customSnackBar.open('Registro alterado com sucesso!', 'success');
         }
         this.router.navigate(['arquivo']);
-      },
-      error => {
-        this.blockUI.stop();
-        this.customSnackBar.open(error, 'danger');
       }
-    );
+    });
   }
 
   cancelar() {

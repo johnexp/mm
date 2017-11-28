@@ -41,15 +41,15 @@ exports.getArquivo = async function (req, res, next) {
 }
 
 exports.createArquivo = async function (req, res, next) {
+  const body = JSON.parse(req.body.arquivo);
   var arquivo = {
-    nome: req.body.nome,
-    descricao: req.body.descricao
+    nome: body.nome,
+    descricao: body.descricao,
+    nomeArquivo: body.nomeArquivo
   };
 
-  var arquivoFile = req.body.arquivo;
-
   try {
-    var createdArquivo = await ArquivoService.createArquivo(arquivo, arquivoFile);
+    var createdArquivo = await ArquivoService.createArquivo(arquivo, req.file);
     return res.status(201).json(createdArquivo);
   } catch (e) {
     return res.status(400).json({ status: 400, message: 'Ocorreu um erro ao tentar realizar o cadastro.', reason: e.messsage });
@@ -57,22 +57,23 @@ exports.createArquivo = async function (req, res, next) {
 }
 
 exports.updateArquivo = async function (req, res, next) {
-  if (!req.body._id) {
-    return res.status(400).json({ status: 400., message: 'Id do registro não encontrado.', reason: e.message });
+  const body = JSON.parse(req.body.arquivo);
+  if (!body._id) {
+    return res.status(400).json({ status: 400., message: 'Id do registro não encontrado.' });
   }
 
-  var id = req.body._id;
+  var id = body._id;
   var arquivo = {
     id,
-    nome: req.body.nome ? req.body.nome : null,
-    descricao: req.body.descricao ? req.body.descricao : null,
-    caminhoArquivo: req.body.caminhoArquivo ? req.body.caminhoArquivo : null,
-    nomeArquivoReal: req.body.nomeArquivoReal ? req.body.nomeArquivoReal : null,
-    nomeArquivo: req.body.nomeArquivo ? req.body.nomeArquivo : null
+    nome: body.nome ? body.nome : null,
+    descricao: body.descricao ? body.descricao : null,
+    caminhoArquivo: body.caminhoArquivo ? body.caminhoArquivo : null,
+    nomeArquivoReal: body.nomeArquivoReal ? body.nomeArquivoReal : null,
+    nomeArquivo: body.nomeArquivo ? body.nomeArquivo : null
   };
 
   try {
-    var updatedArquivo = await ArquivoService.updateArquivo(arquivo, req.body.arquivo);
+    var updatedArquivo = await ArquivoService.updateArquivo(arquivo, req.file);
     return res.status(200).json({ status: 200, data: updatedArquivo, message: 'Registro atualizado com sucesso.' });
   } catch (e) {
     return res.status(400).json({ status: 400., message: 'Ocorreu um erro ao tentar salvar o registro.', reason: e.message });

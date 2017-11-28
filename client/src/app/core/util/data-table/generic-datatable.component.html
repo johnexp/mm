@@ -28,8 +28,8 @@
           <input matInput name="{{ field.columnDef }}" [(ngModel)]="model[field.columnDef]" placeholder="{{ field.header }}">
         </mat-form-field>
       </ng-container>
-      <ng-template [ngTemplateOutlet]="templateRefFilters" [ngTemplateOutletContext]="{ model: model }">
-      </ng-template>
+      <ng-container [ngTemplateOutlet]="filtersRef" [ngTemplateOutletContext]="{ model: model }">
+      </ng-container>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="center center" class="layout-margin">
@@ -74,6 +74,8 @@
       <button mat-icon-button type="button" color="warn" *ngIf="actions.d" (click)="confirmDelete(row._id)" matTooltip="Excluir">
         <mat-icon aria-label="Excluir">delete</mat-icon>
       </button>
+      <ng-container [ngTemplateOutlet]="buttonsRef" [ngTemplateOutletContext]="{ row: row }">
+      </ng-container>
     </mat-cell>
   </ng-container>
 
@@ -85,8 +87,8 @@
     </mat-cell>
   </ng-container>
 
-  <ng-template [ngTemplateOutlet]="templateRefColumns" [ngTemplateOutletContext]="{model: model}">
-  </ng-template>
+  <!-- <ng-template [ngTemplateOutlet]="templateRefColumns" [ngTemplateOutletContext]="{model: model}">
+  </ng-template> -->
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

@@ -5,7 +5,9 @@ var ItemProgressoController = require('../../controllers/item-progresso.controll
 
 // Map each API to the Controller Functions
 router.post('/filter/*?', ItemProgressoController.getItemProgresso);
+router.get('/public/id/:id', ItemProgressoController.getItemProgresso);
 router.get('/id/:id', ItemProgressoController.getItemProgresso);
+router.get('/public', ItemProgressoController.getAllItemProgresso);
 router.get('/', ItemProgressoController.getAllItemProgresso);
 router.post('/', ItemProgressoController.createItemProgresso);
 router.put('/', ItemProgressoController.updateItemProgresso);

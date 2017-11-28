@@ -1,22 +1,24 @@
+import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { CustomSnackBarService } from './../snack-bar/custom-snack-bar.service';
 import { AppSettings } from './../../../app.settings';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Component, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-custom-file-upload',
   templateUrl: './custom-file-upload.component.html',
   styleUrls: ['./custom-file-upload.component.css']
 })
-export class CustomFileUploadComponent {
+export class CustomFileUploadComponent implements AfterViewInit {
 
   @Input() model: any;
   @Input() modelFileProperty = 'arquivo';
   @Input() modelFileNameProperty = 'nomeArquivo';
   @Input() required: Boolean = false;
   @Input() form: any = {};
-  @ViewChild('fileInput') fileInput: ElementRef;
   @ViewChild('filePreview') filePreview: ElementRef;
+  @ViewChild('inputFileHidden') inputFileHidden: NgModel;
   fileUrl: String;
   fileChange: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
@@ -30,7 +32,16 @@ export class CustomFileUploadComponent {
     this.showFile();
   }
 
-  constructor(private customSnackBar: CustomSnackBarService) {
+  constructor(private customSnackBar: CustomSnackBarService,
+    private changeDetectorRef: ChangeDetectorRef) {
+  }
+
+  ngAfterViewInit() {
+    if (this.required) {
+      Promise.resolve(null).then(() =>
+        this.form.form.addControl(this.inputFileHidden.name, this.inputFileHidden.control));
+      this.changeDetectorRef.detectChanges();
+    }
   }
 
   onFileChange(event) {
@@ -42,8 +53,10 @@ export class CustomFileUploadComponent {
         this.model.arquivo = {
           filename: file.name,
           filetype: file.type,
-          value: reader.result.split(',')[1]
+          // value: reader.result.split(',')[1],
+          file: file
         };
+        this.model[this.modelFileNameProperty] = file.name;
         this.showFile();
       };
     }

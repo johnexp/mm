@@ -1,0 +1,55 @@
+.header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.16);
+  height: 100px;
+  background: #FFF url('../../../assets/img/logo.png') no-repeat left center;
+  z-index: 1000;
+}
+
+.header-menu {
+  padding-right: 20px;
+}
+
+.header-menu li {
+  display: inline-block;
+}
+
+.header-menu li a {
+  color: #777777;
+  text-decoration: none;
+  padding: 40px 20px;
+  font-weight: 400;
+  font-size: 1em;
+  text-transform: uppercase;
+  display: block;
+  position: relative;
+}
+
+.header-menu li a::after {
+  content: '';
+  background-color: #731756;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: 30px;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  right: 0;
+  transition: width .2s ease-in-out;
+  -moz-transition: width .2s ease-in-out;
+  -o-transition: width .2s ease-in-out;
+  -webkit-transition: width .2s ease-in-out;
+}
+
+.header-menu li:hover a::after {
+  width: 100%;
+}
+
+.header-menu li .tab-link-disabled {
+  color: #CE99C9;
+  cursor: not-allowed;
+}

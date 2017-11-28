@@ -1,0 +1,68 @@
+.sidenav-container {
+  width: 230px;
+  height: 100%;
+  background: url('../../../assets/img/logo-w.png') no-repeat center 20px;
+  display: inline-block;
+  padding-top: 90px;
+}
+
+.sidenav-container nav {
+  padding-top: 40px;
+}
+
+.sidenav-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidenav-menu li {
+  margin: 10px 0;
+}
+
+.sidenav-menu li a {
+  color: #FFF;
+  display: block;
+  padding: 5px 0 0 20px;
+  background: url('../../../assets/img/menu-bg.png') no-repeat;
+  background-size: 0% 100%;
+  -webkit-transition: all .2s cubic-bezier(.77,.01,.25,1);
+  -moz-transition: all .2s cubic-bezier(.77,.01,.25,1);
+  -o-transition: all .2s cubic-bezier(.77,.01,.25,1);
+  transition: all .2s cubic-bezier(.77,.01,.25,1);
+}
+
+.sidenav-menu li.active a {
+  background: -webkit-linear-gradient(left, #28558c 5px, #f2ecf2 5px);
+  background: -moz-linear-gradient(left, #28558c 5px, #f2ecf2 5px);
+  background: -o-linear-gradient(left, #28558c 5px, #f2ecf2 5px);
+  background: linear-gradient(to right, #28558c 5px, #f2ecf2 5px);
+  color: #28558c;
+}
+
+.sidenav-menu li:hover a {
+  background-size: 100% 100%;
+  color: #28558c;
+}
+
+.sidenav-menu li a mat-icon {
+	padding-right: 5px;
+  font-size: 1.4em;
+}
+
+.sidenav-menu li a span {
+	vertical-align: super;
+  font-size: 1.2em;
+  font-weight: 100;
+}
+
+.sidenav-footer {
+  color: #FFF;
+  font-size: .8em;
+  text-align: center;
+}
+
+.sidenav-footer mat-icon {
+  font-size: 1em;
+  vertical-align: text-top;
+}

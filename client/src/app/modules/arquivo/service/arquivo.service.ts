@@ -1,3 +1,5 @@
+import { AuthenticationService } from './../../../core/service/authentication.service';
+import { AppSettings } from './../../../app.settings';
 import { GenericService } from './../../../core/service/generic.service';
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
@@ -9,11 +11,11 @@ export class ArquivoService extends GenericService {
 
   private path = '/arquivos';
 
-  createOrUpdate(arquivo: Arquivo): Observable<Arquivo> {
-    if (arquivo._id) {
-      return this.update(arquivo);
+  createOrUpdate(formData: FormData, callback?) {
+    if (formData.get('_id')) {
+      return this.update(formData, callback);
     } else {
-      return this.create(arquivo);
+      return this.create(formData, callback);
     }
   }
 
@@ -26,12 +28,38 @@ export class ArquivoService extends GenericService {
     return this.http.get<Arquivo>(url);
   }
 
-  create(arquivo: Arquivo): Observable<Arquivo> {
-    return this.http.post<Arquivo>(this.path, arquivo);
+  create(formData: FormData, callback?) {
+    const req = new XMLHttpRequest();
+    req.open('POST', AppSettings.API_ENDPOINT + this.path);
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    req.setRequestHeader('Authorization', 'Bearer ' + currentUser.token);
+    req.onreadystatechange = () => {
+      if (req.readyState === XMLHttpRequest.DONE) {
+        if (req.status === 201) {
+          callback(req.response);
+        } else {
+          callback(null);
+        }
+      }
+    };
+    req.send(formData);
   }
 
-  update(arquivo: Arquivo): Observable<Arquivo> {
-    return this.http.put<Arquivo>(this.path, arquivo);
+  update(formData: FormData, callback?) {
+    const req = new XMLHttpRequest();
+    req.open('PUT', AppSettings.API_ENDPOINT + this.path);
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    req.setRequestHeader('Authorization', 'Bearer ' + currentUser.token);
+    req.onreadystatechange = () => {
+      if (req.readyState === XMLHttpRequest.DONE) {
+        if (req.status === 200) {
+          callback(req.response);
+        } else {
+          callback(null);
+        }
+      }
+    };
+    req.send(formData);
   }
 
   delete(id: string): Observable<any> {

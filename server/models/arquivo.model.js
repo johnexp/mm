@@ -16,7 +16,8 @@ var ArquivoSchema = new mongoose.Schema({
   },
   caminhoArquivo: {
     type: String,
-    trim: true
+    trim: true,
+    required: 'Preencha o campo "Arquivo"'
   },
   nomeArquivoReal: {
     type: String

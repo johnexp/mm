@@ -3,15 +3,15 @@
   Versões
 </h1>
 
-<app-generic-datatable [columns]="columns" [database]="database" [resource]="'versoes'" [hasPaginator]="true" [lazy]="false" [hasFilter]="true"
-  [actions]="{'u': true, 'd': true}" (deleteRecord)="excluirVersao($event[0], $event[1])">
-  <ng-template let-model="model" #templateRefColumns>
+<app-generic-datatable [columns]="columns" [database]="database" [resource]="'versoes'" [hasPaginator]="true" [lazy]="false"
+  [hasFilter]="true" [actions]="{'u': true, 'd': true}" (deleteRecord)="excluirVersao($event[0], $event[1])">
+  <ng-template let-model="model" #filtersRef>
     <!-- <div fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap> -->
-      <mat-form-field fxFlex>
-        <input matInput name="data" (focus)="data.open()" (click)="data.open()" [matDatepicker]="data" [(ngModel)]="model.data" placeholder="Data">
-        <mat-datepicker-toggle matSuffix [for]="data"></mat-datepicker-toggle>
-        <mat-datepicker #data></mat-datepicker>
-      </mat-form-field>
+    <mat-form-field fxFlex>
+      <input matInput name="data" (focus)="data.open()" (click)="data.open()" [matDatepicker]="data" [(ngModel)]="model.data" placeholder="Data">
+      <mat-datepicker-toggle matSuffix [for]="data"></mat-datepicker-toggle>
+      <mat-datepicker #data></mat-datepicker>
+    </mat-form-field>
     <!-- </div> -->
   </ng-template>
 </app-generic-datatable>

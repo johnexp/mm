@@ -5,4 +5,9 @@
 
 <app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'arquivos'" [lazy]="false" [hasFilter]="true"
   [actions]="{'u': true, 'd': true}" (deleteRecord)="excluirArquivo($event[0], $event[1])">
+  <ng-template let-row="row" #buttonsRef>
+    <button mat-icon-button type="button" color="accent" (click)="downloadFile(row)" matTooltip="Download">
+      <mat-icon aria-label="Download">file_download</mat-icon>
+    </button>
+  </ng-template>
 </app-generic-datatable>

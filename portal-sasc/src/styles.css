@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+
+body,
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.main-content,
+.app-content,
+.app-layout-container {
+  height: 100%;
+}

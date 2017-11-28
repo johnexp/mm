@@ -9,18 +9,17 @@
   <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
     <mat-form-field fxFlex>
       <input matInput class="form-control" name="nome" #nome="ngModel" [(ngModel)]="arquivo.nome" placeholder="Nome" required>
-      <mat-error [hidden]="!nome.hasError('required') || (nome.pristine && !nome.touched && !form.submited)">
+      <mat-error [hidden]="!nome.hasError('required') || (nome.pristine && !nome.touched && !form.submitted)">
         O campo "Nome" é obrigatório
       </mat-error>
     </mat-form-field>
-    <mat-form-field fxFlex>
-      <input matInput class="form-control" name="descricao" #descricao="ngModel" [(ngModel)]="arquivo.descricao" placeholder="Descrição"
-        required>
-      <mat-error [hidden]="!descricao.hasError('required') || (descricao.pristine && !descricao.touched && !form.submited)">
+    <app-custom-file-upload fxFlex [model]="arquivo" [modelFileProperty]="'caminhoArquivo'" [required]="true" [form]="form" [file]="file"></app-custom-file-upload>
+    <mat-form-field fxFlex="100">
+      <textarea matInput name="descricao" #descricao="ngModel" [(ngModel)]="arquivo.descricao" placeholder="Descrição" required></textarea>
+      <mat-error [hidden]="!descricao.hasError('required') || (descricao.pristine && !descricao.touched && !form.submitted)">
         O campo "Descrição" é obrigatório
       </mat-error>
     </mat-form-field>
-    <app-custom-file-upload fxFlex [model]="arquivo" [modelFileProperty]="'caminhoArquivo'" [required]="true" [form]="form" [file]="file"></app-custom-file-upload>
   </div>
 
   <div class="buttons-container layout-margin" fxLayoutAlign="end center">

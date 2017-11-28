@@ -1,3 +1,4 @@
+import { AppSettings } from './../../../../app.settings';
 import { CustomSnackBarService } from './../../../../core/util/snack-bar/custom-snack-bar.service';
 import { Pagination } from './../../../../core/domain/pagination';
 import { GenericDatabase } from './../../../../core/util/data-table/generic-database';
@@ -17,7 +18,9 @@ export class PesquisaArquivoComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
   displayedColumns = [
-    { columnDef: 'nome', header: 'Nome', cell: (row: Arquivo) => `${row.nome}` }
+    { columnDef: 'nome', header: 'Nome', cell: (row: Arquivo) => `${row.nome}` },
+    { columnDef: 'descricao', header: 'Descrição', cell: (row: Arquivo) => `${row.descricao}` },
+    { columnDef: 'nomeArquivo', header: 'Arquivo', cell: (row: Arquivo) => `${row.nomeArquivo}` }
   ];
   database = new GenericDatabase;
   pagination: Pagination;
@@ -32,7 +35,7 @@ export class PesquisaArquivoComponent implements OnInit {
   }
 
   buscarArquivos() {
-    this.blockUI.start('Buscando registros...')
+    this.blockUI.start('Buscando registros...');
     this.arquivoService.getAll().subscribe(
       arquivos => {
         this.blockUI.stop();
@@ -60,6 +63,15 @@ export class PesquisaArquivoComponent implements OnInit {
         this.customSnackBar.open(error, 'danger');
       }
     );
+  }
+
+  downloadFile(file: Arquivo) {
+    const a = <HTMLAnchorElement>(document.createElement('a'));
+    a.href = AppSettings.SERVER_URL + file.caminhoArquivo.split('public')[1];
+    a.download = file.nomeArquivo;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
   }
 
 }

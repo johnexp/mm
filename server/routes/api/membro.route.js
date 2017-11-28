@@ -5,7 +5,9 @@ var MembroController = require('../../controllers/membro.controller');
 
 // Map each API to the Controller Functions
 router.post('/filter/*?', MembroController.getMembros);
+router.get('/public/id/:id', MembroController.getMembro);
 router.get('/id/:id', MembroController.getMembro);
+router.get('/public', MembroController.getAllMembros);
 router.get('/', MembroController.getAllMembros);
 router.post('/', MembroController.createMembro);
 router.post('/upload-foto', MembroController.salvarFoto);

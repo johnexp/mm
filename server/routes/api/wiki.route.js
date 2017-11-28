@@ -12,7 +12,9 @@ var WikiController = require('../../controllers/wiki.controller');
 
 // Map each API to the Controller Functions
 router.post('/filter/*?', WikiController.getWikis);
+router.get('/public/id/:id', WikiController.getWiki);
 router.get('/id/:id', WikiController.getWiki);
+router.get('/public', WikiController.getAllWikis);
 router.get('/', WikiController.getAllWikis);
 router.post('/', WikiController.createWiki);
 router.post('/upload-image', upload.single('file'), WikiController.uploadImage);

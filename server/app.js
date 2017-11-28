@@ -44,7 +44,7 @@ app.use(expressJwt({
     }
     return null;
   }
-}).unless({ path: ['/api/users/authenticate', '/api/users/register'] }));
+}).unless({ path: [/\/public\.*/, '/favicon.ico', '/api/users/authenticate', '/api/users/register'] }));
 
 app.use('/', index);
 app.use('/api', api);
