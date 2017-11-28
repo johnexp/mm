@@ -72,7 +72,7 @@ exports.updateArquivo = async function (req, res, next) {
   };
 
   try {
-    var updatedArquivo = await ArquivoService.updateArquivo(arquivo);
+    var updatedArquivo = await ArquivoService.updateArquivo(arquivo, req.body.arquivo);
     return res.status(200).json({ status: 200, data: updatedArquivo, message: 'Registro atualizado com sucesso.' });
   } catch (e) {
     return res.status(400).json({ status: 400., message: 'Ocorreu um erro ao tentar salvar o registro.', reason: e.message });

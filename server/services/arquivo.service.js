@@ -99,7 +99,7 @@ exports.updateArquivo = async function (arquivo, file) {
   try {
     if (file) {
       var nomeArquivoReal = Date.now() + '-' + file.filename;
-      var nomeArquivoAntigo = oldBanner.nomeArquivoReal;
+      var nomeArquivoAntigo = oldArquivo.nomeArquivoReal;
       oldArquivo.caminhoArquivo = this.saveFile(file, nomeArquivoReal);
       oldArquivo.nomeArquivoReal = nomeArquivoReal;
       oldArquivo.nomeArquivo = file.filename;
@@ -108,10 +108,11 @@ exports.updateArquivo = async function (arquivo, file) {
         this.deleteFile(nomeArquivoAntigo);
       }
     } else {
-      if (oldArquivo.caminhoArquivo != null && !banner.caminhoArquivo) {
+      if (oldArquivo.caminhoArquivo != null && !arquivo.caminhoArquivo) {
         this.deleteFile(oldArquivo.nomeArquivoReal);
         oldArquivo.caminhoArquivo = null;
         oldArquivo.nomeArquivo = null;
+        oldArquivo.nomeArquivoReal = null;
       }
     }
 

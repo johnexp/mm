@@ -1,0 +1,30 @@
+.custom-file-upload {
+  padding: 2px 2px 1.25em;
+  padding-bottom: 1.25em;
+  position: relative;
+}
+
+.file-preview {
+  border-bottom: 1px solid #00000073;
+  padding: 0.4375em 0;
+  border-top: 0.65em solid #0000;
+  margin-bottom: 0.54166667em;
+  bottom: calc(100% - 1.66666667em);
+  width: 100%;
+  min-height: 39px;
+}
+
+.file-buttons-wrap {
+  position: absolute;
+  width: 100%;
+}
+
+.upload-label /deep/ .mat-button:hover .mat-button-focus-overlay,
+.upload-label /deep/ .mat-button .mat-button-ripple,
+.upload-label.invisible {
+  opacity: 0;
+}
+
+.upload-label .mat-button {
+  text-align: left;
+}

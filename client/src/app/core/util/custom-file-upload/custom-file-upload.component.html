@@ -1,16 +1,22 @@
 <div class="custom-file-upload" fxLayoutWrap>
-  <div class="file-preview" #filePreview fxFlex="100" fxLayoutAlign="center center"></div>
-  <div fxFlex="100" fxLayoutWrap>
-    <label for="file" class="upload-label" fxFlex="100">
+  <div class="file-preview" #filePreview fxFlex="100" fxLayoutAlign="start center"></div>
+  <div fxFlex="100" fxLayoutAlign="space-between center" class="file-buttons-wrap">
+    <label for="file" class="upload-label" [ngClass]="{'invisible': filePreview.innerHTML != ''}" fxFlex>
       <a mat-button type="button" color="accent" class="block">
         <mat-icon>attach_file</mat-icon>
         Inserir Arquivo
       </a>
     </label>
-    <input type="file" [hidden]="true" id="file" (change)="onFileChange($event)" #fileInput>
-    <button mat-button fxFlex="100" type="button" (click)="clearFile()" [hidden]="filePreview.innerHTML == ''">
+    <a [hidden]="!fileUrl" href="{{fileUrl}}" target="_blank" mat-icon-button type="button" matTooltip="Download" download>
+      <mat-icon>file_download</mat-icon>
+    </a>
+    <button mat-icon-button type="button" (click)="clearFile()" matTooltip="Limpar" [hidden]="filePreview.innerHTML == ''">
       <mat-icon>clear</mat-icon>
-      Limpar
     </button>
+    <input type="file" [hidden]="true" id="file" (change)="onFileChange($event)" #fileInput>
+    <input type="text" [hidden]="true" name="{{modelFileNameProperty}}" #inputFileHidden="ngModel" [(ngModel)]="model[modelFileNameProperty]" #fileInput [required]="required">
   </div>
+  <mat-error [hidden]="!inputFileHidden.hasError('required') || (inputFileHidden.pristine && !inputFileHidden.touched && !form.submitted)">
+    O campo "Ticket" é obrigatório
+  </mat-error>
 </div>

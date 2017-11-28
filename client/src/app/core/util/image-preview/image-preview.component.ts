@@ -11,13 +11,13 @@ import { Component, Output, EventEmitter, Input, ViewChild, ElementRef } from '@
 export class ImagePreviewComponent {
 
   @Input() model: any;
-  @Input() modelFileProperty: string = 'imagem';
+  @Input() modelFileProperty = 'imagem';
   @Input() isBase64File: Boolean = false;
   @ViewChild('fileInput') fileInput: ElementRef;
   @ViewChild('imagePreview') imagePreview: ElementRef;
   imageChange: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  private _image: string = '';
+  private _image: String = '';
   get image(): string {
     return this.imageChange.value;
   }
@@ -31,10 +31,10 @@ export class ImagePreviewComponent {
   }
 
   onFileChange(event) {
-    let reader = new FileReader();
+    const reader = new FileReader();
     if (event.target.files && event.target.files.length > 0) {
-      let file = event.target.files[0];
-      if (file.type != '' && (/(gif|jpg|jpeg|tiff|png)$/i).test(file.type) == false) {
+      const file = event.target.files[0];
+      if (file.type !== '' && (/(gif|jpg|jpeg|tiff|png)$/i).test(file.type) == false) {
         this.customSnackBar.open('Somente arquivos do tipo imagem são permitidos!', 'warn');
         event.preventDefault();
         return;
@@ -60,7 +60,7 @@ export class ImagePreviewComponent {
 
   showImage() {
     if (this.model[this.modelFileProperty]) {
-      let image = new Image;
+      const image = new Image;
       if (this.isBase64File) {
         image.src = 'data:' + this.model[this.modelFileProperty].filetype + ';base64,' + this.model[this.modelFileProperty].value;
       } else {
@@ -69,7 +69,7 @@ export class ImagePreviewComponent {
       this.imagePreview.nativeElement.innerHTML = '';
       this.imagePreview.nativeElement.appendChild(image);
     } else if (this.model.arquivo) {
-      let image = new Image;
+      const image = new Image;
       image.src = AppSettings.SERVER_URL + this.model.arquivo.split('public')[1];
       this.imagePreview.nativeElement.innerHTML = '';
       this.imagePreview.nativeElement.appendChild(image);

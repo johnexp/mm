@@ -11,13 +11,16 @@ import { Component, Output, EventEmitter, Input, ViewChild, ElementRef } from '@
 export class CustomFileUploadComponent {
 
   @Input() model: any;
-  @Input() modelFileProperty: string = 'arquivo';
-  @Input() modelFileNameProperty: string = 'nomeArquivo';
+  @Input() modelFileProperty = 'arquivo';
+  @Input() modelFileNameProperty = 'nomeArquivo';
+  @Input() required: Boolean = false;
+  @Input() form: any = {};
   @ViewChild('fileInput') fileInput: ElementRef;
   @ViewChild('filePreview') filePreview: ElementRef;
+  fileUrl: String;
   fileChange: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  private _file: string = '';
+  private _file: String = '';
   get file(): string {
     return this.fileChange.value;
   }
@@ -31,9 +34,9 @@ export class CustomFileUploadComponent {
   }
 
   onFileChange(event) {
-    let reader = new FileReader();
+    const reader = new FileReader();
     if (event.target.files && event.target.files.length > 0) {
-      let file = event.target.files[0];
+      const file = event.target.files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.model.arquivo = {
@@ -48,22 +51,22 @@ export class CustomFileUploadComponent {
 
   clearFile() {
     this.model[this.modelFileProperty] = null;
+    this.model[this.modelFileNameProperty] = null;
     this.model.arquivo = null;
     this.filePreview.nativeElement.innerHTML = '';
+    this.fileUrl = null;
   }
 
   showFile() {
-    if (this.model[this.modelFileProperty]) {
-      let link = <HTMLAnchorElement>(document.createElement('a'));
-      link.target = '_blank';
-      link.href = AppSettings.SERVER_URL + this.model[this.modelFileProperty].split('public')[1];
-      link.download = this.model[this.modelFileNameProperty];
-      link.innerHTML = this.model[this.modelFileNameProperty];
-      this.filePreview.nativeElement.innerHTML = '';
-      this.filePreview.nativeElement.appendChild(link);
-    } else if (this.model.arquivo) {
-      let span = <HTMLSpanElement>(document.createElement('span'));
+    if (this.model.arquivo) {
+      const span = <HTMLSpanElement>(document.createElement('span'));
       span.innerHTML = this.model.arquivo.filename;
+      this.filePreview.nativeElement.innerHTML = '';
+      this.filePreview.nativeElement.appendChild(span);
+    } else if (this.model[this.modelFileProperty]) {
+      this.fileUrl = AppSettings.SERVER_URL + this.model[this.modelFileProperty].split('public')[1];
+      const span = <HTMLSpanElement>(document.createElement('span'));
+      span.innerHTML = this.model[this.modelFileNameProperty];
       this.filePreview.nativeElement.innerHTML = '';
       this.filePreview.nativeElement.appendChild(span);
     }
