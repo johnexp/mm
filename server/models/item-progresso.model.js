@@ -19,6 +19,12 @@ var ItemProgressoSchema = new mongoose.Schema({
     min: 0,
     max: 100,
     required: 'Preencha o campo "progresso"',
+  },
+  cor: {
+    type: String,
+    default: 'red',
+    required: true,
+    enum: ['red', 'pink', 'blue', 'green', 'purple', 'orange', 'brown', 'yellow']
   }
 });
 

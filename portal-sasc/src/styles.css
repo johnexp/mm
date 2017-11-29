@@ -1,16 +1,156 @@
 /* You can add global styles to this file, and also import other style files */
 
+@font-face {
+  font-family: 'Barlow Semi Condensed';
+  src: url('/assets/fonts/barlow/BarlowSemiCondensed-Light.eot');
+  src: url('/assets/fonts/barlow/BarlowSemiCondensed-Light.eot?#iefix') format('embedded-opentype'),
+      url('/assets/fonts/barlow/BarlowSemiCondensed-Light.woff2') format('woff2'),
+      url('/assets/fonts/barlow/BarlowSemiCondensed-Light.woff') format('woff'),
+      url('/assets/fonts/barlow/BarlowSemiCondensed-Light.ttf') format('truetype'),
+      url('/assets/fonts/barlow/BarlowSemiCondensed-Light.svg#BarlowSemiCondensed-Light') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body,
 html {
   height: 100%;
 }
 
 body {
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-family: 'Barlow Semi Condensed', Arial, Helvetica, sans-serif;
+  padding-top: 100px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-transform: uppercase;
+}
+
+::-moz-selection {
+  background: #6c0c4e;
+  color: #FFF;
+}
+
+::selection {
+  background: #6c0c4e;
+  color: #FFF;
+}
+
+.white *::-moz-selection {
+  background: #FFF;
+  color: #444;
+}
+
+.white *::selection {
+  background: #FFF;
+  color: #444;
+}
+
+.white,
+.white>* {
+  color: #FFF;
+}
+
+.no-transform {
+  text-transform: none;
 }
 
 .main-content,
 .app-content,
 .app-layout-container {
   height: 100%;
+}
+
+.section {
+  padding: 100px 0;
+}
+
+.section .section-title {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.separator {
+  display: block;
+  margin: 20px auto 30px;
+  position: relative;
+  background: linear-gradient(to left, rgba(0, 0, 255, 0) 55%, #FFF 55%) no-repeat;
+  width: 430px;
+  height: 1px;
+  max-width: 95%;
+}
+
+.container .separator {
+  max-width: 100%;
+  margin: 40px auto;
+}
+
+.separator::before {
+  content: ' ';
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+  top: -15px;
+  background-color: #FFF;
+  -webkit-mask-image: url('/assets/img/sasc-mark.svg');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 20px;
+  -webkit-mask-position: center;
+  mask-image: url('/assets/img/sasc-mark.svg');
+  mask-repeat: no-repeat;
+  mask-size: 20px;
+  mask-position: center;
+  height: 30px;
+  width: 50px;
+  display: block;
+  margin: 0 auto;
+}
+
+.separator::after {
+  content: ' ';
+  background: linear-gradient(to left, #FFF 45%, rgba(0, 0, 255, 0) 45%) no-repeat;
+  background-size: 100% auto;
+  width: 500px;
+  height: 1px;
+  position: absolute;
+  right: 0;
+  top: 0px;
+  max-width: 100%;
+}
+
+.separator.primary {
+  background: linear-gradient(to left, rgba(0, 0, 255, 0) 60%, #6c0c4e 60%) no-repeat;
+}
+
+.separator.primary::before {
+  background-color: #6c0c4e;
+}
+
+.separator.primary::after {
+  background: linear-gradient(to left, #6c0c4e 40%, rgba(0, 0, 255, 0) 40%) no-repeat;
+}
+
+.layout-margin-h > * {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.layout-margin-v > * {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.btn {
+  text-transform: uppercase;
+}
+
+.flex-100 {
+  flex: 1 100%;
 }

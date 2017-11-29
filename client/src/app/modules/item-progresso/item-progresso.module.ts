@@ -15,7 +15,8 @@ import {
   MatIconModule,
   MatDatepickerModule,
   MatInputModule,
-  MatSliderModule
+  MatSliderModule,
+  MatSelectModule
 } from '@angular/material';
 
 const MAT_MODULES = [
@@ -25,7 +26,8 @@ const MAT_MODULES = [
   MatIconModule,
   MatDatepickerModule,
   MatInputModule,
-  MatSliderModule
+  MatSliderModule,
+  MatSelectModule
 ];
 
 @NgModule({

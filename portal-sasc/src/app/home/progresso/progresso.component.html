@@ -1,0 +1,22 @@
+<section class="progress-section d-flex align-content-stretch white">
+  <div class="progress-block progress-section-title flex-100 text-right">
+    <h1>
+      <span class="highlight">Cooperativa</span>, você é parte principal deste projeto!</h1>
+  </div>
+  <div class="progress-block progress-section-bullets flex-100">
+    <h1 class="text-center">Acompanhe o Progresso do Sasc</h1>
+    <div class="progress-item d-flex" *ngFor="let itemProgresso of progressos; let idx = index" [ngClass]="{'flex-row-reverse': idx % 2 != 0}">
+      <div class="progress-bullet" [ngClass]="itemProgresso.cor + '-bullet'">
+        <span *ngIf="itemProgresso.progresso <= 50" class="slice slice-one" [ngStyle]="{'transform': 'rotate(270deg)', '-webkit-transform': 'rotate(270deg)'}"></span>
+        <span *ngIf="itemProgresso.progresso > 50" class="slice slice-one" [ngStyle]="{'transform': 'rotate(' + ((3.6 * itemProgresso.progresso) + 90) + 'deg)', '-webkit-transform': 'rotate(' + ((3.6 * itemProgresso.progresso) + 90) + 'deg)'}"></span>
+        <span *ngIf="itemProgresso.progresso <= 50" class="slice slice-two" [ngStyle]="{'transform': 'rotate(' + ((3.6 * itemProgresso.progresso) + 180) + 'deg)', '-webkit-transform': 'rotate(' + ((3.6 * itemProgresso.progresso) + 180) + 'deg)'}"></span>
+        <span *ngIf="itemProgresso.progresso > 50" class="slice slice-two slice-invisible"></span>
+        <span class="progress justify-content-center align-items-center"><span>{{itemProgresso.progresso}}%</span></span>
+      </div>
+      <div class="progress-text d-flex flex-column justify-content-center" [ngClass]="{'text-right': idx % 2 != 0}">
+        <h4>{{itemProgresso.titulo}}</h4>
+        <h5 class="no-transform">{{itemProgresso.subtitulo}}</h5>
+      </div>
+    </div>
+  </div>
+</section>

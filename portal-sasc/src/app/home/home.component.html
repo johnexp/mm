@@ -1,59 +1,10 @@
-<section class="banners">
-  <div id="carousel-depoimentos" class="carousel slide text-carousel" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#carousel-depoimentos" data-slide-to="0" class="active"></li>
-      <li data-target="#carousel-depoimentos" data-slide-to="1"></li>
-      <li data-target="#carousel-depoimentos" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner">
-      <ng-container *ngFor="let banner of banners; let idx = index">
-        <div class="carousel-item" [ngClass]="{'active': idx == 0}">
-          <img src="{{banner.arquivo}}">
-          <div class="carousel-caption d-none d-md-block">
-            <div class="banner-overlay"></div>
-            <div class="carousel-caption-content">
-              <h3>{{banner.titulo}}</h3>
-              <p>{{banner.texto}}</p>
-              <button class="btn btn-primary">Botão</button>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-      <!-- <div class="carousel-item active">
-          <div class="carousel-caption d-md-block">
-            <h3>Unimed BH</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat.
-            </p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="carousel-caption d-md-block">
-            <h3>Lorem</h3>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-              sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem
-              ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua.
-            </p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="carousel-caption d-md-block">
-            <h3>Ipsum</h3>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-              aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-              sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </div>
-        </div> -->
-    </div>
-    <!-- <a class="carousel-control-prev" href="#carousel-depoimentos" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carousel-depoimentos" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a> -->
+<app-banner></app-banner>
+<section class="section presentation-section text-center">
+  <div class="container">
+    <h1 class="section-title">{{apresentacaoSite.titulo}}</h1>
+    <span class="separator primary"></span>
+    <h3>{{apresentacaoSite.subtitulo}}</h3>
+    <p>{{apresentacaoSite.texto}}</p>
   </div>
 </section>
+<app-progresso></app-progresso>

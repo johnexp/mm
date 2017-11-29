@@ -1,4 +1,4 @@
-import { AppSettings } from './../app.settings';
+import { Router } from '@angular/router';
 import { HomeService } from './../service/home.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,26 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  banners: any[] = [];
+  apresentacaoSite: any = {};
 
-  constructor(private homeService: HomeService) { }
+  constructor(private homeService: HomeService,
+    private router: Router) { }
 
   ngOnInit() {
-    this.obterBanners();
+    this.obterApresentacao();
   }
 
-  obterBanners() {
-    this.homeService.getBanners().subscribe(
+  obterApresentacao() {
+    this.homeService.getPresentation().subscribe(
       response => {
-        response.forEach(banner => {
-          banner.arquivo = AppSettings.SERVER_URL + banner.arquivo.split('public')[1];
-        });
-        this.banners = response;
-        console.log(response);
+        this.apresentacaoSite = response;
       },
       error => {
-        alert('Erro');
+        this.router.navigate(['500']);
       }
     );
   }
+
 }

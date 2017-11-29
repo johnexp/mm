@@ -1,0 +1,78 @@
+.banners-section {
+  max-height: 90%;
+  overflow: hidden;
+  position: relative;
+  height: 500px;
+}
+
+.banners-section .carousel {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.banners-section .carousel .carousel-item img {
+  width: 100%;
+  min-height: 100%;
+  filter: blur(.1em);
+}
+
+.banners-section .carousel .carousel-item,
+.banners-section .carousel .carousel-inner {
+  height: 100%;
+}
+
+.banners-section .carousel .carousel-caption {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.banners-section .carousel .banner-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(111, 15, 79, 0.5);
+  z-index: 50;
+  top: 0;
+  left: 0;
+}
+
+.banners-section .carousel .carousel-caption-content {
+  position: absolute;
+  right: 5%;
+  left: 5%;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  z-index: 60;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 400px;
+  max-height: 80%;
+}
+
+.banners-section .banner-title {
+  font-size: 6em;
+  text-shadow: 0px 2px 3px #00000080;
+  margin-bottom: .3em;
+}
+
+.banners-section .banner-description {
+  font-size: 1.5em;
+  text-shadow: 0px 2px 3px #00000080;
+  margin-bottom: 2em;
+}
+
+.banners-section .separator {
+  margin-bottom: 3em;
+}
+
+.banners-section .carousel-indicators li {
+  height: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}

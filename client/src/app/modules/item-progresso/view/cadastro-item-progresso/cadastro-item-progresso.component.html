@@ -10,15 +10,25 @@
     <mat-form-field fxFlex>
       <input matInput class="form-control" name="titulo" #titulo="ngModel" [(ngModel)]="itemProgresso.titulo" placeholder="Título"
         required>
-      <mat-error [hidden]="!titulo.hasError('required') || (titulo.pristine && !titulo.touched && !form.submited)">
+      <mat-error [hidden]="!titulo.hasError('required') || (titulo.pristine && !titulo.touched && !form.submitted)">
         O campo "Título" é obrigatório
       </mat-error>
     </mat-form-field>
     <mat-form-field fxFlex>
       <input matInput class="form-control" name="subtitulo" #subtitulo="ngModel" [(ngModel)]="itemProgresso.subtitulo" placeholder="Subtítulo"
         required>
-      <mat-error [hidden]="!subtitulo.hasError('required') || (subtitulo.pristine && !subtitulo.touched && !form.submited)">
+      <mat-error [hidden]="!subtitulo.hasError('required') || (subtitulo.pristine && !subtitulo.touched && !form.submitted)">
         O campo "Subtítulo" é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <mat-select placeholder="Cor" #cor="ngModel" name="cor" [(ngModel)]="itemProgresso.cor" required>
+        <mat-option *ngFor="let cor of cores" [value]="cor.value">
+          {{ cor.label }}
+        </mat-option>
+      </mat-select>
+      <mat-error [hidden]="!cor.hasError('required') || (cor.pristine && !cor.touched && !form.submitted)">
+        O campo "Cor" é obrigatório
       </mat-error>
     </mat-form-field>
     <mat-card fxFlex="100" class="slider-wrapper">

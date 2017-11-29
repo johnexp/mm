@@ -16,6 +16,7 @@ export class CadastroItemProgressoComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
   itemProgresso: ItemProgresso = new ItemProgresso;
+  cores: any[] = ItemProgresso.CORES_ARR;
   @ViewChild('form') form;
 
   constructor(private router: Router,

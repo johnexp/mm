@@ -40,7 +40,8 @@ exports.createItemProgresso = async function (itemProgresso) {
   var newItemProgresso = new ItemProgresso({
     titulo: itemProgresso.titulo,
     subtitulo: itemProgresso.subtitulo,
-    progresso: itemProgresso.progresso
+    progresso: itemProgresso.progresso,
+    cor: itemProgresso.cor
   });
 
   try {
@@ -67,6 +68,7 @@ exports.updateItemProgresso = async function (itemProgresso) {
   oldItemProgresso.titulo = itemProgresso.titulo;
   oldItemProgresso.subtitulo = itemProgresso.subtitulo;
   oldItemProgresso.progresso = itemProgresso.progresso;
+  oldItemProgresso.cor = itemProgresso.cor;
 
   try {
     var savedItemProgresso = await oldItemProgresso.save();

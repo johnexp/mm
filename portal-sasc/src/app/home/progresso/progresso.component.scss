@@ -1,0 +1,120 @@
+.progress-section .progress-block {
+  padding: 80px 30px;
+}
+
+.progress-section .progress-block:first-child {
+  padding-left: 80px;
+}
+
+.progress-section .progress-section-title {
+  background: linear-gradient(rgba(0, 0, 0, .63), rgba(0, 0, 0, .63)), url('../../../assets/img/progress-bg.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.progress-section .progress-section-title h1 {
+  font-size: 5.5em;
+  color: #fefefe;
+}
+
+.progress-section .progress-section-title h1 span.highlight {
+  color: #e8c8ff;
+}
+
+.progress-section .progress-section-bullets h1 {
+  margin-bottom: 50px;
+}
+
+.progress-section .progress-section-bullets {
+  background-color: #323232;
+}
+
+.progress-item {
+  margin: 20px 0;
+}
+
+$progressBulletSize: 120px;
+
+.progress-bullet {
+  width: $progressBulletSize;
+  height: $progressBulletSize;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: relative;
+  margin: 0 20px;
+}
+
+.progress-bullet span.progress {
+  background-color: #323232;
+  border-radius: 50%;
+  height: (($progressBulletSize / 100) * 66);
+  width: (($progressBulletSize / 100) * 66);
+  font-size: 1.5em;
+  position: absolute;
+}
+
+.progress-bullet .slice-one {
+  clip: rect(0px $progressBulletSize ($progressBulletSize / 2) 0px);
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+.progress-bullet .slice-two {
+  clip: rect(0 ($progressBulletSize / 2) $progressBulletSize 0);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.progress-bullet .slice-two.slice-invisible {
+  clip: rect(0px $progressBulletSize $progressBulletSize ($progressBulletSize / 2));
+  transform: rotate(0deg);
+}
+
+.progress-bullet .slice {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+$red: #a01515;
+$pink: #df455b;
+$blue: #1a67a9;
+$green: #64ab5b;
+$purple: #895baa;
+$orange: #e2a146;
+$brown: #975d3a;
+$yellow: #d4c659;
+
+$colours: 
+  "red" $red,
+  "pink" $pink,
+  "blue" $blue,
+  "green" $green,
+  "purple" $purple,
+  "orange" $orange,
+  "brown" $brown,
+  "yellow" $yellow;
+
+@each $i in $colours {
+  .#{nth($i, 1)}-bullet,
+  .#{nth($i, 1)}-bullet .slice-one.slice-invisible,
+  .#{nth($i, 1)}-bullet .slice-two.slice-invisible {
+    background: linear-gradient(nth($i, 2), darken(nth($i, 2), 20%));
+    background: nth($i, 2); /* Old browsers */
+    background: -moz-linear-gradient(top, nth($i, 2), darken(nth($i, 2), 20%)); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, nth($i, 2), darken(nth($i, 2), 20%)); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, nth($i, 2), darken(nth($i, 2), 20%)); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='' + nth($i, 2) + '', endColorstr='' + darken(nth($i, 2), 20%) + '',GradientType=0 ); /* IE6-9 */
+  }
+  .#{nth($i, 1)}-bullet .slice-two,
+  .#{nth($i, 1)}-bullet .slice-one {
+    background: desaturate(darken(nth($i, 2), 30%), 20%);
+  }
+}

@@ -12,6 +12,7 @@ exports.getItemProgresso = async function (req, res, next) {
   var query = {};
   req.body.titulo ? query.titulo = { $regex: new RegExp('^.*' + req.body.titulo.trim() + '.*', 'i') } : null;
   req.body.subtitulo ? query.subtitulo = { $regex: new RegExp('^.*' + req.body.subtitulo.trim() + '.*', 'i') } : null;
+  req.body.cor ? query.cor = { $regex: new RegExp('^.*' + req.body.cor.trim() + '.*', 'i') } : null;
 
   try {
     var itemProgresso = await ItemProgressoService.getItemProgresso(query, page, limit, sort);
@@ -43,7 +44,8 @@ exports.createItemProgresso = async function (req, res, next) {
   var itemProgresso = {
     titulo: req.body.titulo,
     subtitulo: req.body.subtitulo,
-    progresso: req.body.progresso
+    progresso: req.body.progresso,
+    cor: req.body.cor
   };
 
   try {
@@ -64,7 +66,8 @@ exports.updateItemProgresso = async function (req, res, next) {
     id,
     titulo: req.body.titulo ? req.body.titulo : null,
     subtitulo: req.body.subtitulo ? req.body.subtitulo : null,
-    progresso: req.body.progresso ? req.body.progresso : null
+    progresso: req.body.progresso ? req.body.progresso : null,
+    cor: req.body.progresso ? req.body.cor : null
   };
 
   try {

@@ -16,6 +16,14 @@ export class HomeService {
     return this.http.get<any[]>(this.resourceUrl + '/banneres/public');
   }
 
+  getPresentation() {
+    return this.http.get<any[]>(this.resourceUrl + '/apresentacao-site/public');
+  }
+
+  getProgress() {
+    return this.http.get<any[]>(this.resourceUrl + '/item-progresso/public');
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.
