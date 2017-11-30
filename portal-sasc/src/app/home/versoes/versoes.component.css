@@ -1,0 +1,12 @@
+.section-title {
+  margin-bottom: 60px;
+}
+
+.separator {
+  margin: 20px 0;
+}
+
+.separator::before {
+  -webkit-mask-size: 12px;
+  mask-size: 12px;
+}

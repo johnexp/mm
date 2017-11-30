@@ -7,7 +7,7 @@
 
 <form #form="ngForm" (ngSubmit)="salvar()" novalidate>
   <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
-    <app-image-preview fxFlex="20" fxFlex.sm="30" fxFlex.xs="100" [isBase64File]="true" [model]="membro" [modelFileProperty]="'foto'" [image]="imagem"></app-image-preview>
+    <app-image-preview fxFlex="20" fxFlex.sm="30" fxFlex.xs="100" [model]="membro" [modelFileProperty]="'foto'" [image]="imagem"></app-image-preview>
     <div fxFlex fxLayoutWrap>
       <mat-form-field fxFlex>
         <input matInput class="form-control" name="nome" #nome="ngModel" [(ngModel)]="membro.nome" placeholder="Nome" required>

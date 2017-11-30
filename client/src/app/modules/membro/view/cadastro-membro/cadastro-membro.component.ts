@@ -39,7 +39,7 @@ export class CadastroMembroComponent implements OnInit {
     this.membroService.get(id).subscribe(
       response => {
         this.membro = response;
-        this.imagem = this.membro.foto;
+        this.imagem = this.membro.arquivo;
         this.blockUI.stop();
       },
       error => {

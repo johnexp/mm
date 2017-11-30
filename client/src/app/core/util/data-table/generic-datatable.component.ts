@@ -21,6 +21,7 @@ import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 @Component({
   selector: 'app-generic-datatable',
   templateUrl: './generic-datatable.component.html',
+  styleUrls: ['./generic-datatable.component.css'],
   providers: [GenericService]
 })
 export class GenericDatatableComponent implements OnInit, AfterViewInit {

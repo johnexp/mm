@@ -9,7 +9,7 @@ body {
   margin: 0;
   font-size: 14px;
   font-family: 'Roboto';
-  background: linear-gradient(-45deg, rgba(233, 57, 17, 0.43), rgba(150, 50, 43, 0.67));
+  background: linear-gradient(-45deg, rgba(37, 76, 130, 0.74), rgba(226, 70, 114, 0.62));
 }
 
 a {
@@ -61,71 +61,6 @@ md-sidenav-layout,
 
 .mat-form-field {
   padding: 2px;
-}
-
-
-/* .custom-table .mat-header-row {
-  align-items: flex-end;
-  border-bottom: none;
-}
-.custom-table .mat-header-row, .custom-table .mat-row {
-  padding: 0;
-}
-.custom-table .mat-header-cell {
-  font-size: 1.3em;
-  color: #6b2e76;
-  font-weight: 600;
-  text-align: center;
-  border-bottom: 1.5px solid #6b2e76;
-  margin-right: 5px;
-}
-.custom-table .mat-cell, .custom-table .mat-header-cell {
-  padding: 0 24px;
-} */
-
-.custom-table .mat-cell.mat-column-selection {
-  width: 70px;
-  flex: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  line-height: 40px;
-  padding: 0 10px;
-}
-
-.custom-table .mat-cell.mat-column-selection .mat-checkbox {
-  height: 40px;
-}
-
-.custom-table .mat-header-cell.mat-column-selection {
-  width: 70px;
-  padding: 0 10px;
-  flex: none;
-  text-align: center;
-}
-
-.custom-table .mat-cell.mat-column-actions {
-  display: flex;
-  justify-content: center;
-  flex: .5 1;
-  padding: 0 10px;
-}
-
-.custom-table .mat-header-cell.mat-column-actions {
-  flex: .5 1;
-  padding: 0 10px;
-}
-
-.custom-table .mat-sort-header-container:hover .mat-sort-header-button::after {
-  content: '\E164';
-  font-family: 'Material Icons';
-  opacity: .5;
-  font-size: 1.5em;
-  padding-left: 5px;
-}
-
-.custom-table .mat-sort-header-sorted .mat-sort-header-container:hover .mat-sort-header-button::after {
-  content: none;
 }
 
 body .mat-button,

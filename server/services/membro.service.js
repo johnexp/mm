@@ -1,8 +1,30 @@
 var Membro = require('../models/membro.model');
-var fs = require('fs');
-var mongoose = require('mongoose');
-var Gridfs = require('gridfs-stream');
+const fs = require('fs');
+const uploadPath = './public/upload/';
 _this = this;
+
+exports.saveFile = function (imagem, nomeArquivo) {
+  try {
+    var filePath = uploadPath + nomeArquivo;
+    let writeStream = fs.createWriteStream(filePath);
+    writeStream.write(imagem.value, 'base64');
+    writeStream.on('finish', () => {
+      console.log('wrote all data to file');
+    });
+    writeStream.end();
+    return filePath;
+  } catch (e) {
+    throw Error('Não foi possível salvar o arquivo no servidor.');
+  }
+}
+
+exports.deleteFile = async function (nomeArquivo) {
+  try {
+    fs.unlink(uploadPath + nomeArquivo);
+  } catch (e) {
+    throw Error('Não foi possível remover o arquivo' + nomeArquivo + ' do servidor.');
+  }
+}
 
 exports.getMembros = async function (query, page, limit, sort) {
   // Options setup for the mongoose paginate
@@ -22,7 +44,7 @@ exports.getMembros = async function (query, page, limit, sort) {
 
 exports.getAllMembros = async function () {
   try {
-    var membros = await Membro.find().select('-foto');
+    var membros = await Membro.find();
     return membros;
   } catch (e) {
     throw Error('Error while getting all Membros');
@@ -43,11 +65,14 @@ exports.createMembro = async function (membro) {
   var newMembro = new Membro({
     nome: membro.nome,
     cargo: membro.cargo,
-    apresentacao: membro.apresentacao,
-    foto: membro.foto
+    apresentacao: membro.apresentacao
   });
 
   try {
+    var nomeArquivo = Date.now() + '-' + membro.foto.filename;
+    newMembro.arquivo = this.saveFile(membro.foto, nomeArquivo);
+    newMembro.nomeArquivo = nomeArquivo;
+
     var savedMembro = await newMembro.save();
     return savedMembro;
   } catch (e) {
@@ -71,42 +96,30 @@ exports.updateMembro = async function (membro) {
   oldMembro.nome = membro.nome;
   oldMembro.cargo = membro.cargo;
   oldMembro.apresentacao = membro.apresentacao;
-  oldMembro.foto = membro.foto;
 
   try {
+    if (membro.foto) {
+      var nomeArquivo = Date.now() + '-' + membro.foto.filename;
+      var nomeArquivoAntigo = oldMembro.nomeArquivo;
+      oldMembro.arquivo = this.saveFile(membro.foto, nomeArquivo);
+      oldMembro.nomeArquivo = nomeArquivo;
+
+      if (nomeArquivoAntigo) {
+        this.deleteFile(nomeArquivoAntigo);
+      }
+    } else {
+      if (oldMembro.arquivo != null && !membro.arquivo) {
+        this.deleteFile(oldMembro.nomeArquivo);
+        oldMembro.arquivo = null;
+        oldMembro.nomeArquivo = null;
+      }
+    }
+
     var savedMembro = await oldMembro.save();
     return savedMembro;
   } catch (e) {
     throw Error("And Error occured while updating the Membro");
   }
-}
-
-exports.salvarFoto = async function (membro) {
-  var db = mongoose.connection.db;
-  var mongoDriver = mongoose.mongo;
-  var gfs = new Gridfs(db, mongoDriver);
-
-  var writestream = gfs.createWriteStream({
-    filename: membro.foto.nome,
-    mode: 'w',
-    metadata: membro.foto.hash
-  });
-  fs.createReadStream('C:\\').pipe(writestream);
-
-  writestream.on('close', function (file) {
-    Membro.findById(membro.id, function (err, _membro) {
-      // handle error
-      _membro.foto = membro.foto;
-      _membro.save(function (err, updatedMembro) {
-        // handle error
-        return res.json(200, updatedMembro)
-      })
-    });
-    fs.unlink('C:\\', function (err) {
-      // handle error
-      console.log('success!')
-    });
-  });
 }
 
 exports.deleteMembro = async function (id) {

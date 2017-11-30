@@ -1,0 +1,42 @@
+<section class="section contact-section">
+  <div class="container text-center white">
+    <h1 class="section-title">Fale Conosco</h1>
+    <span class="separator"></span>
+    <p>Suas dúvidas e sugestões são muito importante para o nosso time!</p>
+
+    <div class="d-flex justify-content-center">
+      <form #form="ngForm" (ngSubmit)="enviarContato()" novalidate>
+        <div class="form-group">
+          <input type="text" class="form-control" #nome="ngModel" [(ngModel)]="contato.nome" name="nome" placeholder="seu nome" required>
+          <div class="invalid-feedback" [hidden]="!nome.hasError('required') || (nome.pristine && !nome.touched && !form.submitted)">
+            O campo "nome" é obrigatório
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" #email="ngModel" [(ngModel)]="contato.email" name="email" placeholder="seu email" required>
+          <div class="invalid-feedback" [hidden]="!email.invalid || (email.pristine && !email.touched && !form.submitted)">
+            O campo "email" é obrigatório
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" #assunto="ngModel" [(ngModel)]="contato.assunto" name="assunto" placeholder="sobre o que quer nos falar?" required>
+          <div class="invalid-feedback" [hidden]="!assunto.invalid || (assunto.pristine && !assunto.touched && !form.submitted)">
+            O campo "assunto" é obrigatório
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" #texto="ngModel" [(ngModel)]="contato.texto" name="texto" placeholder="digite aqui o conteúdo da sua mensagem" required></textarea>
+          <div class="invalid-feedback" [hidden]="!texto.invalid || (texto.pristine && !texto.touched && !form.submitted)">
+            O campo "texto" é obrigatório
+          </div>
+        </div>
+        <div class="button-container d-flex justify-content-center">
+          <button type="submit" class="btn btn-accent">
+            <span class="fa fa-send"></span>
+            Enviar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

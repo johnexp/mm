@@ -4,6 +4,8 @@ export class Membro {
   cargo: string;
   apresentacao: string;
   foto: string | any;
+  arquivo: string;
+  nomeArquivo: string;
 
   constructor() {
 

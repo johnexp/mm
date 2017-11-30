@@ -76,7 +76,6 @@ exports.createBanner = async function (banner, imagem) {
     var savedBanner = await newBanner.save();
     return savedBanner;
   } catch (e) {
-    console.log(e);
     throw Error("Error while Creating Banner");
   }
 }

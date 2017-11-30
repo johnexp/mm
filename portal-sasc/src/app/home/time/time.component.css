@@ -1,0 +1,97 @@
+.team-section {
+  background: url('../../../assets/img/team-bg.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.team-section p {
+  font-size: 1.2rem;
+}
+
+.team-member {
+  margin-top: 80px;
+}
+
+.team-member-photo {
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.team-member-photo::after {
+  content: '';
+  border-radius: 50%;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.team-member-photo img {
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  max-height: 100%;
+  min-width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  filter: saturate(.3);
+  -webkit-filter: saturate(.3);
+}
+
+.team-member h2 {
+  margin-bottom: -5px;
+}
+
+.team-member h2::after {
+  content: '';
+  background-color: #FFF;
+  -webkit-mask-image: url('/assets/img/sasc-mark.svg');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 10px;
+  -webkit-mask-position: center;
+  mask-image: url('/assets/img/sasc-mark.svg');
+  mask-repeat: no-repeat;
+  mask-size: 10px;
+  mask-position: center;
+  height: 25px;
+  width: 50px;
+  display: block;
+  margin: 0 auto;
+}
+
+.team-member-more {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  top: -80px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font-size: 5em;
+  opacity: 0;
+  cursor: pointer;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.18);
+}
+
+.team-member-info,
+.team-member-more {
+  -webkit-transition: all .3s cubic-bezier(.77,.01,.25,1);
+  -moz-transition: all .3s cubic-bezier(.77,.01,.25,1);
+  -o-transition: all .3s cubic-bezier(.77,.01,.25,1);
+  transition: all .3s cubic-bezier(.77,.01,.25,1);
+}
+
+.team-member:hover .team-member-info {
+  filter: blur(.2em);
+}
+
+.team-member:hover .team-member-more {
+  opacity: 1;
+  top: -90px;
+}

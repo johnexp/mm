@@ -18,7 +18,7 @@ export class PesquisaVersaoComponent implements OnInit {
   columns = [
     { columnDef: 'ticket', header: 'Ticket', cell: (row: Versao) => `${row.ticket}` },
     { columnDef: 'numeroVersao', header: 'Versão', cell: (row: Versao) => `${row.numeroVersao}` },
-    { columnDef: 'descricao', header: 'Descrição', cell: (row: Versao) => `${row.descricao}` },
+    { columnDef: 'descricao', header: 'Descrição', cell: (row: Versao) => `${row.descricao}`, escapeHtml: true },
     { columnDef: 'data', header: 'Data', cell: (row: Versao) => `${this.datePipe.transform(row.data, 'dd/MM/yyyy')}` }
   ];
   database = new GenericDatabase;

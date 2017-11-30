@@ -82,9 +82,14 @@
   <!-- Columns -->
   <ng-container *ngFor="let column of columns" matColumnDef="{{ column.columnDef }}">
     <mat-header-cell *matHeaderCellDef mat-sort-header>{{ column.header }}</mat-header-cell>
-    <mat-cell *matCellDef="let row">
-      {{ column.cell(row) }}
-    </mat-cell>
+    <ng-container *ngIf="column.escapeHtml">
+      <mat-cell *matCellDef="let row" [innerHTML]="column.cell(row)"></mat-cell>
+    </ng-container>
+    <ng-container *ngIf="!column.escapeHtml">
+      <mat-cell *matCellDef="let row">
+        {{ column.cell(row) }}
+      </mat-cell>
+    </ng-container>
   </ng-container>
 
   <!-- <ng-template [ngTemplateOutlet]="templateRefColumns" [ngTemplateOutletContext]="{model: model}">

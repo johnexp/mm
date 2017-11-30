@@ -1,3 +1,4 @@
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { customHttpProvider } from './../../core/helpers/custom.http';
 import { DatePipe } from '@angular/common';
 import { CoreModule } from './../../core/core.module';
@@ -35,6 +36,8 @@ const MAT_MODULES = [
     FormsModule,
     CoreModule,
     FlexLayoutModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
     RouterModule.forRoot(
       VersaoRoute,
       { useHash: true }

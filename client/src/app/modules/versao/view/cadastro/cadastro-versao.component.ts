@@ -16,6 +16,13 @@ export class CadastroVersaoComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   versao: Versao = new Versao;
   @ViewChild('form') form;
+  public froalaOptions: Object = {
+    imageUpload: false,
+    imagePaste: false,
+    toolbarButtons: ['bold', 'italic', 'underline'],
+    placeholderText: 'Conteúdo',
+    language: 'pt_br'
+  };
 
   constructor(private location: Location,
     private versaoService: VersaoService,

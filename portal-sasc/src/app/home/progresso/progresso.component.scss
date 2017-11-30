@@ -1,5 +1,31 @@
+// VARIABLES 
+
+$progressBulletSize: 120px;
+
+$red: #a01515;
+$pink: #df455b;
+$blue: #1a67a9;
+$green: #64ab5b;
+$purple: #895baa;
+$orange: #e2a146;
+$brown: #975d3a;
+$yellow: #d4c659;
+
+$colours: 
+  "red" $red,
+  "pink" $pink,
+  "blue" $blue,
+  "green" $green,
+  "purple" $purple,
+  "orange" $orange,
+  "brown" $brown,
+  "yellow" $yellow;
+
+// / VARIABLES /
+
 .progress-section .progress-block {
   padding: 80px 30px;
+  overflow: hidden;
 }
 
 .progress-section .progress-block:first-child {
@@ -17,6 +43,8 @@
 .progress-section .progress-section-title h1 {
   font-size: 5.5em;
   color: #fefefe;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .progress-section .progress-section-title h1 span.highlight {
@@ -35,9 +63,8 @@
   margin: 20px 0;
 }
 
-$progressBulletSize: 120px;
-
 .progress-bullet {
+  min-width: $progressBulletSize;
   width: $progressBulletSize;
   height: $progressBulletSize;
   border-radius: 50%;
@@ -83,25 +110,6 @@ $progressBulletSize: 120px;
   border-radius: 50%;
 }
 
-$red: #a01515;
-$pink: #df455b;
-$blue: #1a67a9;
-$green: #64ab5b;
-$purple: #895baa;
-$orange: #e2a146;
-$brown: #975d3a;
-$yellow: #d4c659;
-
-$colours: 
-  "red" $red,
-  "pink" $pink,
-  "blue" $blue,
-  "green" $green,
-  "purple" $purple,
-  "orange" $orange,
-  "brown" $brown,
-  "yellow" $yellow;
-
 @each $i in $colours {
   .#{nth($i, 1)}-bullet,
   .#{nth($i, 1)}-bullet .slice-one.slice-invisible,
@@ -111,7 +119,7 @@ $colours:
     background: -moz-linear-gradient(top, nth($i, 2), darken(nth($i, 2), 20%)); /* FF3.6-15 */
     background: -webkit-linear-gradient(top, nth($i, 2), darken(nth($i, 2), 20%)); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom, nth($i, 2), darken(nth($i, 2), 20%)); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='' + nth($i, 2) + '', endColorstr='' + darken(nth($i, 2), 20%) + '',GradientType=0 ); /* IE6-9 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='' + nth($i, 2) + '', endColorstr='' + darken(nth($i, 2), 20%) + '', GradientType=0); /* IE6-9 */
   }
   .#{nth($i, 1)}-bullet .slice-two,
   .#{nth($i, 1)}-bullet .slice-one {

@@ -67,6 +67,8 @@ exports.updateMembro = async function (req, res, next) {
     nome: req.body.nome ? req.body.nome : null,
     cargo: req.body.cargo ? req.body.cargo : null,
     apresentacao: req.body.apresentacao ? req.body.apresentacao : null,
+    arquivo: req.body.arquivo ? req.body.arquivo : null,
+    nomeArquivo: req.body.nomeArquivo ? req.body.nomeArquivo : null,
     foto: req.body.foto ? req.body.foto : null
   };
 
@@ -75,23 +77,6 @@ exports.updateMembro = async function (req, res, next) {
     return res.status(200).json({ status: 200, data: updatedMembro, message: "Succesfully Updated Membro" });
   } catch (e) {
     return res.status(400).json({ status: 400., message: e.message });
-  }
-}
-
-exports.salvarFoto = async function (req, res, next) {
-  var membro = {
-    id: req.body._id,
-    apresentacao: req.body.apresentacao,
-    cargo: req.body.cargo,
-    nome: req.body.nome,
-    foto: req.body.foto
-  };
-
-  try {
-    var membro = await MembroService.salvarFoto(membro);
-    return res.status(200).json(membro);
-  } catch (e) {
-    return res.status(400).json({ status: 400, message: "Não foi possível salvar a foto do membro" });
   }
 }
 

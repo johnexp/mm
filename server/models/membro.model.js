@@ -20,6 +20,13 @@ var MembroSchema = new mongoose.Schema({
     required: 'Preencha o campo "Apresentação"',
     trim: true
   },
+  arquivo: {
+    type: String,
+    trim: true
+  },
+  nomeArquivo: {
+    type: String
+  },
   foto: {
     _id: false,
     filename: {

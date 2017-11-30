@@ -28,7 +28,7 @@ export class CadastroWikiComponent implements OnInit {
       'Authorization': 'Bearer ' + this.authenticationService.getAuthorization()
     },
     imageManagerDeleteURL: AppSettings.API_ENDPOINT + '/wikis/delete-image'
-  }
+  };
 
   constructor(private router: Router,
     private route: ActivatedRoute,

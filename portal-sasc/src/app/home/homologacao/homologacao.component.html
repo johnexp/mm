@@ -1,0 +1,26 @@
+<section class="section homologation-section white">
+  <div class="container text-center">
+    <h1 class="section-title">Homologação e Implantação</h1>
+    <span class="separator"></span>
+    <p>Acompanhe a experiência das cooperativas que estão participando da homologação ou implantação do SASC.</p>
+
+    <div id="carousel-homologations" class="carousel slide no-controls text-carousel" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li *ngFor="let homologacao of homologacoes; let idx = index" data-target="#carousel-homologations" [attr.data-slide-to]="idx"
+          [ngClass]="{'active': idx == 0}"></li>
+      </ol>
+      <div class="d-flex justify-content-center">
+        <div class="carousel-inner">
+          <ng-container *ngFor="let homologacao of homologacoes; let idx = index">
+            <div class="carousel-item" [ngClass]="{'active': idx == 0}">
+              <div class="carousel-caption d-md-block">
+                <h4>{{homologacao.descricao}}</h4>
+                <span><em>{{homologacao.responsavel}} - {{homologacao.empresa}}</em></span>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

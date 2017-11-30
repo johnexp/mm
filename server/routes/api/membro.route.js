@@ -10,7 +10,6 @@ router.get('/id/:id', MembroController.getMembro);
 router.get('/public', MembroController.getAllMembros);
 router.get('/', MembroController.getAllMembros);
 router.post('/', MembroController.createMembro);
-router.post('/upload-foto', MembroController.salvarFoto);
 router.put('/', MembroController.updateMembro);
 router.delete('/:id', MembroController.removeMembro);
 

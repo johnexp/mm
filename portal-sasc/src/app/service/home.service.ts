@@ -24,6 +24,19 @@ export class HomeService {
     return this.http.get<any[]>(this.resourceUrl + '/item-progresso/public');
   }
 
+  getVersions() {
+    const url = '/versoes/public/filter/?sort=numeroVersao&order=desc&page=1&limit=2';
+    return this.http.post<any>(this.resourceUrl + url, {});
+  }
+
+  getTeamMembers() {
+    return this.http.get<any[]>(this.resourceUrl + '/membros/public');
+  }
+
+  getHomologations() {
+    return this.http.get<any[]>(this.resourceUrl + '/homologacaos/public');
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.
