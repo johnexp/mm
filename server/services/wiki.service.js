@@ -19,7 +19,7 @@ exports.getWikis = async function (query, page, limit, sort) {
 
 exports.getAllWikis = async function () {
   try {
-    var wikis = await Wiki.find();
+    var wikis = await Wiki.find().sort('-dataPublicacao');
     return wikis;
   } catch (e) {
     throw Error('Error while getting all Wikis');

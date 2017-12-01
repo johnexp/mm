@@ -28,13 +28,7 @@
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
-    <!-- <mat-form-field fxFlex="50">
-      <textarea matInput name="descricao" #descricao="ngModel" [(ngModel)]="versao.descricao" placeholder="Descrição" required></textarea>
-      <mat-error [hidden]="!descricao.hasError('required') || (descricao.pristine && !descricao.touched && !form.submitted)">
-        O campo "Descrição" é obrigatório
-      </mat-error>
-    </mat-form-field> -->
-    <div fxFlex="100" id="conteudo-wiki" [froalaEditor]="froalaOptions" [(froalaModel)]="versao.descricao"></div>
+    <div fxFlex="100" [froalaEditor]="froalaOptions" [(froalaModel)]="versao.descricao"></div>
   </div>
 
   <div class="buttons-container layout-margin" fxLayoutAlign="end center">

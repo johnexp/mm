@@ -1,3 +1,4 @@
+import { SobreModule } from './modules/sobre/sobre.module';
 import { ArquivoModule } from './modules/arquivo/arquivo.module';
 import { WikiModule } from './modules/wiki/wiki.module';
 import { ItemProgressoModule } from './modules/item-progresso/item-progresso.module';
@@ -52,7 +53,8 @@ const MAT_MODULES = [
     BannerModule,
     ItemProgressoModule,
     WikiModule,
-    ArquivoModule
+    ArquivoModule,
+    SobreModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

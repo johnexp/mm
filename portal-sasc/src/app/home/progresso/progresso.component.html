@@ -1,12 +1,12 @@
 <section class="progress-section d-flex flex-wrap flex-md-nowrap align-content-stretch white">
-  <div class="progress-block progress-section-title flex-1 d-flex align-items-center text-right">
+  <div class="progress-block progress-section-title flex-1 d-flex align-items-center text-center text-md-right">
     <h1>
       <span class="highlight">Cooperativa</span>, você é parte principal deste projeto!
     </h1>
   </div>
   <div class="progress-block progress-section-bullets flex-1">
     <h1 class="text-center">Acompanhe o Progresso do Sasc</h1>
-    <div class="progress-item d-flex" *ngFor="let itemProgresso of progressos; let idx = index" [ngClass]="{'flex-row-reverse': idx % 2 != 0}">
+    <div class="progress-item d-flex flex-column flex-md-row align-items-center" *ngFor="let itemProgresso of progressos; let idx = index" [ngClass]="{'flex-md-row-reverse': idx % 2 != 0}">
       <div class="progress-bullet" [ngClass]="itemProgresso.cor + '-bullet'">
         <span *ngIf="itemProgresso.progresso <= 50" class="slice slice-one" [ngStyle]="{'transform': 'rotate(270deg)', '-webkit-transform': 'rotate(270deg)'}"></span>
         <span *ngIf="itemProgresso.progresso > 50" class="slice slice-one" [ngStyle]="{'transform': 'rotate(' + ((3.6 * itemProgresso.progresso) + 90) + 'deg)', '-webkit-transform': 'rotate(' + ((3.6 * itemProgresso.progresso) + 90) + 'deg)'}"></span>
@@ -16,7 +16,7 @@
           <span>{{itemProgresso.progresso}}%</span>
         </span>
       </div>
-      <div class="progress-text d-flex flex-column justify-content-center" [ngClass]="{'text-right': idx % 2 != 0}">
+      <div class="progress-text d-flex flex-column justify-content-center text-center" [ngClass]="{'text-md-right': idx % 2 != 0}">
         <h4>{{itemProgresso.titulo}}</h4>
         <h5 class="no-transform">{{itemProgresso.subtitulo}}</h5>
       </div>

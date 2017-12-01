@@ -1,3 +1,7 @@
+import { WikiModule } from './wiki/wiki.module';
+import { SobreModule } from './sobre/sobre.module';
+import { ArquivosModule } from './arquivos/arquivos.module';
+import { BlockUIModule } from 'ng-block-ui';
 import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeService } from './service/home.service';
@@ -20,7 +24,11 @@ import { AppComponent } from './app.component';
     BrowserModule,
     HttpClientModule,
     AppRoutes,
-    HomeModule
+    BlockUIModule,
+    HomeModule,
+    ArquivosModule,
+    SobreModule,
+    WikiModule
   ],
   providers: [
     HomeService

@@ -25,6 +25,12 @@
           <span>Apresentação do Site</span>
         </a>
       </li>
+      <li [ngClass]="{ 'active': path == 'sobre' }">
+        <a [routerLink]="['/sobre']">
+          <mat-icon>format_color_text</mat-icon>
+          <span>Sobre o Portal</span>
+        </a>
+      </li>
       <li [ngClass]="{ 'active': path == 'banner' }">
         <a [routerLink]="['/banner']">
           <mat-icon>photo_size_select_actual</mat-icon>

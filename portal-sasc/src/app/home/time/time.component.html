@@ -6,8 +6,8 @@
   </div>
   <div class="container-fluid">
     <div class="row">
-      <div class="team-member col-3" *ngFor="let membro of membros">
-        <div class="team-member-info d-flex flex-column align-items-center">
+      <div class="team-member col-md-4 col-lg-3 col-12" *ngFor="let membro of membros">
+        <div class="team-member-info d-flex flex-column align-items-center" (click)="preencherDadosModalMembros(membro)">
           <figure class="team-member-photo d-flex">
             <img src="{{membro.arquivo}}">
           </figure>

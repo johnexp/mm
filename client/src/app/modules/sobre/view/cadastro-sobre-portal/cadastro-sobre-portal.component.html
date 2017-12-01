@@ -1,0 +1,30 @@
+<h1 class="page-title">
+  <mat-icon>format_color_text</mat-icon>
+  Sobre o Portal
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
+    <mat-form-field fxFlex>
+      <input matInput class="form-control" name="titulo" #titulo="ngModel" [(ngModel)]="sobre.titulo" placeholder="Título" required>
+      <mat-error [hidden]="!titulo.hasError('required') || (titulo.pristine && !titulo.touched && !form.submitted)">
+        O campo "Título" é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <input matInput class="form-control" name="subtitulo" #subtitulo="ngModel" [(ngModel)]="sobre.subtitulo" placeholder="Subtítulo"
+        required>
+      <mat-error [hidden]="!subtitulo.hasError('required') || (subtitulo.pristine && !subtitulo.touched && !form.submitted)">
+        O campo "Subtítulo" é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <div fxFlex="100" [froalaEditor]="froalaOptions" [(froalaModel)]="sobre.texto"></div>
+  </div>
+
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center">
+    <button mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+  </div>
+</form>

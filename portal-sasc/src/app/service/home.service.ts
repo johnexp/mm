@@ -37,6 +37,10 @@ export class HomeService {
     return this.http.get<any[]>(this.resourceUrl + '/homologacaos/public');
   }
 
+  sendContact(body) {
+    return this.http.post<any>(this.resourceUrl + '/contato/public', body);
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.

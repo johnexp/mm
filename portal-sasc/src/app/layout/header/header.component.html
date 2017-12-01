@@ -1,21 +1,31 @@
 <div class="header-container d-flex justify-content-end">
-  <nav>
+  <h1>
+    <a [routerLink]="['/']">SASC</a>
+  </h1>
+  <nav class="nav-menu">
     <ul class="header-menu">
       <li>
-        <a href="#">
-          Arquivos
-        </a>
-      </li>
-      <li>
-        <a href="#">
+        <a [routerLink]="['/sobre']">
           Sobre o Portal Colaborativo
         </a>
       </li>
       <li>
-        <a href="#">
+        <a [routerLink]="['/arquivos']">
+          Arquivos
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/wiki']">
           Wiki
         </a>
       </li>
     </ul>
   </nav>
+  <a class="d-flex justify-content-center align-items-start toggle-menu d-md-none" (click)="toggleMenu()">
+    <div id="nav-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </a>
 </div>

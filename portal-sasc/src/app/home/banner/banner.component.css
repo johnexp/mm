@@ -12,8 +12,10 @@
 }
 
 .banners-section .carousel .carousel-item img {
-  width: 100%;
-  min-height: 100%;
+  max-height: 100%;
+  min-width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
   filter: blur(.1em);
 }
 
@@ -56,7 +58,7 @@
 }
 
 .banners-section .banner-title {
-  font-size: 6em;
+  font-size: 5.3em;
   text-shadow: 0px 2px 3px #00000080;
   margin-bottom: .3em;
 }
@@ -75,4 +77,43 @@
   height: 4px;
   border-radius: 4px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1199px) {
+  .banners-section .banner-title {
+    font-size: 5em;
+  }
+  .banners-section .banner-description {
+    font-size: 1.5em;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .banners-section .banner-title {
+    font-size: 4.5em;
+  }
+  .banners-section .banner-description {
+    font-size: 1.3em;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .banners-section .banner-title {
+    font-size: 3.5em;
+  }
+  .banners-section .banner-description {
+    font-size: 1.2em;
+  }
+  .banners-section {
+    max-height: 100%;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .banners-section .banner-title {
+    font-size: 3em;
+  }
+  .banners-section .banner-description {
+    font-size: 1em;
+  }
 }

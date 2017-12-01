@@ -24,7 +24,8 @@
 
 .contact-section form input:focus,
 .contact-section form textarea:focus {
-  box-shadow: 0 4px 2px -1px rgba(108, 12, 78, 0.25);
+  box-shadow: 0 4px 2px -1px rgba(226, 70, 114, .25);
+  border-color: #e24672;
 }
 
 .contact-section .invalid-feedback {

@@ -1,0 +1,18 @@
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center">
+          <h1 class="section-title">Wikis</h1>
+          <span class="separator primary"></span>
+          <p class="section-desc">Wikis</p>
+        </div>
+        <div class="wikis" *ngFor="let wiki of wikis">
+          <h3><a [routerLink]="['/wiki', wiki._id]">{{wiki.titulo}}</a></h3>
+          <small>Publicado em: {{wiki.dataPublicacao | date: 'dd/MM/yyyy'}}</small>
+          <h6 class="no-transform">{{wiki.descricao}} <a [routerLink]="['/wiki', wiki._id]">[...]</a></h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

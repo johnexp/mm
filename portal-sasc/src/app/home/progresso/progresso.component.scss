@@ -126,3 +126,37 @@ $colours:
     background: desaturate(darken(nth($i, 2), 30%), 20%);
   }
 }
+
+@media screen and (max-width: 1199px) {
+  .progress-section .progress-section-title h1 {
+    font-size: 5em;
+  }
+
+  .progress-section .progress-block:first-child {
+    padding-left: 20px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .progress-section .progress-section-title h1 {
+    font-size: 4em;
+  }
+  .progress-section .progress-block:first-child {
+    padding: 5px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .progress-section .progress-section-title h1 {
+    font-size: 4em;
+  }
+  .progress-section .progress-block:first-child {
+    padding: 60px 20px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .progress-section .progress-section-title h1 {
+    font-size: 3em;
+  }
+}

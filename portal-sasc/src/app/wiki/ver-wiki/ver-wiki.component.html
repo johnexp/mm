@@ -1,0 +1,17 @@
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center">
+          <h1 class="section-title">{{wiki.titulo}}</h1>
+          <small>Publicado em: {{wiki.dataPublicacao | date: 'dd/MM/yyyy'}}</small>
+          <span class="separator primary"></span>
+          <p class="section-desc">{{wiki.descricao}}</p>
+        </div>
+        <div class="wiki">
+          <div [innerHTML]="wiki.conteudo"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

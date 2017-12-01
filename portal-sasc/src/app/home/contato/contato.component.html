@@ -6,26 +6,35 @@
 
     <div class="d-flex justify-content-center">
       <form #form="ngForm" (ngSubmit)="enviarContato()" novalidate>
+        <div class="alert alert-dismissible fade" role="alert" [ngClass]="{'alert-danger': severity == 'danger', 'alert-success': severity == 'success', 'hide': !result, 'show': result}">
+          <strong>{{result}}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
         <div class="form-group">
-          <input type="text" class="form-control" #nome="ngModel" [(ngModel)]="contato.nome" name="nome" placeholder="seu nome" required>
+          <input type="text" class="form-control" #nome="ngModel" [(ngModel)]="contato.nome" name="nome" placeholder="nome *" autocomplete="off"
+            required>
           <div class="invalid-feedback" [hidden]="!nome.hasError('required') || (nome.pristine && !nome.touched && !form.submitted)">
             O campo "nome" é obrigatório
           </div>
         </div>
         <div class="form-group">
-          <input type="email" class="form-control" #email="ngModel" [(ngModel)]="contato.email" name="email" placeholder="seu email" required>
+          <input type="email" class="form-control" #email="ngModel" [(ngModel)]="contato.email" name="email" placeholder="email *"
+            autocomplete="off" required>
           <div class="invalid-feedback" [hidden]="!email.invalid || (email.pristine && !email.touched && !form.submitted)">
             O campo "email" é obrigatório
           </div>
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" #assunto="ngModel" [(ngModel)]="contato.assunto" name="assunto" placeholder="sobre o que quer nos falar?" required>
+          <input type="text" class="form-control" #assunto="ngModel" [(ngModel)]="contato.assunto" name="assunto" placeholder="assunto *"
+            autocomplete="off" required>
           <div class="invalid-feedback" [hidden]="!assunto.invalid || (assunto.pristine && !assunto.touched && !form.submitted)">
             O campo "assunto" é obrigatório
           </div>
         </div>
         <div class="form-group">
-          <textarea class="form-control" #texto="ngModel" [(ngModel)]="contato.texto" name="texto" placeholder="digite aqui o conteúdo da sua mensagem" required></textarea>
+          <textarea class="form-control" #texto="ngModel" [(ngModel)]="contato.texto" name="texto" placeholder="texto *" required></textarea>
           <div class="invalid-feedback" [hidden]="!texto.invalid || (texto.pristine && !texto.touched && !form.submitted)">
             O campo "texto" é obrigatório
           </div>

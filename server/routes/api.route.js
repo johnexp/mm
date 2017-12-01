@@ -6,19 +6,23 @@ var versao = require('./api/versao.route');
 var membros = require('./api/membro.route');
 var homologacoes = require('./api/homologacao.route');
 var apresentacaoSite = require('./api/apresentacao-site.route');
+var sobre = require('./api/sobre.route');
 var banners = require('./api/banner.route');
 var itemProgresso = require('./api/item-progresso.route');
 var wiki = require('./api/wiki.route');
 var arquivo = require('./api/arquivo.route');
+var contato = require('./api/contato.route');
 
 router.use('/users', users);
 router.use('/versoes', versao);
 router.use('/membros', membros);
 router.use('/homologacaos', homologacoes);
 router.use('/apresentacao-site', apresentacaoSite);
+router.use('/sobre', sobre);
 router.use('/banneres', banners);
 router.use('/item-progresso', itemProgresso);
 router.use('/wikis', wiki);
 router.use('/arquivos', arquivo);
+router.use('/contato', contato);
 
 module.exports = router;

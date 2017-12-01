@@ -32,7 +32,9 @@ export class CadastroApresentacaoSiteComponent implements OnInit {
     this.blockUI.start('Carregando...');
     this.apresentacaoSiteService.get().subscribe(
       response => {
-        this.apresentacaoSite = response;
+        if (response) {
+          this.apresentacaoSite = response;
+        }
         this.blockUI.stop();
       },
       error => {

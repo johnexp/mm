@@ -1,0 +1,21 @@
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center">
+          <h1 class="section-title">Arquivos</h1>
+          <span class="separator primary"></span>
+          <p class="section-desc">Faça downloads de documentos, vídeos e apresentações referentes ao processo de implantação e homologação do SASC:</p>
+        </div>
+        <div class="arquivo" *ngFor="let arquivo of arquivos">
+          <h3>{{arquivo.nome}}</h3>
+          <h6 class="no-transform">{{arquivo.descricao}}</h6>
+          <a class="download-link" href="{{arquivo.caminhoArquivo}}" download>
+            <span class="fa fa-download"></span>
+            {{arquivo.nomeArquivo}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
