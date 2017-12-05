@@ -21,8 +21,28 @@
     <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
       <ng-container *ngFor="let field of columns">
         <ng-container *ngIf="field.filter != false && field.type" [ngSwitch]="field.type">
-          <!-- <mat-form-field fxFlex *ngSwitchCase="'select'">
-          </mat-form-field> -->
+          <mat-form-field fxFlex *ngSwitchCase="'textarea'">
+            <input matInput name="{{ field.columnDef }}" [(ngModel)]="model[field.columnDef]" placeholder="{{ field.header }}">
+          </mat-form-field>
+          <mat-form-field fxFlex *ngSwitchCase="'text'">
+            <input matInput name="{{ field.columnDef }}" [(ngModel)]="model[field.columnDef]" placeholder="{{ field.header }}">
+          </mat-form-field>
+          <mat-form-field fxFlex *ngSwitchCase="'switch'">
+            <mat-select [(ngModel)]="model[field.columnDef]" name="{{ field.columnDef }}" placeholder="{{ field.header }}">
+              <mat-option [value]=""></mat-option>
+              <mat-option [value]="true">
+                Sim
+              </mat-option>
+              <mat-option [value]="false">
+                Não
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- <mat-card fxFlex class="slide-toggle-container" *ngSwitchCase="'switch'">
+            <mat-slide-toggle name="{{ field.columnDef }}" [(ngModel)]="model[field.columnDef]">
+              {{ field.header }}
+            </mat-slide-toggle>
+          </mat-card> -->
         </ng-container>
         <mat-form-field fxFlex *ngIf="field.filter != false && !field.type">
           <input matInput name="{{ field.columnDef }}" [(ngModel)]="model[field.columnDef]" placeholder="{{ field.header }}">
@@ -84,9 +104,17 @@
       <button mat-icon-button type="button" color="primary" *ngIf="actions.u" (click)="goEdit(row)" matTooltip="Editar">
         <mat-icon aria-label="Editar">edit</mat-icon>
       </button>
-      <button mat-icon-button type="button" color="warn" *ngIf="actions.d" (click)="confirmDelete(row)" matTooltip="Excluir">
-        <mat-icon aria-label="Excluir">delete</mat-icon>
-      </button>
+      <ng-container *ngIf="actions.d">
+        <button mat-icon-button type="button" color="warn" *ngIf="!logicalExclusion" (click)="confirmDelete(row)" matTooltip="Excluir">
+          <mat-icon aria-label="Excluir">delete</mat-icon>
+        </button>
+        <button mat-icon-button type="button" color="warn" *ngIf="logicalExclusion && row.ativo" (click)="confirmDelete(row)" matTooltip="Inativar">
+          <mat-icon aria-label="Inativar">block</mat-icon>
+        </button>
+        <button mat-icon-button type="button" color="success" *ngIf="logicalExclusion && !row.ativo" (click)="confirmDelete(row)" matTooltip="Ativar">
+          <mat-icon aria-label="Ativar">done</mat-icon>
+        </button>
+      </ng-container>
       <ng-container [ngTemplateOutlet]="buttonsRef" [ngTemplateOutletContext]="{ row: row }">
       </ng-container>
     </mat-cell>

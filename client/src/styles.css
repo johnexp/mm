@@ -161,3 +161,12 @@ body .custom-snack-bar-warn {
 .slider-wrapper .mat-slider-horizontal {
   width: 100%;
 }
+
+.mat-button.mat-success, .mat-icon-button.mat-success {
+  color: #32a05a;
+}
+
+.slide-toggle-container {
+  margin: 16px;
+  padding: 2px;
+}
