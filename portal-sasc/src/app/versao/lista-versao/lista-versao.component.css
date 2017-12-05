@@ -1,0 +1,21 @@
+.version {
+  padding: 25px 0;
+  border-bottom: 1px solid #DDD;
+}
+
+.version h3 .fa {
+  font-size: .8em;
+  padding-left: 10px;
+}
+
+.version h3 a {
+  text-decoration: none;
+}
+
+.page-section {
+  background-image: url('../../../assets/img/wiki-bg.jpg');
+}
+
+.version:last-child {
+  border-bottom: none;
+}

@@ -1,0 +1,10 @@
+/deep/ body {
+  background-color: #323232;
+}
+
+.error-title {
+  font-size: 6em;
+  font-weight: 600;
+  color: #808080;
+  text-shadow: 3px 3px 0px #323232, 8px 8px 0px #232323;
+}

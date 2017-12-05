@@ -1,0 +1,20 @@
+<section class="page-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center">
+          <h1 class="section-title">{{versao.numeroVersao}}</h1>
+          <small class="d-block">Data da Publicação: {{versao.dataPublicacao | date: 'dd/MM/yyyy'}}</small>
+          <small class="d-block">Data da Release: {{versao.dataRelease | date: 'dd/MM/yyyy'}}</small>
+          <span class="separator primary"></span>
+          <p class="section-desc" [innerHTML]="versao.descricao"></p>
+        </div>
+        <div class="versao">
+          <div *ngFor="let ticket of versao.tickets">
+            <p><a href="{{ticket.url}}" target="_blank">{{ticket.ticket}}</a> - <span [innerHTML]="ticket.descricao"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

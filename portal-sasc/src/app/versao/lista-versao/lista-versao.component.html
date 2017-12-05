@@ -1,0 +1,24 @@
+<section class="page-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center">
+          <h1 class="section-title">Versões</h1>
+          <span class="separator primary"></span>
+          <p class="section-desc">Versões</p>
+        </div>
+        <div class="version" *ngFor="let versao of versoes">
+          <h3>
+            <a [routerLink]="['/versoes', versao._id]">{{versao.numeroVersao}}
+              <span class="fa fa-link"></span>
+            </a>
+          </h3>
+          <small class="d-block">Data da Publicação: {{versao.dataPublicacao | date: 'dd/MM/yyyy'}}</small>
+          <h6 class="no-transform">
+            <span [innerHTML]="versao.descricao"></span><a class="btn" [routerLink]="['/versoes', versao._id]">[...]</a>
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

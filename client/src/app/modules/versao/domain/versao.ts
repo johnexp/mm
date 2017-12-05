@@ -1,10 +1,12 @@
+import { Ticket } from './ticket';
 
 export class Versao {
   _id: string;
-  ticket: string;
   numeroVersao: string;
   descricao: string;
-  data: Date;
+  dataPublicacao: Date;
+  dataRelease: Date;
+  tickets: Ticket[] = [];
 
   constructor() {
   }

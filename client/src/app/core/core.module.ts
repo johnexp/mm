@@ -32,7 +32,8 @@ import {
   MatNativeDateModule,
   MatDatepickerModule,
   MatSnackBarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatSelectModule
 } from '@angular/material';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AuthenticationService } from './service/authentication.service';
@@ -52,7 +53,8 @@ const MAT_MODULES = [
   MatNativeDateModule,
   MatDatepickerModule,
   MatSnackBarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatSelectModule
 ];
 
 @NgModule({

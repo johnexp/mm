@@ -14,7 +14,7 @@
               <p class="banner-description">{{banner.texto}}</p>
               <span class="separator"></span>
               <div class="d-flex justify-content-center layout-margin-h">
-                <a *ngFor="let button of banner.botoes" class="btn" [ngClass]="'btn-' + button.cor" href="{{button.url}}">{{button.texto}}</a>
+                <a *ngFor="let button of banner.botoes" class="btn" target="_blank" [ngClass]="'btn-' + button.cor" href="{{button.url}}">{{button.texto}}</a>
               </div>
             </div>
           </div>

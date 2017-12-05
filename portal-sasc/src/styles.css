@@ -56,6 +56,16 @@ h6 {
   color: #FFF;
 }
 
+.white a {
+  color: #808080;
+  text-shadow: 1px 1px 0px #000;
+}
+
+.white a:hover {
+  text-decoration: none;
+  color: #c0c0c0;
+}
+
 .no-transform {
   text-transform: none;
 }
@@ -66,17 +76,38 @@ h6 {
   height: 100%;
 }
 
-.section {
+.section,
+.page-section {
   padding: 100px 0;
 }
 
-.section .section-title {
+.section .section-title,
+.page-section .section-title {
   text-transform: uppercase;
   font-weight: 600;
 }
 
-.section .section-desc {
+.section .section-desc,
+.page-section .section-desc {
   font-size: 1.2em;
+  margin-bottom: 40px;
+}
+
+.page-section {
+  position: relative;
+  background-position: top center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.page-section::before {
+  content: '';
+  background: linear-gradient(#ffffffd9 0%, #fff 250px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .separator {

@@ -1,3 +1,5 @@
+import { VersaoModule } from './versao/versao.module';
+import { InternalServerErrorComponent } from './layout/internal-server-error/internal-server-error.component';
 import { WikiModule } from './wiki/wiki.module';
 import { SobreModule } from './sobre/sobre.module';
 import { ArquivosModule } from './arquivos/arquivos.module';
@@ -18,7 +20,8 @@ import { AppComponent } from './app.component';
     AppComponent,
     NavigationComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    InternalServerErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ import { AppComponent } from './app.component';
     HomeModule,
     ArquivosModule,
     SobreModule,
-    WikiModule
+    WikiModule,
+    VersaoModule
   ],
   providers: [
     HomeService

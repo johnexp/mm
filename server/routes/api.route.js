@@ -1,17 +1,17 @@
 var express = require('express');
 
 var router = express.Router();
-var users = require('./api/users.route');
-var versao = require('./api/versao.route');
-var membros = require('./api/membro.route');
-var homologacoes = require('./api/homologacao.route');
-var apresentacaoSite = require('./api/apresentacao-site.route');
-var sobre = require('./api/sobre.route');
-var banners = require('./api/banner.route');
-var itemProgresso = require('./api/item-progresso.route');
-var wiki = require('./api/wiki.route');
-var arquivo = require('./api/arquivo.route');
-var contato = require('./api/contato.route');
+var users = require('../src/user/routes/users.route');
+var versao = require('../src/versao/routes/versao.route');
+var membros = require('../src/membro/routes/membro.route');
+var homologacoes = require('../src/homologacao/routes/homologacao.route');
+var apresentacaoSite = require('../src/apresentacao-site/routes/apresentacao-site.route');
+var sobre = require('../src/sobre/routes/sobre.route');
+var banners = require('../src/banner/routes/banner.route');
+var itemProgresso = require('../src/item-progresso/routes/item-progresso.route');
+var wiki = require('../src/wiki/routes/wiki.route');
+var arquivo = require('../src/arquivo/routes/arquivo.route');
+var contato = require('../src/contato/routes/contato.route');
 
 router.use('/users', users);
 router.use('/versoes', versao);

@@ -1,7 +1,23 @@
-<h1 class="page-title">
-  <mat-icon>face</mat-icon>
-  Membro
-</h1>
+<div fxLayoutAlign="space-between center">
+  <h1 class="page-title">
+    <mat-icon>face</mat-icon>
+    Membro
+  </h1>
+  <mat-form-field>
+    <mat-select [(ngModel)]="filtrarAtivos" name="filtrarAtivos" placeholder="Filtrar Ativos" (selectionChange)="buscarMembros()">
+      <mat-option [value]="">
+        Todos
+      </mat-option>
+      <mat-option [value]="true">
+        Ativos
+      </mat-option>
+      <mat-option [value]="false">
+        Inativos
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
 
 <app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'membros'" [lazy]="false" [hasFilter]="true"
   [actions]="{'u': true, 'd': true}" (deleteRecord)="excluirMembro($event[0], $event[1])">

@@ -49,9 +49,9 @@ export class PesquisaArquivoComponent implements OnInit {
     );
   }
 
-  excluirArquivo(id, paginator) {
+  excluirArquivo(arquivo, paginator) {
     this.blockUI.start('Removendo registro...');
-    this.arquivoService.delete(id).subscribe(
+    this.arquivoService.delete(arquivo._id).subscribe(
       response => {
         this.buscarArquivos();
         paginator.pageIndex = 0;

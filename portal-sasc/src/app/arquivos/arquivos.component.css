@@ -19,3 +19,7 @@
   margin-right: 5px;
   vertical-align: middle;
 }
+
+.page-section {
+  background-image: url('../../assets/img/files-bg.jpg');
+}

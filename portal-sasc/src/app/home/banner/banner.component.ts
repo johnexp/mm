@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { AppSettings } from './../../app.settings';
 import { HomeService } from './../../service/home.service';
 import { Component, OnInit } from '@angular/core';
+declare const $;
 
 @Component({
   selector: 'app-banner',
@@ -17,6 +18,12 @@ export class BannerComponent implements OnInit {
 
   ngOnInit() {
     this.obterBanners();
+
+    $(window).scroll(() => {
+      const yPos = ($(window).scrollTop() / 2);
+      const mTop = yPos + 'px';
+      $('#carousel-banners .carousel-item img').css('margin-top', mTop);
+    });
   }
 
   obterBanners() {

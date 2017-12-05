@@ -6,3 +6,7 @@
   max-width: 100%;
   height: auto;
 }
+
+.page-section {
+  background-image: url('../../../assets/img/wiki-bg.jpg');
+}

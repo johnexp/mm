@@ -17,8 +17,12 @@ export class MembroService extends GenericService {
     }
   }
 
-  getAll(): Observable<Membro[]> {
-    return this.http.get<Membro[]>(this.path);
+  getAll(actives?: Boolean): Observable<Membro[]> {
+    let path = this.path;
+    if (actives != null && actives !== undefined) {
+      path += '/' + actives;
+    }
+    return this.http.get<Membro[]>(path);
   }
 
   get(id: string): Observable<Membro> {

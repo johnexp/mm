@@ -36,6 +36,7 @@ export class GenericDatatableComponent implements OnInit, AfterViewInit {
   @Input() lazy: Boolean = false;
   @Input() resource: string;
   @Input() customEdit: Boolean = false;
+  @Input() logicalExclusion: Boolean = false;
   @Output() deleteRecord: EventEmitter<any> = new EventEmitter<any>();
   @Output() editRecord: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('filter') filter: ElementRef;
@@ -196,14 +197,14 @@ export class GenericDatatableComponent implements OnInit, AfterViewInit {
     this.router.navigate([path + '/cadastrar']);
   }
 
-  confirmDelete(id) {
+  confirmDelete(row) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: { message: 'Deseja realmente excluir o registro?' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.deleteRecord.emit([id, this.paginator]);
+        this.deleteRecord.emit([row, this.paginator]);
       }
     });
   }

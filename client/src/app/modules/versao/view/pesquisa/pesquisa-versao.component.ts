@@ -16,14 +16,19 @@ export class PesquisaVersaoComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
   columns = [
-    { columnDef: 'ticket', header: 'Ticket', cell: (row: Versao) => `${row.ticket}` },
     { columnDef: 'numeroVersao', header: 'Versão', cell: (row: Versao) => `${row.numeroVersao}` },
     { columnDef: 'descricao', header: 'Descrição', cell: (row: Versao) => `${row.descricao}`, escapeHtml: true },
-    { columnDef: 'data', header: 'Data', cell: (row: Versao) => `${this.datePipe.transform(row.data, 'dd/MM/yyyy')}` }
+    {
+      columnDef: 'dataPublicacao', header: 'Data de Publicação',
+      cell: (row: Versao) => `${this.datePipe.transform(row.dataPublicacao, 'dd/MM/yyyy')}`
+    },
+    {
+      columnDef: 'dataRelease', header: 'Data da Release',
+      cell: (row: Versao) => `${this.datePipe.transform(row.dataRelease, 'dd/MM/yyyy')}`
+    }
   ];
   database = new GenericDatabase;
   pagination: Pagination;
-
 
   constructor(private location: Location,
     private versaoService: VersaoService,
@@ -50,9 +55,9 @@ export class PesquisaVersaoComponent implements OnInit {
     );
   }
 
-  excluirVersao(id, paginator) {
+  excluirVersao(versao, paginator) {
     this.blockUI.start('Removendo registro...');
-    this.versaoService.delete(id).subscribe(
+    this.versaoService.delete(versao._id).subscribe(
       response => {
         this.buscarVersoes();
         paginator.pageIndex = 0;

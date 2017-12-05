@@ -48,9 +48,9 @@ export class PesquisaItemProgressoComponent implements OnInit {
     );
   }
 
-  excluirItemProgresso(id, paginator) {
+  excluirItemProgresso(itemProgresso, paginator) {
     this.blockUI.start('Removendo registro...');
-    this.itemProgressoService.delete(id).subscribe(
+    this.itemProgressoService.delete(itemProgresso._id).subscribe(
       response => {
         this.buscarItemProgresso();
         paginator.pageIndex = 0;

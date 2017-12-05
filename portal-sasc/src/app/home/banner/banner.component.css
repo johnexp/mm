@@ -17,6 +17,7 @@
   -o-object-fit: cover;
   object-fit: cover;
   filter: blur(.1em);
+  margin-top: 0px;
 }
 
 .banners-section .carousel .carousel-item,

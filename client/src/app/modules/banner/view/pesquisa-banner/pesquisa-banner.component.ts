@@ -47,9 +47,9 @@ export class PesquisaBannerComponent implements OnInit {
     );
   }
 
-  excluirBanner(id, paginator) {
+  excluirBanner(banner, paginator) {
     this.blockUI.start('Removendo registro...');
-    this.bannerService.delete(id).subscribe(
+    this.bannerService.delete(banner._id).subscribe(
       response => {
         this.buscarBanneres();
         paginator.pageIndex = 0;

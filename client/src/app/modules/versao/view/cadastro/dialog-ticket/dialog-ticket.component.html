@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Adicionar Ticket</h1>
+<div mat-dialog-content>
+  <form #form="ngForm" novalidate>
+    <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput class="form-control" name="ticket" #ticket="ngModel" [(ngModel)]="data.ticket.ticket" placeholder="Ticket"
+          required>
+        <mat-error [hidden]="!ticket.hasError('required') || (ticket.pristine && !ticket.touched && !form.submitted)">
+          O campo "Ticket" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput class="form-control" name="url" #url="ngModel" [(ngModel)]="data.ticket.url" placeholder="URL" required>
+        <mat-error [hidden]="!url.hasError('required') || (url.pristine && !url.touched && !form.submitted)">
+          O campo "URL" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <div fxLayout="row" fxFlex="100" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
+        <h4>Descrição *</h4>
+        <div fxFlex="100" [froalaEditor]="froalaOptions" [(froalaModel)]="data.ticket.descricao"></div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-actions fxLayoutAlign="end center">
+  <button mat-button [mat-dialog-close]="data.ticket" color="primary">
+    <mat-icon>add_circle_outline</mat-icon>
+    Adicionar
+  </button>
+  <button mat-button (click)="onCancelClick()">
+    <mat-icon>cancel</mat-icon>
+    Cancelar
+  </button>
+</div>

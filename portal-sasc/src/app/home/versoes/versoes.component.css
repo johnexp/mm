@@ -10,3 +10,9 @@
   -webkit-mask-size: 12px;
   mask-size: 12px;
 }
+
+.versions .version {
+  margin: 60px 0;
+  border-bottom: 1px solid #DDD;
+  padding: 30px 0;
+}

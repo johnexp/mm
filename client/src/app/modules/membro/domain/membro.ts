@@ -6,8 +6,9 @@ export class Membro {
   foto: string | any;
   arquivo: string;
   nomeArquivo: string;
+  ativo: boolean;
 
   constructor() {
-
+    this.ativo = true;
   }
 }

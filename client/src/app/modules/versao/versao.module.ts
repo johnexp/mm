@@ -1,3 +1,4 @@
+import { DialogTicketComponent } from './view/cadastro/dialog-ticket/dialog-ticket.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { customHttpProvider } from './../../core/helpers/custom.http';
 import { DatePipe } from '@angular/common';
@@ -16,7 +17,8 @@ import {
   MatMenuModule,
   MatDatepickerModule,
   MatSnackBarModule,
-  MatInputModule
+  MatInputModule,
+  MatDialogModule
 } from '@angular/material';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -30,13 +32,15 @@ const MAT_MODULES = [
   MatInputModule,
   MatMenuModule,
   MatDatepickerModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatDialogModule
 ];
 
 @NgModule({
   declarations: [
     CadastroVersaoComponent,
-    PesquisaVersaoComponent
+    PesquisaVersaoComponent,
+    DialogTicketComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +56,7 @@ const MAT_MODULES = [
       { useHash: true }
     )
   ],
+  entryComponents: [DialogTicketComponent],
   exports: [],
   providers: [DatePipe, customHttpProvider],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

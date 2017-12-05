@@ -1,0 +1,15 @@
+.versao {
+  margin: 50px 0 0;
+}
+
+.versao a {
+  font-weight: bold;
+}
+
+.page-section {
+  background-image: url('../../../assets/img/wiki-bg.jpg');
+}
+
+.page-section .section-desc {
+  margin-bottom: 40px;
+}

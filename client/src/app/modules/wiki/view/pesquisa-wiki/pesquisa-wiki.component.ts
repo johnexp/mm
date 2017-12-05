@@ -34,9 +34,9 @@ export class PesquisaWikiComponent implements OnInit {
   }
 
 
-  excluirWiki(id, paginator) {
+  excluirWiki(wiki, paginator) {
     this.blockUI.start('Removendo registro...');
-    this.wikiService.delete(id).subscribe(
+    this.wikiService.delete(wiki._id).subscribe(
       response => {
         paginator.pageIndex = 0;
         paginator.page.emit();

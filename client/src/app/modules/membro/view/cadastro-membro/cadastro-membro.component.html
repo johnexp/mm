@@ -1,8 +1,16 @@
-<h1 class="page-title">
-  <mat-icon>done</mat-icon>
-  Membro -
-  <span class="subtitle">Cadastrar Membro
+<h1 class="page-title" fxLayoutAlign="space-between center">
+  <span>
+    <mat-icon>done</mat-icon>
+    Membro -
+    <span class="subtitle">
+      {{ membro._id ? 'Editar' : 'Cadastrar' }} Membro
+    </span>
   </span>
+  <mat-card>
+    <mat-slide-toggle name="ativo" [(ngModel)]="membro.ativo">
+      Ativo
+    </mat-slide-toggle>
+  </mat-card>
 </h1>
 
 <form #form="ngForm" (ngSubmit)="salvar()" novalidate>

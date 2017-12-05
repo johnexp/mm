@@ -7,28 +7,45 @@
 <form #form="ngForm" (ngSubmit)="salvar()" novalidate>
   <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
     <mat-form-field fxFlex>
-      <input matInput class="form-control" name="ticket" #ticket="ngModel" [(ngModel)]="versao.ticket" placeholder="Ticket" required>
-      <mat-error [hidden]="!ticket.hasError('required') || (ticket.pristine && !ticket.touched && !form.submitted)">
-        O campo "Ticket" é obrigatório
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field fxFlex>
       <input matInput name="versao" #numeroVersao="ngModel" [(ngModel)]="versao.numeroVersao" placeholder="Versão" required>
       <mat-error [hidden]="!numeroVersao.hasError('required') || (numeroVersao.pristine && !numeroVersao.touched && !form.submitted)">
         O campo "Versão" é obrigatório
       </mat-error>
     </mat-form-field>
     <mat-form-field fxFlex>
-      <input matInput name="data" #data="ngModel" (focus)="dataToggle.open()" (click)="dataToggle.open()" [matDatepicker]="dataToggle" [(ngModel)]="versao.data" placeholder="Data" required>
-      <mat-datepicker-toggle matSuffix [disabled]="false" [for]="dataToggle"></mat-datepicker-toggle>
-      <mat-datepicker #dataToggle></mat-datepicker>
-      <mat-error [hidden]="!data.hasError('required') || (data.pristine && !data.touched && !form.submitted)">
-        O campo "Data" é obrigatório
+      <input matInput name="dataPublicacao" #dataPublicacao="ngModel" (focus)="dataPublicacaoToggle.open()" (click)="dataPublicacaoToggle.open()"
+        [matDatepicker]="dataPublicacaoToggle" [(ngModel)]="versao.dataPublicacao" placeholder="Data" required>
+      <mat-datepicker-toggle matSuffix [disabled]="false" [for]="dataPublicacaoToggle"></mat-datepicker-toggle>
+      <mat-datepicker #dataPublicacaoToggle></mat-datepicker>
+      <mat-error [hidden]="!dataPublicacao.hasError('required') || (dataPublicacao.pristine && !dataPublicacao.touched && !form.submitted)">
+        O campo "Data da Publicação" é obrigatório
       </mat-error>
     </mat-form-field>
-  </div>
-  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
-    <div fxFlex="100" [froalaEditor]="froalaOptions" [(froalaModel)]="versao.descricao"></div>
+    <mat-form-field fxFlex>
+      <input matInput name="dataRelease" #dataRelease="ngModel" (focus)="dataReleaseToggle.open()" (click)="dataReleaseToggle.open()"
+        [matDatepicker]="dataReleaseToggle" [(ngModel)]="versao.dataRelease" placeholder="Data" required>
+      <mat-datepicker-toggle matSuffix [disabled]="false" [for]="dataReleaseToggle"></mat-datepicker-toggle>
+      <mat-datepicker #dataReleaseToggle></mat-datepicker>
+      <mat-error [hidden]="!dataRelease.hasError('required') || (dataRelease.pristine && !dataRelease.touched && !form.submitted)">
+        O campo "Data da Release" é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <div fxLayout="row" fxFlex="100" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
+      <h4>Descrição *</h4>
+      <div fxFlex="100" [froalaEditor]="froalaOptions" [(froalaModel)]="versao.descricao"></div>
+    </div>
+
+    <div class="buttons-container layout-margin" fxLayoutAlign="center center" fxFlex="100">
+      <button mat-button type="button" color="primary" (click)="abrirDialogTicket()">
+        <mat-icon>add_circle_outline</mat-icon>
+        Adicionar Ticket
+      </button>
+    </div>
+    <app-generic-datatable fxFlex="100" [columns]="displayedTicketsColumns" [database]="databaseTickets" [lazy]="false" [hasFilter]="false"
+      [hasPaginator]="false" [actions]="{'u': true, 'd': true}" [customEdit]="true" (editRecord)="abrirDialogTicket($event)"
+      (deleteRecord)="removerTicket($event[0])">
+    </app-generic-datatable>
   </div>
 
   <div class="buttons-container layout-margin" fxLayoutAlign="end center">

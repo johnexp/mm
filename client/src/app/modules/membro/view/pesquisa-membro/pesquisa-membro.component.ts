@@ -19,9 +19,11 @@ export class PesquisaMembroComponent implements OnInit {
   displayedColumns = [
     { columnDef: 'nome', header: 'Nome', cell: (row: Membro) => `${row.nome}` },
     { columnDef: 'cargo', header: 'Cargo', cell: (row: Membro) => `${row.cargo}` },
+    { columnDef: 'ativo', header: 'Ativo', cell: (row: Membro) => `${row.ativo ? 'Sim' : 'Não'}`, filter: false }
   ];
   database = new GenericDatabase;
   pagination: Pagination;
+  filtrarAtivos: Boolean;
 
   constructor(private location: Location,
     private customSnackBar: CustomSnackBarService,
@@ -33,8 +35,8 @@ export class PesquisaMembroComponent implements OnInit {
   }
 
   buscarMembros() {
-    this.blockUI.start('Buscando registros...')
-    this.membroService.getAll().subscribe(
+    this.blockUI.start('Buscando registros...');
+    this.membroService.getAll(this.filtrarAtivos).subscribe(
       membros => {
         this.blockUI.stop();
         this.database = new GenericDatabase;
@@ -47,9 +49,9 @@ export class PesquisaMembroComponent implements OnInit {
     );
   }
 
-  excluirMembro(id, paginator) {
+  excluirMembro(membro, paginator) {
     this.blockUI.start('Removendo registro...');
-    this.membroService.delete(id).subscribe(
+    this.membroService.delete(membro._id).subscribe(
       response => {
         this.buscarMembros();
         paginator.pageIndex = 0;

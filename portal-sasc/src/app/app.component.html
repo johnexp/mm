@@ -2,15 +2,14 @@
   <block-ui></block-ui>
 
   <div class="app-content" fxLayout="column">
-    <!-- <div class="navigation-content">
-      <router-outlet name="navigation"></router-outlet>
-    </div> -->
     <div class="header-content">
       <router-outlet name="header"></router-outlet>
     </div>
     <div fxFlex class="main-content">
       <router-outlet></router-outlet>
-      <app-footer></app-footer>
+      <div class="footer-content">
+        <router-outlet name="footer"></router-outlet>
+      </div>
     </div>
   </div>
 </div>

@@ -48,9 +48,9 @@ export class PesquisaHomologacaoComponent implements OnInit {
     );
   }
 
-  excluirHomologacao(id, paginator) {
+  excluirHomologacao(homologacao, paginator) {
     this.blockUI.start('Removendo registro...');
-    this.homologacaoService.delete(id).subscribe(
+    this.homologacaoService.delete(homologacao._id).subscribe(
       response => {
         this.buscarHomologacaos();
         paginator.pageIndex = 0;
