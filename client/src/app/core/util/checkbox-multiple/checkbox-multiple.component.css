@@ -1,0 +1,22 @@
+.checkbox-multiple-container {
+  padding: 2px;
+}
+
+.checkbox-multiple-container h4 {
+  margin: 10px 0;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.checkbox-multiple-container .mat-checkbox {
+  padding: 5px 15px;
+}
+.checkbox-multiple-container .mat-checkbox:first-child {
+  padding-left: 0;
+}
+.checkbox-multiple-container .mat-checkbox:last-child {
+  padding-right: 0;
+}
+
+.checkbox-multiple-container .mat-error {
+  font-size: 75%;
+}

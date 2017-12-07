@@ -27,6 +27,9 @@
           <mat-form-field fxFlex *ngSwitchCase="'text'">
             <input matInput name="{{ field.columnDef }}" [(ngModel)]="model[field.columnDef]" placeholder="{{ field.header }}">
           </mat-form-field>
+          <mat-form-field fxFlex *ngSwitchCase="'slider'">
+            <input matInput type="number" name="{{ field.columnDef }}" [(ngModel)]="model[field.columnDef]" placeholder="{{ field.header }}">
+          </mat-form-field>
           <mat-form-field fxFlex *ngSwitchCase="'switch'">
             <mat-select [(ngModel)]="model[field.columnDef]" name="{{ field.columnDef }}" placeholder="{{ field.header }}">
               <mat-option [value]=""></mat-option>
@@ -65,7 +68,7 @@
       </ng-container>
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="center center" class="layout-margin">
+    <div fxLayout="row" fxLayoutAlign="center center" class="layout-margin buttons-container">
       <button mat-raised-button color="primary" type="submit">
         <mat-icon>filter_list</mat-icon>
         Filtrar
@@ -111,7 +114,8 @@
         <button mat-icon-button type="button" color="warn" *ngIf="logicalExclusion && row.ativo" (click)="confirmDelete(row)" matTooltip="Inativar">
           <mat-icon aria-label="Inativar">block</mat-icon>
         </button>
-        <button mat-icon-button type="button" color="success" *ngIf="logicalExclusion && !row.ativo" (click)="confirmDelete(row)" matTooltip="Ativar">
+        <button mat-icon-button type="button" color="success" *ngIf="logicalExclusion && !row.ativo" (click)="confirmDelete(row)"
+          matTooltip="Ativar">
           <mat-icon aria-label="Ativar">done</mat-icon>
         </button>
       </ng-container>

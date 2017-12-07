@@ -1,3 +1,4 @@
+import { CheckboxMultipleComponent } from './util/checkbox-multiple/checkbox-multiple.component';
 import { CustomFileUploadComponent } from './util/custom-file-upload/custom-file-upload.component';
 import { CoreRoutes } from './core.route';
 import { HttpClientModule } from '@angular/common/http';
@@ -70,7 +71,8 @@ const MAT_MODULES = [
     CustomFileUploadComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CheckboxMultipleComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +90,8 @@ const MAT_MODULES = [
     NavigationComponent,
     GenericDatatableComponent,
     ImagePreviewComponent,
-    CustomFileUploadComponent
+    CustomFileUploadComponent,
+    CheckboxMultipleComponent
   ],
   providers: [
     CustomSnackBarService,

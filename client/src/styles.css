@@ -167,6 +167,29 @@ body .custom-snack-bar-warn {
 }
 
 .slide-toggle-container {
-  margin: 16px;
+  margin: 16px 0;
   padding: 2px;
+}
+
+.radio-group-container {
+  padding: 2px;
+}
+
+.radio-group-container h4 {
+  margin: 10px 0;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.radio-group-container .mat-radio-button {
+  padding: 5px 15px;
+}
+.radio-group-container .mat-radio-button:first-child {
+  padding-left: 0;
+}
+.radio-group-container .mat-radio-button:last-child {
+  padding-right: 0;
+}
+
+.radio-group-container .mat-error {
+  font-size: 75%;
 }
