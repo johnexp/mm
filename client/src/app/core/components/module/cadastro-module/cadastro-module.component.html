@@ -1,0 +1,41 @@
+<h1 class="page-title" fxLayoutAlign="space-between center" fxLayout.xs="column">
+  <span>
+    <mat-icon>done</mat-icon>
+    Module -
+    <span class="subtitle">
+      {{ module._id ? 'Editar' : 'Cadastrar' }} Module
+    </span>
+  </span>
+  <mat-card>
+    <mat-slide-toggle name="ativo" [(ngModel)]="module.ativo" [disabled]="disabled">
+      Ativo
+    </mat-slide-toggle>
+  </mat-card>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <fieldset class="fake-fieldset" [disabled]="disabled">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput name="moduleName" #moduleName="ngModel" [(ngModel)]="module.moduleName" placeholder="Nome do Módulo" required>
+        <mat-error [hidden]="!moduleName.hasError('required') || (moduleName.pristine && !moduleName.touched && !form.submitted)">
+          O campo "Nome do Módulo" é obrigatório
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </fieldset>
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">
+    <button *ngIf="!disabled" mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button *ngIf="!disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button *ngIf="disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+  </div>
+</form>

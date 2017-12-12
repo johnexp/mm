@@ -1,0 +1,17 @@
+<h1 class="page-title">
+  <mat-icon>done</mat-icon>
+  Permission
+</h1>
+
+<app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'permissions'" [lazy]="true" [hasFilter]="true"
+  [actions]="{'u': true, 'd': true, 'v': true}" [logicalExclusion]="true" (deleteRecord)="mudarAtivacaoPermission($event[0], $event[1])">
+  <ng-template let-model="model" #filtersRef>
+    <div fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+
+      <app-select-entity-field fxFlex [fieldLabel]="'Ação'" [entityName]="'actionNames'" [entityMainProperty]="'actionName'"
+        [model]="model" [modelEntityProperty]="'action'" [displayedColumns]="actionSelectionColumns" [multiple]="false"></app-select-entity-field>
+      <app-select-entity-field fxFlex [fieldLabel]="'Módulo'" [entityName]="'modules'" [entityMainProperty]="'moduleName'"
+        [model]="model" [modelEntityProperty]="'module'" [displayedColumns]="moduleSelectionColumns" [multiple]="false"></app-select-entity-field>
+    </div>
+  </ng-template>
+</app-generic-datatable>

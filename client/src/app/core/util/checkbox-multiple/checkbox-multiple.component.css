@@ -1,5 +1,8 @@
 .checkbox-multiple-container {
   padding: 2px;
+  position: relative;
+  margin-bottom: 4px;
+  padding-bottom: 1.25em;
 }
 
 .checkbox-multiple-container h4 {
@@ -19,4 +22,16 @@
 
 .checkbox-multiple-container .mat-error {
   font-size: 75%;
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 0.54166667em;
+  top: calc(100% - 1.66666667em);
+}
+
+@media screen and (max-width: 600px) {
+  .checkbox-multiple-container .mat-checkbox {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }

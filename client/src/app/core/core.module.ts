@@ -1,3 +1,11 @@
+import { PesquisaPermissionComponent } from './components/permission/pesquisa-permission/pesquisa-permission.component';
+import { CadastroPermissionComponent } from './components/permission/cadastro-permission/cadastro-permission.component';
+import { PesquisaModuleComponent } from './components/module/pesquisa-module/pesquisa-module.component';
+import { CadastroModuleComponent } from './components/module/cadastro-module/cadastro-module.component';
+import { PesquisaActionComponent } from './components/action/pesquisa-action/pesquisa-action.component';
+import { CadastroActionComponent } from './components/action/cadastro-action/cadastro-action.component';
+import { DialogEntitySelectionComponent } from './util/select-entity-field/dialog-entity-selection/dialog-entity-selection.component';
+import { SelectEntityFieldComponent } from './util/select-entity-field/select-entity-field.component';
 import { CheckboxMultipleComponent } from './util/checkbox-multiple/checkbox-multiple.component';
 import { CustomFileUploadComponent } from './util/custom-file-upload/custom-file-upload.component';
 import { CoreRoutes } from './core.route';
@@ -35,7 +43,8 @@ import {
   MatSnackBarModule,
   MatTooltipModule,
   MatSelectModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatRadioModule
 } from '@angular/material';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AuthenticationService } from './service/authentication.service';
@@ -57,7 +66,8 @@ const MAT_MODULES = [
   MatSnackBarModule,
   MatTooltipModule,
   MatSelectModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatRadioModule
 ];
 
 @NgModule({
@@ -72,7 +82,15 @@ const MAT_MODULES = [
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    CheckboxMultipleComponent
+    CheckboxMultipleComponent,
+    SelectEntityFieldComponent,
+    DialogEntitySelectionComponent,
+    CadastroActionComponent,
+    PesquisaActionComponent,
+    CadastroModuleComponent,
+    PesquisaModuleComponent,
+    CadastroPermissionComponent,
+    PesquisaPermissionComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +109,8 @@ const MAT_MODULES = [
     GenericDatatableComponent,
     ImagePreviewComponent,
     CustomFileUploadComponent,
-    CheckboxMultipleComponent
+    CheckboxMultipleComponent,
+    SelectEntityFieldComponent
   ],
   providers: [
     CustomSnackBarService,
@@ -101,7 +120,8 @@ const MAT_MODULES = [
     CustomHttp
   ],
   entryComponents: [
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    DialogEntitySelectionComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -1,0 +1,70 @@
+{
+  "action": {
+    "modelProps": {
+      "type": "mongoose.Schema.ObjectId",
+      "ref": "'Action'",
+      "required": "[false, 'O campo \"Ação\" é obrigatório!']"
+    },
+    "populate": {
+      "path": "action",
+      "select": "actionName"
+    },
+    "viewProps": {
+      "name": "actionName",
+      "viewValue": "Ação",
+      "fieldType": "entity",
+      "entityName": "Action",
+      "entityRoutePath": "actions",
+      "mainEntityFieldName": "actionName",
+      "mainEntityFieldLabel": "Nome da Ação",
+      "type": "entity",
+      "multiple": false,
+      "required": true,
+      "showInput": true,
+      "showFilter": true,
+      "showColumn": true
+    }
+  },
+  "module": {
+    "modelProps": {
+      "type": "mongoose.Schema.ObjectId",
+      "ref": "'Module'",
+      "required": "[false, 'O campo \"Módulo\" é obrigatório!']"
+    },
+    "populate": {
+      "path": "module",
+      "select": "moduleName"
+    },
+    "viewProps": {
+      "name": "module",
+      "viewValue": "Módulo",
+      "fieldType": "entity",
+      "entityName": "Module",
+      "entityRoutePath": "modules",
+      "mainEntityFieldName": "moduleName",
+      "mainEntityFieldLabel": "Nome do Módulo",
+      "type": "entity",
+      "multiple": false,
+      "required": true,
+      "showInput": true,
+      "showFilter": true,
+      "showColumn": true
+    }
+  },
+  "stringfied": {
+    "modelProps": {
+      "type": "String",
+      "required": "[true, 'O campo \"Permissão Compilada\" é obrigatório!']"
+    },
+    "viewProps": {
+      "name": "stringfied",
+      "viewValue": "Permissão Compilada",
+      "fieldType": "text",
+      "type": "string",
+      "required": true,
+      "showInput": false,
+      "showFilter": false,
+      "showColumn": false
+    }
+  }
+}

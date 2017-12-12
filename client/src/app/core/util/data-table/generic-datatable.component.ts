@@ -28,13 +28,17 @@ export class GenericDatatableComponent implements OnInit, AfterViewInit {
 
   @Input() columns: any[];
   @Input() selectable: Boolean;
+  @Input() multipleSelection: Boolean = true;
   @Input() selectionData: any[];
+  @Input() selectedIds: any[] = [];
+  @Input() showSelected: Boolean = false;
   @Input() filterPlaceholder: String = 'Filtrar';
   @Input() hasFilter: Boolean = true;
   @Input() hasPaginator: Boolean = true;
-  @Input() actions: any[] = [];
+  @Input() actions: any;
   @Input() lazy: Boolean = false;
   @Input() resource: string;
+  @Input() canCreate: Boolean = true;
   @Input() customEdit: Boolean = false;
   @Input() logicalExclusion: Boolean = false;
   @Output() deleteRecord: EventEmitter<any> = new EventEmitter<any>();
@@ -156,15 +160,57 @@ export class GenericDatatableComponent implements OnInit, AfterViewInit {
   /**
    * Changes records selection
    *
-   * @param recordId - selected record id
+   * @param record - selected record
    */
-  changeSelection(recordId) {
-    const recordIndex = this.selectionData.indexOf(recordId);
-    if (recordIndex > -1) {
-      this.selectionData.splice(recordIndex, 1);
+  changeSelection(record) {
+    if (this.multipleSelection) {
+      const recordIndex = this.selectionData.findIndex(data => data._id === record._id);
+      const recordIdIndex = this.selectedIds.indexOf(record._id);
+      if (recordIndex > -1) {
+        this.selectionData.splice(recordIndex, 1);
+        this.selectedIds.splice(recordIdIndex, 1);
+      } else {
+        this.selectedIds.push(record._id);
+        this.selectionData.push(record);
+      }
     } else {
-      this.selectionData.push(recordId);
+      this.eraseSelection();
+      this.selectionData.push(record);
+      this.selectedIds.push(record._id);
     }
+  }
+
+  changeSelectionAll() {
+    if (this.lazy) {
+      if (this.selectionData.length < this.resultsLength) {
+        this.eraseSelection();
+        return this.genericService.filterGeneric(this.model,
+          this.resource,
+          this.sort.active,
+          this.sort.direction,
+          1,
+          +this.resultsLength).subscribe(
+          results => {
+            this.selectionData.push(...results.docs);
+            this.selectedIds.push(...results.docs.map(doc => doc._id));
+          }
+          );
+      } else {
+        this.eraseSelection();
+      }
+    } else {
+      if (this.selectionData.length < this.database.data.length) {
+        this.selectionData.push(...this.database.data);
+        this.selectedIds.push(...this.database.data.map(doc => doc._id));
+      } else {
+        this.eraseSelection();
+      }
+    }
+  }
+
+  eraseSelection() {
+    this.selectionData.length = 0;
+    this.selectedIds.length = 0;
   }
 
   doFilter() {
@@ -190,6 +236,11 @@ export class GenericDatatableComponent implements OnInit, AfterViewInit {
       const path = this.activatedRoute.root.firstChild.snapshot.url[0].path;
       this.router.navigate([path + '/editar/', row._id]);
     }
+  }
+
+  goView(row) {
+    const path = this.activatedRoute.root.firstChild.snapshot.url[0].path;
+    this.router.navigate([path + '/visualizar/', row._id]);
   }
 
   goCreate() {

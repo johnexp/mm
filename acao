@@ -1,0 +1,21 @@
+{
+  "actionName": {
+    "modelProps": {
+      "type": "String",
+      "trim": true,
+      "required": "[true, 'O campo \"Nome da Ação\" é obrigatório!']",
+      "maxlength": "[200, 'O valor excede a quantidade máxima de caracteres: ({MAXLENGTH})']",
+      "minlength": "[3, 'O valor é menor que a quantidade mínima de caracteres: ({MINLENGTH})']"
+    },
+    "viewProps": {
+      "name": "actionName",
+      "viewValue": "Nome da Ação",
+      "fieldType": "text",
+      "type": "string",
+      "required": true,
+      "showInput": true,
+      "showFilter": true,
+      "showColumn": true
+    }
+  }
+}

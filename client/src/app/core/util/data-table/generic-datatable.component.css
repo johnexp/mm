@@ -16,6 +16,10 @@
 .custom-table /deep/ .mat-cell, .custom-table /deep/ .mat-header-cell {
   padding: 0 24px;
 } */
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
 
 .custom-table /deep/ .mat-cell.mat-column-selection {
   width: 70px;
@@ -41,13 +45,19 @@
 .custom-table /deep/ .mat-cell.mat-column-actions {
   display: flex;
   justify-content: center;
-  flex: .5 1;
+  flex: none;
   padding: 0 10px;
+  min-width: 120px;
 }
 
 .custom-table /deep/ .mat-header-cell.mat-column-actions {
-  flex: .5 1;
+  flex: none;
+  min-width: 120px;
   padding: 0 10px;
+}
+
+.custom-table /deep/ .mat-sort-header-container:hover .mat-sort-header-button {
+  position: relative;
 }
 
 .custom-table /deep/ .mat-sort-header-container:hover .mat-sort-header-button::after {
@@ -56,6 +66,9 @@
   opacity: .5;
   font-size: 1.5em;
   padding-left: 5px;
+  position: absolute;
+  right: -23px;
+  top: -2px;
 }
 
 .custom-table /deep/ .mat-sort-header-sorted .mat-sort-header-container:hover .mat-sort-header-button::after {
@@ -71,4 +84,30 @@
 }
 .custom-table /deep/ .mat-cell {
   padding: 5px;
+}
+
+.selection-container {
+  max-height: 280px;
+  margin-right: 10px;
+  overflow: auto;
+}
+
+.preview-container {
+  max-height: 280px;
+  overflow: auto;
+  padding-left: 10px;
+}
+
+.preview-container, .selection-container {
+  background: #f1f1f1;
+  padding: 10px 15px;
+}
+
+.selection-container .mat-row, .selection-container .mat-header-row {
+  background: #f1f1f1;
+}
+
+.selecteds-title {
+  font: 500 20px/26px Roboto;
+  margin: 5px 0 15px;
 }

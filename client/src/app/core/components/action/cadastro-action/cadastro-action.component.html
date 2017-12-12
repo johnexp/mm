@@ -1,0 +1,43 @@
+<h1 class="page-title" fxLayoutAlign="space-between center" fxLayout.xs="column">
+  <span>
+    <mat-icon>done</mat-icon>
+    Action -
+    <span class="subtitle">
+      {{ action._id ? 'Editar' : 'Cadastrar' }} Action
+    </span>
+  </span>
+  <mat-card>
+    <mat-slide-toggle name="ativo" [(ngModel)]="action.ativo" [disabled]="disabled">
+      Ativo
+    </mat-slide-toggle>
+  </mat-card>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <fieldset class="fake-fieldset" [disabled]="disabled">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput name="actionName" #actionName="ngModel" [(ngModel)]="action.actionName" placeholder="Nome da Ação" required>
+        <mat-error [hidden]="!actionName.hasError('required') || (actionName.pristine && !actionName.touched && !form.submitted)">
+          O campo "Nome da Ação" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <app-select-entity-field fxFlex [form]="form" [fieldLabel]="'Dependentes'" [entityName]="'actions'" [entityMainProperty]="'actionName'"
+        [model]="action" [modelEntityProperty]="'dependants'" [displayedColumns]="actionsSelectionColumns" [multiple]="true"></app-select-entity-field>
+    </div>
+  </fieldset>
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">
+    <button *ngIf="!disabled" mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button *ngIf="!disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button *ngIf="disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+  </div>
+</form>

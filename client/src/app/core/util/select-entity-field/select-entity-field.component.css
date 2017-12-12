@@ -1,0 +1,7 @@
+.entity-selection-field /deep/ .mat-form-field-infix {
+  color: #8c8c8c;
+}
+
+.entity-selection-field /deep/ .mat-form-field-infix .mat-input-element {
+  cursor: pointer;
+}

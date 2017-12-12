@@ -129,5 +129,89 @@
       "showFilter": true,
       "showColumn": true
     }
+  },
+  "selectCores": {
+    "modelProps": {
+      "type": "[{ type: String, enum: [null, 'Vermelho', 'Rosa', 'Azul', 'Verde', 'purple', 'orange', 'brown', 'yellow'] }]",
+      "required": false
+    },
+    "viewProps": {
+      "name": "selectCores",
+      "viewValue": "Select Cores",
+      "fieldType": "select",
+      "type": "string",
+      "required": false,
+      "showInput": true,
+      "showFilter": true,
+      "showColumn": true
+    }
+  },
+  "provisorio": {
+    "modelProps": {
+      "type": "Boolean",
+      "required": "[true, 'Por quê não dizer se é provisório?']",
+      "default": false
+    },
+    "viewProps": {
+      "name": "provisorio",
+      "viewValue": "Provisório?",
+      "fieldType": "checkbox",
+      "type": "boolean",
+      "required": true,
+      "showInput": true,
+      "showFilter": true,
+      "showColumn": true
+    }
+  },
+  "membro": {
+    "modelProps": {
+      "type": "mongoose.Schema.ObjectId",
+      "ref": "'Membro'",
+      "required": "[false, 'Por quê não selecionar um \"Membro\"?']"
+    },
+    "populate": {
+      "path": "membro",
+      "select": "nome"
+    },
+    "viewProps": {
+      "name": "membro",
+      "viewValue": "Membro",
+      "fieldType": "entity",
+      "entityName": "Membro",
+      "entityRoutePath": "membros",
+      "mainEntityFieldName": "nome",
+      "mainEntityFieldLabel": "Nome",
+      "type": "entity",
+      "multiple": false,
+      "required": false,
+      "showInput": true,
+      "showFilter": true,
+      "showColumn": true
+    }
+  },
+  "membros": {
+    "modelProps": {
+      "type": "[{ type: mongoose.Schema.ObjectId, ref: \"Membro\" }]",
+      "required": "[false, 'Por quê não selecionar \"Membros\"?']"
+    },
+    "populate": {
+      "path": "membros",
+      "select": "nome"
+    },
+    "viewProps": {
+      "name": "membros",
+      "viewValue": "Membros",
+      "fieldType": "entity",
+      "entityName": "Membro",
+      "entityRoutePath": "membros",
+      "mainEntityFieldName": "nome",
+      "mainEntityFieldLabel": "Nome",
+      "type": "entity",
+      "multiple": true,
+      "required": false,
+      "showInput": true,
+      "showFilter": true,
+      "showColumn": false
+    }
   }
 }

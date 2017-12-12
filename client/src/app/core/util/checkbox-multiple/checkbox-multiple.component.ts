@@ -32,7 +32,7 @@ export class CheckboxMultipleComponent implements AfterViewInit {
         });
         Promise.resolve(null).then(() => {
           this.form.form.registerControl(this.modelField, ctrl);
-          this.form.form.controls[this.modelField].setErrors({ 'incorrect': true })
+          this.form.form.controls[this.modelField].setErrors({ 'incorrect': true });
         });
       } else {
         this.form.form.controls[this.modelField].setErrors(null);

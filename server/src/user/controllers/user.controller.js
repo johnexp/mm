@@ -49,7 +49,8 @@ exports.updateUser = async function (req, res, next) {
     email: req.body.email ? req.body.email : null,
     password: req.body.password ? req.body.password : null,
     firstName: req.body.firstName ? req.body.firstName : null,
-    lastName: req.body.lastName ? req.body.lastName : null
+    lastName: req.body.lastName ? req.body.lastName : null,
+    permissions: req.body.permissions ? req.body.permissions : null,
   };
 
   try {

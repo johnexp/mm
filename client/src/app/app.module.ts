@@ -1,3 +1,4 @@
+import { TesteModule } from './modules/teste/teste.module';
 import { SobreModule } from './modules/sobre/sobre.module';
 import { ArquivoModule } from './modules/arquivo/arquivo.module';
 import { WikiModule } from './modules/wiki/wiki.module';
@@ -54,7 +55,8 @@ const MAT_MODULES = [
     ItemProgressoModule,
     WikiModule,
     ArquivoModule,
-    SobreModule
+    SobreModule,
+    TesteModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

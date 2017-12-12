@@ -1,0 +1,16 @@
+<mat-card class="entity-selection-field">
+  <mat-form-field fxFlex>
+    <input matInput name="{{modelEntityProperty}}" (click)="openEntitySelectionModal()" #selectedEntities="ngModel" [(ngModel)]="selectedRecords" placeholder="{{ fieldLabel }}"
+      [required]="required" readonly>
+    <mat-error [hidden]="!selectedEntities.hasError('required') || (selectedEntities.pristine && !selectedEntities.touched && !form.submitted)">
+      O campo "{{ fieldLabel }}" é obrigatório
+    </mat-error>
+    <button *ngIf="selectedEntities" type="button" matSuffix mat-icon-button aria-label="Limpar" matTooltip="Limpar" color="warn" (click)="clear()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-icon-button type="button" matPrefix (click)="openEntitySelectionModal()" matTooltip="Selecionar" color="accent">
+      <mat-icon *ngIf="multiple">check_box</mat-icon>
+      <mat-icon *ngIf="!multiple">radio_button_checked</mat-icon>
+    </button>
+  </mat-form-field>
+</mat-card>

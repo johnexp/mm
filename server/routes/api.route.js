@@ -12,6 +12,10 @@ var itemProgresso = require('../src/item-progresso/routes/item-progresso.route')
 var wiki = require('../src/wiki/routes/wiki.route');
 var arquivo = require('../src/arquivo/routes/arquivo.route');
 var contato = require('../src/contato/routes/contato.route');
+var teste = require('../src/teste/routes/teste.route');
+var action = require('../src/action/routes/action.route');
+var modules = require('../src/module/routes/module.route');
+var permission = require('../src/permission/routes/permission.route');
 
 router.use('/users', users);
 router.use('/versoes', versao);
@@ -24,5 +28,9 @@ router.use('/item-progresso', itemProgresso);
 router.use('/wikis', wiki);
 router.use('/arquivos', arquivo);
 router.use('/contato', contato);
+router.use('/testes', teste);
+router.use('/actions', action);
+router.use('/modules', modules);
+router.use('/permissions', permission);
 
 module.exports = router;

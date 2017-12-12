@@ -1,0 +1,105 @@
+<h1 class="page-title" fxLayoutAlign="space-between center" fxLayout.xs="column">
+  <span>
+    <mat-icon>done</mat-icon>
+    Teste -
+    <span class="subtitle">
+      {{ teste._id ? 'Editar' : 'Cadastrar' }} Teste
+    </span>
+  </span>
+  <mat-card>
+    <mat-slide-toggle name="ativo" [(ngModel)]="teste.ativo" [disabled]="disabled">
+      Ativo
+    </mat-slide-toggle>
+  </mat-card>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <fieldset class="fake-fieldset" [disabled]="disabled">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput name="nome" #nome="ngModel" [(ngModel)]="teste.nome" placeholder="Nome" required>
+        <mat-error [hidden]="!nome.hasError('required') || (nome.pristine && !nome.touched && !form.submitted)">
+          O campo "Nome" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex="100">
+        <textarea matInput name="descricao" #descricao="ngModel" [(ngModel)]="teste.descricao" placeholder="Descrição" required></textarea>
+        <mat-error [hidden]="!descricao.hasError('required') || (descricao.pristine && !descricao.touched && !form.submitted)">
+          O campo "Descrição" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-card fxFlex class="slide-toggle-container">
+        <mat-slide-toggle name="definitivo" [(ngModel)]="teste.definitivo">
+          Definitivo?
+        </mat-slide-toggle>
+      </mat-card>
+      <mat-form-field fxFlex>
+        <input matInput name="dataInicio" #dataInicio="ngModel" (focus)="dataInicioToggle.open()" (click)="dataInicioToggle.open()"
+          [matDatepicker]="dataInicioToggle" [min]="dataInicioMinDate" [max]="dataInicioMaxDate" [(ngModel)]="teste.dataInicio"
+          placeholder="Data de Início" required>
+        <mat-datepicker-toggle matSuffix [disabled]="false" [for]="dataInicioToggle"></mat-datepicker-toggle>
+        <mat-datepicker #dataInicioToggle></mat-datepicker>
+        <mat-error [hidden]="!dataInicio.hasError('required') || (dataInicio.pristine && !dataInicio.touched && !form.submitted)">
+          O campo "Data de Início" é obrigatório
+        </mat-error>
+        <mat-error [hidden]="!dataInicio.hasError('matDatepickerMin') || (dataInicio.pristine && !dataInicio.touched && !form.submitted)">
+          A data informada é inferior à data mínima: "{{ dataInicio.errors?.matDatepickerMin?.min | date: 'dd/MM/yyyy' }}"
+        </mat-error>
+        <mat-error [hidden]="!dataInicio.hasError('matDatepickerMax') || (dataInicio.pristine && !dataInicio.touched && !form.submitted)">
+          A data informada é superior à data máxima: "{{ dataInicio.errors?.matDatepickerMax?.max | date: 'dd/MM/yyyy' }}"
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput type="number" name="quantidade" #quantidade="ngModel" [(ngModel)]="teste.quantidade" min="5" max="100"
+          placeholder="Quantidade" required>
+        <mat-error [hidden]="!quantidade.hasError('required') || (quantidade.pristine && !quantidade.touched && !form.submitted)">
+          O campo "Quantidade" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-card fxFlex="100" class="radio-group-container">
+        <h4>Cor</h4>
+        <mat-radio-group #cor="ngModel" name="cor" [(ngModel)]="teste.cor">
+          <div fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutAlign.xs="start stretch">
+            <ng-container *ngFor="let cor of corLista">
+              <mat-radio-button *ngIf="cor" [value]="cor">
+                {{cor}}
+              </mat-radio-button>
+            </ng-container>
+          </div>
+        </mat-radio-group>
+      </mat-card>
+      <app-checkbox-multiple [required]="true" [form]="form" [model]="teste" [modelField]="'cores'" [fieldLabel]="'Cores'" [options]="coresLista"
+        fxFlex="100"></app-checkbox-multiple>
+      <mat-form-field fxFlex>
+        <mat-select placeholder="Select Cores" #selectCores="ngModel" name="selectCores" [(ngModel)]="teste.selectCores" multiple>
+          <ng-container *ngFor="let selectCores of selectCoresLista">
+            <mat-option *ngIf="selectCores" [value]="selectCores">
+              {{ selectCores }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+      <mat-card fxFlex class="checkbox-container">
+        <mat-checkbox name="provisorio" [(ngModel)]="teste.provisorio">Provisório?</mat-checkbox>
+      </mat-card>
+      <app-select-entity-field fxFlex [form]="form" [fieldLabel]="'Membro'" [entityName]="'membros'" [entityMainProperty]="'nome'"
+        [model]="teste" [modelEntityProperty]="'membro'" [displayedColumns]="membroSelectionColumns" [multiple]="false"></app-select-entity-field>
+      <app-select-entity-field fxFlex [form]="form" [fieldLabel]="'Membros'" [entityName]="'membros'" [entityMainProperty]="'nome'"
+        [model]="teste" [modelEntityProperty]="'membros'" [displayedColumns]="membrosSelectionColumns" [multiple]="true"></app-select-entity-field>
+    </div>
+  </fieldset>
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">
+    <button *ngIf="!disabled" mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button *ngIf="!disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button *ngIf="disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+  </div>
+</form>

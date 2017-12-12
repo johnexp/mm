@@ -31,6 +31,10 @@ var UserSchema = new mongoose.Schema({
     default: '',
     required: 'Preencha o campo "Sobrenome"',
     trim: true
+  },
+  permissions: {
+    type: [{ type: mongoose.Schema.ObjectId, ref: "Permission" }],
+    required: false
   }
 });
 

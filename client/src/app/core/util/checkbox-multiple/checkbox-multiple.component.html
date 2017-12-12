@@ -1,11 +1,14 @@
-<mat-card class="checkbox-multiple-container">
-  <h4>{{fieldLabel}}</h4>
-  <ng-container *ngFor="let option of options">
-    <mat-checkbox *ngIf="option" name="{{modelField}}[]" (change)="changeSelection(option)" [checked]="model[modelField].indexOf(option) > -1" [required]="required">
-      {{option}}
-    </mat-checkbox>
-  </ng-container>
+<mat-card class="checkbox-multiple-container" fxFlex fxLayout="column">
+  <h4>{{ fieldLabel }}{{ required ? ' *' : '' }}</h4>
+  <div fxLayout.xs="column">
+    <ng-container *ngFor="let option of options">
+      <mat-checkbox *ngIf="option" name="{{modelField}}[]" (change)="changeSelection(option)" [checked]="model[modelField].indexOf(option) > -1"
+        [required]="required">
+        {{ option }}
+      </mat-checkbox>
+    </ng-container>
+  </div>
   <mat-error [hidden]="!required || (model[modelField].length > 0 || !form.submitted)">
-    O campo "{{fieldLabel}}" é obrigatório
+    O campo "{{ fieldLabel }}" é obrigatório
   </mat-error>
 </mat-card>

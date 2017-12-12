@@ -1,0 +1,43 @@
+<h1 class="page-title">
+  <mat-icon>done</mat-icon>
+  Teste
+</h1>
+
+<app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'testes'" [lazy]="true" [hasFilter]="true"
+  [actions]="{'u': true, 'd': true, 'v': true}" [logicalExclusion]="true" (deleteRecord)="mudarAtivacaoTeste($event[0], $event[1])">
+  <ng-template let-model="model" #filtersRef>
+    <div fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput name="dataInicio" #dataInicio="ngModel" (focus)="dataInicioToggle.open()" (click)="dataInicioToggle.open()"
+          [matDatepicker]="dataInicioToggle" [min]="dataInicioMinDate" [max]="dataInicioMaxDate" [(ngModel)]="model.dataInicio"
+          placeholder="Data de Início">
+        <mat-datepicker-toggle matSuffix [disabled]="false" [for]="dataInicioToggle"></mat-datepicker-toggle>
+        <mat-datepicker #dataInicioToggle></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select placeholder="Cor" #cor="ngModel" name="cor" [(ngModel)]="model.cor">
+          <mat-option></mat-option>
+          <ng-container *ngFor="let cor of corLista">
+            <mat-option *ngIf="cor" [value]="cor">
+              {{ cor }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select placeholder="Select Cores" #selectCores="ngModel" name="selectCores" [(ngModel)]="model.selectCores">
+          <mat-option></mat-option>
+          <ng-container *ngFor="let selectCores of selectCoresLista">
+            <mat-option *ngIf="selectCores" [value]="selectCores">
+              {{ selectCores }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+      <app-select-entity-field fxFlex [fieldLabel]="'Membro'" [entityName]="'membros'" [entityMainProperty]="'nome'"
+        [model]="model" [modelEntityProperty]="'membro'" [displayedColumns]="membroSelectionColumns" [multiple]="false"></app-select-entity-field>
+      <app-select-entity-field fxFlex [fieldLabel]="'Membros'" [entityName]="'membros'" [entityMainProperty]="'nome'"
+        [model]="model" [modelEntityProperty]="'membros'" [displayedColumns]="membrosSelectionColumns" [multiple]="true"></app-select-entity-field>
+    </div>
+  </ng-template>
+</app-generic-datatable>

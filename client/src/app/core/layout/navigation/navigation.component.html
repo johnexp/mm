@@ -1,4 +1,11 @@
-<div class="sidenav-container" fxLayout="column" fxFlexAlign="space-bewteen center">
+<div class="sidenav-container" [ngClass]="{'opened': opened}" fxLayout="column" fxFlexAlign="space-bewteen center">
+  <button class="toggle-menu-button" [ngClass]="{'opened': opened}" (click)="toggleMenu()">
+    <div id="nav-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </button>
   <nav fxFlex>
     <ul class="sidenav-menu">
       <li [ngClass]="{ 'active': path == 'versoes' }">
@@ -55,9 +62,34 @@
           <span>Arquivo</span>
         </a>
       </li>
+      <li [ngClass]="{ 'active': path == 'teste' }">
+        <a [routerLink]="['/teste']">
+          <mat-icon>done</mat-icon>
+          <span>Teste</span>
+        </a>
+      </li>
+      <li [ngClass]="{ 'active': path == 'action' }">
+        <a [routerLink]="['/action']">
+          <mat-icon>done</mat-icon>
+          <span>Ação</span>
+        </a>
+      </li>
+      <li [ngClass]="{ 'active': path == 'module' }">
+        <a [routerLink]="['/module']">
+          <mat-icon>done</mat-icon>
+          <span>Módulo</span>
+        </a>
+      </li>
+      <li [ngClass]="{ 'active': path == 'permission' }">
+        <a [routerLink]="['/permission']">
+          <mat-icon>done</mat-icon>
+          <span>Permissão</span>
+        </a>
+      </li>
     </ul>
   </nav>
   <span class="sidenav-footer">
-    feito com <mat-icon>favorite_border</mat-icon> pela Fencom - 2017
+    feito com
+    <mat-icon>favorite_border</mat-icon> pela Fencom - 2017
   </span>
 </div>

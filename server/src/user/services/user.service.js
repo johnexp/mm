@@ -6,12 +6,16 @@ _this = this;
 
 exports.authenticate = async function (username, password) {
   try {
-    var user = await User.findOne({ username: username });
+    var user = await User.findOne({ username: username })
+      .populate({ path: 'permissions', select: 'stringfied ' });
     if (!bcrypt.compareSync(password, user.hash)) {
       throw Error('Usuário e/ou senha incorretos');
     } else {
       user = user.toObject();
-      user.token = jwt.sign({ sub: user._id }, config.secret);
+      user.token = jwt.sign({
+        sub: user._id,
+        permissions: user.permissions.map(permission => permission.stringfied)
+      }, config.secret);
       delete user.hash;
     }
     return user;
@@ -45,7 +49,8 @@ exports.createUser = async function (user) {
     email: user.email,
     hash: bcrypt.hashSync(user.password, 10),
     firstName: user.firstName,
-    lastName: user.lastName
+    lastName: user.lastName,
+    permissions: user.permissions || []
   });
 
   try {
@@ -102,6 +107,7 @@ exports.updateUser = async function (user) {
   oldUser.email = user.email;
   oldUser.firstName = user.firstName;
   oldUser.lastname = user.lastName;
+  oldUser.permissions = user.permissions;
   if (user.password) {
     oldUser.hash = bcrypt.hashSync(user.password, 10);
   }

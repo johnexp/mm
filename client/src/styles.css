@@ -166,7 +166,7 @@ body .custom-snack-bar-warn {
   color: #32a05a;
 }
 
-.slide-toggle-container {
+.slide-toggle-container, .checkbox-container {
   margin: 16px 0;
   padding: 2px;
 }
@@ -192,4 +192,28 @@ body .custom-snack-bar-warn {
 
 .radio-group-container .mat-error {
   font-size: 75%;
+}
+
+.no-overflow {
+  overflow: hidden;
+}
+
+.inline-button {
+  display: inline-block;
+}
+
+.fake-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .radio-group-container .mat-radio-button {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  body .layout-margin>* {
+    margin: 2px;
+  }
 }

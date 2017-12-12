@@ -51,6 +51,9 @@ export class CustomHttp extends HttpClient {
       // 401 unauthorized response so log user out of client
       window.location.href = '/login';
     }
+    if (response.status === 403) {
+      return Observable.throw('Permissões insuficientes');
+    }
 
     return Observable.throw(response.error.message);
   }

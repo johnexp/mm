@@ -9,11 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class NavigationComponent implements OnInit {
 
   private path: String = '';
+  opened: Boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     const urls = this.activatedRoute.root.firstChild.snapshot.url[0];
     this.path = urls ? urls.path : '';
+  }
+
+  toggleMenu() {
+    this.opened = !this.opened;
   }
 }

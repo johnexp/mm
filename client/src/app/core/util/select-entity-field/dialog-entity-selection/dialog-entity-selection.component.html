@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Selecionar Registros</h1>
+<div mat-dialog-content>
+  <app-generic-datatable [selectable]="true" [selectionData]="data.selectionData" [selectedIds]="selectedIds" [showSelected]="data.multiple"
+    [multipleSelection]="data.multiple" [canCreate]="false" [columns]="data.displayedColumns" [database]="database" [resource]="data.entityName"
+    [lazy]="true" [hasFilter]="true">
+  </app-generic-datatable>
+</div>
+
+<div mat-dialog-actions fxLayoutAlign="end center">
+  <button mat-button [mat-dialog-close]="data.selectionData" color="primary">
+    <mat-icon>add_circle_outline</mat-icon>
+    Selecionar
+  </button>
+  <button mat-button (click)="onCancelClick()">
+    <mat-icon>cancel</mat-icon>
+    Cancelar
+  </button>
+</div>
