@@ -89,7 +89,7 @@ export class CadastroBannerComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['banner']);
+    this.router.navigate(['cadastros/banner']);
   }
 
   abrirDialogBotao(botao?: Botao): void {

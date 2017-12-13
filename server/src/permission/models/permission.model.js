@@ -16,6 +16,10 @@ var PermissionSchema = new mongoose.Schema({
     type: String,
     required: [true, 'O campo "Permissão Compilada" é obrigatório!']
   },
+  prettified: {
+    type: String,
+    required: [true, 'O campo "Permissão" é obrigatório!']
+  },
   criacao: {
     type: Date,
     default: Date.now

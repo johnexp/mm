@@ -7,13 +7,18 @@ import { PesquisaBannerComponent } from './view/pesquisa-banner/pesquisa-banner.
 
 export const BannerRoute: Routes = [
   {
-    path: 'banner', canActivate: [AuthGuard], children: [
-      { path: '', redirectTo: 'listar', pathMatch: 'full' },
-      { path: 'listar', component: PesquisaBannerComponent },
-      { path: 'cadastrar', component: CadastroBannerComponent },
-      { path: 'editar/:id', component: CadastroBannerComponent },
-      { path: '', component: HeaderComponent, outlet: 'header' },
-      { path: '', component: NavigationComponent, outlet: 'navigation' }
+    path: 'cadastros', children: [
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+      {
+        path: 'banner', canActivate: [AuthGuard], children: [
+          { path: '', redirectTo: 'listar', pathMatch: 'full' },
+          { path: 'listar', component: PesquisaBannerComponent },
+          { path: 'cadastrar', component: CadastroBannerComponent },
+          { path: 'editar/:id', component: CadastroBannerComponent },
+          { path: '', component: HeaderComponent, outlet: 'header' },
+          { path: '', component: NavigationComponent, outlet: 'navigation' }
+        ]
+      }
     ]
   }
 ];

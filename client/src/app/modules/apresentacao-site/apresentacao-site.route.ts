@@ -6,11 +6,16 @@ import { CadastroApresentacaoSiteComponent } from './view/cadastro-apresentacao-
 
 export const ApresentacaoSiteRoute: Routes = [
   {
-    path: 'apresentacao-site', canActivate: [AuthGuard], children: [
-      { path: '', component: CadastroApresentacaoSiteComponent },
-      { path: ':id', component: CadastroApresentacaoSiteComponent },
-      { path: '', component: HeaderComponent, outlet: 'header' },
-      { path: '', component: NavigationComponent, outlet: 'navigation' }
+    path: 'cadastros', children: [
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+      {
+        path: 'apresentacao-site', canActivate: [AuthGuard], children: [
+          { path: '', component: CadastroApresentacaoSiteComponent },
+          { path: ':id', component: CadastroApresentacaoSiteComponent },
+          { path: '', component: HeaderComponent, outlet: 'header' },
+          { path: '', component: NavigationComponent, outlet: 'navigation' }
+        ]
+      }
     ]
   }
 ];

@@ -7,13 +7,17 @@ import { PesquisaWikiComponent } from './view/pesquisa-wiki/pesquisa-wiki.compon
 
 export const WikiRoute: Routes = [
   {
-    path: 'wiki', canActivate: [AuthGuard], children: [
-      { path: '', redirectTo: 'listar', pathMatch: 'full' },
-      { path: 'listar', component: PesquisaWikiComponent },
-      { path: 'cadastrar', component: CadastroWikiComponent },
-      { path: 'editar/:id', component: CadastroWikiComponent },
-      { path: '', component: HeaderComponent, outlet: 'header' },
-      { path: '', component: NavigationComponent, outlet: 'navigation' }
-    ]
+    path: 'cadastros', children: [
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+      {
+        path: 'wiki', canActivate: [AuthGuard], children: [
+          { path: '', redirectTo: 'listar', pathMatch: 'full' },
+          { path: 'listar', component: PesquisaWikiComponent },
+          { path: 'cadastrar', component: CadastroWikiComponent },
+          { path: 'editar/:id', component: CadastroWikiComponent },
+          { path: '', component: HeaderComponent, outlet: 'header' },
+          { path: '', component: NavigationComponent, outlet: 'navigation' }
+        ]
+      }]
   }
 ];

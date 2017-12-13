@@ -111,7 +111,7 @@ export class CadastroTesteComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['teste']);
+    this.router.navigate(['administracao/teste']);
   }
 
 }

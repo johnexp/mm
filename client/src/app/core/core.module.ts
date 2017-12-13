@@ -1,3 +1,5 @@
+import { MenuService } from './service/menu.service';
+import { UserInfoComponent } from './components/user-info/user-info.component';
 import { PesquisaPermissionComponent } from './components/permission/pesquisa-permission/pesquisa-permission.component';
 import { CadastroPermissionComponent } from './components/permission/cadastro-permission/cadastro-permission.component';
 import { PesquisaModuleComponent } from './components/module/pesquisa-module/pesquisa-module.component';
@@ -90,7 +92,8 @@ const MAT_MODULES = [
     CadastroModuleComponent,
     PesquisaModuleComponent,
     CadastroPermissionComponent,
-    PesquisaPermissionComponent
+    PesquisaPermissionComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -114,6 +117,7 @@ const MAT_MODULES = [
   ],
   providers: [
     CustomSnackBarService,
+    MenuService,
     AuthGuard,
     AuthenticationService,
     UserService,

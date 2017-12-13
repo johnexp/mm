@@ -84,7 +84,7 @@ export class CadastroWikiComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['wiki']);
+    this.router.navigate(['cadastros/wiki']);
   }
 
 }

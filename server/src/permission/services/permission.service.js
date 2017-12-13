@@ -74,6 +74,7 @@ exports.createPermission = async function (permission, user) {
     action: permission.action,
     module: permission.module,
     stringfied: permission.stringfied,
+    prettified: permission.prettified,
     ativo: permission.ativo,
     usuario: permission.usuario
   });
@@ -104,6 +105,7 @@ exports.updatePermission = async function (permission, user) {
   oldPermission.action = permission.action;
   oldPermission.module = permission.module;
   oldPermission.stringfied = permission.stringfied;
+  oldPermission.prettified = permission.prettified;
   oldPermission.ativo = permission.ativo;
 
   try {

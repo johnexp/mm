@@ -6,11 +6,16 @@ import { CadastroSobrePortalComponent } from './view/cadastro-sobre-portal/cadas
 
 export const SobreRoute: Routes = [
   {
-    path: 'sobre', canActivate: [AuthGuard], children: [
-      { path: '', component: CadastroSobrePortalComponent },
-      { path: ':id', component: CadastroSobrePortalComponent },
-      { path: '', component: HeaderComponent, outlet: 'header' },
-      { path: '', component: NavigationComponent, outlet: 'navigation' }
+    path: 'cadastros', children: [
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+      {
+        path: 'sobre', canActivate: [AuthGuard], children: [
+          { path: '', component: CadastroSobrePortalComponent },
+          { path: ':id', component: CadastroSobrePortalComponent },
+          { path: '', component: HeaderComponent, outlet: 'header' },
+          { path: '', component: NavigationComponent, outlet: 'navigation' }
+        ]
+      }
     ]
   }
 ];

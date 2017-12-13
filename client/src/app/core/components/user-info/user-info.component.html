@@ -1,0 +1,35 @@
+<h1 class="page-title" fxLayoutAlign="space-between center" fxLayout.xs="column">
+  <span>
+    <mat-icon>done</mat-icon>
+    Usuário -
+    <span class="subtitle">
+      {{ user._id ? 'Editar' : 'Cadastrar' }} Usuário
+    </span>
+  </span>
+  <mat-card>
+    <mat-slide-toggle name="ativo" [(ngModel)]="user.active" [disabled]="disabled">
+      Ativo
+    </mat-slide-toggle>
+  </mat-card>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <fieldset class="fake-fieldset" [disabled]="disabled">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput name="username" #username="ngModel" [(ngModel)]="user.username" placeholder="Usuário" required>
+        <mat-error [hidden]="!username.hasError('required') || (username.pristine && !username.touched && !form.submitted)">
+          O campo "Usuário" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <app-select-entity-field fxFlex [form]="form" [fieldLabel]="'Permissões'" [entityName]="'permissions'" [entityMainProperty]="'prettified'"
+        [model]="user" [modelEntityProperty]="'permissions'" [displayedColumns]="permissionsSelectionColumns" [multiple]="true"></app-select-entity-field>
+    </div>
+  </fieldset>
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">
+    <button mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+  </div>
+</form>

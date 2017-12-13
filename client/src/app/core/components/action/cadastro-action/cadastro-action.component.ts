@@ -85,7 +85,7 @@ export class CadastroActionComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['action']);
+    this.router.navigate(['administracao/action']);
   }
 
 }

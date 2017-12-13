@@ -7,13 +7,18 @@ import { PesquisaItemProgressoComponent } from './view/pesquisa-item-progresso/p
 
 export const ItemProgressoRoute: Routes = [
   {
-    path: 'item-progresso', canActivate: [AuthGuard], children: [
-      { path: '', redirectTo: 'listar', pathMatch: 'full' },
-      { path: 'listar', component: PesquisaItemProgressoComponent },
-      { path: 'cadastrar', component: CadastroItemProgressoComponent },
-      { path: 'editar/:id', component: CadastroItemProgressoComponent },
-      { path: '', component: HeaderComponent, outlet: 'header' },
-      { path: '', component: NavigationComponent, outlet: 'navigation' }
+    path: 'cadastros', children: [
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+      {
+        path: 'item-progresso', canActivate: [AuthGuard], children: [
+          { path: '', redirectTo: 'listar', pathMatch: 'full' },
+          { path: 'listar', component: PesquisaItemProgressoComponent },
+          { path: 'cadastrar', component: CadastroItemProgressoComponent },
+          { path: 'editar/:id', component: CadastroItemProgressoComponent },
+          { path: '', component: HeaderComponent, outlet: 'header' },
+          { path: '', component: NavigationComponent, outlet: 'navigation' }
+        ]
+      }
     ]
   }
 ];

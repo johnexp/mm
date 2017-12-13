@@ -32,9 +32,17 @@ var UserSchema = new mongoose.Schema({
     required: 'Preencha o campo "Sobrenome"',
     trim: true
   },
+  roles: {
+    type: [{ type: String, default: 'user', enum: ['admin', 'user', 'guest'] }],
+    required: true
+  },
   permissions: {
     type: [{ type: mongoose.Schema.ObjectId, ref: "Permission" }],
     required: false
+  },
+  active: {
+    type: Boolean,
+    default: true
   }
 });
 

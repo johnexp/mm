@@ -94,7 +94,7 @@ export class CadastroPermissionComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['permission']);
+    this.router.navigate(['administracao/permission']);
   }
 
 }

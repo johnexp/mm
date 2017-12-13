@@ -111,3 +111,13 @@
   font: 500 20px/26px Roboto;
   margin: 5px 0 15px;
 }
+
+.selection-container /deep/ .mat-cell.mat-column-selection,
+.selection-container /deep/ .mat-header-cell.mat-column-selection {
+  width: 40px;
+}
+
+.selection-container /deep/ .mat-header-row,
+.selection-container /deep/ .mat-row {
+  padding-left: 0;
+}

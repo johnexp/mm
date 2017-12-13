@@ -72,7 +72,7 @@ export class CadastroItemProgressoComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['item-progresso']);
+    this.router.navigate(['cadastros/item-progresso']);
   }
 
 }

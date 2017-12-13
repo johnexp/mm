@@ -13,18 +13,26 @@
       </button>
     </div>
     <mat-menu #userMenu="matMenu">
+      <button mat-menu-item [routerLink]="['/administracao/user/info']">
+        <mat-icon>person_outline</mat-icon> Usuário
+      </button>
       <button mat-menu-item (click)="logout()">
-          <mat-icon>power_settings_new</mat-icon> Logout
+        <mat-icon>power_settings_new</mat-icon> Logout
       </button>
     </mat-menu>
   </div>
-  <!-- <nav>
+  <nav>
     <ul class="header-menu">
       <li>
-        <a href="#">
-          Menu Topo
+        <a *ngFor="let section of sections" (click)="loadMenu(section.name)">
+          {{ section.label }}
         </a>
       </li>
+      <!-- <li>
+        <button (click)="loadMenu('administracao')">
+          Administração
+        </button>
+      </li> -->
     </ul>
-  </nav> -->
+  </nav>
 </div>

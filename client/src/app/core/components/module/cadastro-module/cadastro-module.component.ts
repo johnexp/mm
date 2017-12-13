@@ -78,7 +78,7 @@ export class CadastroModuleComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['module']);
+    this.router.navigate(['administracao/module']);
   }
 
 }

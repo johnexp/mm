@@ -7,14 +7,18 @@ import { PesquisaTesteComponent } from './view/pesquisa-teste/pesquisa-teste.com
 
 export const TesteRoute: Routes = [
   {
-    path: 'teste', canActivate: [AuthGuard], children: [
-      { path: '', redirectTo: 'listar', pathMatch: 'full' },
-      { path: 'listar', canActivate: [AuthGuard], component: PesquisaTesteComponent },
-      { path: 'cadastrar', canActivate: [AuthGuard], component: CadastroTesteComponent },
-      { path: 'editar/:id', canActivate: [AuthGuard], component: CadastroTesteComponent },
-      { path: 'visualizar/:id', canActivate: [AuthGuard], component: CadastroTesteComponent },
-      { path: '', component: HeaderComponent, outlet: 'header' },
-      { path: '', component: NavigationComponent, outlet: 'navigation' }
-    ]
+    path: 'administracao', children: [
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+      {
+        path: 'teste', canActivateChild: [AuthGuard], children: [
+          { path: '', redirectTo: 'listar', pathMatch: 'full' },
+          { path: 'listar', component: PesquisaTesteComponent },
+          { path: 'cadastrar', component: CadastroTesteComponent },
+          { path: 'editar/:id', component: CadastroTesteComponent },
+          { path: 'visualizar/:id', component: CadastroTesteComponent },
+          { path: '', component: HeaderComponent, outlet: 'header' },
+          { path: '', component: NavigationComponent, outlet: 'navigation' }
+        ]
+      }]
   }
 ];

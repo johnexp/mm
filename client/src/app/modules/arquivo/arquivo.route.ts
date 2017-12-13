@@ -7,13 +7,17 @@ import { PesquisaArquivoComponent } from './view/pesquisa-arquivo/pesquisa-arqui
 
 export const ArquivoRoute: Routes = [
   {
-    path: 'arquivo', canActivate: [AuthGuard], children: [
-      { path: '', redirectTo: 'listar', pathMatch: 'full' },
-      { path: 'listar', component: PesquisaArquivoComponent },
-      { path: 'cadastrar', component: CadastroArquivoComponent },
-      { path: 'editar/:id', component: CadastroArquivoComponent },
-      { path: '', component: HeaderComponent, outlet: 'header' },
-      { path: '', component: NavigationComponent, outlet: 'navigation' }
-    ]
+    path: 'cadastros', children: [
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+      {
+        path: 'arquivo', canActivate: [AuthGuard], children: [
+          { path: '', redirectTo: 'listar', pathMatch: 'full' },
+          { path: 'listar', component: PesquisaArquivoComponent },
+          { path: 'cadastrar', component: CadastroArquivoComponent },
+          { path: 'editar/:id', component: CadastroArquivoComponent },
+          { path: '', component: HeaderComponent, outlet: 'header' },
+          { path: '', component: NavigationComponent, outlet: 'navigation' }
+        ]
+      }]
   }
 ];

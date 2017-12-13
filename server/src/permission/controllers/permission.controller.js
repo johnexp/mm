@@ -1,5 +1,7 @@
-var PermissionService = require('../services/permission.service');
-_this = this;
+let PermissionService = require('../services/permission.service'),
+  inflections = require('underscore.inflections'),
+  s = require('underscore.string'),
+  _this = this;
 
 exports.getPermissiones = async function (req, res, next) {
 
@@ -13,6 +15,7 @@ exports.getPermissiones = async function (req, res, next) {
   req.body.action ? query.action = req.body.action : null;
   req.body.module ? query.module = req.body.module : null;
   req.body.stringfied ? query.stringfied = { $regex: new RegExp('^.*' + req.body.stringfied.trim() + '.*', 'i') } : null;
+  req.body.prettified ? query.prettified = { $regex: new RegExp('^.*' + req.body.prettified.trim() + '.*', 'i') } : null;
 
   if (req.body.ativo != null && req.body.ativo !== undefined) {
     query.ativo = req.body.ativo;
@@ -50,10 +53,13 @@ exports.getPermission = async function (req, res, next) {
 
 exports.createPermission = async function (req, res, next) {
 
+  let slugifiedModuleName = s(req.body.module.moduleName).slugify().value();
+  let slugifiedSingularModuleName = inflections.singularize(slugifiedModuleName);
   var permission = {
     action: req.body.action,
     module: req.body.module,
-    stringfied: req.body.module.moduleName.toLowerCase() + ':' + req.body.action.actionName.toLowerCase(),
+    stringfied: slugifiedSingularModuleName + ':' + req.body.action.actionName.toLowerCase(),
+    prettified: req.body.action.actionName + ' ' + req.body.module.moduleName,
     ativo: req.body.ativo,
     usuario: req.user.sub
   };
@@ -71,12 +77,16 @@ exports.updatePermission = async function (req, res, next) {
     return res.status(400).json({ status: 400., message: 'Id do registro não encontrado: ' + e });
   }
 
+  let slugifiedModuleName = s(req.body.module.moduleName).slugify().value();
+  let slugifiedSingularModuleName = inflections.singularize(slugifiedModuleName);
+
   var id = req.body._id;
   var permission = {
     id,
     action: req.body.action ? req.body.action : null,
     module: req.body.module ? req.body.module : null,
-    stringfied: req.body.module.moduleName.toLowerCase() + ':' + req.body.action.actionName.toLowerCase(),
+    stringfied: slugifiedSingularModuleName + ':' + req.body.action.actionName.toLowerCase(),
+    prettified: req.body.action.actionName + ' ' + req.body.module.moduleName,
     ativo: req.body.ativo
   };
 

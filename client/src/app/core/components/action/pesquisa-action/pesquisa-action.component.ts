@@ -15,19 +15,18 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 export class PesquisaActionComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
-  displayedColumns = [ {
-      columnDef: 'actionName',
-      header: 'Nome da Ação',
-      cell: (row: Action) => `${row.actionName}`,
-      filter: true,
-      type: 'text'
-    }, {
-      columnDef: 'ativo',
-      header: 'Ativo',
-      cell: (row: Action) => `${row.ativo ? 'Sim' : 'Não'}`,
-      filter: false
-    }
-  ];
+  displayedColumns = [{
+    columnDef: 'actionName',
+    header: 'Nome da Ação',
+    cell: (row: Action) => `${row.actionName}`,
+    filter: true,
+    type: 'text'
+  }, {
+    columnDef: 'ativo',
+    header: 'Ativo',
+    cell: (row: Action) => `${row.ativo ? 'Sim' : 'Não'}`,
+    filter: false
+  }];
 
   database = new GenericDatabase;
   filtrarAtivos: Boolean;
@@ -64,9 +63,7 @@ export class PesquisaActionComponent implements OnInit {
     this.blockUI.start(acao + ' registro...');
     this.actionService.delete(action._id).subscribe(
       response => {
-        this.buscarActiones();
-        paginator.pageIndex = 0;
-        paginator.page.emit();
+        action.ativo = !action.ativo;
         this.blockUI.stop();
       },
       error => {

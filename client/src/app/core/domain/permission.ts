@@ -6,6 +6,7 @@ export class Permission {
   action: Action = new Action;
   module: Module = new Module;
   stringfied: String;
+  prettified: String;
 
   ativo: boolean;
 

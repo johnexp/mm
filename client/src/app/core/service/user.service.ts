@@ -20,6 +20,12 @@ export class UserService extends GenericService {
       .pipe(catchError(this.handleError<User>()));
   }
 
+  getCurrent(): Observable<User> {
+    const url = `${this.path}/current`;
+    return this.http.get<User>(url)
+      .pipe(catchError(this.handleError<User>()));
+  }
+
   create(user: User): Observable<User> {
     const url = this.path + '/register';
     return this.http.post<User>(url, user)
@@ -27,7 +33,7 @@ export class UserService extends GenericService {
   }
 
   update(user: User): Observable<User> {
-    return this.http.put<User>(this.path, user)
+    return this.http.put<User>(this.path + '/' + user._id, user)
       .pipe(catchError(this.handleError<User>()));
   }
 

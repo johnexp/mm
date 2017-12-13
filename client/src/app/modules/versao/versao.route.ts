@@ -6,13 +6,17 @@ import { PesquisaVersaoComponent } from './view/pesquisa/pesquisa-versao.compone
 
 export const VersaoRoute = [
   {
-    path: 'versoes', canActivate: [AuthGuard], children: [
-      { path: '', redirectTo: 'listar', pathMatch: 'full' },
-      { path: 'listar', component: PesquisaVersaoComponent },
-      { path: 'cadastrar', component: CadastroVersaoComponent },
-      { path: 'editar/:id', component: CadastroVersaoComponent },
-      { path: '', component: HeaderComponent, outlet: 'header' },
-      { path: '', component: NavigationComponent, outlet: 'navigation' }
-    ]
+    path: 'cadastros', children: [
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+      {
+        path: 'versoes', canActivate: [AuthGuard], children: [
+          { path: '', redirectTo: 'listar', pathMatch: 'full' },
+          { path: 'listar', component: PesquisaVersaoComponent },
+          { path: 'cadastrar', component: CadastroVersaoComponent },
+          { path: 'editar/:id', component: CadastroVersaoComponent },
+          { path: '', component: HeaderComponent, outlet: 'header' },
+          { path: '', component: NavigationComponent, outlet: 'navigation' }
+        ]
+      }]
   }
 ];

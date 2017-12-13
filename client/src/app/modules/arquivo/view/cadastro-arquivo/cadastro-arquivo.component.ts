@@ -79,7 +79,7 @@ export class CadastroArquivoComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['arquivo']);
+    this.router.navigate(['cadastros/arquivo']);
   }
 
 }

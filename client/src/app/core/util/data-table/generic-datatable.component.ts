@@ -154,7 +154,7 @@ export class GenericDatatableComponent implements OnInit, AfterViewInit {
     if (this.actions) {
       this.displayedColumns.push('actions');
     }
-    this.displayedColumns.push(...this.columns.map(x => x.columnDef));
+    this.displayedColumns.push(...this.columns.filter(column => !column.hidden).map(x => x.columnDef));
   }
 
   /**
@@ -233,18 +233,36 @@ export class GenericDatatableComponent implements OnInit, AfterViewInit {
     if (this.customEdit) {
       this.editRecord.emit(row);
     } else {
-      const path = this.activatedRoute.root.firstChild.snapshot.url[0].path;
+      const urls = this.activatedRoute.root.firstChild.snapshot;
+      let path = '';
+      if (urls.url.length > 0) {
+        const section = urls.url[0];
+        const module = urls.children[0].url[0];
+        path = section.path + '/' + module.path;
+      }
       this.router.navigate([path + '/editar/', row._id]);
     }
   }
 
   goView(row) {
-    const path = this.activatedRoute.root.firstChild.snapshot.url[0].path;
+    const urls = this.activatedRoute.root.firstChild.snapshot;
+    let path = '';
+    if (urls.url.length > 0) {
+      const section = urls.url[0];
+      const module = urls.children[0].url[0];
+      path = section.path + '/' + module.path;
+    }
     this.router.navigate([path + '/visualizar/', row._id]);
   }
 
   goCreate() {
-    const path = this.activatedRoute.root.firstChild.snapshot.url[0].path;
+    const urls = this.activatedRoute.root.firstChild.snapshot;
+    let path = '';
+    if (urls.url.length > 0) {
+      const section = urls.url[0];
+      const module = urls.children[0].url[0];
+      path = section.path + '/' + module.path;
+    }
     this.router.navigate([path + '/cadastrar']);
   }
 

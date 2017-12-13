@@ -7,13 +7,18 @@ import { PesquisaHomologacaoComponent } from './view/pesquisa-homologacao/pesqui
 
 export const HomologacaoRoute: Routes = [
   {
-    path: 'homologacao', canActivate: [AuthGuard], children: [
-      { path: '', redirectTo: 'listar', pathMatch: 'full' },
-      { path: 'listar', component: PesquisaHomologacaoComponent },
-      { path: 'cadastrar', component: CadastroHomologacaoComponent },
-      { path: 'editar/:id', component: CadastroHomologacaoComponent },
-      { path: '', component: HeaderComponent, outlet: 'header' },
-      { path: '', component: NavigationComponent, outlet: 'navigation' }
+    path: 'cadastros', children: [
+      { path: '', redirectTo: '/', pathMatch: 'full' },
+      {
+        path: 'homologacao', canActivate: [AuthGuard], children: [
+          { path: '', redirectTo: 'listar', pathMatch: 'full' },
+          { path: 'listar', component: PesquisaHomologacaoComponent },
+          { path: 'cadastrar', component: CadastroHomologacaoComponent },
+          { path: 'editar/:id', component: CadastroHomologacaoComponent },
+          { path: '', component: HeaderComponent, outlet: 'header' },
+          { path: '', component: NavigationComponent, outlet: 'navigation' }
+        ]
+      }
     ]
   }
 ];

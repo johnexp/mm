@@ -6,7 +6,7 @@ _this = this;
 
 exports.authenticate = async function (username, password) {
   try {
-    var user = await User.findOne({ username: username })
+    var user = await User.findOne({ username: username, active: true })
       .populate({ path: 'permissions', select: 'stringfied ' });
     if (!bcrypt.compareSync(password, user.hash)) {
       throw Error('Usuário e/ou senha incorretos');
@@ -14,7 +14,8 @@ exports.authenticate = async function (username, password) {
       user = user.toObject();
       user.token = jwt.sign({
         sub: user._id,
-        permissions: user.permissions.map(permission => permission.stringfied)
+        permissions: user.permissions.map(permission => permission.stringfied),
+        roles: user.roles
       }, config.secret);
       delete user.hash;
     }
@@ -35,7 +36,7 @@ exports.getAllUsers = async function () {
 
 exports.getUser = async function (id) {
   try {
-    var user = await User.findById(id).select('-hash');
+    var user = await User.findById(id).populate('permissions').select('-hash');
     return user;
   } catch (e) {
     throw Error('Error while getting a Versão');
@@ -50,7 +51,9 @@ exports.createUser = async function (user) {
     hash: bcrypt.hashSync(user.password, 10),
     firstName: user.firstName,
     lastName: user.lastName,
-    permissions: user.permissions || []
+    permissions: user.permissions || [],
+    roles: ['user'],
+    active: true
   });
 
   try {
@@ -94,20 +97,21 @@ exports.validateUserUpdating = async function (user) {
       if (user) {
         throw Error('O nome de usuário já existe. Por favor escolha outro nome de usuário.');
       } else {
-        return this.updateUser(oldUser);
+        return this.updateUser(oldUser, user);
       }
     });
   } else {
-    return this.updateUser(oldUser);
+    return this.updateUser(oldUser, user);
   }
 }
 
-exports.updateUser = async function (user) {
+exports.updateUser = async function (oldUser, user) {
   oldUser.username = user.username;
   oldUser.email = user.email;
   oldUser.firstName = user.firstName;
   oldUser.lastname = user.lastName;
   oldUser.permissions = user.permissions;
+  oldUser.active = user.active;
   if (user.password) {
     oldUser.hash = bcrypt.hashSync(user.password, 10);
   }

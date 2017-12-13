@@ -1,3 +1,5 @@
+import { Permission } from './permission';
+
 export class User {
   _id: string;
   username: string;
@@ -6,4 +8,7 @@ export class User {
   firstName: string;
   lastName: string;
   token: string;
+  roles: string[];
+  permissions: Permission[] = [];
+  active: Boolean = true;
 }

@@ -73,6 +73,6 @@ export class CadastroMembroComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['membro']);
+    this.router.navigate(['cadastros/membro']);
   }
 }

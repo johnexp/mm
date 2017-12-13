@@ -71,7 +71,7 @@ export class CadastroHomologacaoComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['homologacao']);
+    this.router.navigate(['cadastros/homologacao']);
   }
 
 }
