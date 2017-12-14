@@ -1,3 +1,4 @@
+import { HomeComponent } from './../../core/components/home/home.component';
 import { AuthGuard } from './../../core/guard/auth.guard';
 import { Routes } from '@angular/router';
 import { NavigationComponent } from './../../core/layout/navigation/navigation.component';
@@ -7,18 +8,18 @@ import { PesquisaHomologacaoComponent } from './view/pesquisa-homologacao/pesqui
 
 export const HomologacaoRoute: Routes = [
   {
-    path: 'cadastros', children: [
-      { path: '', redirectTo: '/', pathMatch: 'full' },
+    path: 'cadastros', canActivateChild: [AuthGuard], children: [
+      { path: '', component: HomeComponent },
       {
-        path: 'homologacao', canActivate: [AuthGuard], children: [
+        path: 'homologacao', children: [
           { path: '', redirectTo: 'listar', pathMatch: 'full' },
           { path: 'listar', component: PesquisaHomologacaoComponent },
           { path: 'cadastrar', component: CadastroHomologacaoComponent },
-          { path: 'editar/:id', component: CadastroHomologacaoComponent },
-          { path: '', component: HeaderComponent, outlet: 'header' },
-          { path: '', component: NavigationComponent, outlet: 'navigation' }
+          { path: 'editar/:id', component: CadastroHomologacaoComponent }
         ]
-      }
+      },
+      { path: '', component: HeaderComponent, outlet: 'header' },
+      { path: '', component: NavigationComponent, outlet: 'navigation' }
     ]
   }
 ];

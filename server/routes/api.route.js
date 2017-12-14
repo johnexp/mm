@@ -16,6 +16,7 @@ var teste = require('../src/teste/routes/teste.route');
 var action = require('../src/action/routes/action.route');
 var modules = require('../src/module/routes/module.route');
 var permission = require('../src/permission/routes/permission.route');
+var menuModule = require('../src/menu-module/routes/menu-module.route');
 
 router.use('/users', users);
 router.use('/versoes', versao);
@@ -32,5 +33,6 @@ router.use('/testes', teste);
 router.use('/actions', action);
 router.use('/modules', modules);
 router.use('/permissions', permission);
+router.use('/menu-module', menuModule);
 
 module.exports = router;

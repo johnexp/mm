@@ -73,7 +73,7 @@ export class CadastroArquivoComponent implements OnInit {
         } else {
           this.customSnackBar.open('Registro alterado com sucesso!', 'success');
         }
-        this.router.navigate(['arquivo']);
+        this.router.navigate(['cadastros/arquivo']);
       }
     });
   }

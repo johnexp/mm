@@ -58,7 +58,7 @@ export class CadastroApresentacaoSiteComponent implements OnInit {
         } else {
           this.customSnackBar.open('Registro alterado com sucesso!', 'success');
         }
-        this.router.navigate(['apresentacao-site']);
+        this.router.navigate(['cadastro/apresentacao-site']);
       },
       error => {
         this.blockUI.stop();

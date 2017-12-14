@@ -1,3 +1,5 @@
+import { CadastroMenuModuleComponent } from './components/menu-module/cadastro-menu-module/cadastro-menu-module.component';
+import { PesquisaMenuModuleComponent } from './components/menu-module/pesquisa-menu-module/pesquisa-menu-module.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { CadastroPermissionComponent } from './components/permission/cadastro-permission/cadastro-permission.component';
 import { PesquisaPermissionComponent } from './components/permission/pesquisa-permission/pesquisa-permission.component';
@@ -25,49 +27,52 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {
-    path: 'administracao', children: [
-      { path: '', redirectTo: 'user', pathMatch: 'full' },
+    path: 'administracao', canActivate: [AuthGuard], children: [
+      { path: '', component: HomeComponent },
       {
         path: 'user', children: [
           { path: '', redirectTo: 'info', pathMatch: 'full' },
-          { path: 'info', component: UserInfoComponent },
-          { path: '', component: HeaderComponent, outlet: 'header' },
-          { path: '', component: NavigationComponent, outlet: 'navigation' }
+          { path: 'info', component: UserInfoComponent }
         ]
       },
       {
-        path: 'action', canActivate: [AuthGuard], children: [
+        path: 'action', children: [
           { path: '', redirectTo: 'listar', pathMatch: 'full' },
           { path: 'listar', component: PesquisaActionComponent },
           { path: 'cadastrar', component: CadastroActionComponent },
           { path: 'editar/:id', component: CadastroActionComponent },
-          { path: 'visualizar/:id', component: CadastroActionComponent },
-          { path: '', component: HeaderComponent, outlet: 'header' },
-          { path: '', component: NavigationComponent, outlet: 'navigation' }
+          { path: 'visualizar/:id', component: CadastroActionComponent }
         ]
       },
       {
-        path: 'module', canActivate: [AuthGuard], children: [
+        path: 'module', children: [
           { path: '', redirectTo: 'listar', pathMatch: 'full' },
           { path: 'listar', component: PesquisaModuleComponent },
           { path: 'cadastrar', component: CadastroModuleComponent },
           { path: 'editar/:id', component: CadastroModuleComponent },
-          { path: 'visualizar/:id', component: CadastroModuleComponent },
-          { path: '', component: HeaderComponent, outlet: 'header' },
-          { path: '', component: NavigationComponent, outlet: 'navigation' }
+          { path: 'visualizar/:id', component: CadastroModuleComponent }
         ]
       },
       {
-        path: 'permission', canActivate: [AuthGuard], children: [
+        path: 'permission', children: [
           { path: '', redirectTo: 'listar', pathMatch: 'full' },
           { path: 'listar', component: PesquisaPermissionComponent },
           { path: 'cadastrar', component: CadastroPermissionComponent },
           { path: 'editar/:id', component: CadastroPermissionComponent },
-          { path: 'visualizar/:id', component: CadastroPermissionComponent },
-          { path: '', component: HeaderComponent, outlet: 'header' },
-          { path: '', component: NavigationComponent, outlet: 'navigation' }
+          { path: 'visualizar/:id', component: CadastroPermissionComponent }
         ]
-      }
+      },
+      {
+        path: 'menu-module', children: [
+          { path: '', redirectTo: 'listar', pathMatch: 'full' },
+          { path: 'listar', component: PesquisaMenuModuleComponent },
+          { path: 'cadastrar', component: CadastroMenuModuleComponent },
+          { path: 'editar/:id', component: CadastroMenuModuleComponent },
+          { path: 'visualizar/:id', component: CadastroMenuModuleComponent }
+        ]
+      },
+      { path: '', component: HeaderComponent, outlet: 'header' },
+      { path: '', component: NavigationComponent, outlet: 'navigation' }
     ]
   }
 ];

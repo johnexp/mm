@@ -101,7 +101,7 @@ export class CadastroTesteComponent implements OnInit {
         } else {
           this.customSnackBar.open('Registro alterado com sucesso!', 'success');
         }
-        this.router.navigate(['teste']);
+        this.router.navigate(['cadastros/teste']);
       },
       error => {
         this.blockUI.stop();

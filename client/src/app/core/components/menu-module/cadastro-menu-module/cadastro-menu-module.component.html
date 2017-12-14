@@ -1,0 +1,58 @@
+<h1 class="page-title">
+  <mat-icon>done</mat-icon>Menu module -
+  <span class="subtitle">
+    {{ menuModule._id ? 'Editar' : 'Cadastrar' }} Menu module
+  </span>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <fieldset class="fake-fieldset" [disabled]="disabled">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput name="name" #name="ngModel" [(ngModel)]="menuModule.name" placeholder="Nome da Seção" required>
+        <mat-error [hidden]="!name.hasError('required') || (name.pristine && !name.touched && !form.submitted)">
+          O campo "Nome da Seção" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput name="label" #label="ngModel" [(ngModel)]="menuModule.label" placeholder="Label" required>
+        <mat-error [hidden]="!label.hasError('required') || (label.pristine && !label.touched && !form.submitted)">
+          O campo "Label" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select placeholder="Perfis" #roles="ngModel" name="roles" [(ngModel)]="menuModule.roles" multiple>
+          <ng-container *ngFor="let role of rolesLista">
+            <mat-option *ngIf="role" [value]="role">
+              {{ role }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+      <div class="buttons-container layout-margin" fxLayoutAlign="center center" fxFlex="100">
+        <button mat-button type="button" color="primary" (click)="abrirDialogMenu()">
+          <mat-icon>add_circle_outline</mat-icon>
+          Adicionar Menu
+        </button>
+      </div>
+      <app-generic-datatable fxFlex="100" [columns]="displayedMenusColumns" [database]="databaseMenus" [lazy]="false" [hasFilter]="false"
+        [hasPaginator]="false" [actions]="{'u': true, 'd': true}" [customEdit]="true" (editRecord)="abrirDialogMenu($event)"
+        (deleteRecord)="removerMenu($event[0])">
+      </app-generic-datatable>
+    </div>
+  </fieldset>
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">
+    <button *ngIf="!disabled" mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button *ngIf="!disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button *ngIf="disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+  </div>
+</form>

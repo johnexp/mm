@@ -1,3 +1,5 @@
+import { MenuModule } from './../../domain/menu-module';
+import { MenuModuleService } from './../../service/menu-module.service';
 import { Router } from '@angular/router';
 import { MenuService } from './../../service/menu.service';
 import { AuthenticationService } from './../../service/authentication.service';
@@ -10,18 +12,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  sections: string[] = [];
+  sections: MenuModule[] = [];
 
   constructor(private authentication: AuthenticationService,
-    private menuService: MenuService,
+    private menuModuleService: MenuModuleService,
     private router: Router) {
   }
 
   ngOnInit() {
-    const menus = this.menuService.getMenu();
-    this.sections = Object.keys(menus).map(function (menu) {
-      return menus[menu];
-    });
+    // TODO: treat error
+    this.menuModuleService.getModules().subscribe(
+      response => {
+        this.sections = response;
+      },
+      error => {
+
+      }
+    );
   }
 
   loadMenu(sectionName: string) {

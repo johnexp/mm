@@ -24,13 +24,15 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     let permissionFound = state.url === '/' || null;
 
     if (!permissionFound) {
-      if (state.url.startsWith('/') && urlParams.length > 2) {
+      if (state.url.startsWith('/') && urlParams.length > 3) { // Section/module/action
         permissionFound = currentUser.permissions.find(permission => {
           return permission.stringfied === urlParams[2] + ':' + urlParams[3];
         });
-      } else if (state.url.startsWith('/') && urlParams.length === 3) {
+      } else if (state.url.startsWith('/') && urlParams.length === 2) { // Section
+        permissionFound = true;
+      } else if (state.url.startsWith('/') && urlParams.length === 3) { // Single page module
         permissionFound = currentUser.permissions.find(permission => {
-          return permission.stringfied === urlParams[2];
+          return permission.stringfied.split(':')[0] === urlParams[2];
         });
       }
     }

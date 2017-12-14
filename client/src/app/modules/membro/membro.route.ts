@@ -7,18 +7,18 @@ import { PesquisaMembroComponent } from './view/pesquisa-membro/pesquisa-membro.
 
 export const MembroRoute: Routes = [
   {
-    path: 'cadastros', children: [
+    path: 'cadastros', canActivateChild: [AuthGuard], children: [
       { path: '', redirectTo: '/', pathMatch: 'full' },
       {
-        path: 'membro', canActivate: [AuthGuard], children: [
+        path: 'membro', children: [
           { path: '', redirectTo: 'listar', pathMatch: 'full' },
           { path: 'listar', component: PesquisaMembroComponent },
           { path: 'cadastrar', component: CadastroMembroComponent },
-          { path: 'editar/:id', component: CadastroMembroComponent },
-          { path: '', component: HeaderComponent, outlet: 'header' },
-          { path: '', component: NavigationComponent, outlet: 'navigation' }
+          { path: 'editar/:id', component: CadastroMembroComponent }
         ]
-      }
+      },
+      { path: '', component: HeaderComponent, outlet: 'header' },
+      { path: '', component: NavigationComponent, outlet: 'navigation' }
     ]
   }
 ];

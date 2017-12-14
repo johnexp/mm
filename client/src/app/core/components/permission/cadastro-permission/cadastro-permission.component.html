@@ -16,9 +16,13 @@
 <form #form="ngForm" (ngSubmit)="salvar()" novalidate>
   <fieldset class="fake-fieldset" [disabled]="disabled">
     <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
-      <app-select-entity-field fxFlex [form]="form" [fieldLabel]="'Ação'"  [required]="true" [entityName]="'actions'" [entityMainProperty]="'actionName'"
-        [model]="permission" [modelEntityProperty]="'action'" [displayedColumns]="actionSelectionColumns" [multiple]="false"></app-select-entity-field>
-      <app-select-entity-field fxFlex [form]="form" [fieldLabel]="'Módulo'"  [required]="true" [entityName]="'modules'" [entityMainProperty]="'moduleName'"
+      <app-select-entity-field [hidden]="!isEditing" fxFlex [form]="form" [fieldLabel]="'Ação'" [required]="isEditing" [entityName]="'actions'"
+        [entityMainProperty]="'actionName'" [model]="permission" [modelEntityProperty]="'action'" [displayedColumns]="actionSelectionColumns"
+        [multiple]="false"></app-select-entity-field>
+      <app-select-entity-field [hidden]="isEditing" fxFlex [form]="form" [fieldLabel]="'Ação'" [required]="!isEditing" [entityName]="'actions'"
+        [entityMainProperty]="'actionName'" [model]="permission" [modelEntityProperty]="'actions'" [displayedColumns]="actionSelectionColumns"
+        [multiple]="true"></app-select-entity-field>
+      <app-select-entity-field fxFlex [form]="form" [fieldLabel]="'Módulo'" [required]="true" [entityName]="'modules'" [entityMainProperty]="'moduleName'"
         [model]="permission" [modelEntityProperty]="'module'" [displayedColumns]="moduleSelectionColumns" [multiple]="false"></app-select-entity-field>
     </div>
   </fieldset>

@@ -1,3 +1,7 @@
+import { MenuModuleService } from './service/menu-module.service';
+import { DialogMenuComponent } from './components/menu-module/cadastro-menu-module/dialog-menu/dialog-menu.component';
+import { PesquisaMenuModuleComponent } from './components/menu-module/pesquisa-menu-module/pesquisa-menu-module.component';
+import { CadastroMenuModuleComponent } from './components/menu-module/cadastro-menu-module/cadastro-menu-module.component';
 import { MenuService } from './service/menu.service';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { PesquisaPermissionComponent } from './components/permission/pesquisa-permission/pesquisa-permission.component';
@@ -93,7 +97,10 @@ const MAT_MODULES = [
     PesquisaModuleComponent,
     CadastroPermissionComponent,
     PesquisaPermissionComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    CadastroMenuModuleComponent,
+    PesquisaMenuModuleComponent,
+    DialogMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -118,6 +125,7 @@ const MAT_MODULES = [
   providers: [
     CustomSnackBarService,
     MenuService,
+    MenuModuleService,
     AuthGuard,
     AuthenticationService,
     UserService,
@@ -125,7 +133,8 @@ const MAT_MODULES = [
   ],
   entryComponents: [
     ConfirmationDialogComponent,
-    DialogEntitySelectionComponent
+    DialogEntitySelectionComponent,
+    DialogMenuComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

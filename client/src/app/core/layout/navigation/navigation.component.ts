@@ -1,6 +1,10 @@
+import { Observable } from 'rxjs/Observable';
+import { MenuModule } from './../../domain/menu-module';
+import { Menu } from './../../domain/menu';
+import { MenuModuleService } from './../../service/menu-module.service';
 import { MenuService } from './../../service/menu.service';
-import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, Event, NavigationEnd } from '@angular/router';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-navigation',
@@ -11,10 +15,12 @@ export class NavigationComponent implements OnInit {
 
   private path: String = '';
   opened: Boolean = false;
-  menuItems: any[] = [];
+  menuItems: MenuModule = new MenuModule;
 
   constructor(private activatedRoute: ActivatedRoute,
-    private menuSerice: MenuService) {
+    private router: Router,
+    private menuModuleService: MenuModuleService,
+    private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -23,10 +29,38 @@ export class NavigationComponent implements OnInit {
     if (urls.url.length > 0) {
       const section = urls.url[0];
       const menu = urls.children[0].url[0];
-      this.path = urls ? menu.path : '';
+      this.path = menu ? menu.path : '';
       menuPath = section.path;
     }
-    this.menuItems = this.menuSerice.getMenu(menuPath);
+    this.getMenus(menuPath);
+
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        this.setPath();
+      }
+    });
+  }
+
+  getMenus(name) {
+    this.menuModuleService.getByName(name).subscribe(
+      response => {
+        response.forEach(menuModule => {
+          this.menuItems.name = menuModule.name;
+          this.menuItems.menus.push(menuModule.menus);
+        });
+      },
+      error => {
+
+      }
+    );
+  }
+
+  setPath() {
+    const urls = this.activatedRoute.root.firstChild.snapshot;
+    if (urls.url.length > 0 && urls.children.length > 0) {
+      const menu = urls.children[0].url[0];
+      this.path = menu ? menu.path : '';
+    }
   }
 
   toggleMenu() {

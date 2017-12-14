@@ -20,6 +20,7 @@ export class CadastroPermissionComponent implements OnInit {
   permission: Permission = new Permission;
   @ViewChild('form') form;
   disabled: Boolean = false;
+  isEditing: Boolean = false;
   actionSelectionColumns = [{
     columnDef: 'actionName',
     header: 'Nome da Ação',
@@ -45,6 +46,7 @@ export class CadastroPermissionComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe((params: Params) => {
       if (params.params['id'] != null) {
+        this.isEditing = true;
         this.obterPermission(params.params['id']);
       }
     });
@@ -61,6 +63,7 @@ export class CadastroPermissionComponent implements OnInit {
     this.permissionService.get(id).subscribe(
       response => {
         this.permission = response;
+        this.permission.actions = [];
         this.blockUI.stop();
       },
       error => {
@@ -84,7 +87,7 @@ export class CadastroPermissionComponent implements OnInit {
         } else {
           this.customSnackBar.open('Registro alterado com sucesso!', 'success');
         }
-        this.router.navigate(['permission']);
+        this.router.navigate(['administracao/permission']);
       },
       error => {
         this.blockUI.stop();

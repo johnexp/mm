@@ -65,7 +65,7 @@ export class CadastroSobrePortalComponent implements OnInit {
         } else {
           this.customSnackBar.open('Registro alterado com sucesso!', 'success');
         }
-        this.router.navigate(['sobre']);
+        this.router.navigate(['cadastros/sobre']);
       },
       error => {
         this.blockUI.stop();

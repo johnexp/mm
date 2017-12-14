@@ -1,5 +1,7 @@
-var Module = require('../models/module.model');
-_this = this;
+let Module = require('../models/module.model'),
+  Permission = require('../../permission/models/permission.model'),
+  s = require('underscore.string'),
+  _this = this;
 
 exports.getModules = async function (query, page, limit, sort) {
   // Options setup for the mongoose paginate
@@ -86,8 +88,24 @@ exports.updateModule = async function (module, user) {
 
   try {
     var savedModule = await oldModule.save();
+    this.updatePermissions(savedModule);
     this.createHistory(id, savedModule, 'U', user);
+
     return savedModule;
+  } catch (e) {
+    throw Error(e.message);
+  }
+}
+
+exports.updatePermissions = async function (module) {
+  try {
+    var permissions = await Permission.find({ module: module.id }).populate('action');
+    permissions.forEach(function (permission) {
+      let slugifiedModuleName = s(module.moduleName).slugify().value();
+      permission.stringfied = slugifiedModuleName + ':' + permission.action.actionName.toLowerCase();
+      permission.prettified = permission.action.actionName + ' ' + module.moduleName;
+      permission.save();
+    });
   } catch (e) {
     throw Error(e.message);
   }

@@ -1,3 +1,4 @@
+import { HomeComponent } from './../../core/components/home/home.component';
 import { AuthGuard } from './../../core/guard/auth.guard';
 import { Routes } from '@angular/router';
 import { NavigationComponent } from './../../core/layout/navigation/navigation.component';
@@ -7,18 +8,18 @@ import { PesquisaItemProgressoComponent } from './view/pesquisa-item-progresso/p
 
 export const ItemProgressoRoute: Routes = [
   {
-    path: 'cadastros', children: [
-      { path: '', redirectTo: '/', pathMatch: 'full' },
+    path: 'cadastros', canActivateChild: [AuthGuard], children: [
+      { path: '', component: HomeComponent },
       {
-        path: 'item-progresso', canActivate: [AuthGuard], children: [
+        path: 'item-progresso', children: [
           { path: '', redirectTo: 'listar', pathMatch: 'full' },
           { path: 'listar', component: PesquisaItemProgressoComponent },
           { path: 'cadastrar', component: CadastroItemProgressoComponent },
-          { path: 'editar/:id', component: CadastroItemProgressoComponent },
-          { path: '', component: HeaderComponent, outlet: 'header' },
-          { path: '', component: NavigationComponent, outlet: 'navigation' }
+          { path: 'editar/:id', component: CadastroItemProgressoComponent }
         ]
-      }
+      },
+      { path: '', component: HeaderComponent, outlet: 'header' },
+      { path: '', component: NavigationComponent, outlet: 'navigation' }
     ]
   }
 ];

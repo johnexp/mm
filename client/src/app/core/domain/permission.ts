@@ -4,6 +4,7 @@ import { Module } from './module';
 export class Permission {
   _id: number;
   action: Action = new Action;
+  actions: Action[] = [];
   module: Module = new Module;
   stringfied: String;
   prettified: String;

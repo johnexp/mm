@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Adicionar Menu</h1>
+<div mat-dialog-content>
+  <form #form="ngForm" novalidate>
+    <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput class="form-control" name="label" #label="ngModel" [(ngModel)]="data.menu.label" placeholder="Label" required>
+        <mat-error [hidden]="!label.hasError('required') || (label.pristine && !label.touched && !form.submitted)">
+          O campo "Label" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput class="form-control" name="icon" #icon="ngModel" [(ngModel)]="data.menu.icon" placeholder="Ícone" required>
+        <mat-error [hidden]="!icon.hasError('required') || (icon.pristine && !icon.touched && !form.submitted)">
+          O campo "Ícone" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput class="form-control" name="path" #path="ngModel" [(ngModel)]="data.menu.path" placeholder="Caminho" required>
+        <mat-error [hidden]="!path.hasError('required') || (path.pristine && !path.touched && !form.submitted)">
+          O campo "Caminho" é obrigatório
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-actions fxLayoutAlign="end center">
+  <button mat-button [mat-dialog-close]="data.menu" color="primary">
+    <mat-icon>add_circle_outline</mat-icon>
+    Adicionar
+  </button>
+  <button mat-button (click)="onCancelClick()">
+    <mat-icon>cancel</mat-icon>
+    Cancelar
+  </button>
+</div>

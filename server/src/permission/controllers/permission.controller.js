@@ -55,18 +55,26 @@ exports.createPermission = async function (req, res, next) {
 
   let slugifiedModuleName = s(req.body.module.moduleName).slugify().value();
   let slugifiedSingularModuleName = inflections.singularize(slugifiedModuleName);
-  var permission = {
-    action: req.body.action,
-    module: req.body.module,
-    stringfied: slugifiedSingularModuleName + ':' + req.body.action.actionName.toLowerCase(),
-    prettified: req.body.action.actionName + ' ' + req.body.module.moduleName,
-    ativo: req.body.ativo,
-    usuario: req.user.sub
-  };
+  let permissions = [];
+  req.body.actions.forEach(function(action) {
+    permissions.push({
+      action: action,
+      module: req.body.module,
+      stringfied: slugifiedSingularModuleName + ':' + action.actionName.toLowerCase(),
+      prettified: action.actionName + ' ' + req.body.module.moduleName,
+      ativo: req.body.ativo,
+      usuario: req.user.sub
+    });
+  });
 
   try {
-    var createdPermission = await PermissionService.createPermission(permission, req.user.sub);
-    return res.status(201).json(createdPermission);
+    let createdPermissions = [];
+    for (var i = 0; i < permissions.length; i++) {
+      let createdPermission = await PermissionService.createPermission(permissions[i], req.user.sub);
+      createdPermissions.push(createdPermission);
+      
+    }
+    return res.status(201).json(createdPermissions);
   } catch (e) {
     return res.status(400).json({ status: 400, message: 'Ocorreu um erro ao tentar realizar o cadastro: ' + e });
   }

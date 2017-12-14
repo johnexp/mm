@@ -64,6 +64,10 @@ export class MenuService {
         name: 'Permissão',
         icon: 'done',
         path: 'permission'
+      }, {
+        name: 'Menu da Seção',
+        icon: 'done',
+        path: 'menu-module'
       }]
     }
   };

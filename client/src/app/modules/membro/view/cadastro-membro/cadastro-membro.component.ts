@@ -63,7 +63,7 @@ export class CadastroMembroComponent implements OnInit {
         } else {
           this.customSnackBar.open('Registro alterado com sucesso!', 'success');
         }
-        this.router.navigate(['membro']);
+        this.router.navigate(['cadastros/membro']);
       },
       error => {
         this.blockUI.stop();

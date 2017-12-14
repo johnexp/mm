@@ -1,3 +1,4 @@
+import { HomeComponent } from './../../core/components/home/home.component';
 import { AuthGuard } from './../../core/guard/auth.guard';
 import { Routes } from '@angular/router';
 import { NavigationComponent } from './../../core/layout/navigation/navigation.component';
@@ -7,18 +8,18 @@ import { PesquisaBannerComponent } from './view/pesquisa-banner/pesquisa-banner.
 
 export const BannerRoute: Routes = [
   {
-    path: 'cadastros', children: [
-      { path: '', redirectTo: '/', pathMatch: 'full' },
+    path: 'cadastros', canActivateChild: [AuthGuard], children: [
+      { path: '', component: HomeComponent },
       {
-        path: 'banner', canActivate: [AuthGuard], children: [
+        path: 'banner', children: [
           { path: '', redirectTo: 'listar', pathMatch: 'full' },
           { path: 'listar', component: PesquisaBannerComponent },
           { path: 'cadastrar', component: CadastroBannerComponent },
-          { path: 'editar/:id', component: CadastroBannerComponent },
-          { path: '', component: HeaderComponent, outlet: 'header' },
-          { path: '', component: NavigationComponent, outlet: 'navigation' }
+          { path: 'editar/:id', component: CadastroBannerComponent }
         ]
-      }
+      },
+      { path: '', component: HeaderComponent, outlet: 'header' },
+      { path: '', component: NavigationComponent, outlet: 'navigation' }
     ]
   }
 ];

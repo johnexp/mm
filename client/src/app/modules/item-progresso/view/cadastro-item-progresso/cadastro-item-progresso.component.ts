@@ -62,7 +62,7 @@ export class CadastroItemProgressoComponent implements OnInit {
         } else {
           this.customSnackBar.open('Registro alterado com sucesso!', 'success');
         }
-        this.router.navigate(['item-progresso']);
+        this.router.navigate(['cadastros/item-progresso']);
       },
       error => {
         this.blockUI.stop();

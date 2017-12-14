@@ -61,7 +61,7 @@ export class CadastroHomologacaoComponent implements OnInit {
         } else {
           this.customSnackBar.open('Registro alterado com sucesso!', 'success');
         }
-        this.router.navigate(['homologacao']);
+        this.router.navigate(['cadastros/homologacao']);
       },
       error => {
         this.blockUI.stop();

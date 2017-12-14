@@ -213,5 +213,30 @@
       "showFilter": true,
       "showColumn": false
     }
+  },
+  "arquivo": {
+    "modelProps": {
+      "type": "[{ type: mongoose.Schema.ObjectId, ref: \"Membro\" }]",
+      "required": "[false, 'Por quê não selecionar \"Membros\"?']"
+    },
+    "populate": {
+      "path": "membros",
+      "select": "nome"
+    },
+    "viewProps": {
+      "name": "membros",
+      "viewValue": "Membros",
+      "fieldType": "entity",
+      "entityName": "Membro",
+      "entityRoutePath": "membros",
+      "mainEntityFieldName": "nome",
+      "mainEntityFieldLabel": "Nome",
+      "type": "entity",
+      "multiple": true,
+      "required": false,
+      "showInput": true,
+      "showFilter": true,
+      "showColumn": false
+    }
   }
 }

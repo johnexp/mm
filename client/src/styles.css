@@ -9,7 +9,8 @@ body {
   margin: 0;
   font-size: 14px;
   font-family: 'Roboto';
-  background: linear-gradient(-45deg, rgba(37, 76, 130, 0.74), rgba(226, 70, 114, 0.62));
+  /* background: linear-gradient(-45deg, rgba(37, 76, 130, 0.74), rgba(226, 70, 114, 0.62)); */
+  background: linear-gradient(-45deg, rgba(4, 39, 60, 0.82), rgba(6, 131, 144, 0.83));
 }
 
 a {

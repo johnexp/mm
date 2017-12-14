@@ -79,7 +79,7 @@ export class CadastroBannerComponent implements OnInit {
         } else {
           this.customSnackBar.open('Registro alterado com sucesso!', 'success');
         }
-        this.router.navigate(['banner']);
+        this.router.navigate(['cadastros/banner']);
       },
       error => {
         this.blockUI.stop();

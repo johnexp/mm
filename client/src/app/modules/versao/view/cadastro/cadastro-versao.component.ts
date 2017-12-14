@@ -80,7 +80,7 @@ export class CadastroVersaoComponent implements OnInit {
     this.versaoService.createOrUpdate(this.versao).subscribe(
       response => {
         this.customSnackBar.open('Registro salvo com sucesso!', 'success');
-        this.router.navigate(['/versoes']);
+        this.router.navigate(['cadastros/versoes']);
         this.blockUI.stop();
       },
       error => {

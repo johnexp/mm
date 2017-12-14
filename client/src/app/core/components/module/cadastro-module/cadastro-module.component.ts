@@ -68,7 +68,7 @@ export class CadastroModuleComponent implements OnInit {
         } else {
           this.customSnackBar.open('Registro alterado com sucesso!', 'success');
         }
-        this.router.navigate(['module']);
+        this.router.navigate(['administracao/module']);
       },
       error => {
         this.blockUI.stop();

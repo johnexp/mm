@@ -74,7 +74,7 @@ export class CadastroWikiComponent implements OnInit {
         } else {
           this.customSnackBar.open('Registro alterado com sucesso!', 'success');
         }
-        this.router.navigate(['wiki']);
+        this.router.navigate(['cadastros/wiki']);
       },
       error => {
         this.blockUI.stop();
