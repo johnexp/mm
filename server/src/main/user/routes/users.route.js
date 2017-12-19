@@ -4,7 +4,7 @@ var guard = require('express-jwt-permissions')();
 
 // Getting the Versao Controller that we just created
 var UserController = require('../controllers/user.controller');
-var RoleValidation = require('../../../routes/role-validation');
+var RoleValidation = require('../../../../routes/role-validation');
 
 // routes
 router.post('/authenticate', UserController.authenticate);

@@ -16,73 +16,66 @@ import { Membro } from './../../../membro/domain/membro';
 export class PesquisaTesteComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
-  displayedColumns = [ {
-      columnDef: 'nome',
-      header: 'Nome',
-      cell: (row: Teste) => `${row.nome}`,
-      filter: true,
-      type: 'text'
-    }, {
-      columnDef: 'descricao',
-      header: 'Descrição',
-      cell: (row: Teste) => `${row.descricao}`,
-      filter: true,
-      type: 'textarea'
-    }, {
-      columnDef: 'definitivo',
-      header: 'Definitivo?',
-      cell: (row: Teste) => `${row.definitivo ? 'Sim' : 'Não'}`,
-      filter: true,
-      type: 'switch'
-    }, {
-      columnDef: 'dataInicio',
-      header: 'Data de Início',
-      cell: (row: Teste) => `${this.datePipe.transform(row.dataInicio, 'dd/MM/yyyy')}`,
-      filter: true,
-      type: 'date'
-    }, {
-      columnDef: 'quantidade',
-      header: 'Quantidade',
-      cell: (row: Teste) => `${row.quantidade}`,
-      filter: true,
-      type: 'number'
-    }, {
-      columnDef: 'cor',
-      header: 'Cor',
-      cell: (row: Teste) => `${row.cor}`,
-      filter: true,
-      type: 'radio'
-    }, {
-      columnDef: 'cores',
-      header: 'Cores',
-      cell: (row: Teste) => `${row.cores.join(', ')}`,
-      filter: true,
-      type: 'checkbox-multiple'
-    }, {
-      columnDef: 'selectCores',
-      header: 'Select Cores',
-      cell: (row: Teste) => `${row.selectCores.join(', ')}`,
-      filter: true,
-      type: 'select'
-    }, {
-      columnDef: 'provisorio',
-      header: 'Provisório?',
-      cell: (row: Teste) => `${row.provisorio ? 'Sim' : 'Não'}`,
-      filter: true,
-      type: 'checkbox'
-    }, {
-      columnDef: 'membro',
-      header: 'Membro',
-      cell: (row: Teste) => `${row.membro ? row.membro.nome : ''}`,
-      filter: true,
-      type: 'entity'
-    }, {
-      columnDef: 'ativo',
-      header: 'Ativo',
-      cell: (row: Teste) => `${row.ativo ? 'Sim' : 'Não'}`,
-      filter: false
-    }
-  ];
+  displayedColumns = [{
+    columnDef: 'nome',
+    header: 'Nome',
+    cell: (row: Teste) => `${row.nome}`,
+    filter: true,
+    type: 'text'
+  }, {
+    columnDef: 'descricao',
+    header: 'Descrição',
+    cell: (row: Teste) => `${row.descricao}`,
+    filter: true,
+    type: 'textarea'
+  }, {
+    columnDef: 'definitivo',
+    header: 'Definitivo?',
+    cell: (row: Teste) => `${row.definitivo ? 'Sim' : 'Não'}`,
+    filter: true,
+    type: 'switch'
+  }, {
+    columnDef: 'dataInicio',
+    header: 'Data de Início',
+    cell: (row: Teste) => `${this.datePipe.transform(row.dataInicio, 'dd/MM/yyyy')}`,
+    filter: true,
+    type: 'date'
+  }, {
+    columnDef: 'quantidade',
+    header: 'Quantidade',
+    cell: (row: Teste) => `${row.quantidade}`,
+    filter: true,
+    type: 'number'
+  }, {
+    columnDef: 'cor',
+    header: 'Cor',
+    cell: (row: Teste) => `${row.cor}`,
+    filter: true,
+    type: 'radio'
+  }, {
+    columnDef: 'cores',
+    header: 'Cores',
+    cell: (row: Teste) => `${row.cores.join(', ')}`,
+    filter: true,
+    type: 'checkbox-multiple'
+  }, {
+    columnDef: 'selectCores',
+    header: 'Select Cores',
+    cell: (row: Teste) => `${row.selectCores.join(', ')}`,
+    filter: true,
+    type: 'select'
+  },  {
+    columnDef: 'membro',
+    header: 'Membro',
+    cell: (row: Teste) => `${row.membro ? row.membro.nome : ''}`,
+    filter: true,
+    type: 'entity'
+  }, {
+    columnDef: 'ativo',
+    header: 'Ativo',
+    cell: (row: Teste) => `${row.ativo ? 'Sim' : 'Não'}`,
+    filter: false
+  }];
 
   membroSelectionColumns = [{
     columnDef: 'nome',
@@ -100,7 +93,10 @@ export class PesquisaTesteComponent implements OnInit {
   }];
   database = new GenericDatabase;
   filtrarAtivos: Boolean;
-  corLista: string[] = [];  coresLista: string[] = [];  selectCoresLista: string[] = [];
+
+  corLista: string[] = [];
+  coresLista: string[] = [];
+  selectCoresLista: string[] = [];
 
   constructor(private location: Location,
     private customSnackBar: CustomSnackBarService,
@@ -109,11 +105,14 @@ export class PesquisaTesteComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.obterValoresEnum('cor').then((values) => {
       this.corLista = values;
-    });    this.obterValoresEnum('cores').then((values) => {
+    });
+    this.obterValoresEnum('cores').then((values) => {
       this.coresLista = values;
-    });    this.obterValoresEnum('selectCores').then((values) => {
+    });
+    this.obterValoresEnum('selectCores').then((values) => {
       this.selectCoresLista = values;
     });
   }
@@ -127,8 +126,7 @@ export class PesquisaTesteComponent implements OnInit {
     this.blockUI.start(acao + ' registro...');
     this.testeService.delete(teste._id).subscribe(
       response => {
-        paginator.pageIndex = 0;
-        paginator.page.emit();
+        teste.ativo = !teste.ativo;
         this.blockUI.stop();
       },
       error => {

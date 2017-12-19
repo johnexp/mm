@@ -1,3 +1,4 @@
+import { File } from './../../../core/domain/file';
 import { Membro } from './../../membro/domain/membro';
 
 export class Teste {
@@ -10,9 +11,10 @@ export class Teste {
   cor: String;
   cores: string[] = [];
   selectCores: string[] = [];
-  provisorio: Boolean;
-  membro: Membro = new Membro;
+  membro: Membro;
   membros: Membro[] = [];
+  documento: File;
+  imagem: File;
 
   ativo: boolean;
 

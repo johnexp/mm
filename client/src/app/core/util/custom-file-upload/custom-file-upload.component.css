@@ -2,6 +2,8 @@
   padding: 2px 2px 1.25em;
   padding-bottom: 1.25em;
   position: relative;
+  max-height: 60.56px;
+  min-width: 260px;
 }
 
 .custom-file-upload mat-error {

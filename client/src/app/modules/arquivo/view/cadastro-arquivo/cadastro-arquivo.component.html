@@ -13,7 +13,7 @@
         O campo "Nome" é obrigatório
       </mat-error>
     </mat-form-field>
-    <app-custom-file-upload fxFlex [model]="arquivo" [modelFileProperty]="'caminhoArquivo'" [required]="true" [form]="form" [file]="file"></app-custom-file-upload>
+    <app-custom-file-upload fxFlex [model]="arquivo" [modelFileProperty]="'caminhoArquivo'" [modelFileNameProperty]="'nomeArquivo'" [required]="true" [form]="form" [file]="file"></app-custom-file-upload>
     <mat-form-field fxFlex="100">
       <textarea matInput name="descricao" #descricao="ngModel" [(ngModel)]="arquivo.descricao" placeholder="Descrição" required></textarea>
       <mat-error [hidden]="!descricao.hasError('required') || (descricao.pristine && !descricao.touched && !form.submitted)">

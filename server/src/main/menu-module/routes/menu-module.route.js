@@ -3,7 +3,7 @@ var router = express.Router();
 var guard = require('express-jwt-permissions')();
 
 var MenuModuleController = require('../controllers/menu-module.controller');
-var RoleValidation = require('../../../routes/role-validation');
+var RoleValidation = require('../../../../routes/role-validation');
 
 // Map each API to the Controller Functions
 router.post('/filter/*?', RoleValidation.validateRole, guard.check('menu-module:listar'), MenuModuleController.getMenuModule);

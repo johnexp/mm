@@ -5,63 +5,62 @@ var TesteSchema = new mongoose.Schema({
   nome: {
     type: String,
     trim: true,
-    required: [true, 'Por quê não há nome?'],
+    minlength: [3, 'O valor é menor que a quantidade mínima de caracteres: ({MINLENGTH})'],
     maxlength: [200, 'O valor excede a quantidade máxima de caracteres: ({MAXLENGTH})'],
-    minlength: [3, 'O valor é menor que a quantidade mínima de caracteres: ({MINLENGTH})']
+    required: [true, 'O campo "Nome" é obrigatório!']
   },
   descricao: {
     type: String,
     trim: true,
-    required: [true, 'Por quê não há descrição?'],
+    minlength: [5, 'O valor é menor que a quantidade mínima de caracteres: ({MINLENGTH})'],
     maxlength: [200, 'O valor excede a quantidade máxima de caracteres: ({MAXLENGTH})'],
-    minlength: [5, 'O valor é menor que a quantidade mínima de caracteres: ({MINLENGTH})']
+    required: [true, 'O campo "Descrição" é obrigatório!']
   },
   definitivo: {
     type: Boolean,
-    required: [true, 'Por quê não dizer se é definitivo?'],
-    default: false
+    default: false,
+    required: [true, 'O campo "Definitivo?" é obrigatório!']
   },
   dataInicio: {
     type: Date,
+    min: [new Date().setHours(0, 0, 0, 0), 'A data é anterior à data mínima permitida: ({MIN})'],
+    max: [new Date('2018-01-01T01:59:59.000Z'), 'A data é posterior à data máxima permitida: ({MAX})'],
     default: Date.now,
-    max: new Date('December 31, 2018 23:59:59'),
-    min: new Date().setHours(0, 0, 0, 0),
-    required: 'A data de início é obrigatória.'
+    required: [true, 'O campo "Data de Início" é obrigatório!']
   },
   quantidade: {
     type: Number,
-    required: 'A quantidade é obrigatória',
-    max: [100, 'Quantidade superior ao limite'],
-    min: [5, 'Quantidade inferior ao mínimo'],
-    get: v => Math.round(v),
-    set: v => Math.round(v)
+    min: [5, 'O valor é menor que o mínimo permitido: ({MIN})'],
+    max: [100, 'O valor é maior que o máximo permitido: ({MAX})'],
+    required: [true, 'O campo "Quantidade" é obrigatório!']
   },
   cor: {
     type: String,
-    default: '',
     enum: [null, 'Vermelho', 'Rosa', 'Azul', 'Verde', 'purple', 'orange', 'brown', 'yellow']
   },
   cores: {
-    type: [{ type: String, enum: [null, 'Vermelho', 'Rosa', 'Azul', 'Verde', 'purple', 'orange', 'brown', 'yellow'] }],
-    required: true
+    type: [{ type: String, default: 'Vermelho', enum: ['Vermelho', 'Rosa', 'Azul', 'Verde', 'purple', 'orange', 'brown', 'yellow']}],
+    required: [true, 'O campo "Cores" é obrigatório!']
   },
   selectCores: {
-    type: [{ type: String, enum: [null, 'Vermelho', 'Rosa', 'Azul', 'Verde', 'purple', 'orange', 'brown', 'yellow'] }],
-    required: false
-  },
-  provisorio: {
-    type: Boolean,
-    required: [true, 'Por quê não dizer se é provisório?'],
-    default: false
+    type: [{ type: String, enum: [null, 'Vermelho', 'Rosa', 'Azul', 'Verde', 'purple', 'orange', 'brown', 'yellow']}]
   },
   membro: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Membro',
-    required: [false, 'Por quê não selecionar um "Membro"?']
+    ref: 'Membro'
   },
   membros: {
-    type: [{ type: mongoose.Schema.ObjectId, ref: "Membro" }],
-    required: [false, 'Por quê não selecionar "Membros"?']
+    type: [{ type: mongoose.Schema.ObjectId, ref: 'Membro'}]
+  },
+  documento: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'File',
+    required: [true, 'O campo "Documento" é obrigatório!']
+  },
+  imagem: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'File',
+    required: [true, 'O campo "Imagem" é obrigatório!']
   },
   criacao: {
     type: Date,

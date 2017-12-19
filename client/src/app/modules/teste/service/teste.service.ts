@@ -1,3 +1,4 @@
+import { AppSettings } from './../../../app.settings';
 import { GenericService } from './../../../core/service/generic.service';
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
@@ -8,11 +9,11 @@ export class TesteService extends GenericService {
 
   private path = '/testes';
 
-  createOrUpdate(teste: Teste): Observable<Teste> {
-    if (teste._id) {
-      return this.update(teste);
+  createOrUpdate(formData: FormData, callback?) {
+    if (formData.get('_id')) {
+      return this.update(formData, callback);
     } else {
-      return this.create(teste);
+      return this.create(formData, callback);
     }
   }
 
@@ -34,12 +35,29 @@ export class TesteService extends GenericService {
     return this.http.get<string[]>(url);
   }
 
-  create(teste: Teste): Observable<Teste> {
-    return this.http.post<Teste>(this.path, teste);
+  create(formData: FormData, callback?) {
+    this.sendFormData(formData, 'POST', callback);
   }
 
-  update(teste: Teste): Observable<Teste> {
-    return this.http.put<Teste>(this.path, teste);
+  update(formData: FormData, callback?) {
+    this.sendFormData(formData, 'PUT', callback);
+  }
+
+  sendFormData(formData: FormData, action: string, callback?) {
+    const req = new XMLHttpRequest();
+    req.open(action, AppSettings.API_ENDPOINT + this.path);
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    req.setRequestHeader('Authorization', 'Bearer ' + currentUser.token);
+    req.onreadystatechange = () => {
+      if (req.readyState === XMLHttpRequest.DONE && callback) {
+        if (req.status === 200 || req.status === 201) {
+          callback(req.response);
+        } else {
+          callback(null);
+        }
+      }
+    };
+    req.send(formData);
   }
 
   delete(id: string): Observable<any> {

@@ -1,4 +1,5 @@
-var TesteService = require('../services/teste.service');
+const TesteService = require('../services/teste.service'),
+  FileService = require('../../main/file/services/file.service'),
 _this = this;
 
 exports.getTestes = async function (req, res, next) {
@@ -22,10 +23,6 @@ exports.getTestes = async function (req, res, next) {
 
   if (req.body.definitivo != null && req.body.definitivo !== undefined) {
     query.definitivo = req.body.definitivo;
-  }
-
-  if (req.body.provisorio != null && req.body.provisorio !== undefined) {
-    query.provisorio = req.body.provisorio;
   }
 
   if (req.body.ativo != null && req.body.ativo !== undefined) {
@@ -55,7 +52,7 @@ exports.getAllTestes = async function (req, res, next) {
 
 exports.getTeste = async function (req, res, next) {
   try {
-    var testes = await TesteService.getTeste(req.params.id)
+    var testes = await TesteService.getTeste(req.params.id);
     return res.status(200).json(testes);
   } catch (e) {
     return res.status(400).json({ status: 400, message: 'Ocorreu um erro ao buscar o registro: ' + e });
@@ -63,29 +60,37 @@ exports.getTeste = async function (req, res, next) {
 }
 
 exports.createTeste = async function (req, res, next) {
+  const body = JSON.parse(req.body.teste);
   var dataInicio = null;
-  if (req.body.dataInicio) {
-    dataInicio = new Date(req.body.dataInicio);
+  if (body.dataInicio) {
+    dataInicio = new Date(body.dataInicio);
     dataInicio = new Date(dataInicio.getUTCFullYear(), dataInicio.getUTCMonth(), dataInicio.getUTCDate(), 0, 0, 0, 0);
   }
 
   var teste = {
-    nome: req.body.nome,
-    descricao: req.body.descricao,
-    definitivo: req.body.definitivo,
+    nome: body.nome,
+    descricao: body.descricao,
+    definitivo: body.definitivo,
     dataInicio: dataInicio,
-    quantidade: req.body.quantidade,
-    cor: req.body.cor,
-    cores: req.body.cores,
-    selectCores: req.body.selectCores,
-    provisorio: req.body.provisorio,
-    membro: req.body.membro,
-    membros: req.body.membros,
-    ativo: req.body.ativo,
+    quantidade: body.quantidade,
+    cor: body.cor,
+    cores: body.cores,
+    selectCores: body.selectCores,
+    membro: body.membro,
+    membros: body.membros,
+    documento: body.documento,
+    imagem: body.imagem,
+    ativo: body.ativo,
     usuario: req.user.sub
   };
 
   try {
+    if (Array.isArray(req.files.file)) {
+      teste.documento = await FileService.createOrUpdateFile(teste.documento, req.files.file[0]);
+    }
+    if (Array.isArray(req.files.image)) {
+      teste.imagem = await FileService.createOrUpdateFile(teste.imagem, req.files.image[0]);
+    }
     var createdTeste = await TesteService.createTeste(teste, req.user.sub);
     return res.status(201).json(createdTeste);
   } catch (e) {
@@ -94,33 +99,41 @@ exports.createTeste = async function (req, res, next) {
 }
 
 exports.updateTeste = async function (req, res, next) {
-  if (!req.body._id) {
+  const body = JSON.parse(req.body.teste);
+  if (!body._id) {
     return res.status(400).json({ status: 400., message: 'Id do registro não encontrado: ' + e });
   }
 
   var dataInicio = null;
-  if (req.body.dataInicio) {
-    dataInicio = new Date(req.body.dataInicio);
+  if (body.dataInicio) {
+    dataInicio = new Date(body.dataInicio);
     dataInicio = new Date(dataInicio.getUTCFullYear(), dataInicio.getUTCMonth(), dataInicio.getUTCDate(), 0, 0, 0, 0);
   }
-  var id = req.body._id;
+  var id = body._id;
   var teste = {
     id,
-    nome: req.body.nome ? req.body.nome : null,
-    descricao: req.body.descricao ? req.body.descricao : null,
-    definitivo: req.body.definitivo,
+    nome: body.nome ? body.nome : null,
+    descricao: body.descricao ? body.descricao : null,
+    definitivo: body.definitivo,
     dataInicio: dataInicio,
-    quantidade: req.body.quantidade ? req.body.quantidade : null,
-    cor: req.body.cor ? req.body.cor : null,
-    cores: req.body.cores ? req.body.cores : null,
-    selectCores: req.body.selectCores ? req.body.selectCores : null,
-    provisorio: req.body.provisorio,
-    membro: req.body.membro ? req.body.membro : null,
-    membros: req.body.membros ? req.body.membros : null,
-    ativo: req.body.ativo
+    quantidade: body.quantidade ? body.quantidade : null,
+    cor: body.cor ? body.cor : null,
+    cores: body.cores ? body.cores : null,
+    selectCores: body.selectCores ? body.selectCores : null,
+    membro: body.membro ? body.membro : null,
+    membros: body.membros ? body.membros : null,
+    documento: body.documento ? body.documento : null,
+    imagem: body.imagem ? body.imagem : null,
+    ativo: body.ativo
   };
 
   try {
+    if (Array.isArray(req.files.file)) {
+      teste.documento = await FileService.createOrUpdateFile(teste.documento, req.files.file[0]);
+    }
+    if (Array.isArray(req.files.image)) {
+      teste.imagem = await FileService.createOrUpdateFile(teste.imagem, req.files.image[0]);
+    }
     var updatedTeste = await TesteService.updateTeste(teste, req.user.sub);
     return res.status(200).json({ status: 200, data: updatedTeste, message: 'Registro atualizado com sucesso.' });
   } catch (e) {

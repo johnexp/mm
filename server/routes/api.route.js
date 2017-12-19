@@ -1,7 +1,12 @@
 var express = require('express');
 
 var router = express.Router();
-var users = require('../src/user/routes/users.route');
+var users = require('../src/main/user/routes/users.route');
+var action = require('../src/main/action/routes/action.route');
+var modules = require('../src/main/module/routes/module.route');
+var permission = require('../src/main/permission/routes/permission.route');
+var menuModule = require('../src/main/menu-module/routes/menu-module.route');
+
 var versao = require('../src/versao/routes/versao.route');
 var membros = require('../src/membro/routes/membro.route');
 var homologacoes = require('../src/homologacao/routes/homologacao.route');
@@ -13,10 +18,6 @@ var wiki = require('../src/wiki/routes/wiki.route');
 var arquivo = require('../src/arquivo/routes/arquivo.route');
 var contato = require('../src/contato/routes/contato.route');
 var teste = require('../src/teste/routes/teste.route');
-var action = require('../src/action/routes/action.route');
-var modules = require('../src/module/routes/module.route');
-var permission = require('../src/permission/routes/permission.route');
-var menuModule = require('../src/menu-module/routes/menu-module.route');
 
 router.use('/users', users);
 router.use('/versoes', versao);

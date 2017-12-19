@@ -3,7 +3,7 @@ var router = express.Router();
 var guard = require('express-jwt-permissions')();
 
 var ModuleController = require('../controllers/module.controller');
-var RoleValidation = require('../../../routes/role-validation');
+var RoleValidation = require('../../../../routes/role-validation');
 
 // Map each API to the Controller Functions
 router.post('/filter/*?', RoleValidation.validateRole, guard.check('module:listar'), ModuleController.getModules);

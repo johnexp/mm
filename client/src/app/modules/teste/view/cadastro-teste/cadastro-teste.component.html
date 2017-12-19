@@ -79,13 +79,12 @@
           </ng-container>
         </mat-select>
       </mat-form-field>
-      <mat-card fxFlex class="checkbox-container">
-        <mat-checkbox name="provisorio" [(ngModel)]="teste.provisorio">Provisório?</mat-checkbox>
-      </mat-card>
       <app-select-entity-field fxFlex [form]="form" [fieldLabel]="'Membro'" [entityName]="'membros'" [entityMainProperty]="'nome'"
-        [model]="teste" [modelEntityProperty]="'membro'" [displayedColumns]="membroSelectionColumns" [multiple]="false"></app-select-entity-field>
+        [model]="teste" [modelEntityProperty]="'membro'" [displayedColumns]="membroSelectionColumns" [multiple]=""></app-select-entity-field>
       <app-select-entity-field fxFlex [form]="form" [fieldLabel]="'Membros'" [entityName]="'membros'" [entityMainProperty]="'nome'"
         [model]="teste" [modelEntityProperty]="'membros'" [displayedColumns]="membrosSelectionColumns" [multiple]="true"></app-select-entity-field>
+      <app-custom-file-upload fxFlex [model]="teste" [modelFileProperty]="'documento'" [required]="true" [fieldLabel]="'Documento'" [form]="form" [file]="teste.documento?.file"></app-custom-file-upload>
+      <app-image-preview fxFlex="20" fxFlex.sm="30" fxFlex.xs="100" [model]="teste" [modelFileProperty]="'imagem'" [image]="teste.imagem?.file" [form]="form" [fieldLabel]="'Imagem'" [required]="true"></app-image-preview>
     </div>
   </fieldset>
   <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">

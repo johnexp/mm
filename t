@@ -3,15 +3,17 @@
     "modelProps": {
       "type": "String",
       "trim": true,
-      "required": "[true, 'Por quê não há nome?']",
+      "minlength": "[3, 'O valor é menor que a quantidade mínima de caracteres: ({MINLENGTH})']",
       "maxlength": "[200, 'O valor excede a quantidade máxima de caracteres: ({MAXLENGTH})']",
-      "minlength": "[3, 'O valor é menor que a quantidade mínima de caracteres: ({MINLENGTH})']"
+      "required": "[true, 'O campo \"Nome\" é obrigatório!']"
     },
     "viewProps": {
       "name": "nome",
       "viewValue": "Nome",
       "fieldType": "text",
       "type": "string",
+      "minlength": "3",
+      "maxlength": "200",
       "required": true,
       "showInput": true,
       "showFilter": true,
@@ -22,15 +24,17 @@
     "modelProps": {
       "type": "String",
       "trim": true,
-      "required": "[true, 'Por quê não há descrição?']",
+      "minlength": "[5, 'O valor é menor que a quantidade mínima de caracteres: ({MINLENGTH})']",
       "maxlength": "[200, 'O valor excede a quantidade máxima de caracteres: ({MAXLENGTH})']",
-      "minlength": "[5, 'O valor é menor que a quantidade mínima de caracteres: ({MINLENGTH})']"
+      "required": "[true, 'O campo \"Descrição\" é obrigatório!']"
     },
     "viewProps": {
       "name": "descricao",
       "viewValue": "Descrição",
       "fieldType": "textarea",
       "type": "string",
+      "minlength": "5",
+      "maxlength": "200",
       "required": true,
       "showInput": true,
       "showFilter": true,
@@ -40,8 +44,8 @@
   "definitivo": {
     "modelProps": {
       "type": "Boolean",
-      "required": "[true, 'Por quê não dizer se é definitivo?']",
-      "default": false
+      "default": false,
+      "required": "[true, 'O campo \"Definitivo?\" é obrigatório!']"
     },
     "viewProps": {
       "name": "definitivo",
@@ -57,18 +61,18 @@
   "dataInicio": {
     "modelProps": {
       "type": "Date",
+      "min": "[new Date().setHours(0, 0, 0, 0), 'A data é anterior à data mínima permitida: ({MIN})']",
+      "max": "[new Date('2018-01-01T01:59:59.000Z'), 'A data é posterior à data máxima permitida: ({MAX})']",
       "default": "Date.now",
-      "max": "new Date('December 31, 2018 23:59:59')",
-      "min": "new Date().setHours(0, 0, 0, 0)",
-      "required": "'A data de início é obrigatória.'"
+      "required": "[true, 'O campo \"Data de Início\" é obrigatório!']"
     },
     "viewProps": {
       "name": "dataInicio",
       "viewValue": "Data de Início",
       "fieldType": "date",
-      "type": "Date",
-      "min": "new Date",
-      "max": "new Date('December 31, 2017 23:59:59')",
+      "type": "date",
+      "min": "new Date()",
+      "max": "new Date('2018-01-01T01:59:59.000Z')",
       "required": true,
       "showInput": true,
       "showFilter": true,
@@ -78,11 +82,9 @@
   "quantidade": {
     "modelProps": {
       "type": "Number",
-      "required": "'A quantidade é obrigatória'",
-      "max": "[100, 'Quantidade superior ao limite']",
-      "min": "[5, 'Quantidade inferior ao mínimo']",
-      "get": "v => Math.round(v)",
-      "set": "v => Math.round(v)"
+      "min": "[5, 'O valor é menor que o mínimo permitido: ({MIN})']",
+      "max": "[100, 'O valor é maior que o máximo permitido: ({MAX})']",
+      "required": "[true, 'O campo \"Quantidade\" é obrigatório!']"
     },
     "viewProps": {
       "name": "quantidade",
@@ -100,7 +102,6 @@
   "cor": {
     "modelProps": {
       "type": "String",
-      "default": "''",
       "enum": "[null, 'Vermelho', 'Rosa', 'Azul', 'Verde', 'purple', 'orange', 'brown', 'yellow']"
     },
     "viewProps": {
@@ -116,14 +117,15 @@
   },
   "cores": {
     "modelProps": {
-      "type": "[{ type: String, enum: [null, 'Vermelho', 'Rosa', 'Azul', 'Verde', 'purple', 'orange', 'brown', 'yellow'] }]",
-      "required": true
+      "type": "[{ type: String, default: 'Vermelho', enum: ['Vermelho', 'Rosa', 'Azul', 'Verde', 'purple', 'orange', 'brown', 'yellow']}]",
+      "required": "[true, 'O campo \"Cores\" é obrigatório!']"
     },
     "viewProps": {
       "name": "cores",
       "viewValue": "Cores",
       "fieldType": "checkbox-multiple",
       "type": "string",
+      "multiple": true,
       "required": true,
       "showInput": true,
       "showFilter": true,
@@ -132,32 +134,15 @@
   },
   "selectCores": {
     "modelProps": {
-      "type": "[{ type: String, enum: [null, 'Vermelho', 'Rosa', 'Azul', 'Verde', 'purple', 'orange', 'brown', 'yellow'] }]",
-      "required": false
+      "type": "[{ type: String, enum: [null, 'Vermelho', 'Rosa', 'Azul', 'Verde', 'purple', 'orange', 'brown', 'yellow']}]"
     },
     "viewProps": {
       "name": "selectCores",
       "viewValue": "Select Cores",
       "fieldType": "select",
       "type": "string",
+      "multiple": true,
       "required": false,
-      "showInput": true,
-      "showFilter": true,
-      "showColumn": true
-    }
-  },
-  "provisorio": {
-    "modelProps": {
-      "type": "Boolean",
-      "required": "[true, 'Por quê não dizer se é provisório?']",
-      "default": false
-    },
-    "viewProps": {
-      "name": "provisorio",
-      "viewValue": "Provisório?",
-      "fieldType": "checkbox",
-      "type": "boolean",
-      "required": true,
       "showInput": true,
       "showFilter": true,
       "showColumn": true
@@ -166,8 +151,7 @@
   "membro": {
     "modelProps": {
       "type": "mongoose.Schema.ObjectId",
-      "ref": "'Membro'",
-      "required": "[false, 'Por quê não selecionar um \"Membro\"?']"
+      "ref": "'Membro'"
     },
     "populate": {
       "path": "membro",
@@ -182,7 +166,6 @@
       "mainEntityFieldName": "nome",
       "mainEntityFieldLabel": "Nome",
       "type": "entity",
-      "multiple": false,
       "required": false,
       "showInput": true,
       "showFilter": true,
@@ -191,8 +174,7 @@
   },
   "membros": {
     "modelProps": {
-      "type": "[{ type: mongoose.Schema.ObjectId, ref: \"Membro\" }]",
-      "required": "[false, 'Por quê não selecionar \"Membros\"?']"
+      "type": "[{ type: mongoose.Schema.ObjectId, ref: 'Membro'}]"
     },
     "populate": {
       "path": "membros",
@@ -214,26 +196,43 @@
       "showColumn": false
     }
   },
-  "arquivo": {
+  "documento": {
     "modelProps": {
-      "type": "[{ type: mongoose.Schema.ObjectId, ref: \"Membro\" }]",
-      "required": "[false, 'Por quê não selecionar \"Membros\"?']"
+      "type": "mongoose.Schema.ObjectId",
+      "ref": "'File'",
+      "required": "[true, 'O campo \"Documento\" é obrigatório!']"
     },
     "populate": {
-      "path": "membros",
-      "select": "nome"
+      "path": "documento"
     },
     "viewProps": {
-      "name": "membros",
-      "viewValue": "Membros",
-      "fieldType": "entity",
-      "entityName": "Membro",
-      "entityRoutePath": "membros",
-      "mainEntityFieldName": "nome",
-      "mainEntityFieldLabel": "Nome",
+      "name": "documento",
+      "viewValue": "Documento",
+      "fieldType": "file",
+      "entityName": "File",
       "type": "entity",
-      "multiple": true,
-      "required": false,
+      "required": true,
+      "showInput": true,
+      "showFilter": true,
+      "showColumn": false
+    }
+  },
+  "imagem": {
+    "modelProps": {
+      "type": "mongoose.Schema.ObjectId",
+      "ref": "'File'",
+      "required": "[true, 'O campo \"Imagem\" é obrigatório!']"
+    },
+    "populate": {
+      "path": "imagem"
+    },
+    "viewProps": {
+      "name": "imagem",
+      "viewValue": "Imagem",
+      "fieldType": "image",
+      "entityName": "File",
+      "type": "entity",
+      "required": true,
       "showInput": true,
       "showFilter": true,
       "showColumn": false

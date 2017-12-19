@@ -1,4 +1,4 @@
-let User = require('../src/user/models/user.model');
+let User = require('../src/main/user/models/user.model');
 
 exports.validateRole = async (req, res, next) => {
   var user = await User.findById(req.user.sub);

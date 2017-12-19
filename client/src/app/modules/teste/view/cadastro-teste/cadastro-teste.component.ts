@@ -6,6 +6,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { Membro } from './../../../membro/domain/membro';
+import { File } from './../../../../core/domain/file';
 
 @Component({
   selector: 'app-cadastro-teste',
@@ -19,8 +20,8 @@ export class CadastroTesteComponent implements OnInit {
   teste: Teste = new Teste;
   @ViewChild('form') form;
   disabled: Boolean = false;
-  dataInicioMinDate: Date = new Date;
-  dataInicioMaxDate: Date = new Date('December 31, 2017 23:59:59');
+  dataInicioMinDate: Date = new Date();
+  dataInicioMaxDate: Date = new Date('2018-01-01T01:59:59.000Z');
   corLista: string[] = [];
   coresLista: string[] = [];
   selectCoresLista: string[] = [];
@@ -92,20 +93,31 @@ export class CadastroTesteComponent implements OnInit {
       this.customSnackBar.open('O formulário não foi preenchido corretamente', 'warn');
       return;
     }
+    const formData = new FormData();
+    if (this.teste.documento && this.teste.documento.file) {
+      formData.append('file', this.teste.documento.file.binary);
+    }
+    if (this.teste.imagem && this.teste.imagem.file) {
+      formData.append('image', this.teste.imagem.file.binary);
+    }
+    formData.append('teste', JSON.stringify(this.teste));
+    if (this.teste._id) {
+      formData.append('_id', this.teste._id.toString());
+    }
     this.blockUI.start('Salvando...');
-    this.testeService.createOrUpdate(this.teste).subscribe(
+    this.testeService.createOrUpdate(formData,
       teste => {
         this.blockUI.stop();
-        if (!this.teste._id) {
-          this.customSnackBar.open('Registro salvo com sucesso!', 'success');
+        if (!teste) {
+          this.customSnackBar.open('Não foi possível salvar o registro.', 'danger');
         } else {
-          this.customSnackBar.open('Registro alterado com sucesso!', 'success');
+          if (!this.teste._id) {
+            this.customSnackBar.open('Registro salvo com sucesso!', 'success');
+          } else {
+            this.customSnackBar.open('Registro alterado com sucesso!', 'success');
+          }
+          this.router.navigate(['administracao/teste']);
         }
-        this.router.navigate(['cadastros/teste']);
-      },
-      error => {
-        this.blockUI.stop();
-        this.customSnackBar.open(error, 'danger');
       }
     );
   }

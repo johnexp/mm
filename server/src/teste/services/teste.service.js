@@ -1,4 +1,4 @@
-var Teste = require('../models/teste.model');
+const Teste = require('../models/teste.model'),
 _this = this;
 
 exports.getTestes = async function (query, page, limit, sort) {
@@ -16,6 +16,10 @@ exports.getTestes = async function (query, page, limit, sort) {
     }, {
       path: 'membros',
       select: 'nome'
+    }, {
+      path: 'documento'
+    }, {
+      path: 'imagem'
     }]
   };
 
@@ -40,6 +44,10 @@ exports.getAllTestes = async function (query) {
       }, {
         path: 'membros',
         select: 'nome'
+      }, {
+        path: 'documento'
+      }, {
+        path: 'imagem'
       }]);
     return testes;
   } catch (e) {
@@ -60,6 +68,10 @@ exports.getTeste = async function (id) {
       }, {
         path: 'membros',
         select: 'nome'
+      }, {
+        path: 'documento'
+      }, {
+        path: 'imagem'
       }]);
     return teste;
   } catch (e) {
@@ -79,9 +91,10 @@ exports.createTeste = async function (teste, user) {
     cor: teste.cor,
     cores: teste.cores,
     selectCores: teste.selectCores,
-    provisorio: teste.provisorio,
     membro: teste.membro,
     membros: teste.membros,
+    documento: teste.documento,
+    imagem: teste.imagem,
     ativo: teste.ativo,
     usuario: teste.usuario
   });
@@ -117,9 +130,10 @@ exports.updateTeste = async function (teste, user) {
   oldTeste.cor = teste.cor;
   oldTeste.cores = teste.cores;
   oldTeste.selectCores = teste.selectCores;
-  oldTeste.provisorio = teste.provisorio;
   oldTeste.membro = teste.membro;
   oldTeste.membros = teste.membros;
+  oldTeste.documento = teste.documento;
+  oldTeste.imagem = teste.imagem;
   oldTeste.ativo = teste.ativo;
 
   try {

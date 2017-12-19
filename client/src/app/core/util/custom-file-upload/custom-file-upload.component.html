@@ -4,7 +4,7 @@
     <label for="file" class="upload-label" [ngClass]="{'invisible': filePreview.innerHTML != ''}" fxFlex>
       <a mat-button type="button" color="accent" class="block">
         <mat-icon>attach_file</mat-icon>
-        Inserir Arquivo
+        Inserir {{fieldLabel}}
       </a>
     </label>
     <a [hidden]="!fileUrl" href="{{fileUrl}}" target="_blank" mat-icon-button type="button" matTooltip="Download" download color="primary">
@@ -14,9 +14,9 @@
       <mat-icon>clear</mat-icon>
     </button>
     <input type="file" [hidden]="true" id="file" (change)="onFileChange($event)" #fileInput>
-    <input type="text" [hidden]="true" name="{{modelFileNameProperty}}" #inputFileHidden="ngModel" [(ngModel)]="model[modelFileNameProperty]" [required]="required">
+    <input type="text" [hidden]="true" name="{{modelFileNameProperty}}" #inputFileHidden="ngModel" [(ngModel)]="fileName" [required]="required">
   </div>
   <mat-error [hidden]="!inputFileHidden.hasError('required') || (inputFileHidden.pristine && !inputFileHidden.touched && !form.submitted)">
-    O campo "Ticket" é obrigatório
+    O campo "{{fieldLabel}}" é obrigatório
   </mat-error>
 </div>

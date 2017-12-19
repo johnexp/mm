@@ -12,23 +12,40 @@ import { NgModel } from '@angular/forms';
 })
 export class CustomFileUploadComponent implements AfterViewInit {
 
-  @Input() model: any;
+  // @Input() model: any;
+  @Input() fieldLabel = 'Arquivo';
   @Input() modelFileProperty = 'arquivo';
-  @Input() modelFileNameProperty = 'nomeArquivo';
+  @Input() modelFileNameProperty = 'fileName';
   @Input() required: Boolean = false;
   @Input() form: any = {};
   @ViewChild('filePreview') filePreview: ElementRef;
   @ViewChild('inputFileHidden') inputFileHidden: NgModel;
   fileUrl: String;
-  fileChange: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  fileName: String = '';
 
+  fileChange: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private _file: String = '';
+
+  modelChange: BehaviorSubject<any> = new BehaviorSubject<any>({});
+  private _model: any;
+
   get file(): string {
     return this.fileChange.value;
   }
+
   @Input()
   set file(data: string) {
     this.fileChange.next(data);
+    this.showFile();
+  }
+
+  get model(): any {
+    return this.modelChange.value;
+  }
+
+  @Input()
+  set model(data: any) {
+    this.modelChange.next(data);
     this.showFile();
   }
 
@@ -50,38 +67,43 @@ export class CustomFileUploadComponent implements AfterViewInit {
       const file = event.target.files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
-        this.model.arquivo = {
+        if (!this.model[this.modelFileProperty]) {
+          this.model[this.modelFileProperty] = {};
+        }
+        this.model[this.modelFileProperty].file = {
           filename: file.name,
           filetype: file.type,
-          // value: reader.result.split(',')[1],
-          file: file
+          binary: file
         };
-        this.model[this.modelFileNameProperty] = file.name;
+        this.model[this.modelFileProperty].fileName = file.name;
         this.showFile();
       };
     }
   }
 
   clearFile() {
-    this.model[this.modelFileProperty] = null;
-    this.model[this.modelFileNameProperty] = null;
-    this.model.arquivo = null;
+    this.model[this.modelFileProperty] = {};
     this.filePreview.nativeElement.innerHTML = '';
+    this.fileName = null;
     this.fileUrl = null;
   }
 
   showFile() {
-    if (this.model.arquivo) {
-      const span = <HTMLSpanElement>(document.createElement('span'));
-      span.innerHTML = this.model.arquivo.filename;
-      this.filePreview.nativeElement.innerHTML = '';
-      this.filePreview.nativeElement.appendChild(span);
-    } else if (this.model[this.modelFileProperty]) {
-      this.fileUrl = AppSettings.SERVER_URL + this.model[this.modelFileProperty].split('public')[1];
-      const span = <HTMLSpanElement>(document.createElement('span'));
-      span.innerHTML = this.model[this.modelFileNameProperty];
-      this.filePreview.nativeElement.innerHTML = '';
-      this.filePreview.nativeElement.appendChild(span);
+    if (this.model[this.modelFileProperty]) {
+      if (this.model[this.modelFileProperty].file) {
+        this.fileName = this.model[this.modelFileProperty].fileName;
+        const span = <HTMLSpanElement>(document.createElement('span'));
+        span.innerHTML = this.model[this.modelFileProperty].file.filename;
+        this.filePreview.nativeElement.innerHTML = '';
+        this.filePreview.nativeElement.appendChild(span);
+      } else if (this.model[this.modelFileProperty]._id) {
+        this.fileName = this.model[this.modelFileProperty].fileName;
+        this.fileUrl = AppSettings.SERVER_URL + this.model[this.modelFileProperty].filePath.split('public')[1];
+        const span = <HTMLSpanElement>(document.createElement('span'));
+        span.innerHTML = this.model[this.modelFileProperty].fileName;
+        this.filePreview.nativeElement.innerHTML = '';
+        this.filePreview.nativeElement.appendChild(span);
+      }
     }
   }
 }
