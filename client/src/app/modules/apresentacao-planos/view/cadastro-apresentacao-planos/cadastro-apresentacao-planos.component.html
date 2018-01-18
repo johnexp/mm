@@ -1,0 +1,35 @@
+<h1 class="page-title">
+  <mat-icon>format_color_text</mat-icon>
+  Apresentação Planos Por Adesão
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
+    <mat-form-field fxFlex>
+      <input matInput class="form-control" name="titulo" #titulo="ngModel" [(ngModel)]="apresentacaoPlanos.titulo" placeholder="Título"
+        required>
+      <mat-error [hidden]="!titulo.hasError('required') || (titulo.pristine && !titulo.touched && !form.submitted)">
+        O campo "Título" é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <input matInput class="form-control" name="subtitulo" [(ngModel)]="apresentacaoPlanos.subtitulo" placeholder="Subtítulo">
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <input matInput class="form-control" name="urlVerMais" [(ngModel)]="apresentacaoPlanos.urlVerMais" placeholder="URL (Ver Mais)">
+    </mat-form-field>
+    <mat-form-field fxFlex="100">
+      <textarea matInput name="texto" #texto="ngModel" [(ngModel)]="apresentacaoPlanos.texto" placeholder="Texto" required></textarea>
+      <mat-error [hidden]="!texto.hasError('required') || (texto.pristine && !texto.touched && !form.submitted)">
+        O campo "Texto" é obrigatório
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center">
+    <button mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+  </div>
+</form>

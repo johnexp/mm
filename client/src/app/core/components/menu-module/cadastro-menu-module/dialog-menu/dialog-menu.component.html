@@ -20,6 +20,12 @@
           O campo "Caminho" é obrigatório
         </mat-error>
       </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput type="number" class="form-control" min="1" name="order" #order="ngModel" [(ngModel)]="data.menu.order" placeholder="Ordem" required>
+        <mat-error [hidden]="!order.hasError('required') || (order.pristine && !order.touched && !form.submitted)">
+          O campo "Ordem" é obrigatório
+        </mat-error>
+      </mat-form-field>
     </div>
   </form>
 </div>

@@ -1,0 +1,8 @@
+[
+  {
+    "key": "EMAIL_DESTINATARIO_FORMULARIOS",
+    "value": "analista@valem.com.br",
+    "description": "Destinatário que receberá os emails enviados através dos formulários da área do cliente.",
+    "ativo": true
+  }
+]

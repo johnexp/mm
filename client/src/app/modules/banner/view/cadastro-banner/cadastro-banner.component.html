@@ -1,25 +1,23 @@
-<h1 class="page-title">
-  <mat-icon>photo_size_select_actual</mat-icon>
-  Banner -
-  <span class="subtitle">Cadastrar Banner
-  </span>
-</h1>
+<h1 class="page-title" ><mat-icon>done</mat-icon>Banner -
+  <span class="subtitle">
+    {{ banner._id ? 'Editar' : 'Cadastrar' }} Banner
+  </span></h1>
 
 <form #form="ngForm" (ngSubmit)="salvar()" novalidate>
-  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
-    <app-image-preview fxFlex="20" fxFlex.sm="30" fxFlex.xs="100" [model]="banner" [image]="imagem"></app-image-preview>
-    <div fxFlex fxFlex.sm="100" fxLayoutWrap>
+  <fieldset class="fake-fieldset" [disabled]="disabled">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+      <app-image-preview fxFlex="100" [model]="banner" [modelFileProperty]="'imagem'" [image]="banner.imagem?.file" [form]="form" [fieldLabel]="'Imagem'" [required]="true"></app-image-preview>
       <mat-form-field fxFlex>
-        <input matInput class="form-control" name="titulo" #titulo="ngModel" [(ngModel)]="banner.titulo" placeholder="Título" required>
-        <mat-error [hidden]="!titulo.hasError('required') || (titulo.pristine && !titulo.touched && !form.submitted)">
-          O campo "Título" é obrigatório
+        <input matInput name="tituloL1" #tituloL1="ngModel" [(ngModel)]="banner.tituloL1" placeholder="Título (1ª Linha)" required>
+        <mat-error [hidden]="!tituloL1.hasError('required') || (tituloL1.pristine && !tituloL1.touched && !form.submitted)">
+          O campo "Título (1ª Linha)" é obrigatório
         </mat-error>
       </mat-form-field>
       <mat-form-field fxFlex>
-        <input matInput class="form-control" name="texto" #texto="ngModel" [(ngModel)]="banner.texto" placeholder="Texto" required>
-        <mat-error [hidden]="!texto.hasError('required') || (texto.pristine && !texto.touched && !form.submitted)">
-          O campo "Texto" é obrigatório
-        </mat-error>
+        <input matInput name="tituloL2" [(ngModel)]="banner.tituloL2" placeholder="Título (2ª Linha)">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput name="texto" #texto="ngModel" [(ngModel)]="banner.texto" placeholder="Texto">
       </mat-form-field>
       <div class="buttons-container layout-margin" fxLayoutAlign="center center" fxFlex="100">
         <button mat-button type="button" color="primary" (click)="abrirDialogBotao()">
@@ -40,16 +38,19 @@
         </ng-template>
       </app-generic-datatable>
     </div>
-  </div>
-
-  <div class="buttons-container layout-margin" fxLayoutAlign="end center">
-    <button mat-button mat-raised-button type="submit" color="primary">
+  </fieldset>
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">
+    <button *ngIf="!disabled" mat-button mat-raised-button type="submit" color="primary">
       <mat-icon>save</mat-icon>
       Salvar
     </button>
-    <button mat-button type="button" (click)="cancelar()">
+    <button *ngIf="!disabled" mat-button type="button" (click)="cancelar()">
       <mat-icon>cancel</mat-icon>
       Cancelar
+    </button>
+    <button *ngIf="disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
     </button>
   </div>
 </form>

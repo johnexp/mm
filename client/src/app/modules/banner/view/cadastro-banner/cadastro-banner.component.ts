@@ -1,8 +1,7 @@
-import { GenericDatabase } from './../../../../core/util/data-table/generic-database';
-import { Botao } from './../../domain/botao';
 import { DialogBotaoComponent } from './dialog-botao/dialog-botao.component';
 import { MatDialog } from '@angular/material';
-import { AppSettings } from './../../../../app.settings';
+import { Botao } from './../../domain/botao';
+import { GenericDatabase } from './../../../../core/util/data-table/generic-database';
 import { CustomSnackBarService } from './../../../../core/util/snack-bar/custom-snack-bar.service';
 import { Banner } from './../../domain/banner';
 import { BannerService } from './../../service/banner.service';
@@ -10,6 +9,7 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { File } from './../../../../core/domain/file';
 
 @Component({
   selector: 'app-cadastro-banner',
@@ -22,13 +22,13 @@ export class CadastroBannerComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   banner: Banner = new Banner;
   @ViewChild('form') form;
+  disabled: Boolean = false;
   databaseBotoes = new GenericDatabase;
   displayedBotoesColumns = [
     { columnDef: 'texto', header: 'Texto', cell: (row: Botao) => `${row.texto}` },
     { columnDef: 'url', header: 'URL', cell: (row: Botao) => `${row.url}` },
     { columnDef: 'cor', header: 'Cor', cell: (row: Botao) => `${Botao.CORES[row.cor]}` }
   ];
-  imagem: string;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -45,6 +45,12 @@ export class CadastroBannerComponent implements OnInit {
         this.obterBanner(params.params['id']);
       }
     });
+    if (this.router.url.indexOf('/visualizar') > -1) {
+      this.disabled = true;
+    } else {
+      this.disabled = false;
+    }
+
   }
 
   obterBanner(id) {
@@ -55,11 +61,10 @@ export class CadastroBannerComponent implements OnInit {
         this.banner.botoes = this.banner.botoes || [];
         this.databaseBotoes = new GenericDatabase;
         this.databaseBotoes.data = this.banner.botoes;
-        this.imagem = this.banner.arquivo;
         this.blockUI.stop();
       },
       error => {
-        this.customSnackBar.open('Não foi possível obter o registro', 'danger');
+        this.customSnackBar.open(error, 'danger');
         this.blockUI.stop();
       }
     );
@@ -70,20 +75,28 @@ export class CadastroBannerComponent implements OnInit {
       this.customSnackBar.open('O formulário não foi preenchido corretamente', 'warn');
       return;
     }
+    const formData = new FormData();
+    if (this.banner.imagem && this.banner.imagem.file) {
+      formData.append('image', this.banner.imagem.file.binary);
+    }
+    formData.append('banner', JSON.stringify(this.banner));
+    if (this.banner._id) {
+      formData.append('_id', this.banner._id.toString());
+    }
     this.blockUI.start('Salvando...');
-    this.bannerService.createOrUpdate(this.banner).subscribe(
+    this.bannerService.createOrUpdate(formData,
       banner => {
         this.blockUI.stop();
-        if (!this.banner._id) {
-          this.customSnackBar.open('Registro salvo com sucesso!', 'success');
+        if (!banner) {
+          this.customSnackBar.open('Não foi possível salvar o registro.', 'danger');
         } else {
-          this.customSnackBar.open('Registro alterado com sucesso!', 'success');
+          if (!this.banner._id) {
+            this.customSnackBar.open('Registro salvo com sucesso!', 'success');
+          } else {
+            this.customSnackBar.open('Registro alterado com sucesso!', 'success');
+          }
+          this.router.navigate(['cadastros/banner']);
         }
-        this.router.navigate(['cadastros/banner']);
-      },
-      error => {
-        this.blockUI.stop();
-        this.customSnackBar.open('Não foi possível salvar o registro!', 'danger');
       }
     );
   }

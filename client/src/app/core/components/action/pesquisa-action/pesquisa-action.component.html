@@ -1,7 +1,7 @@
 <div fxLayoutAlign="space-between center">
   <h1 class="page-title">
     <mat-icon>done</mat-icon>
-    Action
+    Ações
   </h1>
   <mat-form-field>
     <mat-select [(ngModel)]="filtrarAtivos" name="filtrarAtivos" placeholder="Filtrar Ativos" (selectionChange)="buscarActiones()">
@@ -18,6 +18,6 @@
   </mat-form-field>
 </div>
 
-<app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'actions'" [lazy]="false" [hasFilter]="true"
-  [actions]="{'u': true, 'd': true, 'v': true}" [logicalExclusion]="true" (deleteRecord)="mudarAtivacaoAction($event[0], $event[1])">
+<app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'action'" [lazy]="false" [hasFilter]="true"
+  [actions]="{'u': true, 'c': true, 'v': true}" [logicalExclusion]="true" (changeRecordState)="mudarAtivacaoAction($event[0], $event[1])">
 </app-generic-datatable>

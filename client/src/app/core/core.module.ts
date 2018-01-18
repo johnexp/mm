@@ -1,8 +1,17 @@
+import { QuillModule } from 'ngx-quill';
+import { RichTextFieldComponent } from './util/rich-text-field/rich-text-field.component';
+import { PesquisaParamComponent } from './components/param/pesquisa-param/pesquisa-param.component';
+import { CadastroParamComponent } from './components/param/cadastro-param/cadastro-param.component';
+import { DeniedComponent } from './components/denied/denied.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { PesquisaRoleComponent } from './components/role/pesquisa-role/pesquisa-role.component';
+import { CadastroRoleComponent } from './components/role/cadastro-role/cadastro-role.component';
+import { CadastroUserComponent } from './components/user/cadastro-user/cadastro-user.component';
+import { PesquisaUserComponent } from './components/user/pesquisa-user/pesquisa-user.component';
 import { MenuModuleService } from './service/menu-module.service';
 import { DialogMenuComponent } from './components/menu-module/cadastro-menu-module/dialog-menu/dialog-menu.component';
 import { PesquisaMenuModuleComponent } from './components/menu-module/pesquisa-menu-module/pesquisa-menu-module.component';
 import { CadastroMenuModuleComponent } from './components/menu-module/cadastro-menu-module/cadastro-menu-module.component';
-import { MenuService } from './service/menu.service';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { PesquisaPermissionComponent } from './components/permission/pesquisa-permission/pesquisa-permission.component';
 import { CadastroPermissionComponent } from './components/permission/cadastro-permission/cadastro-permission.component';
@@ -29,10 +38,10 @@ import { GenericDatatableComponent } from './util/data-table/generic-datatable.c
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderComponent } from './layout/header/header.component';
-import { FooterComponent } from './layout/footer/footer.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePipe } from '@angular/common';
 import {
   MatTableModule,
   MatButtonModule,
@@ -78,7 +87,6 @@ const MAT_MODULES = [
 
 @NgModule({
   declarations: [
-    FooterComponent,
     HeaderComponent,
     NavigationComponent,
     GenericDatatableComponent,
@@ -88,48 +96,58 @@ const MAT_MODULES = [
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    NotFoundComponent,
+    DeniedComponent,
     CheckboxMultipleComponent,
     SelectEntityFieldComponent,
     DialogEntitySelectionComponent,
+    RichTextFieldComponent,
     CadastroActionComponent,
     PesquisaActionComponent,
     CadastroModuleComponent,
     PesquisaModuleComponent,
+    CadastroParamComponent,
+    PesquisaParamComponent,
     CadastroPermissionComponent,
     PesquisaPermissionComponent,
     UserInfoComponent,
     CadastroMenuModuleComponent,
     PesquisaMenuModuleComponent,
-    DialogMenuComponent
+    DialogMenuComponent,
+    CadastroUserComponent,
+    PesquisaUserComponent,
+    CadastroRoleComponent,
+    PesquisaRoleComponent
   ],
   imports: [
-    BrowserModule,
+    CommonModule,
     BrowserAnimationsModule,
     FormsModule,
     MAT_MODULES,
     FlexLayoutModule,
     RouterModule,
     HttpClientModule,
+    QuillModule,
     CoreRoutes
   ],
   exports: [
-    FooterComponent,
     HeaderComponent,
     NavigationComponent,
     GenericDatatableComponent,
     ImagePreviewComponent,
     CustomFileUploadComponent,
     CheckboxMultipleComponent,
-    SelectEntityFieldComponent
+    SelectEntityFieldComponent,
+    RichTextFieldComponent
   ],
   providers: [
     CustomSnackBarService,
-    MenuService,
     MenuModuleService,
     AuthGuard,
     AuthenticationService,
     UserService,
-    CustomHttp
+    CustomHttp,
+    DatePipe
   ],
   entryComponents: [
     ConfirmationDialogComponent,

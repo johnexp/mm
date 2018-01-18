@@ -1,21 +1,3 @@
-/* .custom-table /deep/ .mat-header-row {
-  align-items: flex-end;
-  border-bottom: none;
-}
-.custom-table /deep/ .mat-header-row, .custom-table /deep/ .mat-row {
-  padding: 0;
-}
-.custom-table /deep/ .mat-header-cell {
-  font-size: 1.3em;
-  color: #6b2e76;
-  font-weight: 600;
-  text-align: center;
-  border-bottom: 1.5px solid #6b2e76;
-  margin-right: 5px;
-}
-.custom-table /deep/ .mat-cell, .custom-table /deep/ .mat-header-cell {
-  padding: 0 24px;
-} */
 .table-scroll {
   max-width: 100%;
   overflow-x: auto;
@@ -47,13 +29,28 @@
   justify-content: center;
   flex: none;
   padding: 0 10px;
-  min-width: 120px;
+  min-width: 40px;
 }
 
 .custom-table /deep/ .mat-header-cell.mat-column-actions {
   flex: none;
-  min-width: 120px;
+  min-width: 40px;
   padding: 0 10px;
+}
+
+.custom-table /deep/ .mat-cell.mat-column-actions.actions-cell-2,
+.custom-table /deep/ .mat-header-cell.mat-column-actions.actions-header-2 {
+  min-width: 80px;
+}
+
+.custom-table /deep/ .mat-cell.mat-column-actions.actions-cell-3,
+.custom-table /deep/ .mat-header-cell.mat-column-actions.actions-header-3 {
+  min-width: 120px;
+}
+
+.custom-table /deep/ .mat-cell.mat-column-actions.actions-cell-4,
+.custom-table /deep/ .mat-header-cell.mat-column-actions.actions-header-4 {
+  min-width: 160px;
 }
 
 .custom-table /deep/ .mat-sort-header-container:hover .mat-sort-header-button {
@@ -120,4 +117,15 @@
 .selection-container /deep/ .mat-header-row,
 .selection-container /deep/ .mat-row {
   padding-left: 0;
+}
+
+.selection-container /deep/ .mat-paginator-container {
+  background-color: #f1f1f1;
+}
+
+@media screen and (max-width: 599px) {
+  .selection-container {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 }

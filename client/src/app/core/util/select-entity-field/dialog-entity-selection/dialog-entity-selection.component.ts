@@ -15,7 +15,7 @@ export class DialogEntitySelectionComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    this.selectedIds = this.data.selectionData.map(data => data._id);
+    this.selectedIds = this.data.selectionData.map((data: any) => data._id);
   }
 
   onCancelClick(): void {

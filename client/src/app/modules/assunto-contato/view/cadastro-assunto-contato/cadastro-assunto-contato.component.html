@@ -1,0 +1,50 @@
+<h1 class="page-title" ><mat-icon>done</mat-icon>Assunto contato -
+  <span class="subtitle">
+    {{ assuntoContato._id ? 'Editar' : 'Cadastrar' }} Assunto contato
+  </span></h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <fieldset class="fake-fieldset" [disabled]="disabled">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput name="assunto" minlength="2" maxlength="150" #assunto="ngModel" [(ngModel)]="assuntoContato.assunto" placeholder="Assunto" required>
+        <mat-error [hidden]="!assunto.hasError('required') || (assunto.pristine && !assunto.touched && !form.submitted)">
+          O campo "Assunto" é obrigatório
+        </mat-error>
+        <mat-error [hidden]="!assunto.hasError('minlength') || (assunto.pristine && !assunto.touched && !form.submitted)">
+          O valor do campo é menor do que o valor mínimo permitido: 2
+        </mat-error>
+        <mat-error [hidden]="!assunto.hasError('maxlength') || (assunto.pristine && !assunto.touched && !form.submitted)">
+          O valor do campo é maior do que o valor máximo permitido: 150
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput name="email" minlength="5" maxlength="150" #email="ngModel" [(ngModel)]="assuntoContato.email" placeholder="Enviar Para" required>
+        <mat-error [hidden]="!email.hasError('required') || (email.pristine && !email.touched && !form.submitted)">
+          O campo "Enviar Para" é obrigatório
+        </mat-error>
+        <mat-error [hidden]="!email.hasError('minlength') || (email.pristine && !email.touched && !form.submitted)">
+          O valor do campo é menor do que o valor mínimo permitido: 5
+        </mat-error>
+        <mat-error [hidden]="!email.hasError('maxlength') || (email.pristine && !email.touched && !form.submitted)">
+          O valor do campo é maior do que o valor máximo permitido: 150
+        </mat-error>
+      </mat-form-field>
+      <rich-text-field fxFlex="100" [form]="form" [model]="assuntoContato" [maxLength]="1000" [name]="'informacoesAdicionais'" [label]="'Informações Adicionais'"></rich-text-field>
+    </div>
+  </fieldset>
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">
+    <button *ngIf="!disabled" mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button *ngIf="!disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button *ngIf="disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+  </div>
+</form>

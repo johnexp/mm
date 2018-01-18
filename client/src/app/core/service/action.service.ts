@@ -6,7 +6,7 @@ import { Action } from './../domain/action';
 @Injectable()
 export class ActionService extends GenericService {
 
-  private path = '/actions';
+  private path = '/action';
 
   createOrUpdate(action: Action): Observable<Action> {
     if (action._id) {

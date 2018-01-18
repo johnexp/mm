@@ -61,7 +61,7 @@ export class CustomFileUploadComponent implements AfterViewInit {
     }
   }
 
-  onFileChange(event) {
+  onFileChange(event: any) {
     const reader = new FileReader();
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -84,8 +84,8 @@ export class CustomFileUploadComponent implements AfterViewInit {
   clearFile() {
     this.model[this.modelFileProperty] = {};
     this.filePreview.nativeElement.innerHTML = '';
-    this.fileName = null;
-    this.fileUrl = null;
+    this.fileName = '';
+    this.fileUrl = '';
   }
 
   showFile() {

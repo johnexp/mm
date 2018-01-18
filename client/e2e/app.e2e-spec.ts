@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('sascapp App', () => {
+describe('gerenciador-site-valem App', () => {
   let page: AppPage;
 
   beforeEach(() => {

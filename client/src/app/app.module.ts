@@ -1,36 +1,32 @@
-import { TesteModule } from './modules/teste/teste.module';
-import { SobreModule } from './modules/sobre/sobre.module';
-import { ArquivoModule } from './modules/arquivo/arquivo.module';
-import { WikiModule } from './modules/wiki/wiki.module';
-import { ItemProgressoModule } from './modules/item-progresso/item-progresso.module';
-import { HttpModule } from '@angular/http';
-import { customHttpProvider, CustomHttp } from './core/helpers/custom.http';
+import { AppSettings } from './app.settings';
+import { AssuntoContatoModule } from './modules/assunto-contato/assunto-contato.module';
+import { PaginaModule } from './modules/pagina/pagina.module';
+import { ApresentacaoPlanosModule } from './modules/apresentacao-planos/apresentacao-planos.module';
+import { ItemAreaClienteModule } from './modules/item-area-cliente/item-area-cliente.module';
+import { MenuModule } from './modules/menu/menu.module';
+import { OperadoraModule } from './modules/operadora/operadora.module';
+import { ParceiroModule } from './modules/parceiro/parceiro.module';
+import { ProdutoServicoModule } from './modules/produto-servico/produto-servico.module';
+import { DepoimentoModule } from './modules/depoimento/depoimento.module';
 import { BannerModule } from './modules/banner/banner.module';
+import { SobreModule } from './modules/sobre/sobre.module';
 import { ApresentacaoSiteModule } from './modules/apresentacao-site/apresentacao-site.module';
-import { HomologacaoModule } from './modules/homologacao/homologacao.module';
-import { MembroModule } from './modules/membro/membro.module';
+import { customHttpProvider } from './core/helpers/custom.http';
 import { MatPaginatorIntlPtbr } from './core/util/data-table/mat-paginator-intl-ptbr';
-import { VersaoModule } from './modules/versao/versao.module';
 import { CoreModule } from './core/core.module';
 import { AppRoutes } from './app.routes';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
 import { BlockUIModule } from 'ng-block-ui';
-import { MatButtonModule, MatCardModule, MatCheckboxModule, MatChipsModule, MAT_DATE_LOCALE, MatPaginatorIntl } from '@angular/material';
-
-import { AppComponent } from './app.component';
+import { MatPaginatorIntl, MAT_DATE_LOCALE } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import 'hammerjs';
 
-const MAT_MODULES = [
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule
-];
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -41,22 +37,23 @@ const MAT_MODULES = [
     FormsModule,
     BrowserAnimationsModule,
     CommonModule,
-    MAT_MODULES,
     FlexLayoutModule,
     BlockUIModule,
     HttpModule,
     AppRoutes,
     CoreModule,
-    VersaoModule,
-    MembroModule,
-    HomologacaoModule,
     ApresentacaoSiteModule,
-    BannerModule,
-    ItemProgressoModule,
-    WikiModule,
-    ArquivoModule,
     SobreModule,
-    TesteModule
+    BannerModule,
+    DepoimentoModule,
+    ProdutoServicoModule,
+    ParceiroModule,
+    OperadoraModule,
+    MenuModule,
+    ItemAreaClienteModule,
+    ApresentacaoPlanosModule,
+    PaginaModule,
+    AssuntoContatoModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

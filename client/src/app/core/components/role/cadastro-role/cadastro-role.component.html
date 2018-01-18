@@ -1,0 +1,55 @@
+<h1 class="page-title" fxLayoutAlign="space-between center" fxLayout.xs="column">
+  <span>
+    <mat-icon>assignment_turned_in</mat-icon>
+    Perfis -
+    <span class="subtitle">
+      {{ role._id ? 'Editar' : 'Cadastrar' }} Perfil
+    </span>
+  </span>
+  <mat-card>
+    <mat-slide-toggle name="ativo" [(ngModel)]="role.ativo" [disabled]="disabled">
+      Ativo
+    </mat-slide-toggle>
+  </mat-card>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <fieldset class="fake-fieldset" [disabled]="disabled">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput name="roleName" #roleName="ngModel" [(ngModel)]="role.roleName" placeholder="Nome do Perfil" required>
+        <mat-error [hidden]="!roleName.hasError('required') || (roleName.pristine && !roleName.touched && !form.submitted)">
+          O campo "Nome do Perfil" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput name="roleKey" #roleKey="ngModel" [(ngModel)]="role.roleKey" placeholder="Identificador" required>
+        <mat-error [hidden]="!roleKey.hasError('required') || (roleKey.pristine && !roleKey.touched && !form.submitted)">
+          O campo "Identificador" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-card fxFlex class="slide-toggle-container">
+        <mat-slide-toggle name="isAdmin" [(ngModel)]="role.isAdmin">
+          Perfil Administrador
+        </mat-slide-toggle>
+      </mat-card>
+      <app-select-entity-field fxFlex="100" [form]="form" [fieldLabel]="'Permissões'" [required]="false" [entityName]="'permission'"
+        [entityMainProperty]="'prettified'" [selectionType]="'grid'" [lazyFetch]="true" [model]="role" [modelEntityProperty]="'permissions'"
+        [displayedColumns]="permissionSelectionColumns" [multiple]="true"></app-select-entity-field>
+    </div>
+  </fieldset>
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">
+    <button *ngIf="!disabled" mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button *ngIf="!disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button *ngIf="disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+  </div>
+</form>

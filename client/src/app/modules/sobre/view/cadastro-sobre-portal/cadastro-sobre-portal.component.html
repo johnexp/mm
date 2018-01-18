@@ -18,10 +18,7 @@
         O campo "Subtítulo" é obrigatório
       </mat-error>
     </mat-form-field>
-    <div fxLayout="row" fxFlex="100" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutWrap>
-      <h4>Texto *</h4>
-      <div fxFlex="100" [froalaEditor]="froalaOptions" [(froalaModel)]="sobre.texto"></div>
-    </div>
+    <rich-text-field fxFlex="100" [form]="form" [model]="sobre" [name]="'texto'" [required]="true" [label]="'Texto'"></rich-text-field>
   </div>
 
   <div class="buttons-container layout-margin" fxLayoutAlign="end center">

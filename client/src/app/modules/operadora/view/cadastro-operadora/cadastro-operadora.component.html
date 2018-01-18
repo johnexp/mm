@@ -1,0 +1,77 @@
+<h1 class="page-title" fxLayoutAlign="space-between center" fxLayout.xs="column">
+  <span>
+    <mat-icon>done</mat-icon>
+    Operadora -
+    <span class="subtitle">
+      {{ operadora._id ? 'Editar' : 'Cadastrar' }} Operadora
+    </span>
+  </span>
+  <mat-card>
+    <mat-slide-toggle name="ativo" [(ngModel)]="operadora.ativo" [disabled]="disabled">
+      Ativo
+    </mat-slide-toggle>
+  </mat-card>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <fieldset class="fake-fieldset" [disabled]="disabled">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput name="titulo" minlength="5" maxlength="100" #titulo="ngModel" [(ngModel)]="operadora.titulo" placeholder="Título"
+          required>
+        <mat-error [hidden]="!titulo.hasError('required') || (titulo.pristine && !titulo.touched && !form.submitted)">
+          O campo "Título" é obrigatório
+        </mat-error>
+        <mat-error [hidden]="!titulo.hasError('minlength') || (titulo.pristine && !titulo.touched && !form.submitted)">
+          O valor do campo é menor do que o valor mínimo permitido: 5
+        </mat-error>
+        <mat-error [hidden]="!titulo.hasError('maxlength') || (titulo.pristine && !titulo.touched && !form.submitted)">
+          O valor do campo é maior do que o valor máximo permitido: 100
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput name="razaoSocial" maxlength="100" #razaoSocial="ngModel" [(ngModel)]="operadora.razaoSocial" placeholder="Razão Social">
+        <mat-error [hidden]="!razaoSocial.hasError('maxlength') || (razaoSocial.pristine && !razaoSocial.touched && !form.submitted)">
+          O valor do campo é maior do que o valor máximo permitido: 100
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput name="cnpj" [textMask]="{mask: cnpjMask, guide: false}" minlength="18" maxlength="18" #cnpj="ngModel" [(ngModel)]="operadora.cnpj"
+          placeholder="CNPJ" required>
+        <mat-error [hidden]="!cnpj.hasError('required') || (cnpj.pristine && !cnpj.touched && !form.submitted)">
+          O campo "CNPJ" é obrigatório
+        </mat-error>
+        <mat-error [hidden]="!cnpj.hasError('minlength') || (cnpj.pristine && !cnpj.touched && !form.submitted)">
+          O valor do campo é menor do que o valor mínimo permitido: 18
+        </mat-error>
+        <mat-error [hidden]="!cnpj.hasError('maxlength') || (cnpj.pristine && !cnpj.touched && !form.submitted)">
+          O valor do campo é maior do que o valor máximo permitido: 18
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput name="numeroAns" minlength="3" maxlength="10" #numeroAns="ngModel" [(ngModel)]="operadora.numeroAns" placeholder="N° ANS">
+        <mat-error [hidden]="!numeroAns.hasError('minlength') || (numeroAns.pristine && !numeroAns.touched && !form.submitted)">
+          O valor do campo é menor do que o valor mínimo permitido: 3
+        </mat-error>
+        <mat-error [hidden]="!numeroAns.hasError('maxlength') || (numeroAns.pristine && !numeroAns.touched && !form.submitted)">
+          O valor do campo é maior do que o valor máximo permitido: 10
+        </mat-error>
+      </mat-form-field>
+      <rich-text-field fxFlex="100" [form]="form" [model]="operadora" [maxLength]="2000" [minLength]="3" [name]="'texto'" [required]="true" [label]="'Texto'"></rich-text-field>
+    </div>
+  </fieldset>
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">
+    <button *ngIf="!disabled" mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button *ngIf="!disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button *ngIf="disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+  </div>
+</form>

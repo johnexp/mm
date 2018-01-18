@@ -32,12 +32,21 @@ export class CustomHttp extends HttpClient {
 
   private getOptions() {
     // add authorization header with jwt token
-    const headerOptions = {
+    const headerOptions: any = {
       'Content-Type': 'application/json; charset=UTF-8'
     };
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.token) {
-      headerOptions['Authorization'] = 'Bearer ' + currentUser.token;
+    try {
+      let userJson: string = '{}';
+      const userStorage = localStorage.getItem('currentUser');
+      if (typeof userStorage === 'string') {
+        userJson = userStorage;
+      }
+      const currentUser = JSON.parse(userJson);
+      if (currentUser && currentUser.token) {
+        headerOptions['Authorization'] = 'Bearer ' + currentUser.token;
+      }
+    } catch (e) {
+      return null;
     }
     const options = {
       headers: new HttpHeaders(headerOptions)

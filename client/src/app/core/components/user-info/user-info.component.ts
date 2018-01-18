@@ -1,4 +1,4 @@
-import { Permission } from './../../domain/permission';
+import { Role } from './../../domain/role';
 import { User } from './../../domain/user';
 import { CustomSnackBarService } from './../../util/snack-bar/custom-snack-bar.service';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
@@ -12,12 +12,13 @@ import { OnInit, Component, ViewChild } from '@angular/core';
 export class UserInfoComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
-  @ViewChild('form') form;
+  @ViewChild('form') form: any;
+  disabled: Boolean = false;
   user: User = new User;
-  permissionsSelectionColumns = [{
-    columnDef: 'prettified',
-    header: 'Permissão',
-    cell: (row: Permission) => `${row.prettified}`,
+  rolesSelectionColumns = [{
+    columnDef: 'roleName',
+    header: 'Perfil',
+    cell: (row: Role) => `${row.roleName}`,
     filter: true,
     type: 'text'
   }];
@@ -45,7 +46,7 @@ export class UserInfoComponent implements OnInit {
       return;
     }
     this.blockUI.start('Salvando...');
-    this.userService.update(this.user).subscribe(
+    this.userService.updateSelf(this.user).subscribe(
       permission => {
         this.blockUI.stop();
         if (!this.user._id) {

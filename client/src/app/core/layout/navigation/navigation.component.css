@@ -4,10 +4,12 @@
   background: url('../../../../assets/img/logo-w.png') no-repeat center 20px;
   display: inline-block;
   padding-top: 90px;
+  margin-right: -10px;
   -webkit-transition: .25s ease-in-out;
   -moz-transition: .25s ease-in-out;
   -o-transition: .25s ease-in-out;
   transition: .25s ease-in-out;
+  background-size: 90%;
 }
 
 .sidenav-container nav {
@@ -166,7 +168,7 @@
   display: none;
   left: 0;
   top: 10px;
-  padding: 10px 20px;
+  padding: 8px 20px;
   background-color: #FFF;
   border: none;
   border-radius: 0 5px 5px 0;

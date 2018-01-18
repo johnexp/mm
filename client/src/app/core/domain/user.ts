@@ -1,3 +1,4 @@
+import { Role } from './role';
 import { Permission } from './permission';
 
 export class User {
@@ -8,7 +9,7 @@ export class User {
   firstName: string;
   lastName: string;
   token: string;
-  roles: string[];
+  roles: Role[] = [];
   permissions: Permission[] = [];
-  active: Boolean = true;
+  ativo: Boolean = true;
 }

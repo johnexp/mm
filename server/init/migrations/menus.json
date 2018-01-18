@@ -1,0 +1,132 @@
+[
+  {
+    "_id": ObjectId("5a4238aed844fb34b0451202"),
+    "label": "Home",
+    "externo": false,
+    "endereco": "/",
+    "ordem": 1
+  },
+  {
+    "_id": ObjectId("5a42425596788823bc64e087"),
+    "label": "Sobre Nós",
+    "externo": false,
+    "endereco": "sobre-nos",
+    "ordem": 2,
+    "submenus": [
+      {
+        "externo": false,
+        "label": "Surgimento da Valem",
+        "endereco": "surgimento-valem",
+        "ordem": 1,
+        "_id": ObjectId("5a42425596788823bc64e089")
+      },
+      {
+        "externo": false,
+        "label": "Depoimentos",
+        "endereco": "depoimentos",
+        "ordem": 2,
+        "_id": ObjectId("5a42425596788823bc64e088")
+      }
+    ]
+  },
+  {
+    "_id": ObjectId("5a4259508053003398cf9e0f"),
+    "label": "O que fazemos?",
+    "externo": false,
+    "endereco": "o-que-fazemos",
+    "ordem": 3,
+    "submenus": [
+      {
+        "externo": false,
+        "label": "O que é?",
+        "endereco": "o-que-e",
+        "ordem": 1,
+        "_id": ObjectId("5a4259508053003398cf9e12")
+      },
+      {
+        "externo": false,
+        "label": "Planos Por Adesão",
+        "endereco": "planos-por-adesao",
+        "ordem": 2,
+        "_id": ObjectId("5a4259508053003398cf9e11")
+      },
+      {
+        "externo": false,
+        "label": "Quantidade de Municípios, Vidas, Parceiros...",
+        "endereco": "quantidades",
+        "ordem": 3,
+        "_id": ObjectId("5a4259508053003398cf9e10")
+      }
+    ]
+  },
+  {
+    "_id": ObjectId("5a426c598053003398cf9e13"),
+    "label": "Parceiros",
+    "externo": false,
+    "endereco": "parceiros",
+    "ordem": 4,
+    "submenus": [
+      {
+        "externo": false,
+        "label": "Operadoras Parceiras",
+        "endereco": "operadoras",
+        "ordem": 1,
+        "_id": ObjectId("5a426c598053003398cf9e15")
+      },
+      {
+        "externo": false,
+        "label": "Entidades Parceiras",
+        "endereco": "entidades",
+        "ordem": 2,
+        "_id": ObjectId("5a426c598053003398cf9e14")
+      }
+    ]
+  },
+  {
+    "_id": ObjectId("5a426d205db43329745ee478"),
+    "label": "Contrate Seu Plano",
+    "externo": false,
+    "endereco": "contrate-seu-plano",
+    "ordem": 5,
+    "submenus": [
+      {
+        "externo": false,
+        "label": "Manual do Beneficiário",
+        "endereco": "manual-beneficiario",
+        "ordem": 1,
+        "_id": ObjectId("5a426d205db43329745ee47a")
+      },
+      {
+        "externo": false,
+        "label": "Simulação",
+        "endereco": "simulacao-adesao",
+        "ordem": 2,
+        "_id": ObjectId("5a426d205db43329745ee479")
+      }
+    ]
+  },
+  {
+    "_id": ObjectId("5a426d745db43329745ee47b"),
+    "label": "Área do Cliente",
+    "externo": false,
+    "endereco": "area-cliente",
+    "ordem": 6,
+    "submenus": []
+  },
+  {
+    "_id": ObjectId("5a426d9d5db43329745ee47c"),
+    "label": "Fale Com a Gente",
+    "externo": false,
+    "endereco": "fale-com-a-gente",
+    "ordem": 7,
+    "submenus": []
+  },
+  {
+    "_id": ObjectId("5a426dde5db43329745ee47d"),
+    "label": "Blog",
+    "externo": true,
+    "endereco": "blog.valem.com.br",
+    "ordem": 8,
+    "submenus": []
+  }
+]

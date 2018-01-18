@@ -1,0 +1,97 @@
+<h1 class="page-title" fxLayoutAlign="space-between center" fxLayout.xs="column">
+  <span>
+    <mat-icon>done</mat-icon>
+    Item área cliente -
+    <span class="subtitle">
+      {{ itemAreaCliente._id ? 'Editar' : 'Cadastrar' }} Item área cliente
+    </span>
+  </span>
+  <mat-card>
+    <mat-slide-toggle name="ativo" [(ngModel)]="itemAreaCliente.ativo" [disabled]="disabled">
+      Ativo
+    </mat-slide-toggle>
+  </mat-card>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <fieldset class="fake-fieldset" [disabled]="disabled">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput name="titulo" minlength="3" maxlength="50" #titulo="ngModel" [(ngModel)]="itemAreaCliente.titulo" placeholder="Título"
+          required>
+        <mat-error [hidden]="!titulo.hasError('required') || (titulo.pristine && !titulo.touched && !form.submitted)">
+          O campo "Título" é obrigatório
+        </mat-error>
+        <mat-error [hidden]="!titulo.hasError('minlength') || (titulo.pristine && !titulo.touched && !form.submitted)">
+          O valor do campo é menor do que o valor mínimo permitido: 3
+        </mat-error>
+        <mat-error [hidden]="!titulo.hasError('maxlength') || (titulo.pristine && !titulo.touched && !form.submitted)">
+          O valor do campo é maior do que o valor máximo permitido: 50
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput name="resumo" minlength="5" maxlength="200" #resumo="ngModel" [(ngModel)]="itemAreaCliente.resumo" placeholder="Resumo"
+          required>
+        <mat-error [hidden]="!resumo.hasError('required') || (resumo.pristine && !resumo.touched && !form.submitted)">
+          O campo "Resumo" é obrigatório
+        </mat-error>
+        <mat-error [hidden]="!resumo.hasError('minlength') || (resumo.pristine && !resumo.touched && !form.submitted)">
+          O valor do campo é menor do que o valor mínimo permitido: 5
+        </mat-error>
+        <mat-error [hidden]="!resumo.hasError('maxlength') || (resumo.pristine && !resumo.touched && !form.submitted)">
+          O valor do campo é maior do que o valor máximo permitido: 200
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select placeholder="Cor" #cor="ngModel" name="cor" [(ngModel)]="itemAreaCliente.cor" required>
+          <ng-container *ngFor="let cor of corLista">
+            <mat-option *ngIf="cor" [value]="cor.value">
+              {{ cor.label }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error [hidden]="!cor.hasError('required') || (cor.pristine && !cor.touched && !form.submitted)">
+          O campo "Cor" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput name="url" #url="ngModel" [(ngModel)]="itemAreaCliente.url" placeholder="URL" required>
+        <mat-error [hidden]="!url.hasError('required') || (url.pristine && !url.touched && !form.submitted)">
+          O campo "URL" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput name="icone" #icone="ngModel" [(ngModel)]="itemAreaCliente.icone" placeholder="Ícone" required>
+        <mat-hint>Disponível em <a target="_blank" href="http://fontawesome.io/icons">FontAwesome</a> (Ex.: <a target="_blank" href="http://fontawesome.io/icon/home/">fa-home</a>)</mat-hint>
+        <mat-error [hidden]="!icone.hasError('required') || (icone.pristine && !icone.touched && !form.submitted)">
+          O campo "Ícone" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput type="number" name="ordem" #ordem="ngModel" [(ngModel)]="itemAreaCliente.ordem" placeholder="Ordem" required>
+        <mat-error [hidden]="!ordem.hasError('required') || (ordem.pristine && !ordem.touched && !form.submitted)">
+          O campo "Ordem" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-card fxFlex class="slide-toggle-container">
+        <mat-slide-toggle name="home" [(ngModel)]="itemAreaCliente.home">
+          Exibir na Home
+        </mat-slide-toggle>
+      </mat-card>
+    </div>
+  </fieldset>
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">
+    <button *ngIf="!disabled" mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button *ngIf="!disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button *ngIf="disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+  </div>
+</form>

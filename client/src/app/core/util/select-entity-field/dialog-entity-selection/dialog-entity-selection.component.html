@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <app-generic-datatable [selectable]="true" [selectionData]="data.selectionData" [selectedIds]="selectedIds" [showSelected]="data.multiple"
     [multipleSelection]="data.multiple" [canCreate]="false" [columns]="data.displayedColumns" [database]="database" [resource]="data.entityName"
-    [lazy]="true" [hasFilter]="true">
+    [lazy]="data.lazyFetch" [customFetch]="false" [hasFilter]="true">
   </app-generic-datatable>
 </div>
 

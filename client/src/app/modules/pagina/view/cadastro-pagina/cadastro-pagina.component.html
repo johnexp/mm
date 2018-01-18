@@ -1,0 +1,35 @@
+<h1 class="page-title">
+  <mat-icon>insert_drive_file</mat-icon> {{tituloPagina}} -
+  <span class="subtitle">
+    {{ pagina._id ? 'Editar' : 'Cadastrar' }} Conteúdo da Página
+  </span>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <fieldset class="fake-fieldset" [disabled]="disabled">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput name="titulo" minlength="3" maxlength="50" #titulo="ngModel" [(ngModel)]="pagina.titulo" placeholder="titulo"
+          required>
+        <mat-error [hidden]="!titulo.hasError('required') || (titulo.pristine && !titulo.touched && !form.submitted)">
+          O campo "titulo" é obrigatório
+        </mat-error>
+        <mat-error [hidden]="!titulo.hasError('minlength') || (titulo.pristine && !titulo.touched && !form.submitted)">
+          O valor do campo é menor do que o valor mínimo permitido: 3
+        </mat-error>
+        <mat-error [hidden]="!titulo.hasError('maxlength') || (titulo.pristine && !titulo.touched && !form.submitted)">
+          O valor do campo é maior do que o valor máximo permitido: 50
+        </mat-error>
+      </mat-form-field>
+      <rich-text-field fxFlex="100" [form]="form" [model]="pagina" [maxLength]="2000" [minLength]="3" [name]="'resumo'" [label]="'Resumo'"></rich-text-field>
+      <rich-text-field fxFlex="100" [form]="form" [model]="pagina" [maxLength]="4000" [minLength]="3" [name]="'conteudo'" [required]="true"
+        [label]="'Conteúdo'"></rich-text-field>
+    </div>
+  </fieldset>
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">
+    <button *ngIf="!disabled" mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+  </div>
+</form>

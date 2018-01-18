@@ -10,11 +10,11 @@ import { Injectable, AfterViewInit } from '@angular/core';
 @Injectable()
 export class CustomSnackBarService implements AfterViewInit {
 
-  actionButtonLabel: string = ' ';
-  action: boolean = false;
-  setAutoHide: boolean = true;
-  autoHide: number = 3000;
-  addExtraClass: boolean = false;
+  actionButtonLabel = ' ';
+  action: Boolean = false;
+  setAutoHide: Boolean = true;
+  autoHide: Number = 3000;
+  addExtraClass: Boolean = false;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   direction: Direction = 'ltr';
@@ -30,7 +30,7 @@ export class CustomSnackBarService implements AfterViewInit {
     customConfig = customConfig || {};
     config.verticalPosition = customConfig.verticalPosition || this.verticalPosition;
     config.horizontalPosition = customConfig.horizontalPosition || this.horizontalPosition;
-    config.duration = customConfig.autoHide || this.setAutoHide ? this.autoHide : 0;
+    config.duration = customConfig.autoHide || this.setAutoHide ? +this.autoHide : 0;
     config.panelClass = customConfig.panelClass || ('custom-snack-bar' + (severity ? '-' + severity : ''));
     config.direction = this.direction;
     this.snackBar.open(message, action || this.actionButtonLabel, config);

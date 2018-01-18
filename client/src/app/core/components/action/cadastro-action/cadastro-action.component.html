@@ -1,9 +1,9 @@
 <h1 class="page-title" fxLayoutAlign="space-between center" fxLayout.xs="column">
   <span>
     <mat-icon>done</mat-icon>
-    Action -
+    Ações -
     <span class="subtitle">
-      {{ action._id ? 'Editar' : 'Cadastrar' }} Action
+      {{ action._id ? 'Editar' : 'Cadastrar' }} Ação
     </span>
   </span>
   <mat-card>
@@ -22,7 +22,7 @@
           O campo "Nome da Ação" é obrigatório
         </mat-error>
       </mat-form-field>
-      <app-select-entity-field fxFlex [form]="form" [fieldLabel]="'Dependentes'" [entityName]="'actions'" [entityMainProperty]="'actionName'"
+      <app-select-entity-field fxFlex [form]="form" [fieldLabel]="'Dependentes'" [entityName]="'action'" [entityMainProperty]="'actionName'"
         [model]="action" [modelEntityProperty]="'dependants'" [displayedColumns]="actionsSelectionColumns" [multiple]="true"></app-select-entity-field>
     </div>
   </fieldset>

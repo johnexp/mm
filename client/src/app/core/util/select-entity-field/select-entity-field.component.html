@@ -1,16 +1,29 @@
 <mat-card class="entity-selection-field">
-  <mat-form-field fxFlex>
-    <input matInput name="{{modelEntityProperty}}" (click)="openEntitySelectionModal()" #selectedEntities="ngModel" [(ngModel)]="selectedRecords" placeholder="{{ fieldLabel }}"
-      [required]="required" readonly>
-    <mat-error [hidden]="!selectedEntities.hasError('required') || (selectedEntities.pristine && !selectedEntities.touched && !form.submitted)">
-      O campo "{{ fieldLabel }}" é obrigatório
+  <ng-container *ngIf="selectionType === 'input'">
+    <mat-form-field fxFlex>
+      <input matInput name="{{modelEntityProperty}}" (click)="openEntitySelectionModal()" #selectedEntities="ngModel" [(ngModel)]="selectedRecords"
+        placeholder="{{ fieldLabel }}" [required]="required" [disabled]="disabled" readonly>
+      <mat-error [hidden]="!selectedEntities.hasError('required') || (selectedEntities.pristine && !selectedEntities.touched && !form.submitted)">
+        O campo "{{ fieldLabel }}" é obrigatório
+      </mat-error>
+      <button *ngIf="selectedEntities" type="button" matSuffix mat-icon-button aria-label="Limpar" matTooltip="Limpar" [disabled]="disabled" color="warn"
+        (click)="clear()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <button mat-icon-button type="button" matPrefix (click)="openEntitySelectionModal()" [disabled]="disabled" matTooltip="Selecionar" color="accent">
+        <mat-icon *ngIf="multiple">check_box</mat-icon>
+        <mat-icon *ngIf="!multiple">radio_button_checked</mat-icon>
+      </button>
+    </mat-form-field>
+  </ng-container>
+  <ng-container *ngIf="selectionType === 'grid'">
+    <app-generic-datatable [selectable]="true" [selectionData]="model[modelEntityProperty]" [selectedIds]="selectedIds" [showSelected]="false"
+      [multipleSelection]="multiple" [canCreate]="false" [columns]="displayedColumns" [database]="database" [resource]="entityName"
+      [lazy]="lazyFetch" [customFetch]="false" [hasFilter]="true" [disabled]="disabled" (selectionCallback)="validateRequired()">
+    </app-generic-datatable>
+    <input type="hidden" name="{{modelEntityProperty}}" #selectedEntities="ngModel" [(ngModel)]="selectedIds" [required]="required">
+    <mat-error class="custom-error" [hidden]="!selectedEntities.hasError('required') || (selectedEntities.pristine && !selectedEntities.touched && !form.submitted)">
+      O campo "{{ fieldLabel }}" é obrigatório. Nenhum registro foi selecionado!
     </mat-error>
-    <button *ngIf="selectedEntities" type="button" matSuffix mat-icon-button aria-label="Limpar" matTooltip="Limpar" color="warn" (click)="clear()">
-      <mat-icon>close</mat-icon>
-    </button>
-    <button mat-icon-button type="button" matPrefix (click)="openEntitySelectionModal()" matTooltip="Selecionar" color="accent">
-      <mat-icon *ngIf="multiple">check_box</mat-icon>
-      <mat-icon *ngIf="!multiple">radio_button_checked</mat-icon>
-    </button>
-  </mat-form-field>
+  </ng-container>
 </mat-card>

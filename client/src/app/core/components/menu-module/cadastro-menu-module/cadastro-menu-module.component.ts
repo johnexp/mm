@@ -1,10 +1,12 @@
+import { RoleService } from './../../../service/role.service';
+import { Role } from './../../../domain/role';
 import { MatDialog } from '@angular/material';
 import { GenericDatabase } from './../../../util/data-table/generic-database';
 import { DialogMenuComponent } from './dialog-menu/dialog-menu.component';
 import { MenuModuleService } from './../../../service/menu-module.service';
 import { MenuModule } from './../../../domain/menu-module';
 import { Menu } from './../../../domain/menu';
-import { CustomSnackBarService } from './../../../../core/util/snack-bar/custom-snack-bar.service';
+import { CustomSnackBarService } from './../../../util/snack-bar/custom-snack-bar.service';
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Location } from '@angular/common';
@@ -14,21 +16,22 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
   selector: 'app-cadastro-menu-module',
   templateUrl: 'cadastro-menu-module.component.html',
   styleUrls: ['./cadastro-menu-module.component.css'],
-  providers: [MenuModuleService]
+  providers: [MenuModuleService, RoleService]
 })
 export class CadastroMenuModuleComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
-  @ViewChild('form') form;
+  @ViewChild('form') form: any;
   menuModule: MenuModule = new MenuModule;
   databaseMenus = new GenericDatabase;
   disabled: Boolean = false;
   displayedMenusColumns = [
     { columnDef: 'label', header: 'Label', cell: (row: Menu) => `${row.label}` },
     { columnDef: 'icon', header: 'Ícone', cell: (row: Menu) => `${row.icon}` },
-    { columnDef: 'path', header: 'Caminho', cell: (row: Menu) => `${row.path}` }
+    { columnDef: 'path', header: 'Caminho', cell: (row: Menu) => `${row.path}` },
+    { columnDef: 'order', header: 'Ordem', cell: (row: Menu) => `${row.order || ''}`, sorted: true }
   ];
-  rolesLista: string[] = [];
+  rolesLista: Role[] = [];
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -36,7 +39,8 @@ export class CadastroMenuModuleComponent implements OnInit {
     private customSnackBar: CustomSnackBarService,
     private menuModuleService: MenuModuleService,
     private dialog: MatDialog,
-    private changeDetectorRef: ChangeDetectorRef) {
+    private changeDetectorRef: ChangeDetectorRef,
+    private roleService: RoleService) {
   }
 
   ngOnInit() {
@@ -50,12 +54,24 @@ export class CadastroMenuModuleComponent implements OnInit {
     } else {
       this.disabled = false;
     }
-    this.obterValoresEnum('roles').then((values) => {
-      this.rolesLista = values;
-    });
+    this.obterRoles();
   }
 
-  obterMenuModule(id) {
+  obterRoles() {
+    this.blockUI.start('Salvando...');
+    this.roleService.getAll(true).subscribe(
+      roles => {
+        this.rolesLista = roles;
+        this.blockUI.stop();
+      },
+      error => {
+        this.customSnackBar.open('Não foi possível obter os perfis disponíveis.', 'warn');
+        this.blockUI.stop();
+      }
+    );
+  }
+
+  obterMenuModule(id: string) {
     this.blockUI.start('Carregando...');
     this.menuModuleService.get(id).subscribe(
       response => {
@@ -70,10 +86,6 @@ export class CadastroMenuModuleComponent implements OnInit {
         this.blockUI.stop();
       }
     );
-  }
-
-  obterValoresEnum(campo) {
-    return this.menuModuleService.getEnum(campo).toPromise();
   }
 
   salvar() {
@@ -124,20 +136,65 @@ export class CadastroMenuModuleComponent implements OnInit {
   adicionarMenu(menu: Menu) {
     if (menu._id == null) {
       menu._id = '___' + Math.random().toString(36).substring(7);
-      this.menuModule.menus.push(menu);
+      this.mudarOrdemMenusCriacao(menu);
     } else {
-      const indexMenuAlterado = this.menuModule.menus.findIndex(menuExistente => menu._id === menuExistente._id);
-      this.menuModule.menus.splice(indexMenuAlterado, 1);
-      this.databaseMenus = new GenericDatabase;
-      this.databaseMenus.data = this.menuModule.menus;
-      this.changeDetectorRef.detectChanges();
-      this.menuModule.menus.splice(indexMenuAlterado, 0, menu);
+      this.mudarOrdemMenusAlteracao(menu);
     }
     this.databaseMenus = new GenericDatabase;
     this.databaseMenus.data = this.menuModule.menus;
   }
 
-  removerMenu(idMenu) {
+  mudarOrdemMenusCriacao(novoMenu) {
+    const menusToChange = this.menuModule.menus.filter((menuToChange: Menu) => menuToChange.order >= novoMenu.order);
+    this.menuModule.menus.push(novoMenu);
+    menusToChange.forEach((menuPosterior) => {
+      menuPosterior.order++;
+    });
+  }
+
+  mudarOrdemMenusAlteracao(menuAlterado) {
+    const changedMenuIndex = this.menuModule.menus.findIndex((existingMenu: Menu) => menuAlterado._id === existingMenu._id);
+    const oldOrder = this.menuModule.menus[changedMenuIndex].order;
+    let menusToChange = this.obterMenusAlteracaoOrdem(oldOrder, menuAlterado);
+
+    this.menuModule.menus.splice(changedMenuIndex, 1);
+    this.databaseMenus = new GenericDatabase;
+    this.databaseMenus.data = this.menuModule.menus;
+    this.changeDetectorRef.detectChanges();
+    this.menuModule.menus.splice(changedMenuIndex, 0, menuAlterado);
+
+    if (oldOrder !== menuAlterado.order) {
+      if (!oldOrder || oldOrder > menuAlterado.order) {
+        // aumentar ordens maiores que ordemAntiga e menores ou igual que nova ordem
+        menusToChange.forEach((menuToChange: Menu) => {
+          menuToChange.order++;
+        });
+      } else {
+        // diminuir ordens menores que ordemAntiga e maiores ou igual que nova ordem
+        menusToChange.forEach((menuToChange: Menu) => {
+          menuToChange.order--;
+        });
+      }
+    }
+  }
+
+  obterMenusAlteracaoOrdem(oldOrder, menuAlterado): Menu[] {
+    let menusToChange = [];
+    if (!oldOrder) {
+      menusToChange = this.menuModule.menus.filter((menuToChange: Menu) => menuToChange.order >= menuAlterado.order);
+    } else if (oldOrder !== menuAlterado.order) {
+      if (oldOrder > menuAlterado.order) {
+        menusToChange = this.menuModule.menus.filter(
+          menuToChangeOrder => menuToChangeOrder.order < oldOrder && menuToChangeOrder.order >= menuAlterado.order);
+      } else {
+        menusToChange = this.menuModule.menus.filter(
+          menuToChangeOrder => menuToChangeOrder.order <= menuAlterado.order && menuToChangeOrder.order > oldOrder);
+      }
+    }
+    return menusToChange;
+  }
+
+  removerMenu(idMenu: string) {
     const index = this.menuModule.menus.findIndex(menu => menu._id === idMenu);
     this.menuModule.menus.splice(index, 1);
     this.databaseMenus = new GenericDatabase;

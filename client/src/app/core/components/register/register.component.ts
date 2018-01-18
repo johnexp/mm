@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
 
   model: any = {};
-  @ViewChild('form') form;
+  @ViewChild('form') form: any;
   @BlockUI() blockUI: NgBlockUI;
 
   constructor(private router: Router,

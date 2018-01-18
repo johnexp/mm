@@ -1,0 +1,35 @@
+[
+  {
+    "roleName": "Vendas",
+    "ativo": true,
+    "roleKey": "vendas",
+    "isAdmin": false
+  },
+  {
+    "roleName": "Atendimento",
+    "ativo": true,
+    "roleKey": "atendimento",
+    "isAdmin": false
+  },
+  {
+    "roleName": "Gerência",
+    "ativo": true,
+    "roleKey": "gerencia",
+    "isAdmin": false
+  },
+  {
+    "roleName": "Marketing",
+    "roleKey": "marketing",
+    "ativo": true
+  },
+  {
+    "roleName": "Suporte",
+    "roleKey": "suporte",
+    "ativo": true
+  },
+  {
+    "roleName": "Cadastro",
+    "roleKey": "cadastro",
+    "ativo": true
+  }
+]

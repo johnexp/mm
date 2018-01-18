@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>Adicionar Submenu</h1>
+<div mat-dialog-content>
+  <form #form="ngForm" novalidate>
+    <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput name="label" minlength="3" maxlength="50" #label="ngModel" [(ngModel)]="data.submenu.label" placeholder="Label" required>
+        <mat-error [hidden]="!label.hasError('required') || (label.pristine && !label.touched && !form.submitted)">
+          O campo "Label" é obrigatório
+        </mat-error>
+        <mat-error [hidden]="!label.hasError('minlength') || (label.pristine && !label.touched && !form.submitted)">
+          O valor do campo é menor do que o valor mínimo permitido: 3
+        </mat-error>
+        <mat-error [hidden]="!label.hasError('maxlength') || (label.pristine && !label.touched && !form.submitted)">
+          O valor do campo é maior do que o valor máximo permitido: 50
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput name="endereco" maxlength="200" #endereco="ngModel" [(ngModel)]="data.submenu.endereco" placeholder="Endereço" required>
+        <mat-error [hidden]="!endereco.hasError('required') || (endereco.pristine && !endereco.touched && !form.submitted)">
+          O campo "Endereço" é obrigatório
+        </mat-error>
+        <mat-error [hidden]="!endereco.hasError('maxlength') || (endereco.pristine && !endereco.touched && !form.submitted)">
+          O valor do campo é maior do que o valor máximo permitido: 200
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput type="number" name="ordem" #ordem="ngModel" [(ngModel)]="data.submenu.ordem" placeholder="Ordem" required>
+        <mat-error [hidden]="!ordem.hasError('required') || (ordem.pristine && !ordem.touched && !form.submitted)">
+          O campo "Ordem" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-card fxFlex class="checkbox-container">
+        <mat-checkbox name="externo" [(ngModel)]="data.submenu.externo">Externo</mat-checkbox>
+      </mat-card>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-actions fxLayoutAlign="end center">
+  <button mat-button [mat-dialog-close]="data.submenu" color="primary">
+    <mat-icon>add_circle_outline</mat-icon>
+    Adicionar
+  </button>
+  <button mat-button (click)="onCancelClick()">
+    <mat-icon>cancel</mat-icon>
+    Cancelar
+  </button>
+</div>

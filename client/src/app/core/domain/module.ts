@@ -1,6 +1,6 @@
 
 export class Module {
-  _id: number;
+  _id: string;
   moduleName: String;
 
   ativo: boolean;

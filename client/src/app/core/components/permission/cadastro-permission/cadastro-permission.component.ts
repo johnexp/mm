@@ -1,8 +1,8 @@
 import { PermissionService } from './../../../service/permission.service';
 import { Module } from './../../../domain/module';
 import { Permission } from './../../../domain/permission';
-import { Action } from './../../../../core/domain/action';
-import { CustomSnackBarService } from './../../../../core/util/snack-bar/custom-snack-bar.service';
+import { Action } from './../../../domain/action';
+import { CustomSnackBarService } from './../../../util/snack-bar/custom-snack-bar.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Location } from '@angular/common';
@@ -18,7 +18,7 @@ export class CadastroPermissionComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
   permission: Permission = new Permission;
-  @ViewChild('form') form;
+  @ViewChild('form') form: any;
   disabled: Boolean = false;
   isEditing: Boolean = false;
   actionSelectionColumns = [{
@@ -58,7 +58,7 @@ export class CadastroPermissionComponent implements OnInit {
 
   }
 
-  obterPermission(id) {
+  obterPermission(id: string) {
     this.blockUI.start('Carregando...');
     this.permissionService.get(id).subscribe(
       response => {

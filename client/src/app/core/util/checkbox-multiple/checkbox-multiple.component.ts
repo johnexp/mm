@@ -41,7 +41,7 @@ export class CheckboxMultipleComponent implements AfterViewInit {
     this.changeDetectorRef.detectChanges();
   }
 
-  changeSelection(item) {
+  changeSelection(item: any) {
     const itemIndex = this.model[this.modelField].indexOf(item);
     if (itemIndex > -1) {
       this.model[this.modelField].splice(itemIndex, 1);
@@ -51,12 +51,12 @@ export class CheckboxMultipleComponent implements AfterViewInit {
     this.validateCheckboxList();
   }
 
-  get model(): string {
+  get model(): any {
     return this.modelChange.value;
   }
 
   @Input()
-  set model(model: string) {
+  set model(model: any) {
     this.modelChange.next(model);
     this.validateCheckboxList();
   }

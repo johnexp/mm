@@ -1,0 +1,23 @@
+<div fxLayoutAlign="space-between center">
+  <h1 class="page-title">
+    <mat-icon>done</mat-icon>
+    Produto/serviço
+  </h1>
+  <mat-form-field>
+    <mat-select [(ngModel)]="filtrarAtivos" name="filtrarAtivos" placeholder="Filtrar Ativos" (selectionChange)="buscarProdutoServico()">
+      <mat-option [value]="">
+        Todos
+      </mat-option>
+      <mat-option [value]="true">
+        Ativos
+      </mat-option>
+      <mat-option [value]="false">
+        Inativos
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'produto-servico'" [lazy]="false" [hasFilter]="true"
+  [actions]="{'u': true, 'c': true, 'v': true}" [logicalExclusion]="true" (changeRecordState)="mudarAtivacaoProdutoServico($event[0], $event[1])">
+</app-generic-datatable>

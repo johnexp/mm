@@ -6,7 +6,7 @@ import { Permission } from './../domain/permission';
 @Injectable()
 export class PermissionService extends GenericService {
 
-  private path = '/permissions';
+  private path = '/permission';
 
   createOrUpdate(permission: Permission): Observable<Permission> {
     if (permission._id) {

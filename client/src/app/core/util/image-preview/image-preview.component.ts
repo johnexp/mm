@@ -13,6 +13,7 @@ export class ImagePreviewComponent {
   // @Input() model: any;
   @Input() modelFileProperty = 'imagem';
   @Input() isBase64File: Boolean = false;
+  @Input() fieldLabel = 'Imagem';
   @ViewChild('fileInput') fileInput: ElementRef;
   @ViewChild('imagePreview') imagePreview: ElementRef;
   imageChange: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -44,7 +45,7 @@ export class ImagePreviewComponent {
   constructor(private customSnackBar: CustomSnackBarService) {
   }
 
-  onFileChange(event) {
+  onFileChange(event: any) {
     const reader = new FileReader();
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];

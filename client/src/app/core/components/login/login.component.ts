@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   model: any = {};
   returnUrl: string;
-  @ViewChild('form') form;
+  @ViewChild('form') form: any;
   @BlockUI() blockUI: NgBlockUI;
 
   constructor(private route: ActivatedRoute,

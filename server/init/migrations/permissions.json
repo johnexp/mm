@@ -1,0 +1,714 @@
+[
+  {
+    "_id": ObjectId("5a3a946e0fbf061d0cccce35"),
+    "action": ObjectId("5a3a7b6135d10a1f4c8adf1a"),
+    "module": ObjectId("5a3a94550fbf061d0cccce34"),
+    "stringfied": "banner:listar",
+    "prettified": "Listar Banner",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3a946e0fbf061d0cccce36"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a3a94550fbf061d0cccce34"),
+    "stringfied": "banner:visualizar",
+    "prettified": "Visualizar Banner",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3a946e0fbf061d0cccce37"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a3a94550fbf061d0cccce34"),
+    "stringfied": "banner:cadastrar",
+    "prettified": "Cadastrar Banner",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3a946e0fbf061d0cccce38"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a3a94550fbf061d0cccce34"),
+    "stringfied": "banner:editar",
+    "prettified": "Editar Banner",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3a946e0fbf061d0cccce39"),
+    "action": ObjectId("5a3a7bc035d10a1f4c8adf1e"),
+    "module": ObjectId("5a3a94550fbf061d0cccce34"),
+    "stringfied": "banner:excluir",
+    "prettified": "Excluir Banner",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3a94890fbf061d0cccce3a"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a3a943f0fbf061d0cccce32"),
+    "stringfied": "apresentacao-site:cadastrar",
+    "prettified": "Cadastrar Apresentação Site",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3a94890fbf061d0cccce3b"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a3a943f0fbf061d0cccce32"),
+    "stringfied": "apresentacao-site:editar",
+    "prettified": "Editar Apresentação Site",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3a94920fbf061d0cccce3c"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a3a94450fbf061d0cccce33"),
+    "stringfied": "sobre:cadastrar",
+    "prettified": "Cadastrar Sobre",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3a94920fbf061d0cccce3d"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a3a94450fbf061d0cccce33"),
+    "stringfied": "sobre:editar",
+    "prettified": "Editar Sobre",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3aad877e82d51774307b04"),
+    "action": ObjectId("5a3a7b6135d10a1f4c8adf1a"),
+    "module": ObjectId("5a3aad7b7e82d51774307b03"),
+    "stringfied": "depoimento:listar",
+    "prettified": "Listar Depoimento",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3aad877e82d51774307b05"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a3aad7b7e82d51774307b03"),
+    "stringfied": "depoimento:visualizar",
+    "prettified": "Visualizar Depoimento",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3aad877e82d51774307b06"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a3aad7b7e82d51774307b03"),
+    "stringfied": "depoimento:cadastrar",
+    "prettified": "Cadastrar Depoimento",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3aad877e82d51774307b07"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a3aad7b7e82d51774307b03"),
+    "stringfied": "depoimento:editar",
+    "prettified": "Editar Depoimento",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3aad877e82d51774307b08"),
+    "action": ObjectId("5a3a7bc035d10a1f4c8adf1e"),
+    "module": ObjectId("5a3aad7b7e82d51774307b03"),
+    "stringfied": "depoimento:excluir",
+    "prettified": "Excluir Depoimento",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3ab9b80c67641a188eab7e"),
+    "action": ObjectId("5a3a7b6135d10a1f4c8adf1a"),
+    "module": ObjectId("5a3ab9aa0c67641a188eab7d"),
+    "stringfied": "produto-servico:listar",
+    "prettified": "Listar Produto Serviço",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3ab9b80c67641a188eab7f"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a3ab9aa0c67641a188eab7d"),
+    "stringfied": "produto-servico:visualizar",
+    "prettified": "Visualizar Produto Serviço",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3ab9b80c67641a188eab80"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a3ab9aa0c67641a188eab7d"),
+    "stringfied": "produto-servico:cadastrar",
+    "prettified": "Cadastrar Produto Serviço",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3ab9b80c67641a188eab81"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a3ab9aa0c67641a188eab7d"),
+    "stringfied": "produto-servico:editar",
+    "prettified": "Editar Produto Serviço",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3ab9b80c67641a188eab82"),
+    "action": ObjectId("5a3a7bc935d10a1f4c8adf1f"),
+    "module": ObjectId("5a3ab9aa0c67641a188eab7d"),
+    "stringfied": "produto-servico:ativar/inativar",
+    "prettified": "Ativar/Inativar Produto Serviço",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3bce59a44f632594462365"),
+    "action": ObjectId("5a3a7b6135d10a1f4c8adf1a"),
+    "module": ObjectId("5a3bce4ba44f632594462364"),
+    "stringfied": "parceiro:listar",
+    "prettified": "Listar Parceiro",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3bce59a44f632594462366"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a3bce4ba44f632594462364"),
+    "stringfied": "parceiro:visualizar",
+    "prettified": "Visualizar Parceiro",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3bce59a44f632594462367"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a3bce4ba44f632594462364"),
+    "stringfied": "parceiro:cadastrar",
+    "prettified": "Cadastrar Parceiro",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3bce59a44f632594462368"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a3bce4ba44f632594462364"),
+    "stringfied": "parceiro:editar",
+    "prettified": "Editar Parceiro",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3bce59a44f632594462369"),
+    "action": ObjectId("5a3a7bc935d10a1f4c8adf1f"),
+    "module": ObjectId("5a3bce4ba44f632594462364"),
+    "stringfied": "parceiro:ativar/inativar",
+    "prettified": "Ativar/Inativar Parceiro",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3c0745c24be621fca65097"),
+    "action": ObjectId("5a3a7b6135d10a1f4c8adf1a"),
+    "module": ObjectId("5a3c0737c24be621fca65096"),
+    "stringfied": "operadora:listar",
+    "prettified": "Listar Operadora",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3c0745c24be621fca65098"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a3c0737c24be621fca65096"),
+    "stringfied": "operadora:visualizar",
+    "prettified": "Visualizar Operadora",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3c0745c24be621fca65099"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a3c0737c24be621fca65096"),
+    "stringfied": "operadora:cadastrar",
+    "prettified": "Cadastrar Operadora",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3c0745c24be621fca6509a"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a3c0737c24be621fca65096"),
+    "stringfied": "operadora:editar",
+    "prettified": "Editar Operadora",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3c0745c24be621fca6509b"),
+    "action": ObjectId("5a3a7bc935d10a1f4c8adf1f"),
+    "module": ObjectId("5a3c0737c24be621fca65096"),
+    "stringfied": "operadora:ativar/inativar",
+    "prettified": "Ativar/Inativar Operadora",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4232e3cbd2611fc48791bf"),
+    "action": ObjectId("5a3a7b6135d10a1f4c8adf1a"),
+    "module": ObjectId("5a4232cccbd2611fc48791be"),
+    "stringfied": "menu:listar",
+    "prettified": "Listar Menu",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4232e3cbd2611fc48791c0"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a4232cccbd2611fc48791be"),
+    "stringfied": "menu:visualizar",
+    "prettified": "Visualizar Menu",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4232e3cbd2611fc48791c1"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a4232cccbd2611fc48791be"),
+    "stringfied": "menu:cadastrar",
+    "prettified": "Cadastrar Menu",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4232e4cbd2611fc48791c2"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a4232cccbd2611fc48791be"),
+    "stringfied": "menu:editar",
+    "prettified": "Editar Menu",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4232e4cbd2611fc48791c3"),
+    "action": ObjectId("5a3a7bc035d10a1f4c8adf1e"),
+    "module": ObjectId("5a4232cccbd2611fc48791be"),
+    "stringfied": "menu:excluir",
+    "prettified": "Excluir Menu",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a428294e9d6942110655a3d"),
+    "action": ObjectId("5a3a7b6135d10a1f4c8adf1a"),
+    "module": ObjectId("5a428285e9d6942110655a3c"),
+    "stringfied": "item-area-cliente:listar",
+    "prettified": "Listar Item Área Cliente",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a428294e9d6942110655a3e"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a428285e9d6942110655a3c"),
+    "stringfied": "item-area-cliente:visualizar",
+    "prettified": "Visualizar Item Área Cliente",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a428294e9d6942110655a3f"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a428285e9d6942110655a3c"),
+    "stringfied": "item-area-cliente:cadastrar",
+    "prettified": "Cadastrar Item Área Cliente",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a428294e9d6942110655a40"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a428285e9d6942110655a3c"),
+    "stringfied": "item-area-cliente:editar",
+    "prettified": "Editar Item Área Cliente",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a428294e9d6942110655a41"),
+    "action": ObjectId("5a3a7bc935d10a1f4c8adf1f"),
+    "module": ObjectId("5a428285e9d6942110655a3c"),
+    "stringfied": "item-area-cliente:ativar/inativar",
+    "prettified": "Ativar/Inativar Item Área Cliente",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a428e59bffcee1594a81322"),
+    "action": ObjectId("5a3a7b6135d10a1f4c8adf1a"),
+    "module": ObjectId("5a428e4cbffcee1594a81321"),
+    "stringfied": "user:listar",
+    "prettified": "Listar User",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a428e59bffcee1594a81323"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a428e4cbffcee1594a81321"),
+    "stringfied": "user:visualizar",
+    "prettified": "Visualizar User",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a428e59bffcee1594a81324"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a428e4cbffcee1594a81321"),
+    "stringfied": "user:cadastrar",
+    "prettified": "Cadastrar User",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a428e59bffcee1594a81325"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a428e4cbffcee1594a81321"),
+    "stringfied": "user:editar",
+    "prettified": "Editar User",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a428e59bffcee1594a81326"),
+    "action": ObjectId("5a3a7bc935d10a1f4c8adf1f"),
+    "module": ObjectId("5a428e4cbffcee1594a81321"),
+    "stringfied": "user:ativar/inativar",
+    "prettified": "Ativar/Inativar User",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a438809bf9c0a098442b7cc"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a4387f4bf9c0a098442b7cb"),
+    "stringfied": "apresentacao-planos:cadastrar",
+    "prettified": "Cadastrar Apresentação Planos",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a438809bf9c0a098442b7cd"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a4387f4bf9c0a098442b7cb"),
+    "stringfied": "apresentacao-planos:editar",
+    "prettified": "Editar Apresentação Planos",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a43c6453cf70228fc34ea72"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a43c20bd8ad44361890fbd5"),
+    "stringfied": "surgimento-valem:cadastrar",
+    "prettified": "Cadastrar Surgimento Valem",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a43c6453cf70228fc34ea73"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a43c20bd8ad44361890fbd5"),
+    "stringfied": "surgimento-valem:visualizar",
+    "prettified": "Visualizar Surgimento Valem",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a43c6453cf70228fc34ea74"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a43c20bd8ad44361890fbd5"),
+    "stringfied": "surgimento-valem:editar",
+    "prettified": "Editar Surgimento Valem",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a43cefec8f07c2bb8a5daa0"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a43cef2c8f07c2bb8a5da9f"),
+    "stringfied": "o-que-e:editar",
+    "prettified": "Editar O Que É?",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a43cefec8f07c2bb8a5daa1"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a43cef2c8f07c2bb8a5da9f"),
+    "stringfied": "o-que-e:cadastrar",
+    "prettified": "Cadastrar O Que É?",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a43cefec8f07c2bb8a5daa2"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a43cef2c8f07c2bb8a5da9f"),
+    "stringfied": "o-que-e:visualizar",
+    "prettified": "Visualizar O Que É?",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a43d55b9119d64440fdf549"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a43d5509119d64440fdf548"),
+    "stringfied": "planos-por-adesao:editar",
+    "prettified": "Editar Planos Por Adesão",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a43d55b9119d64440fdf54a"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a43d5509119d64440fdf548"),
+    "stringfied": "planos-por-adesao:cadastrar",
+    "prettified": "Cadastrar Planos Por Adesão",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a43d55b9119d64440fdf54b"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a43d5509119d64440fdf548"),
+    "stringfied": "planos-por-adesao:visualizar",
+    "prettified": "Visualizar Planos Por Adesão",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a44db24e0e0d844f4148de5"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a44db1ae0e0d844f4148de4"),
+    "stringfied": "quantidades:editar",
+    "prettified": "Editar Quantidades",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a44db24e0e0d844f4148de6"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a44db1ae0e0d844f4148de4"),
+    "stringfied": "quantidades:cadastrar",
+    "prettified": "Cadastrar Quantidades",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a44db24e0e0d844f4148de7"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a44db1ae0e0d844f4148de4"),
+    "stringfied": "quantidades:visualizar",
+    "prettified": "Visualizar Quantidades",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a44e8359e839234ec84d0d6"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a44e8299e839234ec84d0d5"),
+    "stringfied": "pagina-depoimentos:editar",
+    "prettified": "Editar Página Depoimentos",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a44e8359e839234ec84d0d7"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a44e8299e839234ec84d0d5"),
+    "stringfied": "pagina-depoimentos:cadastrar",
+    "prettified": "Cadastrar Página Depoimentos",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a44e8359e839234ec84d0d8"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a44e8299e839234ec84d0d5"),
+    "stringfied": "pagina-depoimentos:visualizar",
+    "prettified": "Visualizar Página Depoimentos",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a451292643574352caedf1c"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a451287643574352caedf1b"),
+    "stringfied": "pagina-entidades:editar",
+    "prettified": "Editar Página Entidades",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a451292643574352caedf1d"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a451287643574352caedf1b"),
+    "stringfied": "pagina-entidades:cadastrar",
+    "prettified": "Cadastrar Página Entidades",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a451292643574352caedf1e"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a451287643574352caedf1b"),
+    "stringfied": "pagina-entidades:visualizar",
+    "prettified": "Visualizar Página Entidades",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4512a1643574352caedf1f"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a451283643574352caedf1a"),
+    "stringfied": "pagina-operadoras:cadastrar",
+    "prettified": "Cadastrar Página Operadoras",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4512a1643574352caedf20"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a451283643574352caedf1a"),
+    "stringfied": "pagina-operadoras:editar",
+    "prettified": "Editar Página Operadoras",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4512a1643574352caedf21"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a451283643574352caedf1a"),
+    "stringfied": "pagina-operadoras:visualizar",
+    "prettified": "Visualizar Página Operadoras",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a452578c8dd4834b0562c22"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a45255dc8dd4834b0562c21"),
+    "stringfied": "pagina-area-cliente:editar",
+    "prettified": "Editar Página Área Cliente",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a452578c8dd4834b0562c23"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a45255dc8dd4834b0562c21"),
+    "stringfied": "pagina-area-cliente:cadastrar",
+    "prettified": "Cadastrar Página Área Cliente",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a452578c8dd4834b0562c24"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a45255dc8dd4834b0562c21"),
+    "stringfied": "pagina-area-cliente:visualizar",
+    "prettified": "Visualizar Página Área Cliente",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a466be91ef2e846bc34ff18"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a466bdd1ef2e846bc34ff17"),
+    "stringfied": "pagina-demonstrativo-ir:editar",
+    "prettified": "Editar Página Demonstrativo IR",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a466be91ef2e846bc34ff19"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a466bdd1ef2e846bc34ff17"),
+    "stringfied": "pagina-demonstrativo-ir:cadastrar",
+    "prettified": "Cadastrar Página Demonstrativo IR",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a466be91ef2e846bc34ff1a"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a466bdd1ef2e846bc34ff17"),
+    "stringfied": "pagina-demonstrativo-ir:visualizar",
+    "prettified": "Visualizar Página Demonstrativo IR",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4bc4cc5b87751c6800298b"),
+    "action": ObjectId("5a3a7b6135d10a1f4c8adf1a"),
+    "module": ObjectId("5a4bc4c05b87751c6800298a"),
+    "stringfied": "assunto-contato:listar",
+    "prettified": "Listar Assunto Contato",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4bc4cc5b87751c6800298c"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a4bc4c05b87751c6800298a"),
+    "stringfied": "assunto-contato:visualizar",
+    "prettified": "Visualizar Assunto Contato",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4bc4cc5b87751c6800298d"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a4bc4c05b87751c6800298a"),
+    "stringfied": "assunto-contato:cadastrar",
+    "prettified": "Cadastrar Assunto Contato",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4bc4cc5b87751c6800298e"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a4bc4c05b87751c6800298a"),
+    "stringfied": "assunto-contato:editar",
+    "prettified": "Editar Assunto Contato",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4bc4cc5b87751c6800298f"),
+    "action": ObjectId("5a3a7bc035d10a1f4c8adf1e"),
+    "module": ObjectId("5a4bc4c05b87751c6800298a"),
+    "stringfied": "assunto-contato:excluir",
+    "prettified": "Excluir Assunto Contato",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4bcd709e99431ea44af9e6"),
+    "action": ObjectId("5a3a7b6135d10a1f4c8adf1a"),
+    "module": ObjectId("5a4bcd639e99431ea44af9e5"),
+    "stringfied": "role:listar",
+    "prettified": "Listar Role",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4bcd709e99431ea44af9e7"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a4bcd639e99431ea44af9e5"),
+    "stringfied": "role:visualizar",
+    "prettified": "Visualizar Role",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4bcd709e99431ea44af9e8"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a4bcd639e99431ea44af9e5"),
+    "stringfied": "role:cadastrar",
+    "prettified": "Cadastrar Role",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4bcd709e99431ea44af9e9"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a4bcd639e99431ea44af9e5"),
+    "stringfied": "role:editar",
+    "prettified": "Editar Role",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4bcd709e99431ea44af9ea"),
+    "action": ObjectId("5a3a7bc935d10a1f4c8adf1f"),
+    "module": ObjectId("5a4bcd639e99431ea44af9e5"),
+    "stringfied": "role:ativar/inativar",
+    "prettified": "Ativar/Inativar Role",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4cf74076e7142f281cb1b9"),
+    "action": ObjectId("5a3a7b6135d10a1f4c8adf1a"),
+    "module": ObjectId("5a4cf6a876e7142f281cb1b8"),
+    "stringfied": "param:listar",
+    "prettified": "Listar Param",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4cf74076e7142f281cb1ba"),
+    "action": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "module": ObjectId("5a4cf6a876e7142f281cb1b8"),
+    "stringfied": "param:visualizar",
+    "prettified": "Visualizar Param",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4cf74076e7142f281cb1bb"),
+    "action": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "module": ObjectId("5a4cf6a876e7142f281cb1b8"),
+    "stringfied": "param:cadastrar",
+    "prettified": "Cadastrar Param",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4cf74076e7142f281cb1bc"),
+    "action": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "module": ObjectId("5a4cf6a876e7142f281cb1b8"),
+    "stringfied": "param:editar",
+    "prettified": "Editar Param",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4cf74076e7142f281cb1bd"),
+    "action": ObjectId("5a3a7bc935d10a1f4c8adf1f"),
+    "module": ObjectId("5a4cf6a876e7142f281cb1b8"),
+    "stringfied": "param:ativar/inativar",
+    "prettified": "Ativar/Inativar Param",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4fcb5b7cc58026f00edb4e"),
+    "action": ObjectId("5a3a7bc935d10a1f4c8adf1f"),
+    "module": ObjectId("5a3a94550fbf061d0cccce34"),
+    "stringfied": "banner:ativar/inativar",
+    "prettified": "Ativar/Inativar Banner",
+    "ativo": true
+  }
+]

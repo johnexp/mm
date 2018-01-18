@@ -1,0 +1,49 @@
+[
+  {
+    "_id": ObjectId("5a3a7b6135d10a1f4c8adf1a"),
+    "actionName": "Listar",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3a7b6a35d10a1f4c8adf1b"),
+    "actionName": "Visualizar",
+    "ativo": true,
+    "dependants": [ 
+      ObjectId("5a3a7b6135d10a1f4c8adf1a")
+    ]
+  },
+  {
+    "_id": ObjectId("5a3a7b9335d10a1f4c8adf1c"),
+    "actionName": "Cadastrar",
+    "ativo": true,
+    "dependants": [ 
+      ObjectId("5a3a7b6135d10a1f4c8adf1a"), 
+      ObjectId("5a3a7b6a35d10a1f4c8adf1b")
+    ]
+  },
+  {
+    "_id": ObjectId("5a3a7ba635d10a1f4c8adf1d"),
+    "actionName": "Editar",
+    "ativo": true,
+    "dependants": [ 
+      ObjectId("5a3a7b6135d10a1f4c8adf1a"), 
+      ObjectId("5a3a7b6a35d10a1f4c8adf1b")
+    ]
+  },
+  {
+    "_id": ObjectId("5a3a7bc035d10a1f4c8adf1e"),
+    "actionName": "Excluir",
+    "ativo": true,
+    "dependants": [ 
+      ObjectId("5a3a7b6135d10a1f4c8adf1a")
+    ]
+  },
+  {
+    "_id": ObjectId("5a3a7bc935d10a1f4c8adf1f"),
+    "actionName": "Ativar/Inativar",
+    "ativo": true,
+    "dependants": [ 
+      ObjectId("5a3a7b6135d10a1f4c8adf1a")
+    ]
+  }
+]

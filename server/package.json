@@ -1,9 +1,10 @@
 {
-  "name": "sascapp",
-  "version": "0.0.0",
+  "name": "gerenciador-site-valem",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "start-prod": "nodemon ./build/bin/www"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -23,8 +24,23 @@
     "nodemailer": "^4.4.0",
     "nodemon": "^1.12.1",
     "serve-favicon": "~2.4.5",
+    "superagent": "^3.8.2",
     "underscore.inflections": "^0.2.1",
     "underscore.string": "^3.3.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.37",
+    "@babel/preset-env": "^7.0.0-beta.37",
+    "babel-polyfill": "^6.26.0",
+    "browser-sync": "^2.23.5",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^8.0.0-beta.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.1.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "gulp-watch": "^5.0.0",
+    "jshint": "^2.9.5",
+    "jshint-stylish": "^2.2.1"
+  }
 }

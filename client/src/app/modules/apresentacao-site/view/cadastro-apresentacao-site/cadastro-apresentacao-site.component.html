@@ -13,11 +13,10 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field fxFlex>
-      <input matInput class="form-control" name="subtitulo" #subtitulo="ngModel" [(ngModel)]="apresentacaoSite.subtitulo" placeholder="Subtítulo"
-        required>
-      <mat-error [hidden]="!subtitulo.hasError('required') || (subtitulo.pristine && !subtitulo.touched && !form.submitted)">
-        O campo "Subtítulo" é obrigatório
-      </mat-error>
+      <input matInput class="form-control" name="subtitulo" [(ngModel)]="apresentacaoSite.subtitulo" placeholder="Subtítulo">
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <input matInput class="form-control" name="urlVerMais" [(ngModel)]="apresentacaoSite.urlVerMais" placeholder="URL (Ver Mais)">
     </mat-form-field>
     <mat-form-field fxFlex="100">
       <textarea matInput name="texto" #texto="ngModel" [(ngModel)]="apresentacaoSite.texto" placeholder="Texto" required></textarea>

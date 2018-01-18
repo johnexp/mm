@@ -1,0 +1,123 @@
+[
+  {
+    "name": "cadastros",
+    "label": "Cadastros",
+    "menus": [
+      {
+        "icon": "format_color_text",
+        "label": "Apresentação do Site",
+        "path": "apresentacao-site"
+      },
+      {
+        "label": "Sobre o Site",
+        "icon": "format_color_text",
+        "path": "sobre"
+      },
+      {
+        "label": "Banners",
+        "icon": "photo_size_select_actual",
+        "path": "banner"
+      },
+      {
+        "label": "Depoimentos",
+        "icon": "speaker_notes",
+        "path": "depoimento"
+      },
+      {
+        "label": "Produto/Serviço",
+        "icon": "shopping_cart",
+        "path": "produto-servico"
+      },
+      {
+        "label": "Parceiros",
+        "icon": "people_outline",
+        "path": "parceiro"
+      },
+      {
+        "label": "Operadoras",
+        "icon": "business",
+        "path": "operadora"
+      },
+      {
+        "label": "Menu",
+        "icon": "menu",
+        "path": "menu"
+      },
+      {
+        "label": "Ítens da Área do Cliente",
+        "icon": "assignment_turned_in",
+        "path": "item-area-cliente"
+      },
+      {
+        "icon": "text_format",
+        "label": "Apresentação Planos por Adesão",
+        "path": "apresentacao-planos"
+      },
+      {
+        "label": "Assunto Contato",
+        "icon": "subject",
+        "path": "assunto-contato"
+      }
+    ]
+  },
+  {
+    "name": "paginas",
+    "label": "Páginas",
+    "menus": [
+      {
+        "label": "Surgimento da Valem",
+        "icon": "insert_drive_file",
+        "path": "surgimento-valem",
+        "order": 9
+      },
+      {
+        "label": "O Que É?",
+        "icon": "insert_drive_file",
+        "path": "o-que-e",
+        "order": 1
+      },
+      {
+        "label": "Planos Por Adesão",
+        "icon": "insert_drive_file",
+        "path": "planos-por-adesao",
+        "order": 2
+      },
+      {
+        "label": "Quantidades",
+        "icon": "insert_drive_file",
+        "path": "quantidades",
+        "order": 8
+      },
+      {
+        "label": "Página Depoimentos",
+        "icon": "insert_drive_file",
+        "path": "pagina-depoimentos",
+        "order": 4
+      },
+      {
+        "label": "Página Operadoras",
+        "icon": "insert_drive_file",
+        "path": "pagina-operadoras",
+        "order": 6
+      },
+      {
+        "label": "Página Entidades",
+        "icon": "insert_drive_file",
+        "path": "pagina-entidades",
+        "order": 5
+      },
+      {
+        "label": "Página Área do Cliente",
+        "icon": "insert_drive_file",
+        "path": "pagina-area-cliente",
+        "order": 7
+      },
+      {
+        "label": "Página Demonstrativo de IR",
+        "icon": "insert_drive_file",
+        "path": "pagina-demonstrativo-ir",
+        "order": 3
+      }
+    ]
+  }
+]

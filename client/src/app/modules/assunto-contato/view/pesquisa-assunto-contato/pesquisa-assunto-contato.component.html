@@ -1,0 +1,8 @@
+<h1 class="page-title">
+  <mat-icon>done</mat-icon>
+  Assunto Contato
+</h1>
+
+<app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'assunto-contato'" [lazy]="false" [hasFilter]="true"
+  [actions]="{'u': true, 'd': true, 'v': true}" (deleteRecord)="excluirAssuntoContato($event[0], $event[1])">
+</app-generic-datatable>

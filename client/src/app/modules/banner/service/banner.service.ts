@@ -1,19 +1,19 @@
+import { AppSettings } from './../../../app.settings';
 import { GenericService } from './../../../core/service/generic.service';
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { Banner } from './../domain/banner';
-import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class BannerService extends GenericService {
 
-  private path = '/banneres';
+  private path = '/banner';
 
-  createOrUpdate(banner: Banner): Observable<Banner> {
-    if (banner._id) {
-      return this.update(banner);
+  createOrUpdate(formData: FormData, callback?) {
+    if (formData.get('_id')) {
+      return this.update(formData, callback);
     } else {
-      return this.create(banner);
+      return this.create(formData, callback);
     }
   }
 
@@ -23,23 +23,41 @@ export class BannerService extends GenericService {
 
   get(id: string): Observable<Banner> {
     const url = `${this.path}/id/${id}`;
-    return this.http.get<Banner>(url)
-      .pipe(catchError(this.handleError<Banner>(new Banner)));
+    return this.http.get<Banner>(url);
   }
 
-  create(banner: Banner): Observable<Banner> {
-    return this.http.post<Banner>(this.path, banner)
-      .pipe(catchError(this.handleError<Banner>()));
+  create(formData: FormData, callback?) {
+    this.sendFormData(formData, 'POST', callback);
   }
 
-  update(banner: Banner): Observable<Banner> {
-    return this.http.put<Banner>(this.path, banner)
-      .pipe(catchError(this.handleError<Banner>()));
+  update(formData: FormData, callback?) {
+    this.sendFormData(formData, 'PUT', callback);
+  }
+
+  sendFormData(formData: FormData, action: string, callback?) {
+    const req = new XMLHttpRequest();
+    req.open(action, AppSettings.API_ENDPOINT + this.path);
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    req.setRequestHeader('Authorization', 'Bearer ' + currentUser.token);
+    req.onreadystatechange = () => {
+      if (req.readyState === XMLHttpRequest.DONE && callback) {
+        if (req.status === 200 || req.status === 201) {
+          callback(req.response);
+        } else {
+          callback(null);
+        }
+      }
+    };
+    req.send(formData);
   }
 
   delete(id: string): Observable<any> {
     const url = `${this.path}/${id}`;
-    return this.http.delete(url)
-      .pipe(catchError(this.handleError<Banner>()));
+    return this.http.delete(url);
+  }
+
+  changeState(id: string): Observable<any> {
+    const url = `${this.path}/change-state/${id}`;
+    return this.http.post(url, {});
   }
 }

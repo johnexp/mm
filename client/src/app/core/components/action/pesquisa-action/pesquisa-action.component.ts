@@ -1,7 +1,7 @@
 import { Action } from './../../../domain/action';
 import { ActionService } from './../../../service/action.service';
-import { CustomSnackBarService } from './../../../../core/util/snack-bar/custom-snack-bar.service';
-import { GenericDatabase } from './../../../../core/util/data-table/generic-database';
+import { CustomSnackBarService } from './../../../util/snack-bar/custom-snack-bar.service';
+import { GenericDatabase } from './../../../util/data-table/generic-database';
 import { Component, OnInit } from '@angular/core';
 import { Location, DatePipe } from '@angular/common';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
@@ -58,7 +58,7 @@ export class PesquisaActionComponent implements OnInit {
     );
   }
 
-  mudarAtivacaoAction(action, paginator) {
+  mudarAtivacaoAction(action: Action, paginator: any) {
     const acao = action.ativo === true ? 'Inativando' : 'Ativando';
     this.blockUI.start(acao + ' registro...');
     this.actionService.delete(action._id).subscribe(

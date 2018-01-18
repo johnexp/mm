@@ -1,13 +1,7 @@
 <div class="header-container" fxLayout="column">
   <div class="header-actions">
-    <span>SASC - bem vindo de volta!</span>
+    <span>Gerenciador Site Valem - Bem vindo de volta!</span>
     <div class="header-icons">
-      <button mat-icon-button>
-        <mat-icon>notifications_none</mat-icon>
-      </button>
-      <button mat-icon-button>
-        <mat-icon>help_outline</mat-icon>
-      </button>
       <button mat-icon-button [matMenuTriggerFor]="userMenu" matTooltip="Usuário">
         <mat-icon>account_circle</mat-icon>
       </button>
@@ -23,8 +17,8 @@
   </div>
   <nav>
     <ul class="header-menu">
-      <li>
-        <a *ngFor="let section of sections" (click)="loadMenu(section.name)">
+      <li *ngFor="let section of sections" [ngClass]="{'active': activeSection === section.name}" >
+        <a (click)="loadMenu(section.name)">
           {{ section.label }}
         </a>
       </li>

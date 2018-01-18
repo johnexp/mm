@@ -1,0 +1,27 @@
+[
+  {
+    "assunto": "Elogio",
+    "email": "analista@valem.com.br",
+    "informacoesAdicionais": "<p>Teste</p>"
+  },
+  {
+    "assunto": "Informações",
+    "email": "analista@valem.com.br",
+    "informacoesAdicionais": null
+  },
+  {
+    "assunto": "Sugestões",
+    "email": "analista@valem.com.br",
+    "informacoesAdicionais": null
+  },
+  {
+    "assunto": "Reclamações",
+    "email": "analista@valem.com.br",
+    "informacoesAdicionais": null
+  },
+  {
+    "assunto": "Ovidoria",
+    "email": "analista@valem.com.br",
+    "informacoesAdicionais": null
+  }
+]

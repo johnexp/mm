@@ -1,0 +1,23 @@
+<h1 class="page-title">
+  <mat-icon>done</mat-icon>
+  Parceiro
+</h1>
+
+<app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'parceiros'" [lazy]="true" [hasFilter]="true"
+  [actions]="{'u': true, 'c': true, 'v': true}" [logicalExclusion]="true" (changeRecordState)="mudarAtivacaoParceiro($event[0], $event[1])">
+  <ng-template let-model="model" #filtersRef>
+    <div fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+
+      <mat-form-field fxFlex>
+        <mat-select placeholder="Tipo da Entidade" #tipo="ngModel" name="tipo" [(ngModel)]="model.tipo">
+          <mat-option></mat-option>
+          <ng-container *ngFor="let tipo of tipoLista">
+            <mat-option *ngIf="tipo" [value]="tipo">
+              {{ tipo }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </ng-template>
+</app-generic-datatable>

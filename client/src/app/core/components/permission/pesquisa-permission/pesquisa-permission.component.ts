@@ -1,7 +1,7 @@
 import { PermissionService } from '../../../service/permission.service';
 import { Action } from '../../../domain/action';
-import { CustomSnackBarService } from './../../../../core/util/snack-bar/custom-snack-bar.service';
-import { GenericDatabase } from './../../../../core/util/data-table/generic-database';
+import { CustomSnackBarService } from './../../../util/snack-bar/custom-snack-bar.service';
+import { GenericDatabase } from './../../../util/data-table/generic-database';
 import { Permission } from '../../../domain/permission';
 import { Component, OnInit } from '@angular/core';
 import { Location, DatePipe } from '@angular/common';
@@ -62,11 +62,9 @@ export class PesquisaPermissionComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
-
-  mudarAtivacaoPermission(permission, paginator) {
+  mudarAtivacaoPermission(permission: Permission, paginator: any) {
     const acao = permission.ativo === true ? 'Inativando' : 'Ativando';
     this.blockUI.start(acao + ' registro...');
     this.permissionService.delete(permission._id).subscribe(

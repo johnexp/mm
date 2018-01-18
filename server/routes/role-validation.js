@@ -1,9 +1,28 @@
-let User = require('../src/main/user/models/user.model');
+let guard = require('express-jwt-permissions')();
 
-exports.validateRole = async (req, res, next) => {
-  var user = await User.findById(req.user.sub);
-  if (user.roles.indexOf('admin')) {
-    return res.status(403).json({ status: 403., message: 'Permissões insuficientes'});
+var RoleValidation = function () { }
+
+RoleValidation.prototype = {
+  validateRoleOptional: (permission) => {
+    return _middleware.bind(this)
+
+    function _middleware(req, res, next) {
+      if (req.user.roles.indexOf('admin') > -1) {
+        next();
+        return;
+      }
+      return guard.check(permission)(req, res, next);
+    }
+  },
+  validateRole: (req, res, next) => {
+    if (req.user.roles.indexOf('admin') > -1) {
+      next();
+      return;
+    }
+    return res.status(403).json({ status: 403, message: 'Permissões insuficientes' });
   }
-  next();
+}
+
+module.exports = function () {
+  return new RoleValidation();
 }

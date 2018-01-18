@@ -4,7 +4,7 @@
     <label for="imagem" class="upload-label" fxFlex="100">
       <a mat-button type="button" color="accent" class="block">
         <mat-icon>file_upload</mat-icon>
-        Inserir Imagem
+        Inserir {{fieldLabel}}
       </a>
     </label>
     <input type="file" [hidden]="true" id="imagem" name="imagem" (change)="onFileChange($event)" #fileInput>

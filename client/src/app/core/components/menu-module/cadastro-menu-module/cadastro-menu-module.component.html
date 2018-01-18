@@ -1,7 +1,7 @@
 <h1 class="page-title">
-  <mat-icon>done</mat-icon>Menu module -
+  <mat-icon>menu</mat-icon> Menus da Seção -
   <span class="subtitle">
-    {{ menuModule._id ? 'Editar' : 'Cadastrar' }} Menu module
+    {{ menuModule._id ? 'Editar' : 'Cadastrar' }} Menu da Seção
   </span>
 </h1>
 
@@ -23,8 +23,8 @@
       <mat-form-field fxFlex>
         <mat-select placeholder="Perfis" #roles="ngModel" name="roles" [(ngModel)]="menuModule.roles" multiple>
           <ng-container *ngFor="let role of rolesLista">
-            <mat-option *ngIf="role" [value]="role">
-              {{ role }}
+            <mat-option [value]="role._id">
+              {{ role.roleName }}
             </mat-option>
           </ng-container>
         </mat-select>

@@ -7,7 +7,15 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class UserService extends GenericService {
 
-  private path = '/users';
+  private path = '/user';
+
+  createOrUpdate(user: User): Observable<User> {
+    if (user._id) {
+      return this.updateUser(user);
+    } else {
+      return this.create(user);
+    }
+  }
 
   getAll(): Observable<User[]> {
     return this.http.get<User[]>(this.path)
@@ -32,7 +40,12 @@ export class UserService extends GenericService {
       .pipe(catchError(this.handleError<User>()));
   }
 
-  update(user: User): Observable<User> {
+  updateSelf(user: User): Observable<User> {
+    return this.http.put<User>(this.path + '/self/' + user._id, user)
+      .pipe(catchError(this.handleError<User>()));
+  }
+
+  updateUser(user: User): Observable<User> {
     return this.http.put<User>(this.path + '/' + user._id, user)
       .pipe(catchError(this.handleError<User>()));
   }

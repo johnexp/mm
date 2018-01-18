@@ -1,7 +1,7 @@
 import { MenuModule } from './../../../domain/menu-module';
 import { MenuModuleService } from './../../../service/menu-module.service';
-import { CustomSnackBarService } from './../../../../core/util/snack-bar/custom-snack-bar.service';
-import { GenericDatabase } from './../../../../core/util/data-table/generic-database';
+import { CustomSnackBarService } from './../../../util/snack-bar/custom-snack-bar.service';
+import { GenericDatabase } from './../../../util/data-table/generic-database';
 import { Component, OnInit } from '@angular/core';
 import { Location, DatePipe } from '@angular/common';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
@@ -58,7 +58,7 @@ export class PesquisaMenuModuleComponent implements OnInit {
     );
   }
 
-  excluirMenuModule(menuModule, paginator) {
+  excluirMenuModule(menuModule: MenuModule, paginator: any) {
     this.blockUI.start('Removendo registro...');
     this.menuModuleService.delete(menuModule._id).subscribe(
       response => {

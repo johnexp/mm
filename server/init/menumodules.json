@@ -1,0 +1,53 @@
+[
+  {
+    "name": "administracao",
+    "label": "Administração",
+    "menus": [
+      {
+        "label": "Ação",
+        "icon": "done",
+        "path": "action",
+        "order": 1
+      },
+      {
+        "label": "Módulo",
+        "icon": "view_module",
+        "path": "module",
+        "order": 2
+      },
+      {
+        "label": "Permissão",
+        "icon": "vpn_key",
+        "path": "permission",
+        "order": 3
+      },
+      {
+        "label": "Menu da Seção",
+        "icon": "menu",
+        "path": "menu-module",
+        "order": 6
+      },
+      {
+        "label": "Usuário",
+        "icon": "account_circle",
+        "path": "user",
+        "order": 5
+      },
+      {
+        "label": "Perfil",
+        "icon": "assignment_turned_in",
+        "path": "role",
+        "order": 4
+      },
+      {
+        "label": "Parâmetros",
+        "icon": "tune",
+        "path": "param",
+        "order": 7
+      }
+    ],
+    "roles": [
+      "admin"
+    ]
+  }
+]

@@ -3,4 +3,5 @@ export class Menu {
   label: string;
   icon: string;
   path: string;
+  order: number;
 }

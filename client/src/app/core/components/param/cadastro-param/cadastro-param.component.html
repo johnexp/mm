@@ -1,0 +1,53 @@
+<h1 class="page-title" fxLayoutAlign="space-between center" fxLayout.xs="column">
+  <span>
+    <mat-icon>tune</mat-icon>
+    Parâmetros -
+    <span class="subtitle">
+      {{ param._id ? 'Editar' : 'Cadastrar' }} Parâmetro
+    </span>
+  </span>
+  <mat-card>
+    <mat-slide-toggle name="ativo" [(ngModel)]="param.ativo" [disabled]="disabled || !isAdmin">
+      Ativo
+    </mat-slide-toggle>
+  </mat-card>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <fieldset class="fake-fieldset" [disabled]="disabled">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput name="key" #key="ngModel" [(ngModel)]="param.key" placeholder="Chave" [disabled]="!isAdmin" required>
+        <mat-error [hidden]="!key.hasError('required') || (key.pristine && !key.touched && !form.submitted)">
+          O campo "Chave" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput name="value" #value="ngModel" [(ngModel)]="param.value" placeholder="Valor" required>
+        <mat-error [hidden]="!value.hasError('required') || (value.pristine && !value.touched && !form.submitted)">
+          O campo "Valor" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex="100">
+        <textarea matInput name="description" #description="ngModel" [(ngModel)]="param.description" placeholder="Descrição" required></textarea>
+        <mat-error [hidden]="!description.hasError('required') || (description.pristine && !description.touched && !form.submitted)">
+          O campo "Descrição" é obrigatório
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </fieldset>
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">
+    <button *ngIf="!disabled" mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button *ngIf="!disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button *ngIf="disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+  </div>
+</form>

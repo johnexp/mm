@@ -7,7 +7,7 @@
     </span>
   </span>
   <mat-card>
-    <mat-slide-toggle name="ativo" [(ngModel)]="user.active" [disabled]="disabled">
+    <mat-slide-toggle name="ativo" [(ngModel)]="user.ativo" [disabled]="disabled">
       Ativo
     </mat-slide-toggle>
   </mat-card>
@@ -22,8 +22,9 @@
           O campo "Usuário" é obrigatório
         </mat-error>
       </mat-form-field>
-      <app-select-entity-field fxFlex [form]="form" [fieldLabel]="'Permissões'" [entityName]="'permissions'" [entityMainProperty]="'prettified'"
-        [model]="user" [modelEntityProperty]="'permissions'" [displayedColumns]="permissionsSelectionColumns" [multiple]="true"></app-select-entity-field>
+      <app-select-entity-field fxFlex="100" [form]="form" [fieldLabel]="'Perfis'" [required]="true" [entityName]="'role'"
+        [entityMainProperty]="'roleName'" [selectionType]="'grid'" [lazyFetch]="false" [model]="user" [modelEntityProperty]="'roles'"
+        [displayedColumns]="rolesSelectionColumns" [multiple]="true"></app-select-entity-field>
     </div>
   </fieldset>
   <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">

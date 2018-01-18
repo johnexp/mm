@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var bluebird = require('bluebird');
 var expressJwt = require('express-jwt');
 var config = require('./config.json');
+var babelPolyfill = require('babel-polyfill');
 
 var index = require('./routes/index');
 var api = require('./routes/api.route');
@@ -44,7 +45,7 @@ app.use(expressJwt({
     }
     return null;
   }
-}).unless({ path: [/\/public\.*/, '/favicon.ico', '/api/users/authenticate', '/api/users/register'] }));
+}).unless({ path: [/\/public\.*/, '/favicon.ico', '/api/user/authenticate', '/api/user/register'] }));
 
 app.use('/', index);
 app.use('/api', api);
@@ -68,8 +69,8 @@ app.use(function (err, req, res, next) {
 });
 
 mongoose.Promise = bluebird;
-mongoose.connect('mongodb://127.0.0.1:27017/sascapp', { useMongoClient: true })
-  .then(() => { console.log(`Succesfully Connected to the Mongodb Database  at URL: mongodb://127.0.0.1:27017/sascapp`) })
-  .catch(() => { console.log(`Error Connecting to the Mongodb Database at URL: mongodb://127.0.0.1:27017/sascapp`) });
+mongoose.connect(`mongodb://${config.mongo.url}/${config.mongo.collection}`, { useMongoClient: true })
+  .then(() => { console.log(`Succesfully Connected to the Mongodb Database  at URL: mongodb://${config.mongo.url}/${config.mongo.collection}`) })
+  .catch(() => { console.log(`Error Connecting to the Mongodb Database at URL: mongodb://${config.mongo.url}/${config.mongo.collection}`) });
 
 module.exports = app;

@@ -1,0 +1,76 @@
+<h1 class="page-title" fxLayoutAlign="space-between center" fxLayout.xs="column">
+  <span>
+    <mat-icon>done</mat-icon>
+    Parceiro -
+    <span class="subtitle">
+      {{ parceiro._id ? 'Editar' : 'Cadastrar' }} Parceiro
+    </span>
+  </span>
+  <mat-card>
+    <mat-slide-toggle name="ativo" [(ngModel)]="parceiro.ativo" [disabled]="disabled">
+      Ativo
+    </mat-slide-toggle>
+  </mat-card>
+</h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <fieldset class="fake-fieldset" [disabled]="disabled">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+      <app-image-preview fxFlex="20" fxFlex.sm="30" fxFlex.xs="100" [model]="parceiro" [modelFileProperty]="'imagem'" [image]="parceiro.imagem?.file"
+        [form]="form" [fieldLabel]="'Imagem'" [required]="true"></app-image-preview>
+      <mat-form-field fxFlex>
+        <input matInput name="nome" minlength="3" maxlength="50" #nome="ngModel" [(ngModel)]="parceiro.nome" placeholder="Nome" required>
+        <mat-error [hidden]="!nome.hasError('required') || (nome.pristine && !nome.touched && !form.submitted)">
+          O campo "Nome" é obrigatório
+        </mat-error>
+        <mat-error [hidden]="!nome.hasError('minlength') || (nome.pristine && !nome.touched && !form.submitted)">
+          O valor do campo é menor do que o valor mínimo permitido: 3
+        </mat-error>
+        <mat-error [hidden]="!nome.hasError('maxlength') || (nome.pristine && !nome.touched && !form.submitted)">
+          O valor do campo é maior do que o valor máximo permitido: 50
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select placeholder="Tipo da Entidade" #tipo="ngModel" name="tipo" [(ngModel)]="parceiro.tipo" required>
+          <ng-container *ngFor="let tipo of tipoLista">
+            <mat-option *ngIf="tipo" [value]="tipo">
+              {{ tipo }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error [hidden]="!tipo.hasError('required') || (tipo.pristine && !tipo.touched && !form.submitted)">
+          O campo "Tipo da Entidade" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput name="url" minlength="5" maxlength="100" #url="ngModel" [(ngModel)]="parceiro.url" placeholder="URL" required>
+        <mat-error [hidden]="!url.hasError('required') || (url.pristine && !url.touched && !form.submitted)">
+          O campo "URL" é obrigatório
+        </mat-error>
+        <mat-error [hidden]="!url.hasError('minlength') || (url.pristine && !url.touched && !form.submitted)">
+          O valor do campo é menor do que o valor mínimo permitido: 5
+        </mat-error>
+        <mat-error [hidden]="!url.hasError('maxlength') || (url.pristine && !url.touched && !form.submitted)">
+          O valor do campo é maior do que o valor máximo permitido: 100
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput type="number" name="ordem" min="1" #ordem="ngModel" [(ngModel)]="parceiro.ordem" min="1" placeholder="Ordem">
+      </mat-form-field>
+    </div>
+  </fieldset>
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">
+    <button *ngIf="!disabled" mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button *ngIf="!disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button *ngIf="disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+  </div>
+</form>

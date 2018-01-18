@@ -1,0 +1,110 @@
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$mat-custom: (
+  50: #e5ebf1,
+  100: #bfccdd,
+  200: #94aac6,
+  300: #6988af,
+  400: #486f9d,
+  500: #28558c,
+  600: #244e84,
+  700: #1e4479,
+  800: #183b6f,
+  900: #0f2a5c,
+  A100: #92b4ff,
+  A200: #5f91ff,
+  A400: #2c6eff,
+  A700: #180a1a,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: $white-87-opacity,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+$mat-custom-accent: (
+  50: #fce9ee,
+  100: #f6c8d5,
+  200: #f1a3b9,
+  300: #eb7e9c,
+  400: #e66287,
+  500: #e24672,
+  600: #df3f6a,
+  700: #da375f,
+  800: #d62f55,
+  900: #cf2042,
+  A100: #ffffff,
+  A200: #ffd4db,
+  A400: #ffa1b1,
+  A700: #ff879c,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: $white-87-opacity,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$custom-app-primary: mat-palette($mat-custom, 500);
+$custom-app-accent:  mat-palette($mat-custom-accent, 500, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$custom-app-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$custom-app-theme: mat-light-theme($custom-app-primary, $custom-app-accent, $custom-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($custom-app-theme);
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$custom-typography: mat-typography-config(
+  $font-family: 'effraregular'
+);
+
+@include angular-material-typography($custom-typography);
+
+@mixin custom-input-theme($custom-app-theme) {
+  // Use mat-color to extract individual colors from a palette as necessary.
+  .mat-input-placeholder {
+    color: rgba(0, 0, 0, .7);
+  }
+  .mat-input-underline {
+    background-color: rgba(0, 0, 0, .45);
+  }
+}
+
+@include custom-input-theme($custom-app-theme);

@@ -1,0 +1,37 @@
+<h1 class="page-title" ><mat-icon>done</mat-icon>Depoimento -
+  <span class="subtitle">
+    {{ depoimento._id ? 'Editar' : 'Cadastrar' }} Depoimento
+  </span></h1>
+
+<form #form="ngForm" (ngSubmit)="salvar()" novalidate>
+  <fieldset class="fake-fieldset" [disabled]="disabled">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+      <mat-form-field fxFlex>
+        <input matInput name="empresa" #empresa="ngModel" [(ngModel)]="depoimento.empresa" placeholder="Empresa" required>
+        <mat-error [hidden]="!empresa.hasError('required') || (empresa.pristine && !empresa.touched && !form.submitted)">
+          O campo "Empresa" é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex="100">
+        <textarea matInput name="depoimento" #textoDepoimento="ngModel" [(ngModel)]="depoimento.depoimento" placeholder="Depoimento" required></textarea>
+        <mat-error [hidden]="!textoDepoimento.hasError('required') || (textoDepoimento.pristine && !textoDepoimento.touched && !form.submitted)">
+          O campo "Depoimento" é obrigatório
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </fieldset>
+  <div class="buttons-container layout-margin" fxLayoutAlign="end center" fxLayoutAlign.xs="center">
+    <button *ngIf="!disabled" mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button *ngIf="!disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+    <button *ngIf="disabled" mat-button type="button" (click)="cancelar()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+  </div>
+</form>

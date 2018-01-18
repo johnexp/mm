@@ -1,7 +1,7 @@
 
 export class Action {
-  _id: number;
-  actionName: String;
+  _id: string;
+  actionName: string;
   actions: Action[] = [];
 
   ativo: boolean;

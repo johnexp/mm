@@ -1,6 +1,6 @@
 import { ModuleService } from './../../../service/module.service';
 import { Module } from './../../../domain/module';
-import { CustomSnackBarService } from './../../../../core/util/snack-bar/custom-snack-bar.service';
+import { CustomSnackBarService } from './../../../util/snack-bar/custom-snack-bar.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Location } from '@angular/common';
@@ -16,7 +16,7 @@ export class CadastroModuleComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
   module: Module = new Module;
-  @ViewChild('form') form;
+  @ViewChild('form') form: any;
   disabled: Boolean = false;
 
   constructor(private router: Router,
@@ -40,7 +40,7 @@ export class CadastroModuleComponent implements OnInit {
 
   }
 
-  obterModule(id) {
+  obterModule(id: string) {
     this.blockUI.start('Carregando...');
     this.moduleService.get(id).subscribe(
       response => {

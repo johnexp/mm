@@ -1,0 +1,62 @@
+[
+  {
+    "titulo": "Dados Cadastrais",
+    "resumo": "Solicite aqui a alteração de seus dados cadastrais",
+    "url": "alteracao-cadastral",
+    "ativo": true,
+    "home": true,
+    "cor": "purple",
+    "icone": "fa-address-card",
+    "ordem": 2
+  },
+  {
+    "titulo": "Demonstrativo de IR",
+    "resumo": "Demonstrativo para declaração de Imposto de Renda",
+    "url": "demonstrativo-ir",
+    "ativo": true,
+    "home": true,
+    "cor": "blue",
+    "icone": "fa-money",
+    "ordem": 1
+  },
+  {
+    "titulo": "Alteração de Endereço",
+    "resumo": "Solicite aqui a alteração do seu endereço",
+    "url": "alteracao-endereco",
+    "ativo": true,
+    "home": true,
+    "cor": "green",
+    "icone": "fa-map-marker",
+    "ordem": 3
+  },
+  {
+    "titulo": "2ª Via de Boleto",
+    "resumo": "Emissão de 2ª Via de Boleto",
+    "url": "segunda-via-boleto",
+    "icone": "fa-user-circle-o",
+    "ativo": true,
+    "home": false,
+    "cor": "red",
+    "ordem": 4
+  },
+  {
+    "titulo": "2ª Via de Contrato",
+    "resumo": "Emissão de 2ª Via de Contrato",
+    "url": "segunda-via-contrato",
+    "icone": "fa-car",
+    "ativo": true,
+    "home": false,
+    "cor": "teal",
+    "ordem": 5
+  },
+  {
+    "titulo": "2ª Via de Carteirinha",
+    "resumo": "Emissão de 2ª Via de Carteirinha",
+    "url": "segunda-via-carteirinha",
+    "icone": "fa-archive",
+    "ativo": true,
+    "home": false,
+    "cor": "gray-dark",
+    "ordem": 6
+  }
+]

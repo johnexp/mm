@@ -1,4 +1,3 @@
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { CoreModule } from './../../core/core.module';
 import { SobreRoute } from './sobre.route';
 import { BrowserModule } from '@angular/platform-browser';
@@ -41,8 +40,6 @@ const MAT_MODULES = [
     FormsModule,
     CoreModule,
     FlexLayoutModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot(),
     RouterModule.forRoot(SobreRoute, { useHash: true })
   ],
   exports: [],

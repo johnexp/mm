@@ -1,0 +1,117 @@
+let PermissionService = require('../services/permission.service'),
+  inflections = require('underscore.inflections'),
+  s = require('underscore.string'),
+  _this = this;
+
+exports.getPermissiones = async function (req, res, next) {
+
+  var page = req.query.page ? +req.query.page : 1;
+  var limit = req.query.limit ? +req.query.limit : 10;
+  var order = req.query.order ? req.query.order == 'asc' ? 1 : -1 : 1;
+  var sortBy = req.query.sort ? req.query.sort : 'id';
+  var sort = JSON.parse('{ "' + sortBy + '": ' + order + ' }');
+
+  var query = {};
+  req.body.action ? query.action = req.body.action : null;
+  req.body.module ? query.module = req.body.module : null;
+  req.body.stringfied ? query.stringfied = { $regex: new RegExp('^.*' + req.body.stringfied.trim() + '.*', 'i') } : null;
+  req.body.prettified ? query.prettified = { $regex: new RegExp('^.*' + req.body.prettified.trim() + '.*', 'i') } : null;
+
+  if (req.body.ativo != null && req.body.ativo !== undefined) {
+    query.ativo = req.body.ativo;
+  }
+
+  try {
+    var permissiones = await PermissionService.getPermissiones(query, page, limit, sort);
+    return res.status(200).json(permissiones);
+  } catch (e) {
+    return res.status(400).json({ status: 400, message: 'Ocorreu um erro ao filtrar os registros: ' + e });
+  }
+}
+
+exports.getAllPermissiones = async function (req, res, next) {
+  try {
+    var query = {};
+    if (req.params.actives != null && req.params.actives !== undefined) {
+      query.ativo = req.params.actives;
+    }
+    var permissiones = await PermissionService.getAllPermissiones(query);
+    return res.status(200).json(permissiones);
+  } catch (e) {
+    return res.status(400).json({ status: 400, message: 'Ocorreu um erro ao buscar os registros: ' + e });
+  }
+}
+
+exports.getPermission = async function (req, res, next) {
+  try {
+    var permissiones = await PermissionService.getPermission(req.params.id)
+    return res.status(200).json(permissiones);
+  } catch (e) {
+    return res.status(400).json({ status: 400, message: 'Ocorreu um erro ao buscar o registro: ' + e });
+  }
+}
+
+exports.createPermission = async function (req, res, next) {
+
+  let slugifiedModuleName = s(req.body.module.moduleName).slugify().value();
+  // let slugifiedSingularModuleName = inflections.singularize(slugifiedModuleName);
+  let permissions = [];
+  req.body.actions.forEach(function (action) {
+    permissions.push({
+      action: action,
+      module: req.body.module,
+      stringfied: slugifiedModuleName + ':' + action.actionName.toLowerCase(),
+      prettified: action.actionName + ' ' + req.body.module.moduleName,
+      ativo: req.body.ativo,
+      usuario: req.user.sub
+    });
+  });
+
+  try {
+    let createdPermissions = [];
+    for (var i = 0; i < permissions.length; i++) {
+      let createdPermission = await PermissionService.createPermission(permissions[i], req.user.sub);
+      createdPermissions.push(createdPermission);
+    }
+    return res.status(201).json(createdPermissions);
+  } catch (e) {
+    return res.status(400).json({ status: 400, message: 'Ocorreu um erro ao tentar realizar o cadastro: ' + e });
+  }
+}
+
+exports.updatePermission = async function (req, res, next) {
+  if (!req.body._id) {
+    return res.status(400).json({ status: 400, message: 'Id do registro não encontrado: ' + e });
+  }
+
+  let slugifiedModuleName = s(req.body.module.moduleName).slugify().value();
+  // let slugifiedSingularModuleName = inflections.singularize(slugifiedModuleName);
+
+  var id = req.body._id;
+  var permission = {
+    id,
+    action: req.body.action ? req.body.action : null,
+    module: req.body.module ? req.body.module : null,
+    stringfied: slugifiedModuleName + ':' + req.body.action.actionName.toLowerCase(),
+    prettified: req.body.action.actionName + ' ' + req.body.module.moduleName,
+    ativo: req.body.ativo
+  };
+
+  try {
+    var updatedPermission = await PermissionService.updatePermission(permission, req.user.sub);
+    return res.status(200).json({ status: 200, data: updatedPermission, message: 'Registro atualizado com sucesso.' });
+  } catch (e) {
+    return res.status(400).json({ status: 400, message: 'Ocorreu um erro ao tentar salvar o registro: ' + e });
+  }
+}
+
+exports.removePermission = async function (req, res, next) {
+  var id = req.params.id;
+
+  try {
+    var changed = await PermissionService.deletePermission(id, req.user.sub);
+    return res.status(204).json({ status: 204, message: 'Registro alterado com sucesso!' });
+  } catch (e) {
+    return res.status(400).json({ status: 400, message: 'Ocorreu um erro ao tentar remover o registro: ' + e });
+  }
+}

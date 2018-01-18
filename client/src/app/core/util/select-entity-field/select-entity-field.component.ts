@@ -1,3 +1,4 @@
+import { GenericDatabase } from './../data-table/generic-database';
 import { FormControl, Validators } from '@angular/forms';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -21,7 +22,12 @@ export class SelectEntityFieldComponent implements AfterViewInit {
   @Input() entityMainProperty: string;
   @Input() multiple: Boolean = false;
   @Input() required: Boolean = false;
+  @Input() disabled: Boolean = false;
+  @Input() lazyFetch: Boolean = true;
+  @Input() selectionType: String = 'input';
+  database = new GenericDatabase;
   selectedRecords: String = '';
+  selectedIds: string[] = [];
   _modelChange = new BehaviorSubject([]);
 
   get model(): any {
@@ -30,9 +36,9 @@ export class SelectEntityFieldComponent implements AfterViewInit {
 
   @Input('model')
   set model(data: any) {
-    if (data._id && data[this.modelEntityProperty]) {
+    if (data && data._id && data[this.modelEntityProperty]) {
       if (this.multiple) {
-        this.selectedRecords = data[this.modelEntityProperty].map(record => record[this.entityMainProperty]).join(', ');
+        this.selectedRecords = data[this.modelEntityProperty].map((record: any) => record[this.entityMainProperty]).join(', ');
       } else {
         this.selectedRecords = data[this.modelEntityProperty][this.entityMainProperty];
       }
@@ -40,6 +46,9 @@ export class SelectEntityFieldComponent implements AfterViewInit {
       this.selectedRecords = '';
     }
     this._modelChange.next(data);
+    if (this.selectionType === 'grid') {
+      this.setSelectedIds();
+    }
     this.validateRequired();
   }
 
@@ -48,6 +57,12 @@ export class SelectEntityFieldComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.validateRequired();
+  }
+
+  setSelectedIds() {
+    if (this.selectionType === 'grid') {
+      this.selectedIds = this.model[this.modelEntityProperty].map((data: any) => data._id);
+    }
   }
 
   validateRequired() {
@@ -65,6 +80,7 @@ export class SelectEntityFieldComponent implements AfterViewInit {
         this.form.form.controls[this.modelEntityProperty].setErrors(null);
       }
     }
+    this.setSelectedIds();
     this.changeDetectorRef.detectChanges();
   }
 
@@ -84,18 +100,19 @@ export class SelectEntityFieldComponent implements AfterViewInit {
         entityName: this.entityName,
         displayedColumns: this.displayedColumns,
         selectionData: JSON.parse(JSON.stringify(selectionData)),
-        multiple: this.multiple
+        multiple: this.multiple,
+        lazyFetch: this.lazyFetch
       }
     });
     this.registerDialogCloseCallback(dialogRef);
   }
 
-  registerDialogCloseCallback(dialogRef) {
-    dialogRef.afterClosed().subscribe(result => {
+  registerDialogCloseCallback(dialogRef: any) {
+    dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
         if (this.multiple) {
           this.model[this.modelEntityProperty] = result;
-          this.selectedRecords = result.map(record => record[this.entityMainProperty]).join(', ');
+          this.selectedRecords = result.map((record: any) => record[this.entityMainProperty]).join(', ');
         } else {
           this.model[this.modelEntityProperty] = result[0] || [];
           this.selectedRecords = result[0][this.entityMainProperty];

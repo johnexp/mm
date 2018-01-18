@@ -1,0 +1,13 @@
+<h1 class="page-title">
+  <mat-icon>assignment_turned_in</mat-icon>
+  Perfis
+</h1>
+
+<app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'role'" [lazy]="true" [hasFilter]="true"
+  [actions]="{'u': true, 'c': true, 'v': true}" [logicalExclusion]="true" (changeRecordState)="mudarAtivacaoRole($event[0], $event[1])">
+  <ng-template let-model="model" #filtersRef>
+    <div fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch" fxLayoutWrap>
+
+    </div>
+  </ng-template>
+</app-generic-datatable>

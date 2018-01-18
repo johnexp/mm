@@ -1,0 +1,15 @@
+<h1 class="page-title">
+  <mat-icon>account_circle</mat-icon>
+  Usuários
+</h1>
+
+<app-generic-datatable [columns]="displayedColumns" [database]="database" [resource]="'user'" [lazy]="true" [hasFilter]="true"
+  [actions]="{'u': true, 'c': true, 'v': true}" [logicalExclusion]="true" (changeRecordState)="mudarAtivacaoUser($event[0], $event[1])">
+  <ng-template let-model="model" #filtersRef>
+    <div fxFlex="100" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between stretch"
+      fxLayoutWrap>
+      <app-select-entity-field fxFlex [fieldLabel]="'Perfis'" [entityName]="'role'" [entityMainProperty]="'roleName'" [lazyFetch]="false"
+        [model]="model" [modelEntityProperty]="'roles'" [displayedColumns]="rolesSelectionColumns" [multiple]="true"></app-select-entity-field>
+    </div>
+  </ng-template>
+</app-generic-datatable>

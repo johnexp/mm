@@ -1,0 +1,14 @@
+[
+  {
+    "ativo": true,
+    "permissions": [],
+    "roles": [
+      ObjectId("5a4bcdce9e99431ea44af9ec")
+    ],
+    "lastName": "Admin",
+    "firstName": "System",
+    "hash": "$2a$10$LmGnW7HtD7gUSlQp27CgVu0GdzMLPs216/n2E8YfqO0oF1h/E0lTu",
+    "email": "jonathan91j@gmail.com",
+    "username": "admin"
+  }
+]

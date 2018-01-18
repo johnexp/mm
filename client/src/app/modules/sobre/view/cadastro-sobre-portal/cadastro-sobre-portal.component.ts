@@ -17,13 +17,6 @@ export class CadastroSobrePortalComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   sobre: Sobre = new Sobre;
   @ViewChild('form') form;
-  public froalaOptions: Object = {
-    imageUpload: false,
-    imagePaste: false,
-    toolbarButtons: ['bold', 'italic', 'underline', 'fontSize', 'paragraphFormat', 'insertHR', 'align'],
-    placeholderText: 'Conteúdo',
-    language: 'pt_br'
-  };
 
   constructor(private router: Router,
     private location: Location,

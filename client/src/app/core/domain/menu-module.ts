@@ -1,7 +1,7 @@
 import { Menu } from './menu';
 
 export class MenuModule {
-  _id: number;
+  _id: string;
   name: string;
   label: string;
   menus: Menu[] = [];

@@ -6,7 +6,7 @@ import { Module } from './../domain/module';
 @Injectable()
 export class ModuleService extends GenericService {
 
-  private path = '/modules';
+  private path = '/module';
 
   createOrUpdate(module: Module): Observable<Module> {
     if (module._id) {

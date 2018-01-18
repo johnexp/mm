@@ -9,7 +9,7 @@
       </button>
     </div>
     <div fxFlex="100" fxLayoutAlign="center center">
-      <button mat-button color="accent" type="button" (click)="goCreate()">
+      <button *ngIf="canCreate" mat-button color="accent" type="button" [disabled]="disabled" (click)="goCreate()">
         <mat-icon>insert_drive_file</mat-icon>
         Novo
       </button>
@@ -41,11 +41,6 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <!-- <mat-card fxFlex class="slide-toggle-container" *ngSwitchCase="'switch'">
-            <mat-slide-toggle name="{{ field.columnDef }}" [(ngModel)]="model[field.columnDef]">
-              {{ field.header }}
-            </mat-slide-toggle>
-          </mat-card> -->
         </ng-container>
         <mat-form-field fxFlex *ngIf="field.filter != false && !field.type">
           <input matInput name="{{ field.columnDef }}" [(ngModel)]="model[field.columnDef]" placeholder="{{ field.header }}">
@@ -73,7 +68,7 @@
         <mat-icon>filter_list</mat-icon>
         Filtrar
       </button>
-      <button *ngIf="canCreate" mat-button color="accent" type="button" (click)="goCreate()">
+      <button *ngIf="canCreate" mat-button color="accent" type="button" [disabled]="disabled" (click)="goCreate()">
         <mat-icon>insert_drive_file</mat-icon>
         Novo
       </button>
@@ -85,11 +80,12 @@
   </form>
 </div>
 
-<div fxLayout="row" fxLayout.xs="column">
-  <div fxFlex [ngClass]="{'selection-container': showSelected, 'no-overflow': !showSelected}">
+<div fxLayout="row" fxLayoutWrap>
+  <div fxFlex fxFlex.xs="100" [ngClass]="{'selection-container': showSelected, 'no-overflow': !showSelected}">
     <div class="table-scroll">
       <div class="table-container" [ngStyle]="{'min-width.px': displayedColumns.length * 100}">
-        <mat-table #table class="dense custom-table" [dataSource]="dataSource" matSort matSortActive="id" matSortDisableClear matSortDirection="asc">
+        <mat-table #table class="dense custom-table" [dataSource]="dataSource" matSort matSortActive="{{sortActive}}" matSortDisableClear
+          matSortDirection="asc">
 
           <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -98,49 +94,48 @@
           <ng-container matColumnDef="selection">
             <ng-container *ngIf="multipleSelection">
               <mat-header-cell *matHeaderCellDef>
-                <button *ngIf="lazy" (click)="changeSelectionAll()" mat-icon-button>
+                <button *ngIf="lazy" (click)="changeSelectionAll()" type="button" [disabled]="disabled" mat-icon-button>
                   <mat-icon *ngIf="selectionData.length != resultsLength" matTooltip="Selecionar Todos">check_box_outline_blank</mat-icon>
                   <mat-icon *ngIf="selectionData.length == resultsLength" matTooltip="Desselecionar Todos">check_box</mat-icon>
                 </button>
-                <button *ngIf="!lazy" (click)="changeSelectionAll()" mat-icon-button>
+                <button *ngIf="!lazy" (click)="changeSelectionAll()" type="button" [disabled]="disabled" mat-icon-button>
                   <mat-icon *ngIf="selectionData.length != database.data.length" matTooltip="Selecionar Todos">check_box_outline_blank</mat-icon>
                   <mat-icon *ngIf="selectionData.length == database.data.length" matTooltip="Desselecionar Todos">check_box</mat-icon>
                 </button>
               </mat-header-cell>
               <mat-cell *matCellDef="let row">
-                <mat-checkbox (change)="changeSelection(row)" [checked]="selectedIds.indexOf(row._id) > -1"></mat-checkbox>
+                <mat-checkbox (change)="changeSelection(row)" [disabled]="disabled" [checked]="selectedIds.indexOf(row._id) > -1"></mat-checkbox>
               </mat-cell>
             </ng-container>
             <ng-container *ngIf="!multipleSelection">
               <mat-header-cell *matHeaderCellDef class="text-center"> Selecionar </mat-header-cell>
               <mat-cell *matCellDef="let row">
-                <mat-radio-button (change)="changeSelection(row)" [checked]="selectedIds.indexOf(row._id) > -1" [value]="row"></mat-radio-button>
+                <mat-radio-button (change)="changeSelection(row)" [disabled]="disabled" [checked]="selectedIds.indexOf(row._id) > -1" [value]="row"></mat-radio-button>
               </mat-cell>
             </ng-container>
           </ng-container>
 
           <!-- Actions column -->
           <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef class="text-center"> Ações </mat-header-cell>
-            <mat-cell *matCellDef="let row">
-              <button mat-icon-button type="button" color="accent" *ngIf="actions.u" (click)="goEdit(row)" matTooltip="Editar">
+            <mat-header-cell *matHeaderCellDef class="text-center" [ngClass]="'actions-header-' + actionsLength"> Ações </mat-header-cell>
+            <mat-cell *matCellDef="let row"  [ngClass]="'actions-cell-' + actionsLength">
+              <button mat-icon-button type="button" color="accent" *ngIf="actions.u" (click)="goEdit(row)" [disabled]="disabled" matTooltip="Editar">
                 <mat-icon aria-label="Editar">edit</mat-icon>
               </button>
-              <button mat-icon-button type="button" color="primary" *ngIf="actions.v" (click)="goView(row)" matTooltip="Visualizar">
+              <button mat-icon-button type="button" color="primary" *ngIf="actions.v" (click)="goView(row)" [disabled]="disabled" matTooltip="Visualizar">
                 <mat-icon aria-label="Visualizar">remove_red_eyes</mat-icon>
               </button>
-              <ng-container *ngIf="actions.d">
-                <button mat-icon-button type="button" color="warn" *ngIf="!logicalExclusion" (click)="confirmDelete(row)" matTooltip="Excluir">
-                  <mat-icon aria-label="Excluir">delete</mat-icon>
-                </button>
-                <button mat-icon-button type="button" color="warn" *ngIf="logicalExclusion && row.ativo" (click)="confirmDelete(row)" matTooltip="Inativar">
-                  <mat-icon aria-label="Inativar">block</mat-icon>
-                </button>
-                <button mat-icon-button type="button" color="success" *ngIf="logicalExclusion && !row.ativo" (click)="confirmDelete(row)"
-                  matTooltip="Ativar">
-                  <mat-icon aria-label="Ativar">done</mat-icon>
-                </button>
-              </ng-container>
+              <button mat-icon-button type="button" color="warn" *ngIf="actions.d" (click)="confirmDelete(row)" [disabled]="disabled" matTooltip="Excluir">
+                <mat-icon aria-label="Excluir">delete</mat-icon>
+              </button>
+              <button mat-icon-button type="button" color="warn" *ngIf="actions.c && row.ativo" (click)="confirmStateChange(row)" [disabled]="disabled"
+                matTooltip="Inativar">
+                <mat-icon aria-label="Inativar">block</mat-icon>
+              </button>
+              <button mat-icon-button type="button" color="success" *ngIf="actions.c && !row.ativo" (click)="confirmStateChange(row)" [disabled]="disabled"
+                matTooltip="Ativar">
+                <mat-icon aria-label="Ativar">done</mat-icon>
+              </button>
               <ng-container [ngTemplateOutlet]="buttonsRef" [ngTemplateOutletContext]="{ row: row }">
               </ng-container>
             </mat-cell>
@@ -161,9 +156,6 @@
             </ng-container>
           </ng-container>
 
-          <!-- <ng-template [ngTemplateOutlet]="templateRefColumns" [ngTemplateOutletContext]="{model: model}">
-  </ng-template> -->
-
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
@@ -173,11 +165,11 @@
       [pageSizeOptions]="[5, 10, 25, 100]">
     </mat-paginator>
   </div>
-  <div *ngIf="showSelected" fxFlex="50" fxLayout="column" class="preview-container">
+  <div *ngIf="showSelected" fxFlex="50" fxFlex.xs="100" fxLayout="column" class="preview-container">
     <div>
       <h3 class="selecteds-title" fxLayoutAlign="space-between center">
         Selecionados
-        <button (click)="eraseSelection()" color="warn" mat-icon-button matTooltip="Remover Todos">
+        <button (click)="eraseSelection()" color="warn" type="button" [disabled]="disabled" mat-icon-button matTooltip="Remover Todos">
           <mat-icon>delete_forever</mat-icon>
         </button>
       </h3>
@@ -185,7 +177,8 @@
 
     <ng-container *ngFor="let record of selectionData">
       <span>
-        <button (click)="changeSelection(record)" class="inline-button" color="accent" matTooltip="Remover" mat-icon-button>
+        <button (click)="changeSelection(record)" class="inline-button" type="button" [disabled]="disabled" color="accent" matTooltip="Remover"
+          mat-icon-button>
           <mat-icon>close</mat-icon>
         </button>
         <ng-container *ngFor="let column of columns">

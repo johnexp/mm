@@ -1,3 +1,11 @@
 {
-  "secret": "IsH0U1Dr3PLAC3tH15bUT1d0NTwANTt0"
+  "secret": "IsH0U1Dr3PLAC3tH15bUT1d0NTwANTt0",
+  "reCAPTCHAValidation": true,
+  "reCAPTCHASecret": "6Lf4-T4UAAAAACY1OicOqSzMgdvLb0ELu9ggcEDN",
+  "mongo": {
+    "url": "127.0.0.1:27017",
+    "collection": "site-valem"
+  },
+  "mailSender": "agendafacplan@gmail.com",
+  "mailPassword": "v@l3m@2017"
 }

@@ -1,0 +1,112 @@
+[
+  {
+    "_id": ObjectId("5a3a943f0fbf061d0cccce32"),
+    "moduleName": "Apresentação Site",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3a94450fbf061d0cccce33"),
+    "moduleName": "Sobre",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3a94550fbf061d0cccce34"),
+    "moduleName": "Banner",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3aad7b7e82d51774307b03"),
+    "moduleName": "Depoimento",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3ab9aa0c67641a188eab7d"),
+    "moduleName": "Produto Serviço",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3bce4ba44f632594462364"),
+    "moduleName": "Parceiro",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a3c0737c24be621fca65096"),
+    "moduleName": "Operadora",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4232cccbd2611fc48791be"),
+    "moduleName": "Menu",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a428285e9d6942110655a3c"),
+    "moduleName": "Item Área Cliente",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4387f4bf9c0a098442b7cb"),
+    "moduleName": "Apresentação Planos",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a43c20bd8ad44361890fbd5"),
+    "moduleName": "Surgimento Valem",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a43c62b3cf70228fc34ea71"),
+    "moduleName": "Página",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a43cef2c8f07c2bb8a5da9f"),
+    "moduleName": "O Que É?",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a43d5509119d64440fdf548"),
+    "moduleName": "Planos Por Adesão",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a44db1ae0e0d844f4148de4"),
+    "moduleName": "Quantidades",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a44e8299e839234ec84d0d5"),
+    "moduleName": "Página Depoimentos",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a451283643574352caedf1a"),
+    "moduleName": "Página Operadoras",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a451287643574352caedf1b"),
+    "moduleName": "Página Entidades",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a45255dc8dd4834b0562c21"),
+    "moduleName": "Página Área Cliente",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a466bdd1ef2e846bc34ff17"),
+    "moduleName": "Página Demonstrativo IR",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a4bc4c05b87751c6800298a"),
+    "moduleName": "Assunto Contato",
+    "ativo": true
+  },
+  {
+    "_id": ObjectId("5a428e4cbffcee1594a81321"),
+    "moduleName": "User",
+    "ativo": true
+  }
+]

@@ -14,11 +14,12 @@ import {
   MatButtonModule,
   MatFormFieldModule,
   MatIconModule,
-  MatMenuModule,
   MatDatepickerModule,
-  MatSnackBarModule,
+  MatSliderModule,
+  MatRadioModule,
   MatInputModule,
   MatDialogModule,
+  MatCheckboxModule,
   MatSelectModule
 } from '@angular/material';
 
@@ -27,11 +28,12 @@ const MAT_MODULES = [
   MatButtonModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule,
-  MatMenuModule,
   MatDatepickerModule,
-  MatSnackBarModule,
+  MatSliderModule,
+  MatRadioModule,
+  MatInputModule,
   MatDialogModule,
+  MatCheckboxModule,
   MatSelectModule
 ];
 
@@ -50,11 +52,11 @@ const MAT_MODULES = [
     FlexLayoutModule,
     RouterModule.forRoot(BannerRoute, { useHash: true })
   ],
+  exports: [],
+  providers: [],
   entryComponents: [
     DialogBotaoComponent
   ],
-  exports: [],
-  providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class BannerModule {

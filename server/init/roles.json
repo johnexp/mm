@@ -1,0 +1,11 @@
+[
+  {
+    "_id": ObjectId("5a4bcdce9e99431ea44af9ec"),
+    "roleName": "Administrador",
+    "ativo": true,
+    "historico": [],
+    "roleKey": "admin",
+    "permissions": [],
+    "isAdmin": true
+  }
+]

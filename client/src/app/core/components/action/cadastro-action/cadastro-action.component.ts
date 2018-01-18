@@ -1,6 +1,6 @@
 import { ActionService } from './../../../service/action.service';
 import { Action } from './../../../domain/action';
-import { CustomSnackBarService } from './../../../../core/util/snack-bar/custom-snack-bar.service';
+import { CustomSnackBarService } from './../../../util/snack-bar/custom-snack-bar.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Location } from '@angular/common';
@@ -16,7 +16,7 @@ export class CadastroActionComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
   action: Action = new Action;
-  @ViewChild('form') form;
+  @ViewChild('form') form: any;
   disabled: Boolean = false;
   actionsSelectionColumns = [{
     columnDef: 'actionName',
@@ -47,7 +47,7 @@ export class CadastroActionComponent implements OnInit {
 
   }
 
-  obterAction(id) {
+  obterAction(id: string) {
     this.blockUI.start('Carregando...');
     this.actionService.get(id).subscribe(
       response => {
